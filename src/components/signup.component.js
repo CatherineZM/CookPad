@@ -1,30 +1,47 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 
+const log = console.log;
 
+class User {
+    constructor(username, password) {
+        this.username = username;
+        this.password = password;
+        // fields can be edited or added after signup
+        this.gender = null;
+        this.favCuisine = null;
+    }
+}
 export default class Signup extends Component {
     constructor(props){
         super();
-        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
         
         this.state = {
-            email: '',
+            username: '',
             password: '',
+            users: [],
+            userCount: 0
         }
     }
 
-    onChangeEmail(e){
-        this.setState({ email: e.target.value });
+    onChangeUsername(e){
+        e.preventDefault();
+        this.setState({ username: e.target.value });
     }
-    
+     
     onChangePassword(e){
+        e.preventDefault();
         this.setState({ password: e.target.value });
     }
 
     onSubmit(e){
-        window.location = "./"
+        e.preventDefault();
+        this.createUser();
+        log(`${this.state.users[0].username}`);
+        window.location = "./../homepage/:uid";
     }
 
     render(){
@@ -32,8 +49,8 @@ export default class Signup extends Component {
             <div className="container">
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Email: </label>
-                        <input type="email" required placeholder="E.g: 123@gmail.com" className="form-control" value={this.state.email} onChange={this.onChangeEmail}/>
+                        <label>Username: </label>
+                        <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
                     </div>
                     <div className="form-group">
                         <label>Password: </label>
@@ -48,5 +65,11 @@ export default class Signup extends Component {
                 </p>
             </div>  
         )
+    }
+
+    createUser(){
+        const user = new User(this.state.username, this.state.password);
+        this.state.users.push(user);
+        this.setState({userCount: this.state.userCount+1});
     }
 } 

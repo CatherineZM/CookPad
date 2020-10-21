@@ -4,18 +4,18 @@ import {Link} from 'react-router-dom'
 export default class Login extends Component {
     constructor(props){
         super();
-        this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            email: '',
+            username: '',
             password: ''
         }
     }
 
-    onChangeEmail(e) {
-        this.setState({ email: e.target.value });
+    onChangeUsername(e) {
+        this.setState({ username: e.target.value });
     }
     
     onChangePassword(e) {
@@ -32,8 +32,8 @@ export default class Login extends Component {
             <div className="container">
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
-                        <label>Email: </label>
-                        <input type="email" required placeholder="E.g: 123@gmail.com" className="form-control" value={this.state.email} onChange={this.onChangeEmail}/>
+                        <label>Username: </label>
+                        <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
                     </div>
                     <div className="form-group">
                         <label>Password: </label>
