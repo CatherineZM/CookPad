@@ -1,0 +1,26 @@
+#left-panel {
+    margin-top: 30px;
+	padding: 0px;
+    float: left;
+    width: 270px;
+}
+
+#left-panel table{
+	margin: 0px;
+	padding: 0px;
+    background-color: white;
+    width: 250px;
+    border-collapse: collapse;
+}
+
+#left-panel table tr {
+    border: solid;
+    border-width: 5px 0;   
+    border-color: #e6ecf0;
+}
+
+#left-panel table tr td {
+	font-weight: bold;
+	list-style: none;
+    margin-left: 20px;
+}

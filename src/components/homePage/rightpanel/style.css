@@ -1,0 +1,20 @@
+#right-panel {
+    margin-top: 30px;
+    margin-left: 20px;
+    float: left;
+    width: 250px;
+    background-color: white;
+}
+#right-panel table {
+    width: 250px;
+}
+
+#right-panel table tr {
+    border: solid;
+    border-width: 5px;   
+    border-color: #e6ecf0;
+}
+
+#right-panel table tr td {
+	font-weight: bold;
+}

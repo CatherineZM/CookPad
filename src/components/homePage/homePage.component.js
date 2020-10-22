@@ -1,33 +1,52 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
 import './homePage.css'
-import cakeIcon from './images/cake.png'
-import pieIcon from './images/pie.png'
-import pizzaIcon from './images/pizza.png'
-import saladIcon from './images/salad.png'
-import sandwichIcon from './images/sandwich.png'
-import seafoodIcon from './images/seafood.png'
-import soupIcon from './images/soup.png'
-import noodlesIcon from './images/noodles.png'
-import cookpadIcon from './images/cookpad.png'
-import recipe1 from './images/butter-chicken.jpg'
-import recipe2 from './images/lemon-zucchini-bread.jpg'
-import recipe3 from './images/ramen.jpg'
+import "bootstrap/dist/css/bootstrap.min.css"
+import RecipeSlideShow from './slideshow/recipeSlideShow.component'
+import HomePageLeftPanel from './leftpanel/homePageLeftPanel.component'
+import Navbar from '../Navbar/navbar.component'
+import HomePageRightPanel from './rightpanel/homePageRightPanel.component'
+import ReceipeList from './recipelist/recipelist.component'
+
+// hardcoded images
+import recipe1 from '../recipes/butter-chicken.jpg'
+import recipe2 from '../recipes/lemon-zucchini-bread.jpg'
+import recipe3 from '../recipes/ramen.jpg'
+import recipe4 from '../recipes/vanilla-cake.png'
+import recipe5 from '../recipes/spaghetti.png'
+import recipe6 from '../recipes/apple-pie.png'
+import recipe7 from '../recipes/homemade-pizza.png'
+import recipe8 from '../recipes/greek-salad.png'
+import recipe9 from '../recipes/seafood-sandwiches.png'
+import recipe10 from '../recipes/seafood-stew.png'
+import recipe11 from '../recipes/whitebean-chicken-soup.png'
 
 
 export default class HomePage extends Component {
     constructor(props){
-        super();
-        this.incrSlide = this.incrSlide.bind(this);
-        this.decrSlide = this.decrSlide.bind(this);
-        this.autoShowSlides = this.autoShowSlides.bind(this);
+        super(props);
 
         this.state = {
             slide_idx: 0,
             num_slides: 3,
-            top3_slide: [{src:recipe1, alt:'recipe1', text:'Butter Chicken'}, 
-                {src:recipe2, alt:'recipe2', text:'Lemon Zucchini Bread'}, 
-                {src:recipe3, alt:'recipe3', text:'Ramen'}]
+            // the data will be fetched from the database
+            top3_recipe: [{src:recipe1, title:'Butter Chicken', likes: 101, categories:['soup']}, 
+                {src:recipe2, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']}, 
+                {src:recipe3, title:'Ramen', likes: 87, categories:['noodles']}],
+            
+            // the data will be fetched from the database
+            recipes: [
+                {src:recipe1, title:'Butter Chicken', likes: 101, categories:['soup']},
+                {src:recipe2, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']},
+                {src:recipe3, title:'Ramen', likes:87, categories:['noodles']},
+                {src:recipe4, title:'vanilla cake', likes:76, categories:['cake']},
+                {src:recipe5, title:'Homemade Spaghetti', likes:65, categories:['noodles']},
+                {src:recipe6, title:'Apple Pie', likes:63, categories:['pie']},
+                {src:recipe7, title:'Homemade Pizza', likes:62, categories:['pizza']},
+                {src:recipe8, title:'Greek Salad', likes:60, categories:['salad']},
+                {src:recipe9, title:'Seafood Sandwiches', likes:58, categories:['seafood', 'sandwiches']},
+                {src:recipe10, title:'Spicy seafood stew', likes:50, categories:['seafood', 'soup']},
+                {src:recipe11, title:'White Bean Chicken Soup', likes:47, categories:['soup']}
+            ]
         }
     }
 
@@ -41,7 +60,7 @@ export default class HomePage extends Component {
         clearInterval(this.interval);
     }
 
-    incrSlide(){
+    incrSlide = () => {
         if(this.state.slide_idx < this.state.num_slides-1){
             this.setState({ slide_idx: this.state.slide_idx+1 });
         } else {
@@ -54,7 +73,7 @@ export default class HomePage extends Component {
         dots[this.state.slide_idx].className += " active";
     }
 
-    decrSlide(){
+    decrSlide = () => {
         if(this.state.slide_idx > 0){
             this.setState({ slide_idx: this.state.slide_idx-1 });
         } else {
@@ -67,7 +86,7 @@ export default class HomePage extends Component {
         dots[this.state.slide_idx].className += " active";
     }
 
-    autoShowSlides(){
+    autoShowSlides = () => {
         this.incrSlide();
         const dots = document.getElementsByClassName("dot");
         for (let i = 0; i < dots.length; i++) {
@@ -80,114 +99,23 @@ export default class HomePage extends Component {
         return(
             <div id="body">
                 <div className="container-sm">
-                    <div id="navbar">
-                        <ul>
-                            <li><img src={cookpadIcon} alt="cookpad" width="50px" height="50px"/>COOKPAD</li>
-                            <li id="first-item"><Link to="/addrecipe/1">Create a Recipe</Link></li>
-                            <li><Link to="/myrecipes/1">My Recipes</Link></li>
-                            <li><Link to="/myprofile/1">My Profile</Link></li>
-                            <li><Link to="/users">Users</Link></li>
-                            <li><Link to="/">Logout</Link></li>
-                        </ul>
-                    </div>
-
-                    
-                    <div id="left-panel">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td><img src={cakeIcon} alt="cake" width="50px" height="50px"/></td>
-                                    <td>Cake</td>
-                                    <td><input type="checkbox" id="checkbox-cake" name="checkbox-cake"/></td>
-                                </tr>
-                                <tr>
-                                    <td><img src={noodlesIcon} alt="noodles" width="50px" height="50px"/></td>
-                                    <td>Noddles</td>
-                                    <td><input type="checkbox" id="checkbox-noodles" name="checkbox-noodles"/></td>
-                                </tr>
-                                <tr>
-                                    <td><img src={pieIcon} alt="pie" width="50px" height="50px"/></td>
-                                    <td>Pie</td>
-                                    <td><input type="checkbox" id="checkbox-pie" name="checkbox-pie"/></td>
-                                </tr>
-                                <tr>
-                                    <td><img src={pizzaIcon} alt="pizza" width="50px" height="50px"/></td>
-                                    <td>Pizza</td>
-                                    <td><input type="checkbox" id="checkbox-pizza" name="checkbox-pizza"/></td>
-                                </tr>
-                                <tr>
-                                    <td><img src={saladIcon} alt="salad" width="50px" height="50px"/></td>
-                                    <td>Salads</td>
-                                    <td><input type="checkbox" id="checkbox-salad" name="checkbox-salad"/></td>
-                                </tr>
-                                <tr>
-                                    <td><img src={sandwichIcon} alt="sandwich" width="50px" height="50px"/></td>
-                                    <td>Sandwiches</td>
-                                    <td><input type="checkbox" id="checkbox-sandwich" name="checkbox-sandwich"/></td>
-                                </tr>
-                                <tr>
-                                    <td><img src={seafoodIcon} alt="seafood" width="50px" height="50px"/></td>
-                                    <td>Seafood</td>
-                                    <td><input type="checkbox" id="checkbox-seafood" name="checkbox-seafood"/></td>
-                                </tr>
-                                <tr>
-                                    <td><img src={soupIcon} alt="soup" width="50px" height="50px"/></td>
-                                    <td>Soup</td>
-                                    <td><input type="checkbox" id="checkbox-soup" name="checkbox-soup"/></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                    <Navbar/>
+                    <HomePageLeftPanel/>                    
 
                     {/* middle panel */}
                     <div id="middle-panel">
                         {/* recipe slide show */}
-                        <div className="slideshow-container">
-                            <div className="">
-                            <img src={this.state.top3_slide[this.state.slide_idx].src} alt={this.state.top3_slide[this.state.slide_idx].alt} height="380px" width="570px"/>
-                            <div className="text">{ this.state.top3_slide[this.state.slide_idx].text }</div>
-                            </div>
-
-                            <p className="prev" onClick={this.decrSlide}>&#10094;</p>
-                            <p className="next" onClick={this.incrSlide}>&#10095;</p>
-                            <div className="dot-container">
-                                <span className="dot"></span>
-                                <span className="dot"></span> 
-                                <span className="dot"></span> 
-                            </div>
-                        </div>
-
-                        <div className="recipe-post">
-                            <div className="tweetIconContainer">
-                            </div>
-                            <div className="tweetContent">
-                                <h4>Recipe1</h4>
-                                <p>Description1</p>
-                            </div>
-                        </div>
+                        <RecipeSlideShow 
+                            imgsrc={this.state.top3_recipe[this.state.slide_idx].src}
+                            imgalt={this.state.top3_recipe[this.state.slide_idx].title}
+                            imgtext={this.state.top3_recipe[this.state.slide_idx].title}
+                            decrSlide={this.decrSlide}
+                            incrSlide={this.incrSlide}
+                        />
+                        <ReceipeList recipes={this.state.recipes}/>
                     </div>
-                    <div id="right-panel">
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td></td>
-                                    <td>Top 3 Recipes</td>
-                                </tr>
-                                <tr>
-                                    <td>1</td>
-                                    <td>Butter Chicken</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>Lemon Zucchini Bread</td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>Ramen</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+
+                    <HomePageRightPanel top3_recipe={this.state.top3_recipe}/>
                 </div> 
             </div>
         )
