@@ -41,6 +41,7 @@ export default class Signup extends Component {
 
     onSubmit(e){
         e.preventDefault();
+        this.createUser();
         window.location = "..";
     }
 
@@ -86,7 +87,7 @@ export default class Signup extends Component {
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Signup" className="btn btn-primary" disabled={!this.validateUser()} onClick={() =>this.createUser}/>
+                        <input type="submit" value="Signup" className="btn btn-primary" disabled={!this.validateUser()}/>
                     </div>
                 </form>
                 <p className="text-center my-3">Already have an account?{" "} 

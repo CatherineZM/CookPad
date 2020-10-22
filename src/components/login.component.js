@@ -24,11 +24,33 @@ export default class Login extends Component {
     
     onChangePassword(e) {
         this.setState({ password: e.target.value });
-    }   
+    }
 
     onSubmit(e){
         e.preventDefault();
-        window.location = '/homepage/1';  
+        if (this.checkPassword()){
+            const user = this.state.users.find((user)=>{return this.state.username === user.username;});
+            if (user.isAdmin){
+                window.location = '/users';
+            } else {
+                window.location = '/homepage/1';
+            }
+            
+        }
+    }
+
+    checkPassword(){
+        if (!this.state.users.some((user)=>{return this.state.username === user.username;})){
+            alert("Username does not exist!");
+            return false;
+        } 
+        const user = this.state.users.find((user)=>{return this.state.username === user.username;});
+        if (user.password === this.state.password){
+            return true;
+        } else {
+            alert("Password does not match!");
+            return false;
+        }
     }
 
     validateUser(){

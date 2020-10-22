@@ -17,7 +17,7 @@ import { User } from './object';
 export class App extends React.Component{
 
   state = {
-    users: [new User("user", "user"), new User("admin", "admin")],
+    users: [new User("user", "user"), new User("admin", "admin", true)],
     recipes: [],
     userCount: 2,
     recipeCount: 0
