@@ -35,17 +35,17 @@ export default class HomePage extends Component {
             
             // the data will be fetched from the database
             recipes: [
-                {src:recipe1, title:'Butter Chicken', likes: 101, categories:['soup']},
-                {src:recipe2, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']},
-                {src:recipe3, title:'Ramen', likes:87, categories:['noodles']},
-                {src:recipe4, title:'vanilla cake', likes:76, categories:['cake']},
-                {src:recipe5, title:'Homemade Spaghetti', likes:65, categories:['noodles']},
-                {src:recipe6, title:'Apple Pie', likes:63, categories:['pie']},
-                {src:recipe7, title:'Homemade Pizza', likes:62, categories:['pizza']},
-                {src:recipe8, title:'Greek Salad', likes:60, categories:['salad']},
-                {src:recipe9, title:'Seafood Sandwiches', likes:58, categories:['seafood', 'sandwiches']},
-                {src:recipe10, title:'Spicy seafood stew', likes:50, categories:['seafood', 'soup']},
-                {src:recipe11, title:'White Bean Chicken Soup', likes:47, categories:['soup']}
+                {id:0, src:recipe1, title:'Butter Chicken', likes: 101, categories:['soup']},
+                {id:1, src:recipe2, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']},
+                {id:2, src:recipe3, title:'Ramen', likes:87, categories:['noodles']},
+                {id:3, src:recipe4, title:'vanilla cake', likes:76, categories:['cake']},
+                {id:4, src:recipe5, title:'Homemade Spaghetti', likes:65, categories:['noodles']},
+                {id:5, src:recipe6, title:'Apple Pie', likes:63, categories:['pie']},
+                {id:6, src:recipe7, title:'Homemade Pizza', likes:62, categories:['pizza']},
+                {id:7, src:recipe8, title:'Greek Salad', likes:60, categories:['salad']},
+                {id:8, src:recipe9, title:'Seafood Sandwiches', likes:58, categories:['seafood', 'sandwiches']},
+                {id:9, src:recipe10, title:'Spicy seafood stew', likes:50, categories:['seafood', 'soup']},
+                {id:10, src:recipe11, title:'White Bean Chicken Soup', likes:47, categories:['soup']}
             ]
         }
     }

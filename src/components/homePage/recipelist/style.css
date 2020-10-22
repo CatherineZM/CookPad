@@ -2,4 +2,18 @@
     float: left;
     margin-left: 5px;
     margin-right: 5px;
+    margin-top: 30px;
+    margin-bottom: 10px;
+    text-align:center;
+}
+
+a{
+    float: none;
+    color: black;
+}
+
+a:hover{
+    text-decoration: none;
+    background-color:#e6ecf0;
+    color: #86a4b6;
 }

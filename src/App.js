@@ -25,7 +25,7 @@ function App() {
       <Route path="/editrecipe/:uid/:rid" component={EditRecipe}/>
       <Route path="/myprofile/:uid" component={MyProfile}/>
       <Route path="/myrecipes/:uid" component={MyRecipes}/>
-      <Route path="/viewrecipe/:uid/:rid" component={ViewRecipe}/>
+      <Route path="/viewrecipe/:rid" component={ViewRecipe}/>
     </Router>
   );
 }
