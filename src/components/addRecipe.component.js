@@ -55,7 +55,7 @@ export default class AddRecipe extends Component {
         e.preventDefault();
         this.createRecipe();
         log(`${this.recipe.Recipes[0].RecipeName}`);
-        window.location = "./../homepage/:uid";
+        //window.location = "./../homepage/:uid";
     }
 
     render(){
@@ -87,6 +87,7 @@ export default class AddRecipe extends Component {
                     </div>
                 </form>
             </div>
+            
         )
     }
 
@@ -95,4 +96,5 @@ export default class AddRecipe extends Component {
         this.state.Recipes.push(Recipe);
         this.setState({RecipeCounts: this.state.RecipeCounts+1});
     }
+    
 } 
