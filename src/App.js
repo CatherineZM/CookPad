@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route} from "react-router-dom"
+import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import Users from "./components/users.component";
@@ -13,21 +13,35 @@ import MyRecipes from "./components/myRecipes.component";
 import Signup from "./components/signup.component";
 import ViewRecipe from './components/viewRecipe.component';
 
-function App() {
-  return (
-    <Router>
-      <br/>
-      <Route path="/" exact component={Login}/>
-      <Route path="/signup" component={Signup}/>
-      <Route path="/users" component={Users}/>
-      <Route path="/homepage/:uid" component={HomePage}/>
-      <Route path="/addrecipe/:uid" component={AddRecipe}/>
-      <Route path="/editrecipe/:uid/:rid" component={EditRecipe}/>
-      <Route path="/myprofile/:uid" component={MyProfile}/>
-      <Route path="/myrecipes/:uid" component={MyRecipes}/>
-      <Route path="/viewrecipe/:rid" component={ViewRecipe}/>
-    </Router>
-  );
-}
+export class App extends React.Component{
 
+  state = {
+    users: [],
+    recipes: [],
+    userCount: 0,
+    recipeCount: 0
+  }
+
+  render(){
+    return (
+      <div>
+        <Router>
+          <Switch>
+            <Route exact path="/" render = {()=>(<Login appState = {this.state}/>)}/>
+            <Route path="/signup" render = {()=>(<Signup appState = {this.state}/>)}/>
+            <Route path="/users" render = {()=>(<Users appState = {this.state}/>)}/>
+            <Route path="/homepage/:uid" render = {()=>(<HomePage appState = {this.state}/>)}/>
+            <Route path="/addrecipe/:uid" render = {()=>(<AddRecipe appState = {this.state}/>)}/>
+            <Route path="/editrecipe/:uid/:rid" render = {()=>(<EditRecipe appState = {this.state}/>)}/>
+            <Route path="/myprofile/:uid" render = {()=>(<MyProfile appState = {this.state}/>)}/>
+            <Route path="/myrecipes/:uid" render = {()=>(<MyRecipes appState = {this.state}/>)}/>
+            <Route path="/viewrecipe/:rid" render = {()=>(<ViewRecipe appState = {this.state}/>)}/>
+          </Switch>
+        </Router>
+      </div>
+      
+    );
+  }
+  
+}
 export default App;

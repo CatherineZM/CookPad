@@ -18,7 +18,7 @@ import recipe7 from '../recipes/homemade-pizza.png'
 import recipe8 from '../recipes/greek-salad.png'
 import recipe9 from '../recipes/seafood-sandwiches.png'
 import recipe10 from '../recipes/seafood-stew.png'
-import recipe11 from '../recipes/whitebean-chicken-soup.png'
+import recipe11 from '../recipes/Chicken-Noodle-Soup.jpg'
 
 
 export default class HomePage extends Component {
@@ -43,7 +43,7 @@ export default class HomePage extends Component {
                 {id:7, src:recipe8, liked: false, title:'Greek Salad', likes:60, categories:['salad']},
                 {id:8, src:recipe9, liked: false, title:'Seafood Sandwiches', likes:58, categories:['seafood', 'sandwiches']},
                 {id:9, src:recipe10, liked: false, title:'Spicy seafood stew', likes:50, categories:['seafood', 'soup']},
-                {id:10, src:recipe11, liked: false, title:'White Bean Chicken Soup', likes:47, categories:['soup']}
+                {id:10, src:recipe11, liked: false, title:'Chicken Noodle Soup', likes:47, categories:['soup']}
             ]
         }
     }

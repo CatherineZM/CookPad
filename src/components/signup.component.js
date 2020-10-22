@@ -1,20 +1,13 @@
+import { Button } from 'bootstrap';
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { User } from '../object';
 
 const log = console.log;
 
-class User {
-    constructor(username, password) {
-        this.username = username;
-        this.password = password;
-        // fields can be edited or added after signup
-        this.gender = null;
-        this.favCuisine = null;
-    }
-}
 export default class Signup extends Component {
     constructor(props){
-        super();
+        super(props);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -22,8 +15,8 @@ export default class Signup extends Component {
         this.state = {
             username: '',
             password: '',
-            users: [],
-            userCount: 0
+            users: this.props.appState.users,
+            userCount: this.props.appState.userCount
         }
     }
 
@@ -39,9 +32,23 @@ export default class Signup extends Component {
 
     onSubmit(e){
         e.preventDefault();
-        this.createUser();
-        log(`${this.state.users[0].username}`);
-        window.location = "./../homepage/:uid";
+        window.location = "..";
+    }
+
+    createUser(){
+        const user = new User(this.state.username, this.state.password);
+        this.state.users.push(user);
+        this.setState({userCount: this.state.userCount+1});
+    }
+
+    validateUser(){
+        for (let i = 0; i < this.state.userCount; i++){
+            if (this.users[i].username == this.state.username) {
+                log("username exists already");
+                return false;
+            }
+        }
+        return this.state.username.length > 0 && this.state.password.length > 0;
     }
 
     render(){
@@ -57,7 +64,9 @@ export default class Signup extends Component {
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Sign Up" className="btn btn-primary"/>
+                        <Button type="submit" value="Sign Up" className="btn btn-primary" onClick={this.createUser} disabled={!this.validateUser()}>
+                            Sign up
+                            </Button>
                     </div>
                 </form>
                 <p className="text-center my-3">Already have an account?{" "} 
@@ -65,11 +74,5 @@ export default class Signup extends Component {
                 </p>
             </div>  
         )
-    }
-
-    createUser(){
-        const user = new User(this.state.username, this.state.password);
-        this.state.users.push(user);
-        this.setState({userCount: this.state.userCount+1});
     }
 } 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+// import { User } from '../object';
 
 export default class Login extends Component {
     constructor(props){
@@ -10,7 +11,9 @@ export default class Login extends Component {
 
         this.state = {
             username: '',
-            password: ''
+            password: '',
+            users: this.props.appState.users,
+            userCount: this.props.appState.userCount
         }
     }
 
@@ -44,7 +47,7 @@ export default class Login extends Component {
                     </div>
                 </form>
                 <p className="text-center my-3">Don't have an account?{" "}
-                <Link to="signUp" className="text-blue-500 hover:text-blue-600">Sign up here</Link>
+                <Link to='signup' className="text-blue-500 hover:text-blue-600">Sign up here</Link>
                 <br/>
                 </p>
             </div>  
