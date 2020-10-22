@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import { Button } from 'bootstrap';
 // import { User } from '../object';
 
 export default class Login extends Component {
     constructor(props){
-        super();
+        super(props);
         this.onChangeUsername = this.onChangeUsername.bind(this);
         this.onChangePassword = this.onChangePassword.bind(this);
         this.onSubmit = this.onSubmit.bind(this);

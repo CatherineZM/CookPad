@@ -1,9 +1,19 @@
-import { Button } from 'bootstrap';
+import { Button, FormGroup, FormControl, ControlLabel} from 'bootstrap';
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { User } from '../object';
 
 const log = console.log;
+
+// class User {
+//     constructor(username, password) {
+//         this.username = username;
+//         this.password = password;
+//         // fields can be edited or added after signup
+//         this.gender = null;
+//         this.favCuisine = null;
+//     }
+// };
 
 export default class Signup extends Component {
     constructor(props){
@@ -55,6 +65,19 @@ export default class Signup extends Component {
         return(
             <div className="container">
                 <form onSubmit={this.onSubmit}>
+                    {/* <FormGroup controlId = "username">
+                        <ControlLabel>Username: </ControlLabel>
+                        <FormControl type="username" required placeholder="E.g: 123" value={this.state.username} onChange={this.onChangeUsername}/>
+                    </FormGroup>
+                    <FormGroup controlId = "password">
+                        <ControlLabel>Password: </ControlLabel>
+                        <FormControl type="password" required placeholder="Your Password" value={this.state.password} onChange={this.onChangePassword}/>
+                    </FormGroup>
+                    <FormGroup>
+                        <Button type="submit" className="btn btn-primary" onClick={() =>this.createUser} disabled={!this.validateUser()}>
+                            Sign up
+                        </Button>
+                    </FormGroup> */}
                     <div className="form-group">
                         <label>Username: </label>
                         <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
@@ -64,15 +87,13 @@ export default class Signup extends Component {
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
-                        <Button type="submit" value="Sign Up" className="btn btn-primary" onClick={this.createUser} disabled={!this.validateUser()}>
-                            Sign up
-                            </Button>
+                        <input type="submit" value="Signup" className="btn btn-primary" disabled={!this.validateUser()} onClick={() =>this.createUser}/>
                     </div>
                 </form>
                 <p className="text-center my-3">Already have an account?{" "} 
                     <Link to="/" className="text-blue-500 hover:text-blue-600">Login here</Link>
                 </p>
             </div>  
-        )
+        );
     }
 } 

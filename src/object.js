@@ -6,4 +6,4 @@ export class User {
         this.gender = null;
         this.favCuisine = null;
     }
-}
+};
