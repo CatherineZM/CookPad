@@ -1,9 +1,8 @@
-import { Button, FormGroup, FormControl, ControlLabel} from 'bootstrap';
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { User } from '../object';
 
-const log = console.log;
+// const log = console.log;
 
 // class User {
 //     constructor(username, password) {
@@ -52,12 +51,12 @@ export default class Signup extends Component {
     }
 
     validateUser(){
-        for (let i = 0; i < this.state.userCount; i++){
-            if (this.users[i].username == this.state.username) {
-                log("username exists already");
-                return false;
-            }
-        }
+        // for (let i = 0; i < this.state.userCount; i++){
+        //     if (this.users[i].username == this.state.username) {
+        //         log("username exists already");
+        //         return false;
+        //     }
+        // }
         return this.state.username.length > 0 && this.state.password.length > 0;
     }
 

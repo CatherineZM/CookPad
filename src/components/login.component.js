@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { Button } from 'bootstrap';
+// import { Button } from 'bootstrap';
 // import { User } from '../object';
 
 export default class Login extends Component {
@@ -31,6 +31,16 @@ export default class Login extends Component {
         window.location = '/homepage/1';  
     }
 
+    validateUser(){
+        // for (let i = 0; i < this.state.userCount; i++){
+        //     if (this.users[i].username == this.state.username) {
+        //         log("username exists already");
+        //         return false;
+        //     }
+        // }
+        return this.state.username.length > 0 && this.state.password.length > 0;
+    }
+
     render(){
         return(
             <div className="container">
@@ -44,7 +54,7 @@ export default class Login extends Component {
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Login" className="btn btn-primary"/>
+                        <input type="submit" value="Login" className="btn btn-primary" disabled={!this.validateUser()}/>
                     </div>
                 </form>
                 <p className="text-center my-3">Don't have an account?{" "}

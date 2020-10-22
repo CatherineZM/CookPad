@@ -12,13 +12,14 @@ import MyProfile from "./components/myProfile.component";
 import MyRecipes from "./components/myRecipes.component";
 import Signup from "./components/signup.component";
 import ViewRecipe from './components/viewRecipe.component';
+import { User } from './object';
 
 export class App extends React.Component{
 
   state = {
-    users: [],
+    users: [new User("user", "user"), new User("admin", "admin")],
     recipes: [],
-    userCount: 0,
+    userCount: 2,
     recipeCount: 0
   }
 
