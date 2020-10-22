@@ -29,23 +29,21 @@ export default class HomePage extends Component {
             slide_idx: 0,
             num_slides: 3,
             // the data will be fetched from the database
-            top3_recipe: [{src:recipe1, title:'Butter Chicken', likes: 101, categories:['soup']}, 
-                {src:recipe2, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']}, 
-                {src:recipe3, title:'Ramen', likes: 87, categories:['noodles']}],
+            top3_recipe: [0, 1, 2],
             
             // the data will be fetched from the database
             recipes: [
-                {id:0, src:recipe1, title:'Butter Chicken', likes: 101, categories:['soup']},
-                {id:1, src:recipe2, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']},
-                {id:2, src:recipe3, title:'Ramen', likes:87, categories:['noodles']},
-                {id:3, src:recipe4, title:'vanilla cake', likes:76, categories:['cake']},
-                {id:4, src:recipe5, title:'Homemade Spaghetti', likes:65, categories:['noodles']},
-                {id:5, src:recipe6, title:'Apple Pie', likes:63, categories:['pie']},
-                {id:6, src:recipe7, title:'Homemade Pizza', likes:62, categories:['pizza']},
-                {id:7, src:recipe8, title:'Greek Salad', likes:60, categories:['salad']},
-                {id:8, src:recipe9, title:'Seafood Sandwiches', likes:58, categories:['seafood', 'sandwiches']},
-                {id:9, src:recipe10, title:'Spicy seafood stew', likes:50, categories:['seafood', 'soup']},
-                {id:10, src:recipe11, title:'White Bean Chicken Soup', likes:47, categories:['soup']}
+                {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 101, categories:['soup']},
+                {id:1, src:recipe2, liked: false, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']},
+                {id:2, src:recipe3, liked: false, title:'Ramen', likes:87, categories:['noodles']},
+                {id:3, src:recipe4, liked: false, title:'vanilla cake', likes:76, categories:['cake']},
+                {id:4, src:recipe5, liked: false, title:'Homemade Spaghetti', likes:65, categories:['noodles']},
+                {id:5, src:recipe6, liked: false, title:'Apple Pie', likes:63, categories:['pie']},
+                {id:6, src:recipe7, liked: false, title:'Homemade Pizza', likes:62, categories:['pizza']},
+                {id:7, src:recipe8, liked: false, title:'Greek Salad', likes:60, categories:['salad']},
+                {id:8, src:recipe9, liked: false, title:'Seafood Sandwiches', likes:58, categories:['seafood', 'sandwiches']},
+                {id:9, src:recipe10, liked: false, title:'Spicy seafood stew', likes:50, categories:['seafood', 'soup']},
+                {id:10, src:recipe11, liked: false, title:'White Bean Chicken Soup', likes:47, categories:['soup']}
             ]
         }
     }
@@ -95,6 +93,24 @@ export default class HomePage extends Component {
         dots[this.state.slide_idx].className += " active";
     }
 
+    clickHeart = (rid) => {
+        // need to update the information into database
+        if(this.state.recipes[rid].liked){
+            let new_recipes = this.state.recipes
+            new_recipes[rid].liked = false;
+            new_recipes[rid].likes--;
+            this.setState({ recipes: new_recipes });
+        }else{
+            let new_recipes = this.state.recipes
+            new_recipes[rid].liked = true;
+            new_recipes[rid].likes++;
+            this.setState({ recipes: new_recipes });
+        }
+
+        // update top three recipes
+        
+    }
+
     render(){
         return(
             <div id="body">
@@ -106,16 +122,23 @@ export default class HomePage extends Component {
                     <div id="middle-panel">
                         {/* recipe slide show */}
                         <RecipeSlideShow 
-                            imgsrc={this.state.top3_recipe[this.state.slide_idx].src}
-                            imgalt={this.state.top3_recipe[this.state.slide_idx].title}
-                            imgtext={this.state.top3_recipe[this.state.slide_idx].title}
+                            imgsrc={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].src}
+                            imgalt={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].title}
+                            imgtext={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].title}
                             decrSlide={this.decrSlide}
                             incrSlide={this.incrSlide}
                         />
-                        <ReceipeList recipes={this.state.recipes}/>
+                        <ReceipeList 
+                        recipes={this.state.recipes}
+                        clickHeart={this.clickHeart}
+                        />
                     </div>
 
-                    <HomePageRightPanel top3_recipe={this.state.top3_recipe}/>
+                    <HomePageRightPanel 
+                    top3_recipe={this.state.top3_recipe} 
+                    recipes={this.state.recipes}
+                    clickHeart={this.clickHeart}
+                    />
                 </div> 
             </div>
         )

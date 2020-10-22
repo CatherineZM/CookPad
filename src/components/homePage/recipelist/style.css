@@ -17,3 +17,23 @@ a:hover{
     background-color:#e6ecf0;
     color: #86a4b6;
 }
+
+.likes{
+    color: red;
+    border-radius: 10px;
+    border-color: black;
+    cursor: pointer;
+}
+.likes:hover{
+    color: red;
+    border-radius: 10px;
+    border-color: black;
+    
+}
+
+.dislikes{
+    color: white;
+    stroke:red;
+    stroke-width: 30;
+    cursor: pointer;
+}
