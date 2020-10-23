@@ -17,7 +17,7 @@ import { User } from './object';
 export class App extends React.Component{
 
   state = {
-    users: [new User("user", "user"), new User("admin", "admin", true)],
+    users: [new User(1, "user", "user"), new User(0, "admin", "admin", true)],
     recipes: [],
     userCount: 2,
     recipeCount: 0
@@ -33,10 +33,10 @@ export class App extends React.Component{
             <Route path="/adminpage" render = {()=>(<AdminPage appState = {this.state}/>)}/>
             <Route path="/homepage/:uid" render = {()=>(<HomePage appState = {this.state}/>)}/>
             <Route path="/addrecipe/:uid" render = {()=>(<AddRecipe appState = {this.state}/>)}/>
-            <Route path="/editrecipe/:uid/:rid" render = {()=>(<EditRecipe appState = {this.state}/>)}/>
-            <Route path="/myprofile/:uid" render = {()=>(<MyProfile appState = {this.state}/>)}/>
-            <Route path="/myrecipes/:uid" render = {()=>(<MyRecipes appState = {this.state}/>)}/>
-            <Route path="/viewrecipe/:rid" render = {()=>(<ViewRecipe appState = {this.state}/>)}/>
+            <Route path="/editrecipe/:uid/:rid" render = {({match})=>(<EditRecipe {...match.params} appState = {this.state}/>)}/>
+            <Route path="/myprofile/:uid" render = {({match})=>(<MyProfile {...match.params} appState = {this.state}/>)}/>
+            <Route path="/myrecipes/:uid" render = {({match})=>(<MyRecipes {...match.params} appState = {this.state}/>)}/>
+            <Route path="/viewrecipe/:rid" render = {({match})=>(<ViewRecipe {...match.params} appState = {this.state}/>)}/>
           </Switch>
         </Router>
       </div>

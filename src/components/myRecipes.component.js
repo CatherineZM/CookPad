@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+    import { matchPath } from "react-router-dom";
 
 export default class MyRecipes extends Component {
     constructor(props){
-        super();
+        super(props);
+        
+        this.state = {
+            id: this.props.uid
+        }
+
     }
 
     componentDidMount() {
@@ -12,7 +18,7 @@ export default class MyRecipes extends Component {
     render(){
         return(
             <div className="container">
-                <p> This is the my recipes page</p>
+                <p> This is the user {this.props.uid} recipes page</p>
             </div>  
         )
     }

@@ -9,7 +9,8 @@ export default class User extends Component {
 
         this.state = {
             username : this.props.user.username,
-
+            uid : this.props.user.id
+ 
 
         }
     }
@@ -21,7 +22,7 @@ export default class User extends Component {
                     {this.state.username}
                 </td>
                 <td className = "recipeLink">
-                    <Link to="/myrecipes/:uid"> View Recipes </Link>
+                    <Link to = {`/myrecipes/${this.state.uid}`}> View Recipes </Link>
                 </td>
                 <td className = "banButton">
                     <button onClick={()=>{}}> Ban </button>

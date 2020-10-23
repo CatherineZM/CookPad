@@ -46,7 +46,7 @@ export default class Signup extends Component {
     }
 
     createUser(){
-        const user = new User(this.state.username, this.state.password);
+        const user = new User(0, this.state.username, this.state.password);
         this.state.users.push(user);
         this.setState({userCount: this.state.userCount+1});
     }

@@ -1,7 +1,8 @@
 export class User {
-    constructor(username, password, isAdmin = false) {
+    constructor(id, username, password, isAdmin = false) {
         this.username = username;
         this.password = password;
+        this.id = id;
         this.isAdmin = isAdmin;
         // fields can be edited or added after signup
         this.gender = null;
