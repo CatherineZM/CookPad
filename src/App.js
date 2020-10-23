@@ -3,7 +3,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import Users from "./components/users.component";
+import AdminPage from "./components/adminPage.component";
 import AddRecipe from "./components/addRecipe.component";
 import EditRecipe from "./components/editRecipe.component";
 import HomePage from "./components/homePage/homePage.component";
@@ -30,7 +30,7 @@ export class App extends React.Component{
           <Switch>
             <Route exact path="/" render = {()=>(<Login appState = {this.state}/>)}/>
             <Route path="/signup" render = {()=>(<Signup appState = {this.state}/>)}/>
-            <Route path="/users" render = {()=>(<Users appState = {this.state}/>)}/>
+            <Route path="/adminpage" render = {()=>(<AdminPage appState = {this.state}/>)}/>
             <Route path="/homepage/:uid" render = {()=>(<HomePage appState = {this.state}/>)}/>
             <Route path="/addrecipe/:uid" render = {()=>(<AddRecipe appState = {this.state}/>)}/>
             <Route path="/editrecipe/:uid/:rid" render = {()=>(<EditRecipe appState = {this.state}/>)}/>

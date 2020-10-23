@@ -31,7 +31,7 @@ export default class Login extends Component {
         if (this.checkPassword()){
             const user = this.state.users.find((user)=>{return this.state.username === user.username;});
             if (user.isAdmin){
-                window.location = '/users';
+                window.location = '/adminpage';
             } else {
                 window.location = '/homepage/1';
             }
