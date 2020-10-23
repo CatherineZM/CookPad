@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './addRecipe-style.css'
+import Navbar from "../Navbar/navbar.component";
 
 const log = console.log; 
 
@@ -61,6 +62,7 @@ export default class AddRecipe extends Component {
     render(){
         return(
             <div className="container">
+                <Navbar />
                 <form onSubmit = {this.onSubmit}>
                 {/* <div className = "Recipe-form">
                         <label> Recipe Picture: </label>

@@ -9,7 +9,7 @@ import EditRecipe from "./components/editRecipe.component";
 import HomePage from "./components/homePage/homePage.component";
 import Login from "./components/login.component";
 import MyProfile from "./components/myProfile.component";
-import MyRecipes from "./components/myRecipes.component";
+import MyRecipes from "./components/myRecipes/myRecipes.component";
 import Signup from "./components/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import { User } from './object';
