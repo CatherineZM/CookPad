@@ -7,6 +7,15 @@ import Navbar from '../Navbar/navbar.component'
 import HomePageRightPanel from './rightpanel/homePageRightPanel.component'
 import ReceipeList from './recipelist/recipelist.component'
 
+import cakeIcon from '../images/cake.png'
+import pieIcon from '../images/pie.png'
+import pizzaIcon from '../images/pizza.png'
+import saladIcon from '../images/salad.png'
+import sandwichIcon from '../images/sandwich.png'
+import seafoodIcon from '../images/seafood.png'
+import soupIcon from '../images/soup.png'
+import noodlesIcon from '../images/noodles.png'
+
 // hardcoded images
 import recipe1 from '../recipes/butter-chicken.jpg'
 import recipe2 from '../recipes/lemon-zucchini-bread.jpg'
@@ -21,6 +30,10 @@ import recipe10 from '../recipes/seafood-stew.png'
 import recipe11 from '../recipes/Chicken-Noodle-Soup.jpg'
 
 
+
+// mappings between categories and id
+// 0: cake; 1: noodles; 2: pie; 3: pizza; 4: salads; 5: sandwiches; 6: seafood; 7: soup 
+
 export default class HomePage extends Component {
     constructor(props){
         super(props);
@@ -30,20 +43,44 @@ export default class HomePage extends Component {
             num_slides: 3,
             // the data will be fetched from the database
             top3_recipe: [0, 1, 2],
-            
+            // categories
+            categories: [
+                {id:0, src:cakeIcon, text:'Cake', checked:true},
+                {id:1, src:noodlesIcon, text:'Noodles', checked:true},
+                {id:2, src:pieIcon, text:'Pie', checked:true},
+                {id:3, src:pizzaIcon, text: 'Pizza', checked:true},
+                {id:4, src:saladIcon, text: 'Salads', checked:true},
+                {id:5, src:sandwichIcon, text:'Sandwiches', checked:true},
+                {id:6, src:seafoodIcon, text: 'Seafood', checked:true},
+                {id:7, src:soupIcon, text:'Soup', checked:true}
+            ],
+            all_checked: true,
             // the data will be fetched from the database
             recipes: [
-                {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 101, categories:['soup']},
-                {id:1, src:recipe2, liked: false, title:'Lemon Zucchini Bread', likes: 99, categories:['cake']},
-                {id:2, src:recipe3, liked: false, title:'Ramen', likes:87, categories:['noodles']},
-                {id:3, src:recipe4, liked: false, title:'vanilla cake', likes:76, categories:['cake']},
-                {id:4, src:recipe5, liked: false, title:'Homemade Spaghetti', likes:65, categories:['noodles']},
-                {id:5, src:recipe6, liked: false, title:'Apple Pie', likes:63, categories:['pie']},
-                {id:6, src:recipe7, liked: false, title:'Homemade Pizza', likes:62, categories:['pizza']},
-                {id:7, src:recipe8, liked: false, title:'Greek Salad', likes:60, categories:['salad']},
-                {id:8, src:recipe9, liked: false, title:'Seafood Sandwiches', likes:58, categories:['seafood', 'sandwiches']},
-                {id:9, src:recipe10, liked: false, title:'Spicy seafood stew', likes:50, categories:['seafood', 'soup']},
-                {id:10, src:recipe11, liked: false, title:'Chicken Noodle Soup', likes:47, categories:['soup']}
+                {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7]},
+                {id:1, src:recipe2, liked: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
+                {id:2, src:recipe3, liked: false, title:'Ramen', likes:98, categories:[1]},
+                {id:3, src:recipe4, liked: false, title:'vanilla cake', likes:76, categories:[0]},
+                {id:4, src:recipe5, liked: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
+                {id:5, src:recipe6, liked: false, title:'Apple Pie', likes:63, categories:[2]},
+                {id:6, src:recipe7, liked: false, title:'Homemade Pizza', likes:62, categories:[3]},
+                {id:7, src:recipe8, liked: false, title:'Greek Salad', likes:60, categories:[4]},
+                {id:8, src:recipe9, liked: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
+                {id:9, src:recipe10, liked: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
+                {id:10, src:recipe11, liked: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
+            ],
+            displayed_recipes: [
+                {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7]},
+                {id:1, src:recipe2, liked: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
+                {id:2, src:recipe3, liked: false, title:'Ramen', likes:98, categories:[1]},
+                {id:3, src:recipe4, liked: false, title:'vanilla cake', likes:76, categories:[0]},
+                {id:4, src:recipe5, liked: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
+                {id:5, src:recipe6, liked: false, title:'Apple Pie', likes:63, categories:[2]},
+                {id:6, src:recipe7, liked: false, title:'Homemade Pizza', likes:62, categories:[3]},
+                {id:7, src:recipe8, liked: false, title:'Greek Salad', likes:60, categories:[4]},
+                {id:8, src:recipe9, liked: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
+                {id:9, src:recipe10, liked: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
+                {id:10, src:recipe11, liked: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
             ]
         }
     }
@@ -52,6 +89,7 @@ export default class HomePage extends Component {
         this.interval = setInterval(() => {
             this.autoShowSlides();
         }, 3000)
+        // initialize recipes, displayed recipes, top3_recipe id
     }
 
     componentWillUnmount() {
@@ -93,22 +131,92 @@ export default class HomePage extends Component {
         dots[this.state.slide_idx].className += " active";
     }
 
-    clickHeart = (rid) => {
+    clickHeart=(rid)=>{
+        console.log('hi')
+        console.log()
         // need to update the information into database
+        let new_recipes = this.state.recipes;
+        let new_displayed_recipes = this.state.displayed_recipes;
         if(this.state.recipes[rid].liked){
-            let new_recipes = this.state.recipes
             new_recipes[rid].liked = false;
+            new_displayed_recipes[rid].liked = false;
             new_recipes[rid].likes--;
-            this.setState({ recipes: new_recipes });
+            new_displayed_recipes[rid].likes --;
+            this.setState({ recipes: new_recipes,
+                            displayed_recipes: new_displayed_recipes });
         }else{
-            let new_recipes = this.state.recipes
             new_recipes[rid].liked = true;
+            new_displayed_recipes[rid].liked = true;
             new_recipes[rid].likes++;
-            this.setState({ recipes: new_recipes });
+            new_displayed_recipes[rid].likes ++;
+            this.setState({ recipes: new_recipes,
+                displayed_recipes: new_displayed_recipes });
         }
 
         // update top three recipes
-        
+        let first_largest = 0;
+        let second_largest = 0;
+        let third_largest = 0;
+        let first_idx = 0;
+        let second_idx = 0;
+        let third_idx = 0;
+        for(let i=0; i< new_recipes.length; i++){
+            console.log(i)
+            if(new_recipes[i].likes > first_largest){
+                third_largest = second_largest;
+                second_largest = first_largest;
+                first_largest = new_recipes[i].likes;
+                first_idx = i;
+            }else if(new_recipes[i].likes > second_largest){
+                third_largest = second_largest;
+                second_largest = new_recipes[i].likes;
+                second_idx = i;
+            }else if(new_recipes[i].likes > third_largest){
+                third_largest = new_recipes[i].likes;
+                third_idx = i;
+            }
+        }
+        this.setState({ top3_recipe: [first_idx, second_idx, third_idx]})
+    }
+
+    clickCategory = (event)=>{
+        let new_categories = this.state.categories;
+        new_categories[event.target.name].checked = !this.state.categories[event.target.name].checked;
+        this.setState({ categories: new_categories});
+
+        let categories_ondisplay = []
+        for(let i = 0; i < this.state.categories.length; i++){
+            if(this.state.categories[i].checked)
+            categories_ondisplay.push(i)
+        }
+        console.log(categories_ondisplay)
+        // show and hide receipes
+        let new_recipes = []
+        for(let i = 0; i < this.state.recipes.length; i++){
+            for(let j = 0; j < this.state.recipes[i].categories.length; j++){
+                if(categories_ondisplay.includes(this.state.recipes[i].categories[j])){ 
+                    new_recipes.push(this.state.recipes[i]);
+                    break;
+                }
+            }
+        }
+        console.log(new_recipes)
+        this.setState({ displayed_recipes: new_recipes });
+    }
+
+    clickAll = (e) => {
+        this.setState({ all_checked: !this.state.all_checked})
+        let all_checked = !this.state.all_checked;
+        let new_categories = this.state.categories
+        for(let i = 0; i < this.state.categories.length; i++){
+            new_categories[i].checked = all_checked;
+        }
+        this.setState({ categories: new_categories});
+        if(all_checked){
+            this.setState({ displayed_recipes: this.state.recipes});
+        }else{
+            this.setState({ displayed_recipes: []});
+        }
     }
 
     render(){
@@ -116,7 +224,12 @@ export default class HomePage extends Component {
             <div id="body">
                 <div className="container-sm">
                     <Navbar/>
-                    <HomePageLeftPanel/>                    
+                    <HomePageLeftPanel
+                        categories={this.state.categories}
+                        clickCategory={this.clickCategory}
+                        all_checked={this.state.all_checked}
+                        clickAll={this.clickAll}
+                    />                    
 
                     {/* middle panel */}
                     <div id="middle-panel">
@@ -129,7 +242,7 @@ export default class HomePage extends Component {
                             incrSlide={this.incrSlide}
                         />
                         <ReceipeList 
-                        recipes={this.state.recipes}
+                        recipes={this.state.displayed_recipes}
                         clickHeart={this.clickHeart}
                         />
                     </div>

@@ -20,7 +20,7 @@ export default class ReceipeList extends Component {
                         {!recipe.liked && <FaHeart className="dislikes" onClick={()=>clickHeart(recipe.id)}/>}
                         {recipe.likes}
                     </div>
-                </div>   
+                </div>    
             ))}
             </div>
         )   

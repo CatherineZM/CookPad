@@ -17,6 +17,7 @@
     border: solid;
     border-width: 5px 0;   
     border-color: #e6ecf0;
+    height: 50px;
 }
 
 #left-panel table tr td {
