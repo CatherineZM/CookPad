@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import AdminPage from "./components/adminPage.component";
-import AddRecipe from "./components/addRecipe.component";
+import AddRecipe from "./components/addRecipe/addRecipe.component";
 import EditRecipe from "./components/editRecipe.component";
 import HomePage from "./components/homePage/homePage.component";
 import Login from "./components/login.component";
 import MyProfile from "./components/myProfile.component";
 import MyRecipes from "./components/myRecipes.component";
 import Signup from "./components/signup.component";
-import ViewRecipe from './components/viewRecipe.component';
+import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import { User } from './object';
 
 export class App extends React.Component{

@@ -132,8 +132,6 @@ export default class HomePage extends Component {
     }
 
     clickHeart=(rid)=>{
-        console.log('hi')
-        console.log()
         // need to update the information into database
         let new_recipes = this.state.recipes;
         let new_displayed_recipes = this.state.displayed_recipes;
