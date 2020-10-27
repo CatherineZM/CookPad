@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import MyRecipes from './myRecipes/myRecipes.component'
 import {Link} from 'react-router-dom';
 
 

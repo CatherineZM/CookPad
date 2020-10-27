@@ -5,7 +5,7 @@ import RecipeSlideShow from './slideshow/recipeSlideShow.component'
 import HomePageLeftPanel from './leftpanel/homePageLeftPanel.component'
 import Navbar from '../Navbar/navbar.component'
 import HomePageRightPanel from './rightpanel/homePageRightPanel.component'
-import ReceipeList from './recipelist/recipelist.component'
+import ReceipeList from '../recipelist/recipelist.component'
 
 import cakeIcon from '../images/cake.png'
 import pieIcon from '../images/pie.png'
@@ -57,30 +57,30 @@ export default class HomePage extends Component {
             all_checked: true,
             // the data will be fetched from the database
             recipes: [
-                {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7]},
-                {id:1, src:recipe2, liked: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
-                {id:2, src:recipe3, liked: false, title:'Ramen', likes:98, categories:[1]},
-                {id:3, src:recipe4, liked: false, title:'vanilla cake', likes:76, categories:[0]},
-                {id:4, src:recipe5, liked: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
-                {id:5, src:recipe6, liked: false, title:'Apple Pie', likes:63, categories:[2]},
-                {id:6, src:recipe7, liked: false, title:'Homemade Pizza', likes:62, categories:[3]},
-                {id:7, src:recipe8, liked: false, title:'Greek Salad', likes:60, categories:[4]},
-                {id:8, src:recipe9, liked: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
-                {id:9, src:recipe10, liked: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
-                {id:10, src:recipe11, liked: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
+                {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
+                {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
+                {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
+                {id:3, src:recipe4, liked: false, collected: false, title:'vanilla cake', likes:76, categories:[0]},
+                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
+                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
+                {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
+                {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]},
+                {id:8, src:recipe9, liked: false, collected: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
+                {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
+                {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
             ],
             displayed_recipes: [
-                {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7]},
-                {id:1, src:recipe2, liked: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
-                {id:2, src:recipe3, liked: false, title:'Ramen', likes:98, categories:[1]},
-                {id:3, src:recipe4, liked: false, title:'vanilla cake', likes:76, categories:[0]},
-                {id:4, src:recipe5, liked: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
-                {id:5, src:recipe6, liked: false, title:'Apple Pie', likes:63, categories:[2]},
-                {id:6, src:recipe7, liked: false, title:'Homemade Pizza', likes:62, categories:[3]},
-                {id:7, src:recipe8, liked: false, title:'Greek Salad', likes:60, categories:[4]},
-                {id:8, src:recipe9, liked: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
-                {id:9, src:recipe10, liked: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
-                {id:10, src:recipe11, liked: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
+                {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
+                {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
+                {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
+                {id:3, src:recipe4, liked: false, collected: false, title:'vanilla cake', likes:76, categories:[0]},
+                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
+                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
+                {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
+                {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]},
+                {id:8, src:recipe9, liked: false, collected: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
+                {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
+                {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
             ]
         }
     }
@@ -131,25 +131,66 @@ export default class HomePage extends Component {
         dots[this.state.slide_idx].className += " active";
     }
 
+    clickStar=(rid)=>{
+        // need to update the information into database
+        let new_recipes = this.state.recipes;
+        let new_displayed_recipes = this.state.displayed_recipes;
+        this.state.recipes.forEach((recipe, idx)=>{
+            if(recipe.id === rid){
+                if(recipe.collected){
+                    new_recipes[idx].collected = false;
+                    this.setState({ recipes: new_recipes });
+                }else{
+                    new_recipes[idx].collected = true;
+                    this.setState({ recipes: new_recipes });
+                }
+            }
+        })
+
+        this.state.displayed_recipes.forEach((recipe, idx)=>{
+            if(recipe.id === rid){
+                if(recipe.collected){
+                    new_displayed_recipes[idx].collected = false;
+                    this.setState({ displayed_recipes: new_displayed_recipes });
+                }else{
+                    new_displayed_recipes[idx].collected = true;
+                    this.setState({ displayed_recipes: new_displayed_recipes });
+                }
+            }
+        })
+    }
+
     clickHeart=(rid)=>{
         // need to update the information into database
         let new_recipes = this.state.recipes;
         let new_displayed_recipes = this.state.displayed_recipes;
-        if(this.state.recipes[rid].liked){
-            new_recipes[rid].liked = false;
-            new_displayed_recipes[rid].liked = false;
-            new_recipes[rid].likes--;
-            new_displayed_recipes[rid].likes --;
-            this.setState({ recipes: new_recipes,
-                            displayed_recipes: new_displayed_recipes });
-        }else{
-            new_recipes[rid].liked = true;
-            new_displayed_recipes[rid].liked = true;
-            new_recipes[rid].likes++;
-            new_displayed_recipes[rid].likes ++;
-            this.setState({ recipes: new_recipes,
-                displayed_recipes: new_displayed_recipes });
-        }
+        this.state.recipes.forEach((recipe, idx)=>{
+            if(recipe.id === rid){
+                if(recipe.liked){
+                    new_recipes[idx].liked = false;
+                    new_recipes[idx].likes--;
+                    this.setState({ recipes: new_recipes });
+                }else{
+                    new_recipes[idx].liked = true;
+                    new_recipes[idx].likes++;
+                    this.setState({ recipes: new_recipes });
+                }
+            }
+        })
+
+        this.state.displayed_recipes.forEach((recipe, idx)=>{
+            if(recipe.id === rid){
+                if(recipe.liked){
+                    new_displayed_recipes[idx].liked = false;
+                    new_displayed_recipes[idx].likes--;
+                    this.setState({ displayed_recipes: new_displayed_recipes });
+                }else{
+                    new_displayed_recipes[idx].liked = true;
+                    new_displayed_recipes[idx].likes++;
+                    this.setState({ displayed_recipes: new_displayed_recipes });
+                }
+            }
+        })
 
         // update top three recipes
         let first_largest = 0;
@@ -242,6 +283,7 @@ export default class HomePage extends Component {
                         <ReceipeList 
                         recipes={this.state.displayed_recipes}
                         clickHeart={this.clickHeart}
+                        clickStar={this.clickStar}
                         />
                     </div>
 

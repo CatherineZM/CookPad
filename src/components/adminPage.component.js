@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import Navbar from './Navbar/navbar.component';
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
 import User from "./user.component"
 import { uid } from "react-uid";
 

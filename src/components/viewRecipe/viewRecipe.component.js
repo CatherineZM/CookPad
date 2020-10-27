@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar/navbar.component";
-import { FaHeart } from "react-icons/fa";
+import { FaHeart, FaStar } from "react-icons/fa";
 import { uid } from "react-uid";
 // hardcoded images
 import recipe1 from '../recipes/butter-chicken.jpg'
@@ -11,7 +11,8 @@ export default class ViewRecipe extends Component {
         // the current recipe will be fetch from database
         // here assume you have all the recipes
         this.state = {
-            recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7],
+            uid: 0,
+            recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7], collected: false,
             creator:"Nora", 
             ingredients: [
                 {ingredient:"Butter", measure:"2 tablespoons"},
@@ -58,6 +59,46 @@ export default class ViewRecipe extends Component {
         }
     }
 
+    clickStar=(rid)=>{
+        // need to update the information into database
+        let new_recipe = this.state.recipe;
+        if(this.state.recipe.collected){
+            new_recipe.collected = false;
+            this.setState({ recipes: new_recipe });
+        }else{
+            new_recipe.collected = true;
+            this.setState({ recipes: new_recipe });
+        }
+    }
+
+    clickHeart=(rid)=>{
+        // need to update the information into database
+        let new_recipe = this.state.recipe;
+        if(this.state.recipe.liked){
+            new_recipe.liked = false;
+            new_recipe.likes--;
+            this.setState({ recipes: new_recipe });
+        }else{
+            new_recipe.liked = true;
+            new_recipe.likes++;
+            this.setState({ recipes: new_recipe });
+        }
+    }
+
+    editRecipe=(e)=>{
+        e.preventDefault();
+        window.location = "/editRecipe/" + this.state.recipe.id
+    }
+
+    deleteRecipe=(e)=>{
+        e.preventDefault();
+        if (window.confirm('Are you sure you wish to delete this item?')){
+            // delete item in database
+            console.log("item deleted")
+            window.location = "/myrecipes/" + this.state.uid
+        } 
+    }
+
     render(){
         return(
             <div className="container-sm">
@@ -65,6 +106,8 @@ export default class ViewRecipe extends Component {
                 <p>{this.state.recipe.title}</p>
                 <p>By: {this.state.recipe.creator}</p>
                 <div>
+                    {this.state.recipe.collected && <FaStar className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
+                    {!this.state.recipe.collected && <FaStar className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
                     {this.state.recipe.liked && <FaHeart className="likes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
                     {!this.state.recipe.liked && <FaHeart className="dislikes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
                     {this.state.recipe.likes}
@@ -90,14 +133,14 @@ export default class ViewRecipe extends Component {
                         {this.state.recipe.steps.map((step, id)=>{
                             return(
                                 <tr key={uid(step)}>
-                                    <td>{id+1}.</td>
-                                    <td>{step}</td>
+                                    <td>{id+1}.{step}</td>
                                 </tr>
                             )
                         })}
                     </tbody>
                 </table>
-                <img className="recipe" src={this.state.recipe.src} alt={this.state.recipe.title} height="200px" width="275px"/>
+                <form onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
+                <form onSubmit={this.deleteRecipe}><input type="submit" value="Delete" className="btn btn-primary"/></form>
             </div>  
         )
     }

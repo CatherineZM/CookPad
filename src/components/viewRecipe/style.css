@@ -1,0 +1,15 @@
+
+.star{
+    color:rgb(212, 212, 15);
+    border-radius: 10px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.hollow-star{
+    color: white;
+    stroke:  rgb(212, 212, 15);
+    margin-right: 10px;
+    stroke-width: 30;
+    cursor: pointer;
+}
