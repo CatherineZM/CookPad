@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Users from "./user.component"
+import UserList from "./userlist/userList.component"
 import './style.css'
 import NavbarEmpty from '../Navbar-empty/navbar-empty'
 
@@ -20,7 +20,7 @@ export default class AdminPage extends Component {
         return(
             <div className="container-sm">    
                 <NavbarEmpty is_adminpage={true}/>
-                <Users users={this.state.users}/>     
+                <UserList users={this.state.users}/>     
             </div>  
         )
     }

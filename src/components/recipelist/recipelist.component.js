@@ -6,12 +6,12 @@ import { uid } from "react-uid";
 
 export default class ReceipeList extends Component {
     render(){
-        const {recipes, clickHeart, clickStar} = this.props;
+        const {recipes, clickHeart, clickStar, userid} = this.props;
         return(
             <div>
             {recipes.map( (recipe) => (
                 <div key={uid(recipe.title)} className="recipe-container">
-                    <Link to={"/viewrecipe/"+ recipe.id}>
+                    <Link to={"/viewrecipe/"+ userid + "/" + recipe.id}>
                     <img className="recipe" src={recipe.src} alt={recipe.text} height="200px" width="275px"/>
                     </Link> 
                     <div className="recipe-title">{recipe.title}</div>

@@ -15,13 +15,12 @@ export default class AddRecipe extends Component {
         super(props);
         
         this.state = {
+            uid: this.props.match.params.uid,
             RecipeName: '',
             Description: '',
             Ingredients: [{name:"", quantity:"", unit:""}],
             Steps:[],
             RecipeImages: [],
-            recipes: this.props.appState.recipes,
-            recipeCount: this.props.appState.recipeCount,
             CuisineTypes :[
                 {name: "Cake", id: 0},
                 {name: "Noodles", id: 1},
@@ -91,7 +90,7 @@ export default class AddRecipe extends Component {
     render(){ 
         return(
             <div className="container">
-                <Navbar/>
+                <Navbar uid={this.state.uid}/>
                 <form onSubmit = {this.onSubmit}>
                     <div className = "Recipe-form">
                         <label> Recipe Name: </label>
@@ -129,8 +128,8 @@ export default class AddRecipe extends Component {
                          {
                             this.state.Ingredients.map((Ingredient, index) => {
                                 return(
-                                    <div class="row" id="Ingredient-row" key={index}>
-                                        <div class="col">
+                                    <div className="row" id="Ingredient-row" key={index}>
+                                        <div className="col">
                                             <input 
                                                 type = "Ingredients" 
                                                 required 
@@ -140,7 +139,7 @@ export default class AddRecipe extends Component {
                                                 onChange={(e)=>this.onChangeIngredientsName(e,index)}
                                             />
                                         </div>
-                                        <div class="col">
+                                        <div className="col">
                                             <input 
                                                 type = "Ingredients" 
                                                 required 
@@ -150,7 +149,7 @@ export default class AddRecipe extends Component {
                                                 onChange={(e)=>this.onChangeIngredientsQuan(e,index)}
                                             />
                                         </div>
-                                        <div class="col">
+                                        <div className="col">
                                             <Dropdown
                                                 className = "UnitSelector"
                                                 options={UnitType} 
@@ -184,7 +183,7 @@ export default class AddRecipe extends Component {
                                                 onChange={(e)=>this.onChangeSteps(e,(index))}
                                             />
                                         </div>
-                                        <div class ="col">
+                                        <div className ="col">
                                             <button 
                                                 className = "btn btn-outline-primary" 
                                                 onClick={this.onChangeRemoveSteps}>Remove</button>

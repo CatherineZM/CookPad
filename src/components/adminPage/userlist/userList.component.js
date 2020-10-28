@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { uid } from "react-uid";
 
-export default class Users extends Component {
+export default class UserList extends Component {
     render() {
         const {users} = this.props;
         return(

@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import './style.css'
+import Navbar from "../Navbar/navbar.component"
 
 export default class MyProfile extends Component {
     constructor(props){
-        super();
+        super(props);
+        
+        this.state = {
+            uid: this.props.match.params.uid
+        }
     }
 
     componentDidMount() {
@@ -12,9 +17,10 @@ export default class MyProfile extends Component {
 
     render(){
         return(
-            <div className="container">
-                <h> This is the my profile page</h>
-            </div>  
+            <div className="container-sm">
+                <Navbar uid={this.state.uid}/>
+                <div>this is my profile page</div>
+            </div> 
         )
     }
 } 

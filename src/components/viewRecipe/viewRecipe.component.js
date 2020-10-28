@@ -11,7 +11,8 @@ export default class ViewRecipe extends Component {
         // the current recipe will be fetch from database
         // here assume you have all the recipes
         this.state = {
-            uid: 0,
+            uid: this.props.match.params.uid,
+            rid: this.props.match.params.rid,
             recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7], collected: false,
             creator:"Nora", 
             ingredients: [
@@ -43,6 +44,8 @@ export default class ViewRecipe extends Component {
     }
 
     componentDidMount() {
+        console.log(this.state.uid)
+        console.log(this.state.rid)
     }
 
     clickHeart=(rid)=>{
@@ -102,7 +105,7 @@ export default class ViewRecipe extends Component {
     render(){
         return(
             <div className="container-sm">
-                <Navbar/>
+                <Navbar uid={this.state.uid}/>
                 <p>{this.state.recipe.title}</p>
                 <p>By: {this.state.recipe.creator}</p>
                 <div>

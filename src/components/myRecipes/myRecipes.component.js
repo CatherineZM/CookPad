@@ -13,7 +13,7 @@ export default class MyRecipes extends Component {
         super(props);
         
         this.state = {
-            id: this.props.uid,
+            uid: this.props.match.params.uid,
             recipes: [
                 {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
                 {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
@@ -66,7 +66,7 @@ export default class MyRecipes extends Component {
     render(){
         return(
             <div className="container-sm">
-                <Navbar />
+                <Navbar uid={this.state.uid}/>
                 <div>
                 <ReceipeList 
                     recipes={this.state.recipes}

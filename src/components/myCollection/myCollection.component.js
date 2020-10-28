@@ -8,7 +8,7 @@ export default class MyCollection extends Component {
     constructor(props){
         super(props);
         this.state = {
-            id: this.props.uid,
+            uid: this.props.match.params.uid,
             recipes: [
                 {id:8, src:recipe9, liked: false, collected: false,  title:'Seafood Sandwiches', likes:58, categories:[5, 6]}
             ]
@@ -56,7 +56,7 @@ export default class MyCollection extends Component {
     render(){
         return(
             <div className="container-sm">
-                <Navbar />
+                <Navbar uid={this.state.uid}/>
                 <ReceipeList 
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}

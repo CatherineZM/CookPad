@@ -9,6 +9,7 @@ import EditRecipe from "./components/editRecipe/editRecipe.component";
 import HomePage from "./components/homePage/homePage.component";
 import Login from "./components/login/login.component";
 import MyProfile from "./components/myProfile/myProfile.component";
+import EditProfile from "./components/editProfile/editProfile.component"
 import MyRecipes from "./components/myRecipes/myRecipes.component";
 import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
@@ -20,16 +21,17 @@ export class App extends React.Component{
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" render = {()=>(<Login appState = {this.state}/>)}/>
-            <Route path="/signup" render = {()=>(<Signup appState = {this.state}/>)}/>
-            <Route path="/adminpage" render = {()=>(<AdminPage appState = {this.state}/>)}/>
-            <Route path="/homepage/:uid" render = {()=>(<HomePage appState = {this.state}/>)}/>
-            <Route path="/addrecipe/:uid" render = {()=>(<AddRecipe appState = {this.state}/>)}/>
-            <Route path="/editrecipe/:rid" render = {({match})=>(<EditRecipe {...match.params} appState = {this.state}/>)}/>
-            <Route path="/myprofile/:uid" render = {({match})=>(<MyProfile {...match.params} appState = {this.state}/>)}/>
-            <Route path="/myrecipes/:uid" render = {({match})=>(<MyRecipes {...match.params} appState = {this.state}/>)}/>
-            <Route path="/mycollection/:uid" render = {({match})=>(<MyCollection {...match.params} appState = {this.state}/>)}/>
-            <Route path="/viewrecipe/:rid" render = {({match})=>(<ViewRecipe {...match.params} appState = {this.state}/>)}/>
+            <Route path="/" exact component = {Login}/>
+            <Route path="/signup" component = {Signup}/>
+            <Route path="/adminpage" component = {AdminPage}/>
+            <Route path="/homepage/:uid" component = {HomePage}/>
+            <Route path="/addrecipe/:uid" component = {AddRecipe}/>
+            <Route path="/editrecipe/:uid/:rid" component = {EditRecipe}/>
+            <Route path="/myprofile/:uid" component = {MyProfile}/>
+            <Route path="/editprofile/:uid" component = {EditProfile}/>
+            <Route path="/myrecipes/:uid" component = {MyRecipes}/>
+            <Route path="/mycollection/:uid" component = {MyCollection}/>
+            <Route path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
           </Switch>
         </Router>
       </div>

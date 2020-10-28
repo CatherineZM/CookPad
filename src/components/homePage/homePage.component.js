@@ -36,9 +36,11 @@ export default class HomePage extends Component {
         super(props);
 
         this.state = {
+            uid: this.props.match.params.uid,
             slide_idx: 0,
             num_slides: 3,
             // the data will be fetched from the database and calculated in component_DidMount callback
+            // this is the index into the recipes array
             top3_recipe: [0, 1, 2],
             // categories 
             categories: [
@@ -259,7 +261,7 @@ export default class HomePage extends Component {
         return(
             <div id="body">
                 <div className="container-sm">
-                    <Navbar/>
+                    <Navbar uid={this.state.uid}/>
                     <HomePageLeftPanel
                         categories={this.state.categories}
                         clickCategory={this.clickCategory}
@@ -281,6 +283,7 @@ export default class HomePage extends Component {
                         recipes={this.state.displayed_recipes}
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
+                        userid={this.state.uid}
                         />
                     </div>
 
