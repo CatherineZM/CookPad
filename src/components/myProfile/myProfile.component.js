@@ -7,19 +7,28 @@ export default class MyProfile extends Component {
         super(props);
         
         this.state = {
-            uid: this.props.match.params.uid
+            uid: this.props.match.params.uid,
+            username:"Nora", 
+            description: "Hello World!"
         }
     }
 
     componentDidMount() {
+        //  get user information from the database
     }
 
+    editDescription = (e)=>{
+        e.preventDefault();
+        window.location = "/editprofile/" + this.state.uid
+    }
 
     render(){
         return(
             <div className="container-sm">
                 <Navbar uid={this.state.uid}/>
-                <div>this is my profile page</div>
+                <div>Username: {this.state.username}</div>
+                <div>Description: {this.state.description}</div>
+                <form onSubmit={this.editDescription}><input type="submit" value="Edit Description" className="btn btn-primary"/></form>
             </div> 
         )
     }
