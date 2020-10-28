@@ -13,7 +13,8 @@ import EditProfile from "./components/editProfile/editProfile.component"
 import MyRecipes from "./components/myRecipes/myRecipes.component";
 import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
-import MyCollection from './components/myCollection/myCollection.component'
+import MyCollection from './components/myCollection/myCollection.component';
+import ViewProfile from './components/viewProfile/viewProfile.component';
 
 export class App extends React.Component{
   render(){
@@ -32,6 +33,7 @@ export class App extends React.Component{
             <Route path="/myrecipes/:uid" component = {MyRecipes}/>
             <Route path="/mycollection/:uid" component = {MyCollection}/>
             <Route path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
+            <Route path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
           </Switch>
         </Router>
       </div>

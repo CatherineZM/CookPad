@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import Navbar from "../Navbar/navbar.component";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { uid } from "react-uid";
+import { Link } from "react-router-dom"
+
 // hardcoded images
 import recipe1 from '../recipes/butter-chicken.jpg'
 
@@ -9,12 +11,11 @@ export default class ViewRecipe extends Component {
     constructor(props){
         super(props);
         // the current recipe will be fetch from database
-        // here assume you have all the recipes
         this.state = {
             uid: this.props.match.params.uid,
             rid: this.props.match.params.rid,
             recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7], collected: false,
-            creator:"Nora", 
+            creator:{uid:127, username:"Raon"}, 
             ingredients: [
                 {ingredient:"Butter", measure:"2 tablespoons"},
                 {ingredient:"Medium onion", measure:"1 (medium diced)"},
@@ -44,8 +45,7 @@ export default class ViewRecipe extends Component {
     }
 
     componentDidMount() {
-        console.log(this.state.uid)
-        console.log(this.state.rid)
+        // the current recipe will be fetch from database
     }
 
     clickHeart=(rid)=>{
@@ -107,7 +107,7 @@ export default class ViewRecipe extends Component {
             <div className="container-sm">
                 <Navbar uid={this.state.uid}/>
                 <p>{this.state.recipe.title}</p>
-                <p>By: {this.state.recipe.creator}</p>
+                <p><Link to={"/viewprofile/"+ this.state.uid + "/" + this.state.recipe.creator.uid}>By: {this.state.recipe.creator.username}</Link></p>
                 <div>
                     {this.state.recipe.collected && <FaStar className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
                     {!this.state.recipe.collected && <FaStar className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  

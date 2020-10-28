@@ -72,6 +72,7 @@ export default class MyRecipes extends Component {
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}
                     clickStar={this.clickStar}
+                    userid={this.state.uid}
                 />
             </div>
             </div>  
