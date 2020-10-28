@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {NewRecipe} from '../../object';
 import './style.css'
 import Navbar from "../Navbar/navbar.component";
 import Dropdown from 'react-dropdown';
@@ -24,14 +23,14 @@ export default class AddRecipe extends Component {
             recipes: this.props.appState.recipes,
             recipeCount: this.props.appState.recipeCount,
             CuisineTypes :[
-                {name: "Cake", id: 1},
-                {name: "Noodles", id: 2},
-                {name: "Pie", id: 3},
-                {name: "Pizza", id: 4},
-                {name: "Salads", id: 5},
-                {name: "Sandwiches", id: 6},
-                {name: "Seafood", id: 7},
-                {name: "Soup", id: 8}
+                {name: "Cake", id: 0},
+                {name: "Noodles", id: 1},
+                {name: "Pie", id: 2},
+                {name: "Pizza", id: 3},
+                {name: "Salads", id: 4},
+                {name: "Sandwiches", id: 5},
+                {name: "Seafood", id: 6},
+                {name: "Soup", id: 7}
             ]
         }
     }
@@ -85,7 +84,7 @@ export default class AddRecipe extends Component {
 
     onSubmit=(e)=>{
         e.preventDefault();
-        this.createRecipe();
+        // push the recipe to the database
         window.location = "/homepage/1";
     }
 
@@ -225,10 +224,4 @@ export default class AddRecipe extends Component {
             </div>
         )
     }
-    createRecipe(){
-        const Recipe = new NewRecipe(this.state.RecipeName);
-        this.state.recipes.push(Recipe);
-        this.setState({recipeCount: this.state.recipeCount+1});
-    }
-    
 } 

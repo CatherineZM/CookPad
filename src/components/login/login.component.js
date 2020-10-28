@@ -10,48 +10,23 @@ export default class Login extends Component {
         this.state = {
             username: '',
             password: '',
-            users: this.props.appState.users,
-            userCount: this.props.appState.userCount
         }
     }
 
-    onChangeUsername=(e)=>{
-        this.setState({ username: e.target.value });
-    }
-    
-    onChangePassword=(e)=>{
-        this.setState({ password: e.target.value });
-    }
+    onChangeUsername=(e)=>{ this.setState({ username: e.target.value }); }
+    onChangePassword=(e)=>{ this.setState({ password: e.target.value }); }
 
     onSubmit=(e)=>{
         e.preventDefault();
-        if (this.checkPassword()){
-            const user = this.state.users.find((user)=>{return this.state.username === user.username;});
-            if (user.isAdmin){
-                window.location = '/adminpage';
-            } else {
-                window.location = '/homepage/1';
-            }
-            
-        }
-    }
-
-    checkPassword=()=>{
-        if (!this.state.users.some((user)=>{return this.state.username === user.username;})){
-            alert("Username does not exist!");
-            return false;
-        } 
-        const user = this.state.users.find((user)=>{return this.state.username === user.username;});
-        if (user.password === this.state.password){
-            return true;
+        // fetch users data from the backend data base and perform the check
+        // for now hardcode admin and user
+        if (this.state.username === "admin" && this.state.password === "admin"){
+            window.location = '/adminpage';
+        } else if(this.state.username === "user" && this.state.password === "user") {
+            window.location = '/homepage/1';
         } else {
-            alert("Password does not match!");
-            return false;
-        }
-    }
-
-    validateUser=()=>{
-        return this.state.username.length > 0 && this.state.password.length > 0;
+            alert("Username does not exist or Password does not match!");
+        }     
     }
 
     render(){
@@ -68,7 +43,7 @@ export default class Login extends Component {
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Login" className="btn btn-primary" disabled={!this.validateUser()}/>
+                        <input type="submit" value="Login" className="btn btn-primary"/>
                     </div>
                 </form>
                 <p className="text-center my-3">Don't have an account?{" "}

@@ -13,17 +13,8 @@ import MyRecipes from "./components/myRecipes/myRecipes.component";
 import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import MyCollection from './components/myCollection/myCollection.component'
-import { User } from './object';
 
 export class App extends React.Component{
-
-  state = {
-    users: [new User(1, "user", "user"), new User(0, "admin", "admin", true)],
-    recipes: [],
-    userCount: 2,
-    recipeCount: 0
-  }
-
   render(){
     return (
       <div>

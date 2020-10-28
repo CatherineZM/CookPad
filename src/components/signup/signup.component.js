@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { User } from '../../object';
 import './style.css'
 import NavbarEmpty from "../Navbar-empty/navbar-empty"
 
@@ -10,8 +9,7 @@ export default class Signup extends Component {
         this.state = {
             username: '',
             password: '',
-            users: this.props.appState.users,
-            userCount: this.props.appState.userCount
+            description: ''
         }
     }
 
@@ -25,20 +23,15 @@ export default class Signup extends Component {
         this.setState({ password: e.target.value });
     }
 
+    onChangeDescription = (e)=>{
+        e.preventDefault();
+        this.setState({ description: e.target.value });
+    }
+
     onSubmit=(e)=>{
         e.preventDefault();
-        this.createUser();
+        // create a new user object and push the user to backend database
         window.location = "..";
-    }
-
-    createUser=()=>{
-        const user = new User(0, this.state.username, this.state.password);
-        this.state.users.push(user);
-        this.setState({userCount: this.state.userCount+1});
-    }
-
-    validateUser=()=>{
-        return this.state.username.length > 0 && this.state.password.length > 0;
     }
 
     render(){
@@ -55,7 +48,11 @@ export default class Signup extends Component {
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
                     <div className="form-group">
-                        <input type="submit" value="Signup" className="btn btn-primary" disabled={!this.validateUser()}/>
+                        <label>Description: </label>
+                        <input type="text" placeholder="Tell me about yourself" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
+                    </div>
+                    <div className="form-group">
+                        <input type="submit" value="Signup" className="btn btn-primary"/>
                     </div>
                 </form>
                 <p className="text-center my-3">Already have an account?{" "} 
