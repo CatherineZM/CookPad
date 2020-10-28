@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import './style.css'
 
-export default class MyProfile extends Component {
+export default class EditRecipe extends Component {
     constructor(props){
         super();
     }
@@ -12,7 +13,7 @@ export default class MyProfile extends Component {
     render(){
         return(
             <div className="container">
-                <h> This is the my profile page</h>
+                <p> This is the edit recipe page</p>
             </div>  
         )
     }

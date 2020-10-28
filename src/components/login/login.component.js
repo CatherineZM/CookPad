@@ -1,14 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-// import { Button } from 'bootstrap';
-// import { User } from '../object';
+import './style.css'
 
 export default class Login extends Component {
     constructor(props){
         super(props);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
             username: '',
@@ -18,15 +14,15 @@ export default class Login extends Component {
         }
     }
 
-    onChangeUsername(e) {
+    onChangeUsername=(e)=>{
         this.setState({ username: e.target.value });
     }
     
-    onChangePassword(e) {
+    onChangePassword=(e)=>{
         this.setState({ password: e.target.value });
     }
 
-    onSubmit(e){
+    onSubmit=(e)=>{
         e.preventDefault();
         if (this.checkPassword()){
             const user = this.state.users.find((user)=>{return this.state.username === user.username;});
@@ -39,7 +35,7 @@ export default class Login extends Component {
         }
     }
 
-    checkPassword(){
+    checkPassword=()=>{
         if (!this.state.users.some((user)=>{return this.state.username === user.username;})){
             alert("Username does not exist!");
             return false;
@@ -53,13 +49,7 @@ export default class Login extends Component {
         }
     }
 
-    validateUser(){
-        // for (let i = 0; i < this.state.userCount; i++){
-        //     if (this.users[i].username == this.state.username) {
-        //         log("username exists already");
-        //         return false;
-        //     }
-        // }
+    validateUser=()=>{
         return this.state.username.length > 0 && this.state.password.length > 0;
     }
 

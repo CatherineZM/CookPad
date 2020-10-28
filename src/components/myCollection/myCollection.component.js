@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Navbar from '../Navbar/navbar.component'
 import recipe9 from '../recipes/seafood-sandwiches.png'
 import ReceipeList from '../recipelist/recipelist.component'
+import './style.css'
 
 export default class MyCollection extends Component {
     constructor(props){
@@ -55,7 +56,7 @@ export default class MyCollection extends Component {
     render(){
         return(
             <div className="container-sm">
-                <Navbar/>
+                <Navbar />
                 <ReceipeList 
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}

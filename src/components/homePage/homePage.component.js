@@ -7,33 +7,30 @@ import Navbar from '../Navbar/navbar.component'
 import HomePageRightPanel from './rightpanel/homePageRightPanel.component'
 import ReceipeList from '../recipelist/recipelist.component'
 
-import cakeIcon from '../images/cake.png'
-import pieIcon from '../images/pie.png'
-import pizzaIcon from '../images/pizza.png'
-import saladIcon from '../images/salad.png'
-import sandwichIcon from '../images/sandwich.png'
-import seafoodIcon from '../images/seafood.png'
-import soupIcon from '../images/soup.png'
-import noodlesIcon from '../images/noodles.png'
+import cakeIcon from './images/cake.png'
+import pieIcon from './images/pie.png'
+import pizzaIcon from './images/pizza.png'
+import saladIcon from './images/salad.png'
+import sandwichIcon from './images/sandwich.png'
+import seafoodIcon from './images/seafood.png'
+import soupIcon from './images/soup.png'
+import noodlesIcon from './images/noodles.png'
 
 // hardcoded images
-import recipe1 from '../recipes/butter-chicken.jpg'
-import recipe2 from '../recipes/lemon-zucchini-bread.jpg'
-import recipe3 from '../recipes/ramen.jpg'
-import recipe4 from '../recipes/vanilla-cake.png'
-import recipe5 from '../recipes/spaghetti.png'
-import recipe6 from '../recipes/apple-pie.png'
-import recipe7 from '../recipes/homemade-pizza.png'
-import recipe8 from '../recipes/greek-salad.png'
-import recipe9 from '../recipes/seafood-sandwiches.png'
-import recipe10 from '../recipes/seafood-stew.png'
-import recipe11 from '../recipes/Chicken-Noodle-Soup.jpg'
-
-
+import recipe1 from '../../recipes/butter-chicken.jpg'
+import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
+import recipe3 from '../../recipes/ramen.jpg'
+import recipe4 from '../../recipes/vanilla-cake.png'
+import recipe5 from '../../recipes/spaghetti.png'
+import recipe6 from '../../recipes/apple-pie.png'
+import recipe7 from '../../recipes/homemade-pizza.png'
+import recipe8 from '../../recipes/greek-salad.png'
+import recipe9 from '../../recipes/seafood-sandwiches.png'
+import recipe10 from '../../recipes/seafood-stew.png'
+import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 
 // mappings between categories and id
 // 0: cake; 1: noodles; 2: pie; 3: pizza; 4: salads; 5: sandwiches; 6: seafood; 7: soup 
-
 export default class HomePage extends Component {
     constructor(props){
         super(props);

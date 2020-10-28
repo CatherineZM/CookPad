@@ -1,19 +1,16 @@
 import React, { Component } from 'react';
-import Navbar from './Navbar/navbar.component';
 import User from "./user.component"
 import { uid } from "react-uid";
+import './style.css'
 
 export default class AdminPage extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            users: this.props.appState.users
-        
+            users: this.props.appState.users   
         }
     }
-
-    
 
     componentDidMount() {
     }
@@ -21,9 +18,7 @@ export default class AdminPage extends Component {
 
     render(){
         return(
-            <div className="container">
-                <Navbar/>
-           
+            <div className="container">       
                 <table className="user-list">
                     <tbody>
                         <tr>

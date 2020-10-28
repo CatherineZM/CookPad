@@ -1,26 +1,11 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import { User } from '../object';
-
-// const log = console.log;
-
-// class User {
-//     constructor(username, password) {
-//         this.username = username;
-//         this.password = password;
-//         // fields can be edited or added after signup
-//         this.gender = null;
-//         this.favCuisine = null;
-//     }
-// };
+import { User } from '../../object';
+import './style.css'
 
 export default class Signup extends Component {
     constructor(props){
-        super(props);
-        this.onChangeUsername = this.onChangeUsername.bind(this);
-        this.onChangePassword = this.onChangePassword.bind(this);
-        this.onSubmit = this.onSubmit.bind(this);
-        
+        super(props);        
         this.state = {
             username: '',
             password: '',
@@ -29,17 +14,17 @@ export default class Signup extends Component {
         }
     }
 
-    onChangeUsername(e){
+    onChangeUsername = (e)=>{
         e.preventDefault();
         this.setState({ username: e.target.value });
     }
      
-    onChangePassword(e){
+    onChangePassword = (e)=>{
         e.preventDefault();
         this.setState({ password: e.target.value });
     }
 
-    onSubmit(e){
+    onSubmit=(e)=>{
         e.preventDefault();
         this.createUser();
         window.location = "..";
@@ -52,12 +37,6 @@ export default class Signup extends Component {
     }
 
     validateUser(){
-        // for (let i = 0; i < this.state.userCount; i++){
-        //     if (this.users[i].username == this.state.username) {
-        //         log("username exists already");
-        //         return false;
-        //     }
-        // }
         return this.state.username.length > 0 && this.state.password.length > 0;
     }
 
@@ -65,19 +44,6 @@ export default class Signup extends Component {
         return(
             <div className="container">
                 <form onSubmit={this.onSubmit}>
-                    {/* <FormGroup controlId = "username">
-                        <ControlLabel>Username: </ControlLabel>
-                        <FormControl type="username" required placeholder="E.g: 123" value={this.state.username} onChange={this.onChangeUsername}/>
-                    </FormGroup>
-                    <FormGroup controlId = "password">
-                        <ControlLabel>Password: </ControlLabel>
-                        <FormControl type="password" required placeholder="Your Password" value={this.state.password} onChange={this.onChangePassword}/>
-                    </FormGroup>
-                    <FormGroup>
-                        <Button type="submit" className="btn btn-primary" onClick={() =>this.createUser} disabled={!this.validateUser()}>
-                            Sign up
-                        </Button>
-                    </FormGroup> */}
                     <div className="form-group">
                         <label>Username: </label>
                         <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>

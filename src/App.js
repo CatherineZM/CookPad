@@ -3,14 +3,14 @@ import './App.css';
 import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
 import "bootstrap/dist/css/bootstrap.min.css"
 
-import AdminPage from "./components/adminPage.component";
+import AdminPage from "./components/adminPage/adminPage.component";
 import AddRecipe from "./components/addRecipe/addRecipe.component";
-import EditRecipe from "./components/editRecipe.component";
+import EditRecipe from "./components/editRecipe/editRecipe.component";
 import HomePage from "./components/homePage/homePage.component";
-import Login from "./components/login.component";
-import MyProfile from "./components/myProfile.component";
+import Login from "./components/login/login.component";
+import MyProfile from "./components/myProfile/myProfile.component";
 import MyRecipes from "./components/myRecipes/myRecipes.component";
-import Signup from "./components/signup.component";
+import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import MyCollection from './components/myCollection/myCollection.component'
 import { User } from './object';

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
-
 
 export default class User extends Component {
     constructor(props){
@@ -9,8 +7,6 @@ export default class User extends Component {
         this.state = {
             username : this.props.user.username,
             uid : this.props.user.id
- 
-
         }
     }
 
@@ -20,17 +16,13 @@ export default class User extends Component {
                 <td className = "username">
                     {this.state.username}
                 </td>
-                <td className = "recipeLink">
-                    <Link to = {`/myrecipes/${this.state.uid}`}> View Recipes </Link>
-                </td>
                 <td className = "banButton">
                     <button onClick={()=>{}}> Ban </button>
                 </td>
-
-
-    
+                <td className = "PromoteButton">
+                    <button onClick={()=>{}}> Promote </button>
+                </td>
             </tr>
-
         )
     }
 }

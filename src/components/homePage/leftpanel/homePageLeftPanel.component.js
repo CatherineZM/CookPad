@@ -12,7 +12,7 @@ export default class HomePageLeftPanel extends Component {
                 <tbody>
                     {categories.map( (category) => (
                         <tr key={uid(category.text)}>
-                            <td><img src={category.src} alt={category.text} width="50px" height="50px"/></td>
+                            <td><img src={category.src} alt={category.text}/></td>
                             <td>{category.text}</td>
                             <td><input type="checkbox" name={category.id} onChange={clickCategory} checked={category.checked}/></td>
                         </tr> 
