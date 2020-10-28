@@ -9,3 +9,14 @@ export class User {
         this.favCuisine = null;
     }
 };
+
+export class NewRecipe {
+    cosntructor(RecipeName, Ingredients, Steps) {
+        this.RecipeName = RecipeName;
+        this.Ingredients = Ingredients; 
+        this.Steps = Steps; 
+        //optional content
+        this.Description = null;
+        this.RecipeImage = null;
+    }
+};
