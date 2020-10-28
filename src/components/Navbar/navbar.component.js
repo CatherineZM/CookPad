@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
-import './navbar.css'
+import './style.css'
 import cookpadIcon from '../homePage/images/cookpad.png'
 
 export default class Navbar extends Component {
@@ -8,7 +8,7 @@ export default class Navbar extends Component {
         return(
             <div id="navbar">
                 <ul>
-                    <li><img src={cookpadIcon} alt="cookpad" width="50px" height="50px"/><Link to="/homepage/1">COOKPAD</Link></li>
+                    <li><img src={cookpadIcon} alt="cookpad"/><Link to="/homepage/1">COOKPAD</Link></li>
                     <li id="first-item"><Link to="/addrecipe/1">Create a Recipe</Link></li>
                     <li><Link to="/myrecipes/1">My Recipes</Link></li>
                     <li><Link to="/mycollection/1">My Collection</Link></li>

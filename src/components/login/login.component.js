@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './style.css'
+import NavbarEmpty from "../Navbar-empty/navbar-empty"
 
 export default class Login extends Component {
     constructor(props){
@@ -56,6 +57,7 @@ export default class Login extends Component {
     render(){
         return(
             <div className="container">
+                <NavbarEmpty is_adminpage={false}/>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>

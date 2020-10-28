@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import { User } from '../../object';
 import './style.css'
+import NavbarEmpty from "../Navbar-empty/navbar-empty"
 
 export default class Signup extends Component {
     constructor(props){
@@ -30,19 +31,20 @@ export default class Signup extends Component {
         window.location = "..";
     }
 
-    createUser(){
+    createUser=()=>{
         const user = new User(0, this.state.username, this.state.password);
         this.state.users.push(user);
         this.setState({userCount: this.state.userCount+1});
     }
 
-    validateUser(){
+    validateUser=()=>{
         return this.state.username.length > 0 && this.state.password.length > 0;
     }
 
     render(){
         return(
             <div className="container">
+                <NavbarEmpty is_adminpage={false}/>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>

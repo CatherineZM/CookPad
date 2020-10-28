@@ -38,9 +38,9 @@ export default class HomePage extends Component {
         this.state = {
             slide_idx: 0,
             num_slides: 3,
-            // the data will be fetched from the database
+            // the data will be fetched from the database and calculated in component_DidMount callback
             top3_recipe: [0, 1, 2],
-            // categories
+            // categories 
             categories: [
                 {id:0, src:cakeIcon, text:'Cake', checked:true},
                 {id:1, src:noodlesIcon, text:'Noodles', checked:true},

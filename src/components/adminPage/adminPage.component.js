@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import User from "./user.component"
 import { uid } from "react-uid";
 import './style.css'
-import {Link} from 'react-router-dom'
-import cookpadIcon from '../homePage/images/cookpad.png'
+import NavbarEmpty from '../Navbar-empty/navbar-empty'
 
 export default class AdminPage extends Component {
     constructor(props){
@@ -21,12 +20,8 @@ export default class AdminPage extends Component {
     render(){
         return(
             <div className="container-sm">    
-            <div id="navbar">
-                <ul>
-                    <li><img src={cookpadIcon} alt="cookpad" width="50px" height="50px"/><Link to="/homepage/1">COOKPAD</Link></li>
-                    <li><Link to="/">Logout</Link></li>
-                </ul>
-            </div>   
+                <NavbarEmpty is_adminpage={true}/>
+
                 <table className="user-list">
                     <tbody>
                         <tr>
