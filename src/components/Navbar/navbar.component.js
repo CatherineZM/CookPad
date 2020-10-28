@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
 import './navbar.css'
-import cookpadIcon from '../images/cookpad.png'
+import cookpadIcon from '../homePage/images/cookpad.png'
 
 export default class Navbar extends Component {
     render(){
