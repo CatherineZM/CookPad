@@ -9,8 +9,6 @@ import ImageUploader from 'react-images-upload';
 import 'react-dropdown/style.css';
 //import { TouchableHighlightBase } from 'react-native';
 
-const log = console.log; 
-
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 
 const defaultUnit = UnitType[0];
@@ -61,13 +59,15 @@ export default class AddRecipe extends Component {
     }
 
     onChangeIngredientsName(e,index){
-        this.state.Ingredients[index].name = e.target.value;
-        this.setState({ Ingredients: this.state.Ingredients });
+        let ingredients = this.state.Ingredients;
+        ingredients[index].name = e.target.value;
+        this.setState({ Ingredients: ingredients });
     }
 
     onChangeIngredientsQuan(e,index){
-        this.state.Ingredients[index].quantity = e.target.value;
-        this.setState({ Ingredients: this.state.Ingredients });
+        let ingredients = this.state.Ingredients;
+        ingredients[index].quantity = e.target.value;
+        this.setState({ Ingredients: ingredients });
     }
 
     addIngredientsRow(){
@@ -76,8 +76,9 @@ export default class AddRecipe extends Component {
     }
 
     onChangeSteps(e,index){
-        this.state.Steps[index] = e.target.value;
-        this.setState({ Steps: this.state.Steps });
+        let steps = this.state.Steps;
+        steps[index] = e.target.value;
+        this.setState({ Steps: steps });
     }
 
     addStepsRow(){
