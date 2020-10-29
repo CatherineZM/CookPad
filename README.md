@@ -3,7 +3,7 @@ Cookpad is a recipe sharing app that allows food lovers to write food blogs and 
 
 ## Get started
 ### Clone the repo
-git clone
+git clone https://github.com/csc309-fall-2020/team07.git
 ### Build the project
 Instal the npm packages described in the package.json:
 npm install
