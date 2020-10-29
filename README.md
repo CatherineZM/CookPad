@@ -1,20 +1,33 @@
 # COOKPAD
+Cookpad is a recipe sharing app that allows food lovers to write food blogs and recipes and beginners to learn cooking. 
+
+## Get started
+### Clone the repo
+git clone
+### Build the project
+Instal the npm packages described in the package.json:
+npm install
+
+Build and open the project:
+npm start
+
 ## login credentials
 Login as a regular user:
-* username: user
-* password: user
+  * username: user
+  * password: user
+
 Login as an admin:
-* username: admin
-* password: admin
+  * username: admin
+  * password: admin
 
 ## Regular User Sample Workflow:
 1. Click on "Sign up here" on the login page to **Sign up**: 
-* Username: user
-* Password: user
-* Description: optional
+  * Username: user
+  * Password: user
+  * Description: optional
 2. Click on "Login here" on the sign up page to **Login**:
-* username: user
-* password: user
+  * username: user
+  * password: user
 3. **View all recipes** on the homepage
 4. **Search for a recipe** by applying filters on the left hand side of the homepage
 5. **Like or dislike** the recipe by clicking on the heart icon at the botton of the recipe
@@ -32,8 +45,8 @@ Login as an admin:
 
 ## Admin User Sample Workflow:
 1. Login in as as admin:
-* username: admin
-* password: admin
+  * username: admin
+  * password: admin
 2. An admin can **Ban users** by clicking on "Ban" button
 3. An admin can also **Promote users as admins** by clicking on "Promote" button
 
