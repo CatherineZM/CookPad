@@ -9,14 +9,14 @@ git clone https://github.com/csc309-fall-2020/team07.git
 
 ### Build the project
 Instal the npm packages described in the package.json:
-<div class="bg-gray">
+```
 npm install
-
+```
 
 Build and open the project:
-<div class="bg-gray">
+```
 npm start
-</div>
+```
 
 ## login credentials
 Login as a regular user:
