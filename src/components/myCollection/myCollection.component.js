@@ -29,7 +29,7 @@ export default class MyCollection extends Component {
                     this.setState({ recipes: new_recipes });
                 }else{
                     new_recipes[idx].liked = true;
-                    new_recipes[idx].likes--;
+                    new_recipes[idx].likes++;
                     this.setState({ recipes: new_recipes });
                 }
             }
@@ -57,12 +57,14 @@ export default class MyCollection extends Component {
         return(
             <div className="container-sm">
                 <Navbar uid={this.state.uid}/>
+                <div id="my-collection">
                 <ReceipeList 
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}
                     clickStar={this.clickStar}
                     userid={this.state.uid}
                 />
+                </div>
             </div>  
         )
     }

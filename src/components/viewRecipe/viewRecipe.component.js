@@ -48,20 +48,6 @@ export default class ViewRecipe extends Component {
         // the current recipe will be fetch from database
     }
 
-    clickHeart=(rid)=>{
-        // need to update the information into database
-        let new_recipe = this.state.recipe;
-        if(this.state.recipe.liked){
-            new_recipe.liked = false;
-            new_recipe.likes--;
-            this.setState({ recipes: new_recipe });
-        }else{
-            new_recipe.liked = true;
-            new_recipe.likes++;
-            this.setState({ recipes: new_recipe });
-        }
-    }
-
     clickStar=(rid)=>{
         // need to update the information into database
         let new_recipe = this.state.recipe;

@@ -9,7 +9,7 @@ export default class RecipeSlideShow extends Component {
             <div className="slideshow-container">
             <div className="">
             <img src={imgsrc} alt={imgalt} height="380px" width="570px"/>
-            <div className="text">{imgtext}</div>
+            <div className="caption-text">{imgtext}</div>
             </div>
 
             <p className="prev" onClick={decrSlide}>&#10094;</p>

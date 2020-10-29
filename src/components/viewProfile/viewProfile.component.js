@@ -66,15 +66,20 @@ export default class ViewProfile extends Component {
         return(
             <div className="container-sm">
                 <Navbar uid={this.state.uid}/>
-                <div>{this.state.user.username + "'s Profile:"}</div>
-                <div>{this.state.user.description}</div>
-                <div>{this.state.user.username + "'s recipes:"}</div>
-                <ReceipeList 
-                    recipes={this.state.recipes}
-                    clickHeart={this.clickHeart}
-                    clickStar={this.clickStar}
-                    userid={this.state.uid}
-                />
+                <div id="user-profile">
+                    <h4>{this.state.user.username + "'s Profile:"}</h4>
+                    <div>{this.state.user.description}</div>
+                </div>
+                
+                <div id="user-recipes">
+                    <h4>{this.state.user.username + "'s Recipes:"}</h4>
+                    <ReceipeList 
+                        recipes={this.state.recipes}
+                        clickHeart={this.clickHeart}
+                        clickStar={this.clickStar}
+                        userid={this.state.uid}
+                    />    
+                </div>
             </div> 
         )
     }

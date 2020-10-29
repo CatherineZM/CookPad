@@ -18,7 +18,7 @@ export default class Login extends Component {
 
     onSubmit=(e)=>{
         e.preventDefault();
-        // fetch users data from the backend data base and perform the check
+        // fetch users data from the backend database and perform the check
         // for now hardcode admin and user
         if (this.state.username === "admin" && this.state.password === "admin"){
             window.location = '/adminpage';

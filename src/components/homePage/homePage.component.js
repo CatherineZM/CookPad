@@ -246,9 +246,7 @@ export default class HomePage extends Component {
         this.setState({ all_checked: !this.state.all_checked})
         let all_checked = !this.state.all_checked;
         let new_categories = this.state.categories
-        for(let i = 0; i < this.state.categories.length; i++){
-            new_categories[i].checked = all_checked;
-        }
+        new_categories.forEach((category)=>{category.checked = all_checked})
         this.setState({ categories: new_categories});
         if(all_checked){
             this.setState({ displayed_recipes: this.state.recipes});
@@ -269,9 +267,7 @@ export default class HomePage extends Component {
                         clickAll={this.clickAll}
                     />                    
 
-                    {/* middle panel */}
                     <div id="middle-panel">
-                        {/* recipe slide show */}
                         <RecipeSlideShow 
                             imgsrc={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].src}
                             imgalt={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].title}
