@@ -8,7 +8,16 @@ import Dropdown from 'react-dropdown';
 import ImageUploader from 'react-images-upload'; 
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
-
+const CuisineTypes =[
+    {name: "Cake", id: 0},
+    {name: "Noodles", id: 1},
+    {name: "Pie", id: 2},
+    {name: "Pizza", id: 3},
+    {name: "Salads", id: 4},
+    {name: "Sandwiches", id: 5},
+    {name: "Seafood", id: 6},
+    {name: "Soup", id: 7}
+]; 
 export default class EditRecipe extends Component {
     constructor(props){
         super(props);
@@ -16,6 +25,7 @@ export default class EditRecipe extends Component {
             uid: this.props.match.params.uid,
             RecipeName: 'Butter Chicken',
             Description: '',
+            cuisinetype: [{name: "Soup", id: 7}],
             Ingredients: [
                 {name:"Butter", quantity:"2", unit:6},
                 {name:"Medium onion", quantity:"1", unit:0},
@@ -40,17 +50,7 @@ export default class EditRecipe extends Component {
                 {content:"Stir in the cream and add the chicken back to the pan. Heat and simmer for 10 minutes, or until the chicken is cooked through and the sauce thickens up a bit.",id: 7},
                 {content:"Serve with cooked white rice and enjoy!",id: 8}
             ],
-            RecipeImages: [],
-            CuisineTypes :[
-                {name: "Cake", id: 0},
-                {name: "Noodles", id: 1},
-                {name: "Pie", id: 2},
-                {name: "Pizza", id: 3},
-                {name: "Salads", id: 4},
-                {name: "Sandwiches", id: 5},
-                {name: "Seafood", id: 6},
-                {name: "Soup", id: 7}
-            ]
+            RecipeImage: recipe1
         }
     }
 
@@ -149,8 +149,8 @@ export default class EditRecipe extends Component {
                         <label>Cuisine Type: </label>
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
-                            options={this.state.CuisineTypes} 
-                            selectedValues={this.state.selectedValue} 
+                            options={CuisineTypes} 
+                            selectedValues={this.state.cuisinetype} 
                             onSelect={this.onSelect} 
                             onRemove={this.onRemove} 
                             displayValue="name" 
@@ -236,8 +236,9 @@ export default class EditRecipe extends Component {
                         </button> 
                     </div>
                     <div className = "Recipe-form">
-                        <label>Please upload a picture of your recipe: </label>
+                        <label>Please upload a picture of your recipe if you want to update: </label>
                         <div>
+                            <img className="Image"src={recipe1}/> 
                             <ImageUploader
                                 withIcon = {false}
                                 withPreview = {true}
