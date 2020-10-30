@@ -166,7 +166,7 @@ export default class AddRecipe extends Component {
                                         <div className ="col">
                                             <button 
                                                 className = "btn btn-outline-primary" 
-                                                onClick={this.onChangeRemoveIngredients}>Remove</button>
+                                                onClick={(e)=>this.onChangeRemoveIngredients(index)}>Remove</button>
                                         </div>
                                     </div>
                                 )})
@@ -196,7 +196,7 @@ export default class AddRecipe extends Component {
                                         <div className ="col">
                                             <button 
                                                 className = "btn btn-outline-primary" 
-                                                onClick={this.onChangeRemoveSteps}>Remove</button>
+                                                onClick={(e)=>this.onChangeRemoveSteps(index)}>Remove</button>
                                         </div>
                                     </div>
                                 )})
