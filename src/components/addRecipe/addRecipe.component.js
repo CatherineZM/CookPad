@@ -61,6 +61,11 @@ export default class AddRecipe extends Component {
         }));
     }
 
+    onChangeRemoveIngredients=(index)=>{
+        this.state.Ingredients.splice(index,1);
+        this.setState({Ingredients: this.state.Ingredients})
+    }
+
     onChangeSteps=(e,index)=>{
         let steps = this.state.Steps;
         steps[index] = e.target.value;
@@ -157,6 +162,11 @@ export default class AddRecipe extends Component {
                                                 placeholder ={defaultUnit}
                                                 value={Ingredient.unit} 
                                             />
+                                        </div>
+                                        <div className ="col">
+                                            <button 
+                                                className = "btn btn-outline-primary" 
+                                                onClick={this.onChangeRemoveIngredients}>Remove</button>
                                         </div>
                                     </div>
                                 )})
