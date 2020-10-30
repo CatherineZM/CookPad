@@ -5,7 +5,7 @@ import { uid } from "react-uid";
 import { Link } from "react-router-dom"
 
 // hardcoded images
-import recipe1 from '../recipes/butter-chicken.jpg'
+import recipe1 from '../../recipes/butter-chicken.jpg'
 
 export default class ViewRecipe extends Component {
     constructor(props){
@@ -128,6 +128,7 @@ export default class ViewRecipe extends Component {
                         })}
                     </tbody>
                 </table>
+                {/* only show the two button if they belong to the user */}
                 <form onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
                 <form onSubmit={this.deleteRecipe}><input type="submit" value="Delete" className="btn btn-primary"/></form>
             </div>  
