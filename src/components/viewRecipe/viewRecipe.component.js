@@ -76,7 +76,7 @@ export default class ViewRecipe extends Component {
 
     editRecipe=(e)=>{
         e.preventDefault();
-        window.location = "/editRecipe/" + this.state.recipe.id
+        window.location = "/editRecipe/" + this.state.uid + "/" + this.state.recipe.id
     }
 
     deleteRecipe=(e)=>{
