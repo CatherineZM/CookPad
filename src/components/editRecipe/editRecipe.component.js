@@ -3,9 +3,9 @@ import './style.css'
 import Navbar from "../Navbar/navbar.component" 
 import recipe1 from '../../recipes/butter-chicken.jpg'
 import {Multiselect} from 'multiselect-react-dropdown';
-import { uid } from "react-uid";
 import Dropdown from 'react-dropdown';
 import ImageUploader from 'react-images-upload'; 
+import Col from 'react-bootstrap/Col';
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 const CuisineTypes =[
@@ -162,7 +162,7 @@ export default class EditRecipe extends Component {
                             this.state.Ingredients.map((Ingredient, index) => {
                                 return(
                                     <div className="row" id="Ingredient-row" key={index}>
-                                        <div className="col">
+                                        <Col className="col" xs={5}>
                                             <input 
                                                 type = "Ingredients" 
                                                 required 
@@ -171,8 +171,8 @@ export default class EditRecipe extends Component {
                                                 value = {Ingredient.name} 
                                                 onChange={(e)=>this.onChangeIngredientsName(e,index)}
                                             />
-                                        </div>
-                                        <div className="col">
+                                        </Col>
+                                        <Col className="col" xs={2}>
                                             <input 
                                                 type = "Ingredients" 
                                                 required 
@@ -181,21 +181,21 @@ export default class EditRecipe extends Component {
                                                 value = {Ingredient.quantity} 
                                                 onChange={(e)=>this.onChangeIngredientsQuan(e,index)}
                                             />
-                                        </div>
-                                        <div className="col">
+                                        </Col>
+                                        <Col className="col" xs={3}>
                                             <Dropdown
                                                 className = "UnitSelector"
                                                 options={UnitType} 
                                                 onChange={this._onSelect} 
                                                 value={UnitType[Ingredient.unit]} 
                                             />
-                                        </div>
-                                        <div className ="col">
+                                        </Col>
+                                        <Col className ="col" xs={1}>
                                             <button 
                                                 type="button"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveIngredients(index)}>Remove</button>
-                                        </div>
+                                        </Col>
                                     </div>
                                 )})
                         } 
@@ -211,21 +211,21 @@ export default class EditRecipe extends Component {
                             this.state.Steps.map((step, index) => {
                                 return(
                                     <div class="row" key={index}>
-                                        <div class = "col">
-                                            <input 
+                                        <Col className = "col" xs = {10}>
+                                            <textarea 
                                                 type = "Steps" 
                                                 required 
                                                 className = "form-control" 
                                                 value = {step.content} 
                                                 onChange={(e)=>this.onChangeSteps(e,index)}
                                             />
-                                        </div>
-                                        <div className ="col">
+                                        </Col>
+                                        <Col className ="col">
                                             <button 
                                                 type="button"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveSteps(index)}>Remove</button>
-                                        </div>
+                                        </Col>
                                     </div>
                                 )})
                         }
@@ -238,7 +238,7 @@ export default class EditRecipe extends Component {
                     <div className = "Recipe-form">
                         <label>Please upload a picture of your recipe if you want to update: </label>
                         <div>
-                            <img className="Image"src={recipe1}/> 
+                            <img alt="recipe" className="Image"src={recipe1}/> 
                             <ImageUploader
                                 withIcon = {false}
                                 withPreview = {true}

@@ -2,3 +2,7 @@
     height: 40%;
     width: 40%;
 }
+textarea{
+    resize: none;
+    height: fit-content; 
+}

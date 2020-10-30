@@ -5,6 +5,7 @@ import Dropdown from 'react-dropdown';
 import {Multiselect} from 'multiselect-react-dropdown';
 import ImageUploader from 'react-images-upload';
 import 'react-dropdown/style.css';
+import Col from 'react-bootstrap/Col';
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 
@@ -134,7 +135,7 @@ export default class AddRecipe extends Component {
                             this.state.Ingredients.map((Ingredient, index) => {
                                 return(
                                     <div className="row" id="Ingredient-row" key={index}>
-                                        <div className="col">
+                                        <Col className="col" xs={5}>
                                             <input 
                                                 type = "Ingredients" 
                                                 required 
@@ -143,8 +144,8 @@ export default class AddRecipe extends Component {
                                                 value = {Ingredient.name} 
                                                 onChange={(e)=>this.onChangeIngredientsName(e,index)}
                                             />
-                                        </div>
-                                        <div className="col">
+                                        </Col>
+                                        <Col className="col" xs={2}>
                                             <input 
                                                 type = "Ingredients" 
                                                 required 
@@ -153,8 +154,8 @@ export default class AddRecipe extends Component {
                                                 value = {Ingredient.quantity} 
                                                 onChange={(e)=>this.onChangeIngredientsQuan(e,index)}
                                             />
-                                        </div>
-                                        <div className="col">
+                                        </Col>
+                                        <Col className="col" xs={3}>
                                             <Dropdown
                                                 className = "UnitSelector"
                                                 options={UnitType} 
@@ -162,18 +163,19 @@ export default class AddRecipe extends Component {
                                                 placeholder ={defaultUnit}
                                                 value={Ingredient.unit} 
                                             />
-                                        </div>
-                                        <div className ="col">
+                                        </Col>
+                                        <Col className ="col" xs={1}>
                                             <button 
+                                                type="button"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveIngredients(index)}>Remove</button>
-                                        </div>
+                                        </Col>
                                     </div>
                                 )})
                         } 
                     </div>
                     <div className="AddIngredient-btn">
-                        <button className = "btn btn-outline-primary" type = "Add-Ingredients" onClick={this.addIngredientsRow} >
+                        <button className = "btn btn-outline-primary" type = "button" onClick={this.addIngredientsRow} >
                             Add Ingredients
                         </button>
                     </div>
@@ -183,8 +185,8 @@ export default class AddRecipe extends Component {
                             this.state.Steps.map((step, index) => {
                                 return(
                                     <div class="row" key={index}>
-                                        <div class = "col">
-                                            <input 
+                                        <Col className = "col" xs = {10}>
+                                            <textarea 
                                                 type = "Steps" 
                                                 required 
                                                 placeholder="Enter a step"
@@ -192,19 +194,20 @@ export default class AddRecipe extends Component {
                                                 value = {step} 
                                                 onChange={(e)=>this.onChangeSteps(e,(index))}
                                             />
-                                        </div>
-                                        <div className ="col">
+                                        </Col>
+                                        <Col className ="col">
                                             <button 
+                                                type="button"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveSteps(index)}>Remove</button>
-                                        </div>
+                                        </Col>
                                     </div>
                                 )})
                         }
                         
                     </div>
                     <div className="AddSteps-btn">
-                        <button className = "btn btn-outline-primary" type = "Add-Steps" onClick={this.addStepsRow} >
+                        <button className = "btn btn-outline-primary" type = "button" onClick={this.addStepsRow} >
                             Add Steps
                         </button> 
                     </div>
