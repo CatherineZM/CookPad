@@ -5,7 +5,7 @@ import { uid } from "react-uid";
 import { Link } from "react-router-dom"
 
 // hardcoded images
-import recipe1 from '../recipes/butter-chicken.jpg'
+import recipe1 from '../../recipes/butter-chicken.jpg'
 
 export default class ViewRecipe extends Component {
     constructor(props){

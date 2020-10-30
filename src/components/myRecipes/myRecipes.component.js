@@ -3,10 +3,10 @@ import "./style.css";
 import ReceipeList from '../recipelist/recipelist.component'
 import Navbar from "../Navbar/navbar.component"
 
-import recipe1 from '../recipes/butter-chicken.jpg'
-import recipe2 from '../recipes/lemon-zucchini-bread.jpg'
-import recipe3 from '../recipes/ramen.jpg'
-import recipe4 from '../recipes/vanilla-cake.png'
+import recipe1 from '../../recipes/butter-chicken.jpg'
+import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
+import recipe3 from '../../recipes/ramen.jpg'
+import recipe4 from '../../recipes/vanilla-cake.png'
 
 export default class MyRecipes extends Component {
     constructor(props){

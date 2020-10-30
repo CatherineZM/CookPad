@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar/navbar.component'
-import recipe9 from '../recipes/seafood-sandwiches.png'
+import recipe9 from '../../recipes/seafood-sandwiches.png'
 import ReceipeList from '../recipelist/recipelist.component'
 import './style.css'
 
