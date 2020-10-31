@@ -111,7 +111,7 @@ export default class EditRecipe extends Component {
     }
 
     onImageUpload=(picture)=>{
-        this.setState({RecipeImages: this.state.RecipeImages.concat(picture),});
+        this.setState({RecipeImage: this.state.RecipeImage.concat(picture)});
     }
 
     onSubmit=(e)=>{
