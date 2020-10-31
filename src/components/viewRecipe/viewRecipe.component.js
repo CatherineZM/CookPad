@@ -101,7 +101,7 @@ export default class ViewRecipe extends Component {
         return(
             <div>
             <Navbar uid={this.state.uid}/>
-            <Container maxWidth="md" margin-top="20px">
+            <Container maxWidth="md">
                 <div className="recipe-des">
                     <img src={this.state.recipe.src} alt="" width="600px" height="400px"/>
                     <div className="recipe-des-text">

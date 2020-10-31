@@ -291,6 +291,7 @@ export default class HomePage extends Component {
                     top3_recipe={this.state.top3_recipe} 
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}
+                    userid={this.state.uid}
                     />
                     
                     <TopRecipes

@@ -10,7 +10,7 @@ import TableCell from '@material-ui/core/TableCell';
 
 export default class HomePageRightPanel extends Component {
     render(){
-        const {top3_recipe, recipes, clickHeart} = this.props;
+        const {top3_recipe, recipes, clickHeart, userid} = this.props;
         return(
             <div id="right-panel">
             <Table size="small" aria-label="a dense table">
@@ -21,7 +21,7 @@ export default class HomePageRightPanel extends Component {
                     </TableRow>
                     {top3_recipe.map((recipe)=>(
                         <TableRow key={uid(recipes[recipe].title)}>
-                            <TableCell><Link to={"/viewrecipe/"+ recipes[recipe].id}>{recipes[recipe].title}</Link></TableCell>
+                            <TableCell><Link to={"/viewrecipe/"+userid+"/"+recipes[recipe].id}>{recipes[recipe].title}</Link></TableCell>
                             <TableCell>
                             {recipes[recipe].liked && <FaHeart className="likes" onClick={()=>clickHeart(recipe)}/>}
                             {!recipes[recipe].liked && <FaHeart className="dislikes" onClick={()=>clickHeart(recipe)}/>}
