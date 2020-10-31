@@ -134,64 +134,68 @@ export default class HomePage extends Component {
 
     clickStar=(rid)=>{
         // need to update the information into database
-        let new_recipes = this.state.recipes;
-        let new_displayed_recipes = this.state.displayed_recipes;
-        this.state.recipes.forEach((recipe, idx)=>{
+        const new_recipes = [];
+        const new_displayed_recipes = [];
+        this.state.recipes.forEach((recipe)=>{
+            const new_recipe = Object.create(recipe)
             if(recipe.id === rid){
-                if(recipe.collected){
-                    new_recipes[idx].collected = false;
-                    this.setState({ recipes: new_recipes });
+                if(new_recipe.collected){
+                    new_recipe.collected = false;
                 }else{
-                    new_recipes[idx].collected = true;
-                    this.setState({ recipes: new_recipes });
+                    new_recipe.collected = true;
                 }
             }
+            new_recipes.push(new_recipe)
         })
 
-        this.state.displayed_recipes.forEach((recipe, idx)=>{
-            if(recipe.id === rid){
-                if(recipe.collected){
-                    new_displayed_recipes[idx].collected = false;
-                    this.setState({ displayed_recipes: new_displayed_recipes });
+        this.setState({ recipes: new_recipes });
+        this.state.displayed_recipes.forEach((recipe)=>{
+            const new_recipe = Object.create(recipe)
+            if(new_recipe.id === rid){
+                if(new_recipe.collected){
+                    new_recipe.collected = false;
                 }else{
-                    new_displayed_recipes[idx].collected = true;
-                    this.setState({ displayed_recipes: new_displayed_recipes });
+                    new_recipe.collected = true;
                 }
             }
+            new_displayed_recipes.push(new_recipe)
         })
+        this.setState({ displayed_recipes: new_displayed_recipes });
     }
 
     clickHeart=(rid)=>{
         // need to update the information into database
-        let new_recipes = this.state.recipes;
-        let new_displayed_recipes = this.state.displayed_recipes;
-        this.state.recipes.forEach((recipe, idx)=>{
+        const new_recipes = [];
+        const new_displayed_recipes = [];
+        this.state.recipes.forEach((recipe)=>{
+            const new_recipe = Object.create(recipe)
             if(recipe.id === rid){
-                if(recipe.liked){
-                    new_recipes[idx].liked = false;
-                    new_recipes[idx].likes--;
-                    this.setState({ recipes: new_recipes });
+                if(new_recipe.liked){
+                    new_recipe.liked = false;
+                    new_recipe.likes--;
                 }else{
-                    new_recipes[idx].liked = true;
-                    new_recipes[idx].likes++;
-                    this.setState({ recipes: new_recipes });
+                    new_recipe.liked = true;
+                    new_recipe.likes++;
                 }
             }
+            new_recipes.push(new_recipe)
         })
 
-        this.state.displayed_recipes.forEach((recipe, idx)=>{
-            if(recipe.id === rid){
-                if(recipe.liked){
-                    new_displayed_recipes[idx].liked = false;
-                    new_displayed_recipes[idx].likes--;
-                    this.setState({ displayed_recipes: new_displayed_recipes });
+        this.setState({ recipes: new_recipes });
+        this.state.displayed_recipes.forEach((recipe)=>{
+            const new_recipe = Object.create(recipe)
+            if(new_recipe.id === rid){
+                if(new_recipe.liked){
+                    new_recipe.liked = false;
+                    new_recipe.likes--;
                 }else{
-                    new_displayed_recipes[idx].liked = true;
-                    new_displayed_recipes[idx].likes++;
-                    this.setState({ displayed_recipes: new_displayed_recipes });
+                    new_recipe.liked = true;
+                    new_recipe.likes++;
                 }
             }
+            new_displayed_recipes.push(new_recipe)
         })
+        this.setState({ displayed_recipes: new_displayed_recipes });
 
         // update top three recipes
         let first_largest = 0;
@@ -219,18 +223,18 @@ export default class HomePage extends Component {
     }
 
     clickCategory = (event)=>{
-        let new_categories = this.state.categories;
+        const new_categories = this.state.categories;
         new_categories[event.target.name].checked = !this.state.categories[event.target.name].checked;
         this.setState({ categories: new_categories});
 
-        let categories_ondisplay = []
+        const categories_ondisplay = []
         for(let i = 0; i < this.state.categories.length; i++){
             if(this.state.categories[i].checked)
             categories_ondisplay.push(i)
         }
-        console.log(categories_ondisplay)
+
         // show and hide receipes
-        let new_recipes = []
+        const new_recipes = []
         for(let i = 0; i < this.state.recipes.length; i++){
             for(let j = 0; j < this.state.recipes[i].categories.length; j++){
                 if(categories_ondisplay.includes(this.state.recipes[i].categories[j])){ 

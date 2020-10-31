@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar/navbar.component";
 import { FaHeart, FaStar } from "react-icons/fa";
-import { uid } from "react-uid";
 import { Link } from "react-router-dom"
 import Container from "@material-ui/core/Container"
+import Ingredients from "./ingredients.component"
+import Steps from "./steps.component"
+import {uid} from "react-uid"
 
 // hardcoded images
 import recipe1 from '../../recipes/butter-chicken.jpg'
+import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
+import recipe3 from '../../recipes/ramen.jpg'
 
 export default class ViewRecipe extends Component {
     constructor(props){
@@ -15,6 +19,10 @@ export default class ViewRecipe extends Component {
         this.state = {
             uid: this.props.match.params.uid,
             rid: this.props.match.params.rid,
+            top3_recipe:[
+                {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
+                {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]}
+            ],
             recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7], collected: false,
             creator:{uid:127, username:"Raon"}, 
             ingredients: [
@@ -93,46 +101,51 @@ export default class ViewRecipe extends Component {
         return(
             <div>
             <Navbar uid={this.state.uid}/>
-            <Container maxWidth="md">
-                <p>{this.state.recipe.title}</p>
-                <p><Link to={"/viewprofile/"+ this.state.uid + "/" + this.state.recipe.creator.uid}>By: {this.state.recipe.creator.username}</Link></p>
-                <div>
-                    {this.state.recipe.collected && <FaStar className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
-                    {!this.state.recipe.collected && <FaStar className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
-                    {this.state.recipe.liked && <FaHeart className="likes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
-                    {!this.state.recipe.liked && <FaHeart className="dislikes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
-                    {this.state.recipe.likes}
+            <Container maxWidth="md" margin-top="20px">
+                <div className="recipe-des">
+                    <img src={this.state.recipe.src} alt="" width="600px" height="400px"/>
+                    <div className="recipe-des-text">
+                        {this.state.recipe.title+" "}
+                        {this.state.recipe.collected && <FaStar className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
+                        {!this.state.recipe.collected && <FaStar className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
+                        {this.state.recipe.liked && <FaHeart className="likes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
+                        {!this.state.recipe.liked && <FaHeart className="dislikes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
+                        {this.state.recipe.likes}
+                        <p><Link to={"/viewprofile/"+ this.state.uid + "/" + this.state.recipe.creator.uid}>By: {this.state.recipe.creator.username}</Link></p>
+                    </div>
                 </div>
 
-                <p>ingredients:</p>
-                <table>
-                    <tbody>
-                    {this.state.recipe.ingredients.map((ingredient)=>{
-                    return(
-                        <tr key={uid(ingredient.ingredient)}>
-                            <td>{ingredient.ingredient}:</td>
-                            <td>{ingredient.measure}</td>
-                        </tr>
-                        )
-                    })}
-                    </tbody>
-                </table>
+                <div className="recommendations">
+                {this.state.top3_recipe.map((recipe)=>(
+                    <div key={uid(recipe.title)}>
+                        <Link to={"/viewrecipe/"+ this.state.uid + "/" + recipe.id}>
+                        <img src={recipe.src} alt="" height="200px" width="260px"></img>
+                        </Link>
+                    <div>{recipe.title}</div>
+                    </div>
+                    ))}
+                </div>
                 
-                <p>steps:</p>
-                <table>
-                    <tbody>
-                        {this.state.recipe.steps.map((step, id)=>{
-                            return(
-                                <tr key={uid(step)}>
-                                    <td>{id+1}.{step}</td>
-                                </tr>
-                            )
-                        })}
-                    </tbody>
-                </table>
+
+                <div className="mid-section">
+                    <Steps
+                        steps={this.state.recipe.steps}
+                    />
+
+                    <Ingredients
+                        ingredients={this.state.recipe.ingredients}
+                    />
+                </div>
+
                 {/* only show the two button if they belong to the user */}
-                <form onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
-                <form onSubmit={this.deleteRecipe}><input type="submit" value="Delete" className="btn btn-primary"/></form>
+                <div>
+                    <div className="view-recipe-form-group">
+                        <form float="left" onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
+                    </div>
+                    <div className="view-recipe-form-group">
+                        <form onSubmit={this.deleteRecipe}><input type="submit" value="Delete" className="btn btn-primary"/></form>
+                    </div>
+                </div>
             </Container> 
             </div> 
         )

@@ -1,4 +1,40 @@
 
+.recipe-ingredients{
+    max-width:300px;
+    background-color: white;
+    float: right;
+}
+
+.recommendations{
+    width: 300px;
+    float: right;
+    text-align: center;
+}
+
+.view-recipe-form-group{
+    margin-top: 10px;
+    float: right;
+    margin-left: 50px;
+}
+
+.recipe-des{
+    background-color: white;
+    width: 600px;
+    float: left;
+    margin-bottom: 20px;
+    height: 450px;
+}
+
+.recipe-des-text{
+    margin-left: 20px;
+}
+
+.recipe-steps{
+    max-width: 600px;
+    background-color: white;
+    float:left;
+}
+
 .star{
     color:rgb(212, 212, 15);
     border-radius: 10px;

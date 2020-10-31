@@ -51,7 +51,6 @@ export default class MyCollection extends Component {
                 }
             }
         })
-        console.log(this.state.recipes)
     }
     
     clickStar=(rid)=>{
