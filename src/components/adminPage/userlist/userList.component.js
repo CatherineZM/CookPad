@@ -1,33 +1,39 @@
 import React, { Component } from 'react';
 import { uid } from "react-uid";
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableRow from '@material-ui/core/TableRow'
+import TableCell from '@material-ui/core/TableCell';
+import "./style.css"
 
 export default class UserList extends Component {
     render() {
         const {users} = this.props;
         return(
-            <table className="user-list">
-                    <tbody>
-                        <tr>
-                            <th>Username</th>
-                            <th>Ban a user</th>
-                            <th>Promote a user</th>
-                        </tr>
+            <div className="user-list">
+            <Table>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell>Username</TableCell>
+                            <TableCell>Ban a user</TableCell>
+                            <TableCell>Promote a user</TableCell>
+                        </TableRow>
                         {users.map(user => (
-                        <tr class="user_row" key={uid(user.username)}>
-                            <td className = "username">
+                        <TableRow class="user_row" key={uid(user.username)}>
+                            <TableCell className = "username">
                                 {user.username}
-                            </td>
-                            <td className = "banButton">
-                                <button onClick={()=>{}}> Ban </button>
-                            </td>
-                            <td className = "PromoteButton">
-                                <button onClick={()=>{}}> Promote </button>
-                            </td>
-                        </tr>
+                            </TableCell>
+                            <TableCell className = "banButton">
+                                <button className="btn btn-primary" onClick={()=>{}}> Ban </button>
+                            </TableCell>
+                            <TableCell className = "PromoteButton">
+                                <button className="btn btn-primary" onClick={()=>{}}> Promote </button>
+                            </TableCell>
+                        </TableRow>
                         ))}
-                    </tbody>
-            </table>
-            
+                    </TableBody>
+            </Table>
+            </div>
         )
     }
 }

@@ -9,6 +9,10 @@ import recipe1 from '../../recipes/butter-chicken.jpg'
 import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
 import recipe3 from '../../recipes/ramen.jpg'
 import recipe4 from '../../recipes/vanilla-cake.png'
+import recipe5 from '../../recipes/spaghetti.png'
+import recipe6 from '../../recipes/apple-pie.png'
+import recipe7 from '../../recipes/homemade-pizza.png'
+import recipe8 from '../../recipes/greek-salad.png'
 
 export default class MyCollection extends Component {
     constructor(props){
@@ -19,7 +23,11 @@ export default class MyCollection extends Component {
                 {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
                 {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
                 {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
-                {id:3, src:recipe4, liked: false, collected: false, title:'vanilla cake', likes:76, categories:[0]}
+                {id:3, src:recipe4, liked: false, collected: false, title:'vanilla cake', likes:76, categories:[0]},
+                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
+                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
+                {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
+                {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]}
             ]
         }
     }
