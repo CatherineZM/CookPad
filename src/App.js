@@ -13,6 +13,7 @@ import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import MyCollection from './components/myCollection/myCollection.component';
 import ViewProfile from './components/viewProfile/viewProfile.component';
+import MyProfile from './components/myProfile/myProfile.component';
 
 export class App extends React.Component{
   render(){
@@ -30,6 +31,7 @@ export class App extends React.Component{
             <Route path="/mycollection/:uid" component = {MyCollection}/>
             <Route path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
             <Route path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
+            <Route path="/myprofile/:uid" component={MyProfile}/>
           </Switch>
         </Router>
       </div>

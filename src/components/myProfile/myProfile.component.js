@@ -3,27 +3,23 @@ import './style.css'
 import Navbar from "../Navbar/navbar.component"
 import ReceipeList from '../recipelist/recipelist.component'
 
+// hard coded images
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 
-export default class EditProfile extends Component {
+export default class MyProfile extends Component {
     constructor(props){
         super(props);
         
         this.state = {
             uid: this.props.match.params.uid,
             // the following information is fetched from database according to curruid
-            username: "raon", 
-            description: "I love Chinese Food!!!",
+            user: {username: "nora", description: "I love Chinese Food!!!"},
             recipes: [
                 {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
                 {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
             ]
         }
-    }
-
-    componentDidMount() {
-        // fetch user information and other recipes user created
     }
 
     clickHeart=(rid)=>{
@@ -64,7 +60,7 @@ export default class EditProfile extends Component {
 
     editprofile=(e)=>{
         e.preventDefault();
-        window.location = "/myprofile/" + this.state.uid;
+        window.location = "/editprofile/"+this.state.uid;
     }
 
     render(){
@@ -72,18 +68,12 @@ export default class EditProfile extends Component {
             <div className="container-sm">
                 <Navbar uid={this.state.uid}/>
                 <div id="user-profile">
-                    <h4>{this.state.username + "'s Profile:"}</h4>
+                    <h4>{this.state.user.username + "'s Profile:"}</h4>
+                    <div>{this.state.user.description}</div>
                 </div>
-                <form onSubmit={this.editprofile}>
-                    <div className="form-group">
-                        <input type="text" placeholder="Tell me about yourself" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
-                    </div>  
-                    <div className="form-group">
-                        <input type="submit" value="Update" className="btn btn-primary"/>
-                    </div>
-                </form>
+                <form onSubmit={this.editprofile}><input type="submit" value="Edit" className="btn btn-primary"/></form>
                 <div id="user-recipes">
-                    <h4>{this.state.username + "'s Recipes:"}</h4>
+                    <h4>{this.state.user.username + "'s Recipes:"}</h4>
                     <ReceipeList 
                         recipes={this.state.recipes}
                         clickHeart={this.clickHeart}

@@ -3,8 +3,9 @@ import './style.css'
 import Navbar from "../Navbar/navbar.component"
 import ReceipeList from '../recipelist/recipelist.component'
 
-import recipe10 from '../../recipes/seafood-stew.png'
-import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
+// hardcoded images
+import recipe5 from '../../recipes/spaghetti.png'
+import recipe6 from '../../recipes/apple-pie.png'
 
 export default class ViewProfile extends Component {
     constructor(props){
@@ -16,14 +17,10 @@ export default class ViewProfile extends Component {
             // the following information is fetched from database according to curruid
             user: {username: "raon", description: "I love Chinese Food!!!"},
             recipes: [
-                {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
-                {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
+                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
+                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]}
             ]
         }
-    }
-
-    componentDidMount() {
-        // fetch user information and other recipes user created
     }
 
     clickHeart=(rid)=>{
@@ -62,6 +59,7 @@ export default class ViewProfile extends Component {
         console.log(this.state.recipes)
     }
 
+
     render(){
         return(
             <div className="container-sm">
@@ -70,7 +68,6 @@ export default class ViewProfile extends Component {
                     <h4>{this.state.user.username + "'s Profile:"}</h4>
                     <div>{this.state.user.description}</div>
                 </div>
-                
                 <div id="user-recipes">
                     <h4>{this.state.user.username + "'s Recipes:"}</h4>
                     <ReceipeList 

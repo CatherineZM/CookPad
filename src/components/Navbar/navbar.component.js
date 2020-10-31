@@ -12,7 +12,7 @@ export default class Navbar extends Component {
                     <li><img src={cookpadIcon} alt="cookpad"/><Link to={"/homepage/"+uid}>COOKPAD</Link></li>
                     <li id="first-item"><Link to={"/addrecipe/"+uid}>Create a Recipe</Link></li>
                     <li><Link to={"/mycollection/"+uid}>My Collection</Link></li>
-                    <li><Link to={"/viewprofile/"+uid+"/"+uid}>My Profile</Link></li>
+                    <li><Link to={"/myprofile/"+uid }>My Profile</Link></li>
                     <li><Link to="/">Logout</Link></li>
                 </ul>
             </div>
