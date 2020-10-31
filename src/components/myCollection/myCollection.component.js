@@ -1,8 +1,13 @@
 import React, { Component } from 'react';
 import Navbar from '../Navbar/navbar.component'
-import recipe9 from '../../recipes/seafood-sandwiches.png'
 import ReceipeList from '../recipelist/recipelist.component'
 import './style.css'
+
+// hardcoded images
+import recipe1 from '../../recipes/butter-chicken.jpg'
+import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
+import recipe3 from '../../recipes/ramen.jpg'
+import recipe4 from '../../recipes/vanilla-cake.png'
 
 export default class MyCollection extends Component {
     constructor(props){
@@ -10,7 +15,10 @@ export default class MyCollection extends Component {
         this.state = {
             uid: this.props.match.params.uid,
             recipes: [
-                {id:8, src:recipe9, liked: false, collected: false,  title:'Seafood Sandwiches', likes:58, categories:[5, 6]}
+                {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
+                {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
+                {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
+                {id:3, src:recipe4, liked: false, collected: false, title:'vanilla cake', likes:76, categories:[0]}
             ]
         }
     }

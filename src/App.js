@@ -8,9 +8,7 @@ import AddRecipe from "./components/addRecipe/addRecipe.component";
 import EditRecipe from "./components/editRecipe/editRecipe.component";
 import HomePage from "./components/homePage/homePage.component";
 import Login from "./components/login/login.component";
-import MyProfile from "./components/myProfile/myProfile.component";
-import EditProfile from "./components/editProfile/editProfile.component"
-import MyRecipes from "./components/myRecipes/myRecipes.component";
+import EditProfile from "./components/editProfile/editProfile.component";
 import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import MyCollection from './components/myCollection/myCollection.component';
@@ -28,9 +26,7 @@ export class App extends React.Component{
             <Route path="/homepage/:uid" component = {HomePage}/>
             <Route path="/addrecipe/:uid" component = {AddRecipe}/>
             <Route path="/editrecipe/:uid/:rid" component = {EditRecipe}/>
-            <Route path="/myprofile/:uid" component = {MyProfile}/>
             <Route path="/editprofile/:uid" component = {EditProfile}/>
-            <Route path="/myrecipes/:uid" component = {MyRecipes}/>
             <Route path="/mycollection/:uid" component = {MyCollection}/>
             <Route path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
             <Route path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
