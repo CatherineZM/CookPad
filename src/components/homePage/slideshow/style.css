@@ -26,7 +26,7 @@
     top: 50%;
     width: auto;
     padding: 16px;
-    margin-top: -40px;
+    margin-top: -150px;
     color: white;
     font-weight: bold;
     font-size: 18px;
@@ -46,7 +46,7 @@
 
 /* Position the "next button" to the right */
 .next {
-    margin-left: 528px;
+    margin-left: 359px;
     border-radius: 3px 0 0 3px;
 }
 

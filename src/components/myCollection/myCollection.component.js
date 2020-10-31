@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Container from "@material-ui/core/Container"
 import Navbar from '../Navbar/navbar.component'
 import ReceipeList from '../recipelist/recipelist.component'
 import './style.css'
@@ -63,8 +64,9 @@ export default class MyCollection extends Component {
 
     render(){
         return(
-            <div className="container-sm">
-                <Navbar uid={this.state.uid}/>
+            <div>
+            <Navbar uid={this.state.uid}/>
+            <Container maxWidth='md'>
                 <div id="my-collection">
                 <ReceipeList 
                     recipes={this.state.recipes}
@@ -73,7 +75,8 @@ export default class MyCollection extends Component {
                     userid={this.state.uid}
                 />
                 </div>
-            </div>  
+            </Container>  
+            </div>
         )
     }
-} 
+}

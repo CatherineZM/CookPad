@@ -3,6 +3,7 @@ import Navbar from "../Navbar/navbar.component";
 import { FaHeart, FaStar } from "react-icons/fa";
 import { uid } from "react-uid";
 import { Link } from "react-router-dom"
+import Container from "@material-ui/core/Container"
 
 // hardcoded images
 import recipe1 from '../../recipes/butter-chicken.jpg'
@@ -90,8 +91,9 @@ export default class ViewRecipe extends Component {
 
     render(){
         return(
-            <div className="container-sm">
-                <Navbar uid={this.state.uid}/>
+            <div>
+            <Navbar uid={this.state.uid}/>
+            <Container maxWidth="md">
                 <p>{this.state.recipe.title}</p>
                 <p><Link to={"/viewprofile/"+ this.state.uid + "/" + this.state.recipe.creator.uid}>By: {this.state.recipe.creator.username}</Link></p>
                 <div>
@@ -131,7 +133,8 @@ export default class ViewRecipe extends Component {
                 {/* only show the two button if they belong to the user */}
                 <form onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
                 <form onSubmit={this.deleteRecipe}><input type="submit" value="Delete" className="btn btn-primary"/></form>
-            </div>  
+            </Container> 
+            </div> 
         )
     }
 } 

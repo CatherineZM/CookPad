@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Container from '@material-ui/core/Container'
 import './style.css'
 import Navbar from "../Navbar/navbar.component"
 import ReceipeList from '../recipelist/recipelist.component'
@@ -69,8 +70,10 @@ export default class EditProfile extends Component {
 
     render(){
         return(
-            <div className="container-sm">
-                <Navbar uid={this.state.uid}/>
+            <div>
+            <Navbar uid={this.state.uid}/>
+            <Container maxWidth='md'>
+                
                 <div id="user-profile">
                     <h4>{this.state.username + "'s Profile:"}</h4>
                 </div>
@@ -91,7 +94,8 @@ export default class EditProfile extends Component {
                         userid={this.state.uid}
                     />    
                 </div>
-            </div> 
+            </Container> 
+            </div>
         )
     }
 } 

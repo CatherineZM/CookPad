@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import './style.css'
 import Navbar from "../Navbar/navbar.component";
 import Dropdown from 'react-dropdown';
+import Container from "@material-ui/core/Container"
 import {Multiselect} from 'multiselect-react-dropdown';
 import ImageUploader from 'react-images-upload';
 import 'react-dropdown/style.css';
@@ -95,8 +96,10 @@ export default class AddRecipe extends Component {
 
     render(){ 
         return(
-            <div className="container">
-                <Navbar uid={this.state.uid}/>
+            <div>
+            <Navbar uid={this.state.uid}/>
+            <Container maxWidth='md'>
+                
                 <form onSubmit = {this.onSubmit}>
                     <div className = "Recipe-form">
                         <label> Recipe Name: </label>
@@ -233,6 +236,7 @@ export default class AddRecipe extends Component {
                         />
                     </div>
                 </form>
+            </Container>
             </div>
         )
     }

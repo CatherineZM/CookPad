@@ -12,7 +12,7 @@ export default class ReceipeList extends Component {
             {recipes.map( (recipe) => (
                 <div key={uid(recipe.title)} className="recipe-container">
                     <Link to={"/viewrecipe/"+ userid + "/" + recipe.id}>
-                    <img className="recipe" src={recipe.src} alt={recipe.text} height="200px" width="275px"/>
+                    <img className="recipe" src={recipe.src} alt={recipe.text} height="190px" width="190px"/>
                     </Link> 
                     <div className="recipe-title">{recipe.title}</div>
                     <div className="like-class">

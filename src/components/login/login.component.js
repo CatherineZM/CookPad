@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './style.css'
 import NavbarEmpty from "../Navbar-empty/navbar-empty"
+import Container from "@material-ui/core/container"
 
 export default class Login extends Component {
     constructor(props){
@@ -31,8 +32,9 @@ export default class Login extends Component {
 
     render(){
         return(
-            <div className="container">
-                <NavbarEmpty is_adminpage={false}/>
+            <div>
+            <NavbarEmpty is_adminpage={false}/>
+            <Container maxWidth='md'> 
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
@@ -50,7 +52,8 @@ export default class Login extends Component {
                 <Link to='signup' className="text-blue-500 hover:text-blue-600">Sign up here</Link>
                 <br/>
                 </p>
-            </div>  
+            </Container>  
+            </div>
         )
     }
 } 

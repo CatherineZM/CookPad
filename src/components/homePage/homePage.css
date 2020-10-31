@@ -6,6 +6,7 @@ body {
 #middle-panel {
     background-color: white;
     float: left;
-	margin-top: 30px;
-    max-width: 570px;
+    margin-top: 30px;
+    max-width: 400px;
+    margin-left: 230px;
 }

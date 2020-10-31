@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Container from '@material-ui/core/Container';
 import './homePage.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import RecipeSlideShow from './slideshow/recipeSlideShow.component'
@@ -6,6 +7,7 @@ import HomePageLeftPanel from './leftpanel/homePageLeftPanel.component'
 import Navbar from '../Navbar/navbar.component'
 import HomePageRightPanel from './rightpanel/homePageRightPanel.component'
 import ReceipeList from '../recipelist/recipelist.component'
+import TopRecipes from "./toprecipes/topRecipes.component"
 
 import cakeIcon from './images/cake.png'
 import pieIcon from './images/pie.png'
@@ -199,7 +201,6 @@ export default class HomePage extends Component {
         let second_idx = 0;
         let third_idx = 0;
         for(let i=0; i< new_recipes.length; i++){
-            console.log(i)
             if(new_recipes[i].likes > first_largest){
                 third_largest = second_largest;
                 second_largest = first_largest;
@@ -238,7 +239,6 @@ export default class HomePage extends Component {
                 }
             }
         }
-        console.log(new_recipes)
         this.setState({ displayed_recipes: new_recipes });
     }
 
@@ -258,8 +258,8 @@ export default class HomePage extends Component {
     render(){
         return(
             <div id="body">
-                <div className="container-sm">
-                    <Navbar uid={this.state.uid}/>
+                <Navbar uid={this.state.uid}/>
+                <Container maxWidth='md'>
                     <HomePageLeftPanel
                         categories={this.state.categories}
                         clickCategory={this.clickCategory}
@@ -288,7 +288,13 @@ export default class HomePage extends Component {
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}
                     />
-                </div> 
+                    
+                    <TopRecipes
+                    top3_recipe={this.state.top3_recipe}
+                    recipes={this.state.recipes}
+                    userid={this.state.uid}
+                    />
+                </Container> 
             </div>
         )
     }

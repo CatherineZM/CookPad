@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import UserList from "./userlist/userList.component"
 import './style.css'
 import NavbarEmpty from '../Navbar-empty/navbar-empty'
+import Container from "@material-ui/core/Container"
 
 export default class AdminPage extends Component {
     constructor(props){
@@ -18,9 +19,11 @@ export default class AdminPage extends Component {
 
     render(){
         return(
-            <div className="container-sm">    
+            <div>
                 <NavbarEmpty is_adminpage={true}/>
-                <UserList users={this.state.users}/>     
+                <Container maxWidth='md'>       
+                    <UserList users={this.state.users}/>     
+                </Container>
             </div>  
         )
     }

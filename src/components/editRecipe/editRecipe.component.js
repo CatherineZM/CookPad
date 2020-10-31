@@ -3,6 +3,7 @@ import './style.css'
 import Navbar from "../Navbar/navbar.component" 
 import recipe1 from '../../recipes/butter-chicken.jpg'
 import {Multiselect} from 'multiselect-react-dropdown';
+import Container from "@material-ui/core/Container"
 import Dropdown from 'react-dropdown';
 import ImageUploader from 'react-images-upload'; 
 import Col from 'react-bootstrap/Col';
@@ -122,8 +123,10 @@ export default class EditRecipe extends Component {
 
     render(){
         return(
-            <div className="container">
-               <Navbar uid={this.state.uid}/>
+            <div> 
+            <Navbar uid={this.state.uid}/>
+            <Container maxWidth='md'>
+               
                <form onSubmit={this.ReturnView}>
                     <div className="form-group">
                     <label> Recipe Name: </label>
@@ -258,6 +261,7 @@ export default class EditRecipe extends Component {
                         />
                     </div>
                 </form>
+            </Container>
             </div>  
         )
     }
