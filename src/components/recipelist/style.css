@@ -23,6 +23,7 @@ a:hover{
     border-radius: 10px;
     border-color: black;
     cursor: pointer;
+    padding-right: 10px;
 }
 .likes:hover{
     color: red;

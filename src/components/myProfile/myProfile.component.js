@@ -7,6 +7,8 @@ import ReceipeList from '../recipelist/recipelist.component'
 // hard coded images
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
+import button from 'bootstrap'
+import { FaEdit } from "react-icons/fa";
 
 export default class MyProfile extends Component {
     constructor(props){
@@ -72,8 +74,9 @@ export default class MyProfile extends Component {
                 <div id="user-profile">
                     <h4>{this.state.user.username + "'s Profile:"}</h4>
                     <div>{this.state.user.description}</div>
+                    <FaEdit id="edit" onClick= {this.editprofile}></FaEdit>
                 </div>
-                <form onSubmit={this.editprofile}><input type="submit" value="Edit" className="btn btn-primary"/></form>
+                
                 <div id="user-recipes">
                     <h4>{this.state.user.username + "'s Recipes:"}</h4>
                     <ReceipeList 

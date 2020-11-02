@@ -1,0 +1,37 @@
+#user-profile {
+    background-color: white;
+	padding: 10px;
+
+	/* Add properties below */
+	margin-top: 30px;
+    margin-left: 10px;
+	width: 200px;
+    float: left;
+    border-radius: 10%;
+    text-align: center;
+}
+
+#edit{
+    margin-top: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+
+#user-profile div{
+    padding-top: 10px;
+}
+
+#user-recipes {
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 10%;
+    margin-left: 30px;
+    margin-right: 10px;
+    width: fit-content;
+}
+
+#user-recipes h4 {
+    text-align: center;
+}
