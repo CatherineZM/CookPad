@@ -105,14 +105,14 @@ export default class ViewRecipe extends Component {
                 <div className="recipe-des">
                     <img src={this.state.recipe.src} alt="" width="600px" height="400px"/>
                     <div className="recipe-des-text">
-                        {this.state.recipe.title+" "}
                         {this.state.recipe.collected && <FaBookmark className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
                         {!this.state.recipe.collected && <FaBookmark className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
                         {this.state.recipe.liked && <FaHeart className="likes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
                         {!this.state.recipe.liked && <FaHeart className="dislikes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
-                        {this.state.recipe.likes}
-                        <p><Link to={"/viewprofile/"+ this.state.uid + "/" + this.state.recipe.creator.uid}>By: {this.state.recipe.creator.username}</Link></p>
+                        <span>{this.state.recipe.likes}</span>
+                        <p><Link to={"/viewprofile/"+ this.state.uid + "/" + this.state.recipe.creator.uid}>{this.state.recipe.title+" "}By: {this.state.recipe.creator.username}</Link></p>
                     </div>
+
                 </div>
 
                 <div className="recommendations">
