@@ -7,7 +7,6 @@ import ReceipeList from '../recipelist/recipelist.component'
 // hard coded images
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
-import button from 'bootstrap'
 import { FaEdit } from "react-icons/fa";
 
 export default class MyProfile extends Component {

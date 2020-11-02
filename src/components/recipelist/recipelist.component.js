@@ -16,11 +16,12 @@ export default class ReceipeList extends Component {
                     </Link> 
                     <div className="recipe-title">{recipe.title}</div>
                     <div className="like-class">
-                        {recipe.collected && <FaBookmark className="star" onClick={()=>clickStar(recipe.id)}/>}  
-                        {!recipe.collected && <FaBookmark className="hollow-star" onClick={()=>clickStar(recipe.id)}/>}  
+                         
                         {recipe.liked && <FaHeart className="likes" onClick={()=>clickHeart(recipe.id)}/>}
                         {!recipe.liked && <FaHeart className="dislikes" onClick={()=>clickHeart(recipe.id)}/>}
-                        {" " + recipe.likes}
+                        <span>{recipe.likes}</span>
+                        {recipe.collected && <FaBookmark className="star" onClick={()=>clickStar(recipe.id)}/>}  
+                        {!recipe.collected && <FaBookmark className="hollow-star" onClick={()=>clickStar(recipe.id)}/>} 
                     </div>
                 </div>   
             ))}

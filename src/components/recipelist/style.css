@@ -18,18 +18,28 @@ a:hover{
     color: #86a4b6;
 }
 
+.recipe{
+    border-radius: 10%;
+}
+
+.like-class{
+    text-align: left;
+}
+
+.like-class span{
+    position: relative;
+    margin-left: 10px;
+}
+
 .likes{
     color: red;
     border-radius: 10px;
     border-color: black;
     cursor: pointer;
-    padding-right: 10px;
-}
-.likes:hover{
-    color: red;
-    border-radius: 10px;
-    border-color: black;
-    
+    position: relative;
+    float: left;
+    margin-top: 5px;
+    margin-left: 15px;
 }
 
 .dislikes{
@@ -37,13 +47,21 @@ a:hover{
     stroke:red;
     stroke-width: 30;
     cursor: pointer;
+    position: relative;
+    float: left;
+    margin-top: 5px;
+    margin-left: 15px;
 }
+
 
 .star{
     color:rgb(212, 212, 15);
     border-radius: 10px;
     margin-right: 10px;
     cursor: pointer;
+    float: right;
+    margin-right: 20px;
+    margin-top: 5px;
 }
 
 .hollow-star{
@@ -52,4 +70,7 @@ a:hover{
     margin-right: 10px;
     stroke-width: 30;
     cursor: pointer;
+    float: right;
+    margin-right: 20px;
+    margin-top: 5px;
 }

@@ -3,6 +3,7 @@ import Container from '@material-ui/core/Container'
 import './style.css'
 import Navbar from "../Navbar/navbar.component"
 import ReceipeList from '../recipelist/recipelist.component'
+import {Form, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap'
 
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
@@ -65,7 +66,20 @@ export default class EditProfile extends Component {
 
     editprofile=(e)=>{
         e.preventDefault();
+        
         window.location = "/myprofile/" + this.state.uid;
+    }
+
+    onChangeDescription=(e)=>{
+        e.preventDefault();
+        this.setState({description: e.target.value});
+    }
+
+    enterKeyHandler(e){
+        e.preventDefault();
+        if (e.keyCode === 13){
+            this.setState({description: this.state.description + '\n'});
+        };
     }
 
     render(){
@@ -76,15 +90,16 @@ export default class EditProfile extends Component {
                 
                 <div id="user-profile">
                     <h4>{this.state.username + "'s Profile:"}</h4>
+                    <Form onSubmit={this.editprofile}>
+                    <FormGroup id="profile-input">
+                        <InputGroup>
+                            <FormControl componentClass="testarea" value={this.state.description} onChange={this.onChangeDescription}/>
+                        </InputGroup>
+                        <Button className="btn btn-primary" onClick={this.editprofile}> Update</Button>
+                    </FormGroup>  
+                    </Form>
                 </div>
-                <form onSubmit={this.editprofile}>
-                    <div className="form-group">
-                        <input type="text" placeholder="Tell me about yourself" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
-                    </div>  
-                    <div className="form-group">
-                        <input type="submit" value="Update" className="btn btn-primary"/>
-                    </div>
-                </form>
+                
                 <div id="user-recipes">
                     <h4>{this.state.username + "'s Recipes:"}</h4>
                     <ReceipeList 

@@ -2,17 +2,18 @@
     background-color: white;
 	padding: 10px;
 
-	/* Add properties below */
+    /* Add properties below */
+    min-height: 0px;
 	margin-top: 30px;
     margin-left: 10px;
-	width: 200px;
+	width: 25%;
     float: left;
     border-radius: 10%;
     text-align: center;
 }
 
 #edit{
-    margin-top: 10px;
+    margin-bottom: 10px;
     position: relative;
     cursor: pointer;
 }
@@ -28,8 +29,7 @@
     margin-top: 30px;
     border-radius: 10%;
     margin-left: 30px;
-    margin-right: 10px;
-    width: fit-content;
+    width: 100%;
 }
 
 #user-recipes h4 {
