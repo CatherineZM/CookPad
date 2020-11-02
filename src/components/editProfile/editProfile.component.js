@@ -15,7 +15,7 @@ export default class EditProfile extends Component {
         this.state = {
             uid: this.props.match.params.uid,
             // the following information is fetched from database according to curruid
-            username: "raon", 
+            username: "nora", 
             description: "I love Chinese Food!!!",
             recipes: [
                 {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
