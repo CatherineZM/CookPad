@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar/navbar.component";
-import { FaHeart, FaStar } from "react-icons/fa";
+import { FaHeart, FaBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom"
 import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
@@ -106,8 +106,8 @@ export default class ViewRecipe extends Component {
                     <img src={this.state.recipe.src} alt="" width="600px" height="400px"/>
                     <div className="recipe-des-text">
                         {this.state.recipe.title+" "}
-                        {this.state.recipe.collected && <FaStar className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
-                        {!this.state.recipe.collected && <FaStar className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
+                        {this.state.recipe.collected && <FaBookmark className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
+                        {!this.state.recipe.collected && <FaBookmark className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
                         {this.state.recipe.liked && <FaHeart className="likes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
                         {!this.state.recipe.liked && <FaHeart className="dislikes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
                         {this.state.recipe.likes}

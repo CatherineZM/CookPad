@@ -23,9 +23,10 @@ export default class HomePageRightPanel extends Component {
                         <TableRow key={uid(recipes[recipe].title)}>
                             <TableCell><Link to={"/viewrecipe/"+userid+"/"+recipes[recipe].id}>{recipes[recipe].title}</Link></TableCell>
                             <TableCell>
+                            
                             {recipes[recipe].liked && <FaHeart className="likes" onClick={()=>clickHeart(recipe)}/>}
                             {!recipes[recipe].liked && <FaHeart className="dislikes" onClick={()=>clickHeart(recipe)}/>}
-                            {" "+recipes[recipe].likes}
+                            <span>{recipes[recipe].likes}</span>
                             </TableCell>
                         </TableRow>
                     ))}
