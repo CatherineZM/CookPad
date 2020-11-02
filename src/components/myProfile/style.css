@@ -12,7 +12,7 @@
     text-align: center;
 }
 
-#edit{
+.edit-button{
     margin-bottom: 10px;
     position: relative;
     cursor: pointer;

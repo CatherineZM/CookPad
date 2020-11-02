@@ -13,10 +13,17 @@
 }
 
 #profile-input{
-    min-height: 300px;
+  
 }
 
-#profile-input input{
-    min-height: 300px;
+#profile-input textarea{
+    width: 170px;
+    margin-left: 20px;
+    min-height: 200px;
     text-align: left;
+}
+
+.save-button{
+    cursor: pointer;
+    margin-top: 10px;
 }

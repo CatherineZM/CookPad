@@ -7,6 +7,7 @@ import {Form, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap'
 
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
+import { FaCheck, FaRegSave, FaSave } from "react-icons/fa";
 
 export default class EditProfile extends Component {
     constructor(props){
@@ -93,9 +94,9 @@ export default class EditProfile extends Component {
                     <Form onSubmit={this.editprofile}>
                     <FormGroup id="profile-input">
                         <InputGroup>
-                            <FormControl componentClass="testarea" value={this.state.description} onChange={this.onChangeDescription}/>
+                            <textarea value={this.state.description} onChange={this.onChangeDescription}/>
                         </InputGroup>
-                        <Button className="btn btn-primary" onClick={this.editprofile}> Update</Button>
+                        <FaRegSave class="save-button" onClick={this.editprofile}/>
                     </FormGroup>  
                     </Form>
                 </div>

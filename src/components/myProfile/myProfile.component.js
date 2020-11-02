@@ -7,7 +7,7 @@ import ReceipeList from '../recipelist/recipelist.component'
 // hard coded images
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
-import { FaEdit } from "react-icons/fa";
+import { FaRegEdit } from "react-icons/fa";
 
 export default class MyProfile extends Component {
     constructor(props){
@@ -35,7 +35,7 @@ export default class MyProfile extends Component {
                     this.setState({ recipes: new_recipes });
                 }else{
                     new_recipes[idx].liked = true;
-                    new_recipes[idx].likes--;
+                    new_recipes[idx].likes++;
                     this.setState({ recipes: new_recipes });
                 }
             }
@@ -73,7 +73,7 @@ export default class MyProfile extends Component {
                 <div id="user-profile">
                     <h4>{this.state.user.username + "'s Profile:"}</h4>
                     <div>{this.state.user.description}</div>
-                    <FaEdit id="edit" onClick= {this.editprofile}></FaEdit>
+                    <FaRegEdit class="edit-button" onClick= {this.editprofile}/>
                 </div>
                 
                 <div id="user-recipes">

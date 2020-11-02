@@ -23,8 +23,13 @@
     width: 600px;
     float: left;
     margin-bottom: 20px;
-    height: 450px;
+    height: fit-content;
     margin-top: 30px;
+    border-radius: 10%;
+}
+
+img{
+    border-radius: 10%;
 }
 
 .recipe-steps{
@@ -33,26 +38,35 @@
     float:left;
 }
 .recipe-des-text{
+    margin-top: 10px;
     margin-left: 20px;
 }
 
 
-.recipe-des-text span{
+.recipe-des-text #like-count{
     position: relative;
+    float: right;
+    margin-right: 30px;
+}
+
+.recipe-des-text #author{
+    float: left;
     margin-left: 10px;
 }
 
-
+.recipe-des-text #title{
+    float: left;
+    margin-left: 10px;
+}
 
 .likes{
     color: red;
     border-radius: 10px;
     border-color: black;
     cursor: pointer;
-    position: relative;
-    float: left;
+    float: right;
     margin-top: 5px;
-    margin-left: 15px;
+    margin-right: 10px;
 }
 
 .dislikes{
@@ -60,30 +74,29 @@
     stroke:red;
     stroke-width: 30;
     cursor: pointer;
-    position: relative;
-    float: left;
+    float: right;
     margin-top: 5px;
-    margin-left: 15px;
+    margin-right: 10px;
 }
 
 
 .star{
-    color:rgb(212, 212, 15);
+    color:black;
     border-radius: 10px;
     margin-right: 10px;
     cursor: pointer;
     float: right;
-    margin-right: 20px;
+    margin-right: 25px;
     margin-top: 5px;
 }
 
 .hollow-star{
     color: white;
-    stroke:  rgb(212, 212, 15);
+    stroke:  black;
     margin-right: 10px;
     stroke-width: 30;
     cursor: pointer;
     float: right;
-    margin-right: 20px;
+    margin-right: 25px;
     margin-top: 5px;
 }
