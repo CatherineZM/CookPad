@@ -68,7 +68,7 @@ export default class EditProfile extends Component {
     editprofile=(e)=>{
         e.preventDefault();
         
-        window.location = "/myprofile/" + this.state.uid;
+        window.location = "/viewprofile/" + this.state.uid + "/" +this.state.uid;
     }
 
     onChangeDescription=(e)=>{
@@ -85,7 +85,7 @@ export default class EditProfile extends Component {
 
     render(){
         return(
-            <div>
+            <div className="edit-profile">
             <Navbar uid={this.state.uid}/>
             <Container maxWidth='md'>
                 

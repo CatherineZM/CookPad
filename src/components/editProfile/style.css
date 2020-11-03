@@ -8,8 +8,12 @@
     margin-left: 10px;
 	width: 25%;
     float: left;
-    border-radius: 10%;
+    border-radius: 25px;
     text-align: center;
+}
+
+#user-recipes{
+    border-radius: 25px;
 }
 
 #profile-input{

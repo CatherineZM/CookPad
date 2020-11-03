@@ -43,9 +43,13 @@ export default class Navbar extends Component {
           ></IconButton>
           <SearchIcon />
             <div id="navbar">
+                <div className="logo">
+                    <img src={cookpadIcon} alt="cookpad"/>
+                    <Link to={"/homepage/"+this.state.uid}>COOKPAD</Link>
+                </div>
+                
                 <ul>
-                    <li><img src={cookpadIcon} alt="cookpad"/><Link to={"/homepage/"+this.state.uid}>COOKPAD</Link></li>
-                    <li id="first-item"><Link to={"/addrecipe/"+this.state.uid}>Create a Recipe</Link></li>
+                    <li><Link to={"/addrecipe/"+this.state.uid}>Create a Recipe</Link></li>
                     <li><Link to={"/mycollection/"+this.state.uid}>My Collection</Link></li>
                     <li><Link to={"/viewprofile/"+this.state.uid+"/"+ this.state.uid}>My Profile</Link></li>
                     <this.adminPageGenerator/>

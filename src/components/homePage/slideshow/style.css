@@ -1,5 +1,9 @@
+#slides {
+    border-radius: 25px;
+}
 #slideshow-container{
     background-color: #e6ecf0;
+    border-radius: 25px;
 }
 
 .dot-container {

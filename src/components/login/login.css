@@ -22,6 +22,7 @@ div{
 .login-page .logo .name {
 
     font-size: 45px;
+    font-weight: bold;
     position: relative;
     float: left;
     margin-top: 50px;

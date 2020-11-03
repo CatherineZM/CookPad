@@ -6,15 +6,33 @@
 	z-index: 999;
 }
 
+#navbar .logo{
+	float: left;
+	margin-left: 280px;
+	font-weight: bold;
+	font-size: 25px;
+	width: fit-content;
+}
+#navbar .logo img{
+	height: 60px;
+	width: 60px;
+}
+
+
+
+
 #navbar ul {
-	margin: 0px;
+	float: left;
+	margin-top: 10px;
+	margin-left: 40px;
     padding: 3px;
     margin-right: 10px;
 	/* Add properties below */
 }
 
 #navbar ul li{
-    margin-right: 15px;
+	margin-right: 15px;
+	font-family: Arial, Helvetica, sans-serif;
 	font-weight: bold;
 	list-style: none; /* Gets rid of list bullet points */
 	text-align: center;

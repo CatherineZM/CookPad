@@ -4,9 +4,10 @@
     margin-top: 20px;
     text-align:center;
     background-color: white;
+    border-radius: 25px;
 }
 
 #top-recipe img{
-    border-radius: 10%;
+    border-radius: 25px;
 
 }
