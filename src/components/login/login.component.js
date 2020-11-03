@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './login.css'
-import NavbarEmpty from "../Navbar-empty/navbar-empty"
 import Container from "@material-ui/core/container"
 import cookpadIcon from '../homePage/images/cookpad.png'
 
