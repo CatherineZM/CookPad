@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import './style.css'
+import './signup.css'
 import NavbarEmpty from "../Navbar-empty/navbar-empty"
 import Container from "@material-ui/core/Container"
+import cookpadIcon from '../homePage/images/cookpad.png'
 
 export default class Signup extends Component {
     constructor(props){
@@ -37,11 +38,14 @@ export default class Signup extends Component {
 
     render(){
         return(
-            <div>
-            <NavbarEmpty is_adminpage={false}/>
-            <Container maxWidth='md'>
-                
-                <form onSubmit={this.onSubmit}>
+            <div className="signup-page">
+            <div className = "logo">
+                <img src={cookpadIcon} alt="cookpad"/>
+                <span className = "name">COOKPAD</span>
+            </div>
+            
+            <Container maxWidth='md'> 
+                <form className="signup-form" onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
                         <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
@@ -52,15 +56,16 @@ export default class Signup extends Component {
                     </div>
                     <div className="form-group">
                         <label>Description: </label>
-                        <input type="text" placeholder="Tell me about yourself" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
+                        <input type="description" placeholder="Personal Description (Optional)" className="form-control" value={this.state.description} onChange={this.onChangeDescription}/>
                     </div>
-                    <div className="form-group">
+                    <div id="signup-button" className="form-group">
                         <input type="submit" value="Signup" className="btn btn-primary"/>
                     </div>
                 </form>
-                <p className="text-center my-3">Already have an account?{" "} 
-                    <Link to="/" className="text-blue-500 hover:text-blue-600">Login here</Link>
-                </p>
+                <div className = "link-signup">Already have an account?{" "}
+                <Link to='/' className="text-blue-500 hover:text-blue-600">Log in here</Link>
+                <br/>
+                </div>
             </Container>  
             </div>
         );

@@ -33,14 +33,14 @@ export default class Login extends Component {
 
     render(){
         return(
-            <div>
-            <div id = "logo">
+            <div className="login-page">
+            <div className = "logo">
                 <img src={cookpadIcon} alt="cookpad"/>
-                <span id = "name">COOKPAD</span>
+                <span className = "name">COOKPAD</span>
             </div>
             
             <Container maxWidth='md'> 
-                <form id="loginForm" onSubmit={this.onSubmit}>
+                <form className="login-form" onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
                         <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
@@ -49,14 +49,14 @@ export default class Login extends Component {
                         <label>Password: </label>
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
-                    <div id="loginButton" className="form-group">
+                    <div id="login-button" className="form-group">
                         <input type="submit" value="Login" className="btn btn-primary"/>
                     </div>
                 </form>
-                <p className="text-center my-3">Don't have an account?{" "}
+                <div className = "link-signup">Don't have an account?{" "}
                 <Link to='signup' className="text-blue-500 hover:text-blue-600">Sign up here</Link>
                 <br/>
-                </p>
+                </div>
             </Container>  
             </div>
         )
