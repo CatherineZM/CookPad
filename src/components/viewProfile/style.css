@@ -1,15 +1,39 @@
-#user-profile{
+#user-profile {
     background-color: white;
+	padding: 10px;
+
+    /* Add properties below */
+    min-height: 0px;
+	margin-top: 30px;
+    margin-left: 10px;
+    width: 25%;
+    position: relative;
     float: left;
-    margin-top: 30px;
-    margin-left: 24%;
-    width: 570px;
+    border-radius: 10%;
+    text-align: center;
 }
 
-#user-recipes{
+.edit-button{
+    margin-bottom: 10px;
+    position: relative;
+    cursor: pointer;
+}
+
+
+
+#user-profile div{
+    padding-top: 10px;
+}
+
+#user-recipes {
     background-color: white;
+    padding: 20px;
     float: left;
     margin-top: 30px;
-    margin-left: 24%;
-    max-width: 570px;
+    border-radius: 10%;
+    margin-left: 30px;
+}
+
+#user-recipes h4 {
+    text-align: center;
 }

@@ -3,11 +3,11 @@ import Container from '@material-ui/core/Container'
 import './style.css'
 import Navbar from "../Navbar/navbar.component"
 import ReceipeList from '../recipelist/recipelist.component'
-import {Form, FormGroup, InputGroup, FormControl, Button} from 'react-bootstrap'
+import {Form, FormGroup, InputGroup} from 'react-bootstrap'
 
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
-import { FaCheck, FaRegSave, FaSave } from "react-icons/fa";
+import { FaRegSave } from "react-icons/fa";
 
 export default class EditProfile extends Component {
     constructor(props){

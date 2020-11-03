@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from "react-router-dom";
-import "./style.css";
+import "./recipelist.css";
 import { FaHeart, FaBookmark } from "react-icons/fa";
 import { uid } from "react-uid";
 

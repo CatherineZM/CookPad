@@ -13,7 +13,6 @@ import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import MyCollection from './components/myCollection/myCollection.component';
 import ViewProfile from './components/viewProfile/viewProfile.component';
-import MyProfile from './components/myProfile/myProfile.component';
 
 export class App extends React.Component{
   render(){
@@ -23,7 +22,7 @@ export class App extends React.Component{
           <Switch>
             <Route path="/" exact component = {Login}/>
             <Route path="/signup" component = {Signup}/>
-            <Route path="/adminpage" component = {AdminPage}/>
+            <Route path="/adminpage/:uid" component = {AdminPage}/>
             <Route path="/homepage/:uid" component = {HomePage}/>
             <Route path="/addrecipe/:uid" component = {AddRecipe}/>
             <Route path="/editrecipe/:uid/:rid" component = {EditRecipe}/>
@@ -31,7 +30,6 @@ export class App extends React.Component{
             <Route path="/mycollection/:uid" component = {MyCollection}/>
             <Route path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
             <Route path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
-            <Route path="/myprofile/:uid" component={MyProfile}/>
           </Switch>
         </Router>
       </div>

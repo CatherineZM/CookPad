@@ -5,6 +5,7 @@
     margin-top: 30px;
     margin-bottom: 10px;
     text-align:center;
+    background-color: white;
 }
 
 a{
@@ -28,10 +29,10 @@ a:hover{
 
 .like-class span{
     position: relative;
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
-.likes{
+.like-class .likes{
     color: red;
     border-radius: 10px;
     border-color: black;
@@ -42,7 +43,7 @@ a:hover{
     margin-left: 15px;
 }
 
-.dislikes{
+.like-class .dislikes{
     color: white;
     stroke:red;
     stroke-width: 30;

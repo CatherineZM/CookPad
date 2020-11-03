@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css'
+import './viewRecipe.css'
 import { uid } from "react-uid";
 import Table from "@material-ui/core/Table"
 import TableBody from "@material-ui/core/TableBody"

@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
-import './style.css'
 import Container from "@material-ui/core/Container"
+import './style.css'
 import Navbar from "../Navbar/navbar.component"
 import ReceipeList from '../recipelist/recipelist.component'
 
-// hardcoded images
-import recipe5 from '../../recipes/spaghetti.png'
-import recipe6 from '../../recipes/apple-pie.png'
+// hard coded images
+import recipe10 from '../../recipes/seafood-stew.png'
+import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
+import { FaRegEdit } from "react-icons/fa";
+
+const user_lst = [
+    {uid: 0, username: "admin", name: "Nora", description: "I love Chinese Food!!!", isAdmin: true},
+    {uid: 1, username: "user", name: "Mo", description: "I love my boyfriend!!!", isAdmin: false}
+    ]
+                
 
 export default class ViewProfile extends Component {
     constructor(props){
@@ -14,13 +21,13 @@ export default class ViewProfile extends Component {
         
         this.state = {
             uid: this.props.match.params.uid,
-            curruid: this.props.match.params.curruid,
             // the following information is fetched from database according to curruid
-            user: {username: "raon", description: "I love Chinese Food!!!"},
+            user: user_lst.find(usr=>usr.uid == this.props.match.params.uid),
             recipes: [
-                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
-                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]}
-            ]
+                {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
+                {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
+            ],
+            curruid:this.props.match.params.curruid
         }
     }
 
@@ -35,7 +42,7 @@ export default class ViewProfile extends Component {
                     this.setState({ recipes: new_recipes });
                 }else{
                     new_recipes[idx].liked = true;
-                    new_recipes[idx].likes--;
+                    new_recipes[idx].likes++;
                     this.setState({ recipes: new_recipes });
                 }
             }
@@ -60,16 +67,30 @@ export default class ViewProfile extends Component {
         console.log(this.state.recipes)
     }
 
+    editprofile=(e)=>{
+        e.preventDefault();
+        window.location = "/editprofile/"+this.state.uid;
+    }
+
+    editButtonGenerator=()=>{
+        if (this.state.uid === this.state.curruid){
+            return <FaRegEdit class="edit-button" onClick= {this.editprofile}/>
+        }
+        return null
+    }
+        
 
     render(){
         return(
             <div>
-            <Navbar uid={this.state.uid}/>
-            <Container maxWidth="md">
+            <Navbar uid={this.state.curruid}/>
+            <Container maxWidth='md'>
                 <div id="user-profile">
-                    <h4>{this.state.user.username + "'s Profile:"}</h4>
+                    <h4>{this.state.user.name + "'s Profile:"}</h4>
                     <div>{this.state.user.description}</div>
+                    <this.editButtonGenerator/>
                 </div>
+                
                 <div id="user-recipes">
                     <h4>{this.state.user.username + "'s Recipes:"}</h4>
                     <ReceipeList 
@@ -79,8 +100,8 @@ export default class ViewProfile extends Component {
                         userid={this.state.uid}
                     />    
                 </div>
-            </Container> 
-            </div>
+            </Container>
+            </div> 
         )
     }
 } 

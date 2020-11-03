@@ -6,6 +6,7 @@ import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
 import {uid} from "react-uid"
+import './viewRecipe.css'
 
 // hardcoded images
 import recipe1 from '../../recipes/butter-chicken.jpg'
