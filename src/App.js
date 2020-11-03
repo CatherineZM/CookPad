@@ -28,8 +28,8 @@ export class App extends React.Component{
             <Route path="/editrecipe/:uid/:rid" component = {EditRecipe}/>
             <Route path="/editprofile/:uid" component = {EditProfile}/>
             <Route path="/mycollection/:uid" component = {MyCollection}/>
-            <Route path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
-            <Route path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
+            <Route exact path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
+            <Route exact path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
           </Switch>
         </Router>
       </div>

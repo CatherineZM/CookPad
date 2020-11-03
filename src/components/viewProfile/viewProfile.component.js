@@ -27,8 +27,10 @@ export default class ViewProfile extends Component {
                 {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
                 {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
             ],
-            curruid:this.props.match.params.curruid
+            curruid: this.props.match.params.curruid
         }
+        console.log(this.state.user)
+        console.log(this.props.match.params.uid)
     }
 
     clickHeart=(rid)=>{
@@ -78,7 +80,19 @@ export default class ViewProfile extends Component {
         }
         return null
     }
+    
+    componentWillReceiveProps(nextProps){
+        if (nextProps.match.params.uid !== this.props.match.params.uid){
+            const currUid = nextProps.match.params.uid
+            const currUser = user_lst.find(usr=>usr.uid == currUid)
+            this.setState({
+                uid: currUid,
+                user: currUser
+            })
+        }
         
+    }
+    
 
     render(){
         return(
@@ -92,7 +106,7 @@ export default class ViewProfile extends Component {
                 </div>
                 
                 <div id="user-recipes">
-                    <h4>{this.state.user.username + "'s Recipes:"}</h4>
+                    <h4>{this.state.user.name + "'s Recipes:"}</h4>
                     <ReceipeList 
                         recipes={this.state.recipes}
                         clickHeart={this.clickHeart}

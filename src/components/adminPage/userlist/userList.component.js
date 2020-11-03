@@ -21,20 +21,25 @@ export default class UserList extends Component {
             <Table>
                     <TableBody>
                         <TableRow>
+                            <TableCell>Uid</TableCell>
                             <TableCell>Username</TableCell>
-                            <TableCell>Ban a user</TableCell>
-                            <TableCell>Promote a user</TableCell>
+                            <TableCell>View Profiles</TableCell>
+                            <TableCell>Mange</TableCell>
                         </TableRow>
                         {this.state.users.map(user => (
                         <TableRow class="user_row" key={uid(user.username)}>
+                            <TableCell className = "uid">
+                                {user.uid}
+                            </TableCell>
                             <TableCell className = "username">
-                                <Link to={"/viewprofile/"+user.uid+"/"+this.state.uid}>{user.username}</Link>
+                                {user.username}
                             </TableCell>
-                            <TableCell className = "banButton">
-                                <button className="btn btn-primary" onClick={()=>{}}> Ban </button>
+                            <TableCell className = "Profile">
+                                <Link to={"/viewprofile/"+user.uid+"/"+this.state.uid}>View Profile</Link>
                             </TableCell>
-                            <TableCell className = "PromoteButton">
-                                <button className="btn btn-primary" onClick={()=>{}}> Promote </button>
+                            <TableCell className = "Operations">
+                                <button id = "banButton" className="btn btn-primary" onClick={()=>{}}> Ban </button>
+                                <button id = "promoteButton" className="btn btn-primary" onClick={()=>{}}> Promote </button>
                             </TableCell>
                         </TableRow>
                         ))}
