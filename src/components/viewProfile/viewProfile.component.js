@@ -11,7 +11,8 @@ import { FaRegEdit } from "react-icons/fa";
 
 const user_lst = [
     {uid: 0, username: "admin", name: "Nora", description: "I love Chinese Food!!!", isAdmin: true},
-    {uid: 1, username: "user", name: "Mo", description: "I love my boyfriend!!!", isAdmin: false}
+    {uid: 1, username: "user", name: "Mo", description: "I love my boyfriend!!!", isAdmin: false},
+    {uid: 127, username: "raon", name: "Raon", description: "I love blahblah!!!", isAdmin: false}
     ]
                 
 
