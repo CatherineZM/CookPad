@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
-import './style.css'
+import './login.css'
 import NavbarEmpty from "../Navbar-empty/navbar-empty"
 import Container from "@material-ui/core/container"
+import cookpadIcon from '../homePage/images/cookpad.png'
 
 export default class Login extends Component {
     constructor(props){
@@ -33,9 +34,13 @@ export default class Login extends Component {
     render(){
         return(
             <div>
-            <NavbarEmpty is_adminpage={false}/>
+            <div id = "logo">
+                <img src={cookpadIcon} alt="cookpad"/>
+                <span id = "name">COOKPAD</span>
+            </div>
+            
             <Container maxWidth='md'> 
-                <form onSubmit={this.onSubmit}>
+                <form id="loginForm" onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
                         <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
@@ -44,7 +49,7 @@ export default class Login extends Component {
                         <label>Password: </label>
                         <input type="password" required placeholder="Your Password" className="form-control" value={this.state.password} onChange={this.onChangePassword}/>
                     </div>
-                    <div className="form-group">
+                    <div id="loginButton" className="form-group">
                         <input type="submit" value="Login" className="btn btn-primary"/>
                     </div>
                 </form>
