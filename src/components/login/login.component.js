@@ -33,12 +33,13 @@ export default class Login extends Component {
     render(){
         return(
             <div className="login-page">
-            <div className = "logo">
-                <img src={cookpadIcon} alt="cookpad"/>
-                <span className = "name">COOKPAD</span>
-            </div>
+            
             
             <Container maxWidth='md'> 
+                <div className = "logo">
+                    <img src={cookpadIcon} alt="cookpad"/>
+                    <span className = "name">COOKPAD</span>
+                </div>
                 <form className="login-form" onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
