@@ -63,6 +63,11 @@ export default class EditRecipe extends Component {
         window.location = "/viewprofile/"+this.state.uid+"/"+ this.state.uid
     }
 
+    onCancel=(e)=>{
+        e.preventDefault();
+        window.location = "/viewprofile/"+this.state.uid+"/"+ this.state.uid
+    }
+
     onChangeRecipeName = (e) =>{
         e.preventDefault();
         this.setState({ RecipeName: e.target.value });
@@ -256,6 +261,11 @@ export default class EditRecipe extends Component {
                             value = "Update Recipe" 
                             className = "btn btn-primary"
                         />
+                        <button 
+                            type="button"
+                            id="cancel-edit"
+                            className = "btn btn-primary" 
+                            onClick={this.onCancel}>Cancel</button>
                     </div>
                 </form>
             </Container>

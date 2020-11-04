@@ -22,7 +22,12 @@
     height: 40%;
     width: 40%;
 }
+
 textarea{
     resize: none;
     height: fit-content; 
+}
+
+.edit-recipe #cancel-edit{
+    margin-left: 10px;
 }
