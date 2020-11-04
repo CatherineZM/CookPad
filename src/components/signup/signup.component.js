@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import Avatar from 'react-avatar-edit';
+
 import './signup.css'
 import Container from "@material-ui/core/Container"
 import cookpadIcon from '../homePage/images/cookpad.png'
@@ -10,6 +12,7 @@ export default class Signup extends Component {
         this.state = {
             username: '',
             password: '',
+            profilePic: null,
             description: ''
         }
     }
@@ -22,6 +25,18 @@ export default class Signup extends Component {
     onChangePassword = (e)=>{
         e.preventDefault();
         this.setState({ password: e.target.value });
+    }
+
+    onImageLoad=(e)=>{
+        this.setState({profilePic: e.target.value});
+    }
+
+    onClose=(e)=>{
+        this.setState({preview: null})
+    }
+      
+    onCrop=(e,preview)=>{
+        this.setState({preview})
     }
 
     onChangeDescription = (e)=>{
@@ -46,6 +61,18 @@ export default class Signup extends Component {
                     <span className = "name">COOKPAD</span>
                 </div>
                 <form className="signup-form" onSubmit={this.onSubmit}>
+                    <div className="form-group" id="upload-pic">
+                        <Avatar 
+                            width={430}
+                            height={250} 
+                            round={true} 
+                            label={"Choose a profile picture"}
+                            onImageLoad={this.onImageLoad}
+                            onCrop={this.onCrop}
+                            onClose={this.onClose}
+                            src={this.state.profilePic}
+                        /> 
+                    </div> 
                     <div className="form-group">
                         <label>Username: </label>
                         <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>
