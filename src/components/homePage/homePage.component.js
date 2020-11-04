@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Container from '@material-ui/core/Container';
+
 import './homePage.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import RecipeSlideShow from './slideshow/recipeSlideShow.component'
@@ -130,6 +131,10 @@ export default class HomePage extends Component {
             dots[i].className = dots[i].className.replace(" active", "");
         }
         dots[this.state.slide_idx].className += " active";
+    }
+
+    clickRecipe=(userid,rid)=>{
+        window.location = "/viewrecipe/"+ userid + "/" + rid;
     }
 
     clickStar=(rid)=>{
@@ -282,6 +287,7 @@ export default class HomePage extends Component {
                         />
                         <ReceipeList 
                         recipes={this.state.displayed_recipes}
+                        clickRecipe={this.clickRecipe}
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
                         userid={this.state.uid}

@@ -27,11 +27,6 @@ a:hover{
     text-align: left;
 }
 
-.like-class span{
-    position: relative;
-    margin-left: 5px;
-}
-
 .like-class .likes{
     color: red;
     border-radius: 10px;
@@ -52,26 +47,4 @@ a:hover{
     float: left;
     margin-top: 5px;
     margin-left: 15px;
-}
-
-
-.star{
-    color:rgb(212, 212, 15);
-    border-radius: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-    float: right;
-    margin-right: 20px;
-    margin-top: 5px;
-}
-
-.hollow-star{
-    color: white;
-    stroke:  rgb(212, 212, 15);
-    margin-right: 10px;
-    stroke-width: 30;
-    cursor: pointer;
-    float: right;
-    margin-right: 20px;
-    margin-top: 5px;
 }
