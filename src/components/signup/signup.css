@@ -5,8 +5,8 @@ div{
     background-color: white;
     position: relative;
     margin-top: 50px;
-    margin-left: 500px;
-    width: fit-content;
+    margin-left: 25%;
+    width: 430px;
     height: 160px;
     border-radius: 25px;
 }
@@ -22,6 +22,7 @@ div{
 .signup-page .logo .name {
 
     font-size: 45px;
+    font-weight: bold;
     position: relative;
     float: left;
     margin-top: 50px;
@@ -33,7 +34,7 @@ div{
     margin-top: 20px;
     position: relative;
     width: 420px;
-    margin-left: 240px;
+    margin-left: 25%;
 }
 
 .signup-page .signup-form #signup-button{
@@ -45,5 +46,5 @@ div{
 .signup-page .link-signup {
     position: relative;
     margin-top: 20px;
-    margin-left: 300px;
+    margin-left: 32%;
 }

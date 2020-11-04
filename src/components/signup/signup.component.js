@@ -38,12 +38,13 @@ export default class Signup extends Component {
     render(){
         return(
             <div className="signup-page">
-            <div className = "logo">
-                <img src={cookpadIcon} alt="cookpad"/>
-                <span className = "name">COOKPAD</span>
-            </div>
+            
             
             <Container maxWidth='md'> 
+                <div className = "logo">
+                    <img src={cookpadIcon} alt="cookpad"/>
+                    <span className = "name">COOKPAD</span>
+                </div>
                 <form className="signup-form" onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username: </label>
