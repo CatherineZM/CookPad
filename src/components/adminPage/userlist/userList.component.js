@@ -25,7 +25,7 @@ export default class UserList extends Component {
         return(
             <div className="user-list">
             <Table>
-                <TableHead className="table-head">
+                <TableHead id="table-head">
                     <TableRow>
                         <TableCell align = 'center'>uid</TableCell>
                         <TableCell align = 'center'>Username</TableCell>

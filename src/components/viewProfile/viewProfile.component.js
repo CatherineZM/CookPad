@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import Container from "@material-ui/core/Container"
-import './style.css'
+import './viewProfile.css'
 import Navbar from "../Navbar/navbar.component"
 import ReceipeList from '../recipelist/recipelist.component'
+import Avatar from 'react-avatar';
 
 // hard coded images
+import ProfilePic from'./default-profile-pic.png' 
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 import { FaRegEdit } from "react-icons/fa";
 
 const user_lst = [
     {uid: 0, username: "admin", name: "Nora", description: "I love Chinese Food!!!", isAdmin: true},
-    {uid: 1, username: "user", name: "Mo", description: "I love my boyfriend!!!", isAdmin: false},
+    {uid: 1, username: "user", name: "Catherine", description: "I love baking!!!", isAdmin: false},
     {uid: 127, username: "raon", name: "Raon", description: "I love blahblah!!!", isAdmin: false}
     ]
-                
 
 export default class ViewProfile extends Component {
     constructor(props){
@@ -24,6 +25,7 @@ export default class ViewProfile extends Component {
             uid: this.props.match.params.uid,
             // the following information is fetched from database according to curruid
             user: user_lst.find(usr=>usr.uid == this.props.match.params.uid),
+            userpicture: {src: ProfilePic},
             recipes: [
                 {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
                 {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
@@ -77,7 +79,12 @@ export default class ViewProfile extends Component {
 
     editButtonGenerator=()=>{
         if (this.state.uid === this.state.curruid){
-            return <FaRegEdit class="edit-button" onClick= {this.editprofile}/>
+            return <button type="button"
+                    className = "btn btn-outline-primary"
+                    onClick={this.editprofile}>
+                    <FaRegEdit/>
+                    Edit Profile
+                    </button>  
         }
         return null
     }
@@ -93,7 +100,6 @@ export default class ViewProfile extends Component {
         }
         
     }
-    
 
     render(){
         return(
@@ -102,13 +108,14 @@ export default class ViewProfile extends Component {
             <Container maxWidth='md'>
                 <Navbar uid={this.state.curruid}/>
                 <div id="user-profile">
-                    <h4>{this.state.user.name + "'s Profile:"}</h4>
+                    <h4>{this.state.user.name + "'s Profile"}</h4>
+                    <Avatar id="user-picture" name="user" size="150" round={true} src={this.state.userpicture.src}/> 
                     <div>{this.state.user.description}</div>
                     <this.editButtonGenerator/>
                 </div>
                 
                 <div id="user-recipes">
-                    <h4>{this.state.user.name + "'s Recipes:"}</h4>
+                    <h4>{this.state.user.name + "'s Recipes"}</h4>
                     <ReceipeList 
                         recipes={this.state.recipes}
                         clickHeart={this.clickHeart}
