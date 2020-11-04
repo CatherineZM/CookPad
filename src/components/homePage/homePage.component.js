@@ -262,8 +262,9 @@ export default class HomePage extends Component {
     render(){
         return(
             <div id="body">
-                <Navbar uid={this.state.uid}/>
+                
                 <Container maxWidth='md'>
+                    <Navbar uid={this.state.uid}/>
                     <HomePageLeftPanel
                         categories={this.state.categories}
                         clickCategory={this.clickCategory}

@@ -1,14 +1,14 @@
 #navbar {
 	background-color: white;
 	position: fixed;
-	width: 100%;
+	width: 915px;
 	text-align: center;
 	z-index: 999;
 }
 
 #navbar .logo{
 	float: left;
-	margin-left: 280px;
+	margin-left: 10px;
 	font-weight: bold;
 	font-size: 25px;
 	width: fit-content;
@@ -22,9 +22,8 @@
 
 
 #navbar ul {
-	float: left;
+	float: right;
 	margin-top: 10px;
-	margin-left: 40px;
     padding: 3px;
     margin-right: 10px;
 	/* Add properties below */

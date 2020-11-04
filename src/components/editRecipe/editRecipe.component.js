@@ -124,9 +124,9 @@ export default class EditRecipe extends Component {
     render(){
         return(
             <div> 
-            <Navbar uid={this.state.uid}/>
+            
             <Container maxWidth='md'>
-               
+                <Navbar uid={this.state.uid}/>
                <form onSubmit={this.ReturnView}>
                     <div className="form-group">
                     <label> Recipe Name: </label>

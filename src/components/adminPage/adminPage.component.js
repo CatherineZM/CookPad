@@ -27,8 +27,9 @@ export default class AdminPage extends Component {
     render(){
         return(
             <div>
-                <Navbar uid={this.state.uid}/>
-                <Container maxWidth='md'>       
+                
+                <Container maxWidth='md'>     
+                <Navbar uid={this.state.uid}/>  
                     <UserList users={this.state.users} uid={this.state.uid}/>     
                 </Container>
             </div>  

@@ -98,8 +98,9 @@ export default class ViewProfile extends Component {
     render(){
         return(
             <div>
-            <Navbar uid={this.state.curruid}/>
+            
             <Container maxWidth='md'>
+                <Navbar uid={this.state.curruid}/>
                 <div id="user-profile">
                     <h4>{this.state.user.name + "'s Profile:"}</h4>
                     <div>{this.state.user.description}</div>

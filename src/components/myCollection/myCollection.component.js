@@ -72,8 +72,9 @@ export default class MyCollection extends Component {
     render(){
         return(
             <div>
-            <Navbar uid={this.state.uid}/>
+            
             <Container maxWidth='md'>
+                <Navbar uid={this.state.uid}/>
                 <div id="my-collection">
                 <ReceipeList 
                     recipes={this.state.recipes}

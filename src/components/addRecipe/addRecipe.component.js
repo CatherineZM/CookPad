@@ -97,8 +97,9 @@ export default class AddRecipe extends Component {
     render(){ 
         return(
             <div>
-            <Navbar uid={this.state.uid}/>
+            
             <Container maxWidth='md'>
+                <Navbar uid={this.state.uid}/>
                 <form onSubmit = {this.onSubmit} className="add-recipe">
                     <b>Create A Recipe</b>
                     <div className = "Recipe-form">
