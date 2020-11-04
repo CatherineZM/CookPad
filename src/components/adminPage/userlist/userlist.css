@@ -1,0 +1,11 @@
+.user-list{
+    margin-top: 20px;
+    background-color: white;
+}
+.table-head{
+    text-size-adjust: 20px;
+    font-weight: bold;
+}
+.user-list #promoteButton{
+    margin-left: 3px;
+}
