@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './style.css'
+import './addRecipe.css'
 import Navbar from "../Navbar/navbar.component";
 import Dropdown from 'react-dropdown';
 import Container from "@material-ui/core/Container"
@@ -99,8 +99,8 @@ export default class AddRecipe extends Component {
             <div>
             <Navbar uid={this.state.uid}/>
             <Container maxWidth='md'>
-                
-                <form onSubmit = {this.onSubmit}>
+                <form onSubmit = {this.onSubmit} className="add-recipe">
+                    <b>Create A Recipe</b>
                     <div className = "Recipe-form">
                         <label> Recipe Name: </label>
                         <input 
@@ -169,6 +169,7 @@ export default class AddRecipe extends Component {
                                         </Col>
                                         <Col className ="col" xs={1}>
                                             <button 
+                                                id="remove-ingredient"
                                                 type="button"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveIngredients(index)}>Remove</button>
@@ -178,7 +179,7 @@ export default class AddRecipe extends Component {
                         } 
                     </div>
                     <div className="AddIngredient-btn">
-                        <button className = "btn btn-outline-primary" type = "button" onClick={this.addIngredientsRow} >
+                        <button id="add-ingredient" className = "btn btn-outline-primary" type = "button" onClick={this.addIngredientsRow} >
                             Add Ingredients
                         </button>
                     </div>
@@ -200,6 +201,7 @@ export default class AddRecipe extends Component {
                                         </Col>
                                         <Col className ="col">
                                             <button 
+                                                id="remove-step"
                                                 type="button"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveSteps(index)}>Remove</button>
@@ -210,7 +212,7 @@ export default class AddRecipe extends Component {
                         
                     </div>
                     <div className="AddSteps-btn">
-                        <button className = "btn btn-outline-primary" type = "button" onClick={this.addStepsRow} >
+                        <button id = "add-step" className = "btn btn-outline-primary" type = "button" onClick={this.addStepsRow} >
                             Add Steps
                         </button> 
                     </div>
