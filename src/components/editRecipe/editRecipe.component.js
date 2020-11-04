@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './style.css'
+import './editRecipe.css'
 import Navbar from "../Navbar/navbar.component" 
 import recipe1 from '../../recipes/butter-chicken.jpg'
 import {Multiselect} from 'multiselect-react-dropdown';
@@ -60,7 +60,7 @@ export default class EditRecipe extends Component {
 
     ReturnView=(e)=>{
         e.preventDefault();
-        window.location = "/myrecipes/" + this.state.uid
+        window.location = "/viewprofile/"+this.state.uid+"/"+ this.state.uid
     }
 
     onChangeRecipeName = (e) =>{
@@ -115,19 +115,14 @@ export default class EditRecipe extends Component {
         this.setState({RecipeImage: this.state.RecipeImage.concat(picture)});
     }
 
-    onSubmit=(e)=>{
-        e.preventDefault();
-        // push the recipe to the database
-        window.location = "/homepage/1";
-    }
-
     render(){
         return(
             <div> 
             
             <Container maxWidth='md'>
                 <Navbar uid={this.state.uid}/>
-               <form onSubmit={this.ReturnView}>
+                <form onSubmit={this.ReturnView} className="edit-recipe">
+                    <b>Edit Your Recipe</b>
                     <div className="form-group">
                     <label> Recipe Name: </label>
                         <input 
@@ -196,6 +191,7 @@ export default class EditRecipe extends Component {
                                         <Col className ="col" xs={1}>
                                             <button 
                                                 type="button"
+                                                id="remove-ingredient"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveIngredients(index)}>Remove</button>
                                         </Col>
@@ -204,7 +200,7 @@ export default class EditRecipe extends Component {
                         } 
                     </div>
                     <div className="AddIngredient-btn">
-                        <button className = "btn btn-outline-primary" type = "Add-Ingredients" onClick={this.addIngredientsRow} >
+                        <button id="add-ingredient" className = "btn btn-outline-primary" type = "Add-Ingredients" onClick={this.addIngredientsRow} >
                             Add Ingredients
                         </button>
                     </div>
@@ -226,6 +222,7 @@ export default class EditRecipe extends Component {
                                         <Col className ="col">
                                             <button 
                                                 type="button"
+                                                id="remove-step"
                                                 className = "btn btn-outline-primary" 
                                                 onClick={(e)=>this.onChangeRemoveSteps(index)}>Remove</button>
                                         </Col>
@@ -234,7 +231,7 @@ export default class EditRecipe extends Component {
                         }
                     </div>
                     <div className="AddSteps-btn">
-                        <button className = "btn btn-outline-primary" type = "Add-Steps" onClick={this.addStepsRow} >
+                        <button id = "add-step" className = "btn btn-outline-primary" type = "Add-Steps" onClick={this.addStepsRow} >
                             Add Steps
                         </button> 
                     </div>
