@@ -23,11 +23,13 @@
 }
 
 #right-panel #table-row .recipe-name{
-    padding-right: 50px;
+    padding-right: 40px;
 }
 
 #right-panel #table-row .recipe-likes{
+    padding-top: 15px;
     padding-left: 0px;
+    width: 70px;
 }
 
 #right-panel #table-row .recipe-likes .dislikes{

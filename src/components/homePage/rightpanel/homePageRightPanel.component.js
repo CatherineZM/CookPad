@@ -27,7 +27,7 @@ export default class HomePageRightPanel extends Component {
                             
                             {recipes[recipe].liked && <FaHeart className="likes" onClick={()=>clickHeart(recipe)}/>}
                             {!recipes[recipe].liked && <FaHeart className="dislikes" onClick={()=>clickHeart(recipe)}/>}
-                            <span>{recipes[recipe].likes}</span>
+                            <p>{recipes[recipe].likes}</p>
                             </TableCell>
                         </TableRow>
                     ))}
