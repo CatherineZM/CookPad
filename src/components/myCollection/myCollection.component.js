@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from "@material-ui/core/Container"
 import Navbar from '../Navbar/navbar.component'
 import ReceipeList from '../recipelist/recipelist.component'
-import './style.css'
+import './myCollection.css'
 
 // hardcoded images
 import recipe1 from '../../recipes/butter-chicken.jpg'
@@ -23,7 +23,7 @@ export default class MyCollection extends Component {
                 {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
                 {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
                 {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
-                {id:3, src:recipe4, liked: false, collected: false, title:'vanilla cake', likes:76, categories:[0]},
+                {id:3, src:recipe4, liked: false, collected: false, title:'Vanilla Cake', likes:76, categories:[0]},
                 {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
                 {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
                 {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},

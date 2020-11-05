@@ -15,45 +15,67 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import { yellow } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import { withStyles } from '@material-ui/core/styles';
 
-export default class ReceipeList extends Component {
+const styles = {
+    root: {
+        maxWidth: 380,
+    },
+    media: {
+        height: 250,
+    },
+    likeButton:{
+        paddingRight:10,
+    },
+    saveButton: {
+        paddingLeft: 195,
+    },
+  };
+
+class ReceipeList extends Component {
     
     render(){
-        const {useStyles, recipes, clickRecipe, clickHeart, clickStar, userid} = this.props;
+        const {classes, recipes, clickRecipe, clickHeart, clickStar, userid} = this.props;
         return(
             <div>
             {recipes.map( (recipe) => (
                 <div key={uid(recipe.title)} className="recipe-container">
-                    <Card>
-                    <CardActionArea onClick={()=>clickRecipe(userid,recipe.id)}>
-                        <CardMedia
-                        height="300"
-                        component="img"
-                        alt={recipe.title}
-                        image={recipe.src}
-                        />
-                        <CardContent>
-                        <Typography gutterBottom variant="body" component="h4">
-                            {recipe.title}
-                        </Typography>
-                        </CardContent>
-                    </CardActionArea>
-                    <CardActions>
-                        <div className="like-class">
-                            <FormControlLabel
-                            labelPlacement="end"
-                            control={<Checkbox disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="liked" />} 
-                            label={recipe.likes}
+                        <Card className={classes.root}>
+                        <CardActionArea onClick={()=>clickRecipe(userid,recipe.id)}>
+                            <CardMedia
+                            className={classes.media}
+                            component="img"
+                            alt={recipe.title}
+                            image={recipe.src}
                             />
-                            <FormControlLabel
-                            control={<Checkbox disableRipple={true} onChange={()=>clickStar(recipe.id)} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon style={{ color: yellow[500] }}/>} name="saved" />} 
-                            /> 
-                        </div>
-                    </CardActions>
-                    </Card>
+                            <CardContent>
+                            <Typography gutterBottom variant="body" component="h4">
+                                {recipe.title}
+                            </Typography>
+                            </CardContent>
+                        </CardActionArea>
+                        <CardActions disableSpacing>
+                            <div className="like-class">
+                                <FormControlLabel
+                                labelPlacement="end"
+                                className={classes.likeButton}
+                                control={<Checkbox disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="liked" />} 
+                                label={recipe.likes}
+                                />
+                                <FormControlLabel
+                                labelPlacement="end"
+                                className={classes.saveButton}
+                                control={<Checkbox disableRipple={true} onChange={()=>clickStar(recipe.id)} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon style={{color: yellow[500] }}/>} name="saved" />} 
+                                label="Save"
+                                /> 
+                            </div>
+                        </CardActions>
+                        </Card>
                 </div>   
             ))}
             </div>
         )   
     }
 }
+
+export default withStyles(styles)(ReceipeList);
