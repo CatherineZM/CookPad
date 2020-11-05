@@ -21,16 +21,6 @@ export default class Navbar extends Component {
         }
 
     }
-        
-    
-
-    adminPageGenerator = ()=>{
-        if (this.state.isAdmin){
-            return <li><Link to={"/adminpage/"+this.state.uid}>Admin Page</Link></li>;
-        }
-        return null;
-    }
-
 
     render(){
 
