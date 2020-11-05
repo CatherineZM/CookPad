@@ -19,17 +19,21 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     root: {
-        maxWidth: 380,
+        maxWidth: 180,
+        height: 350,
         borderRadius: 20,
     },
+    title:{
+        height: 80,
+    },
     media: {
-        height: 250,
+        height: 200,
     },
     likeButton:{
         paddingLeft: 20,
     },
     saveButton: {
-        marginLeft: 180,
+        marginLeft: 10,
     },
   };
 
@@ -49,8 +53,8 @@ class ReceipeList extends Component {
                             alt={recipe.title}
                             image={recipe.src}
                             />
-                            <CardContent>
-                            <Typography gutterBottom variant="body" component="h4">
+                            <CardContent className={classes.title}>
+                            <Typography gutterBottom variant="body" component="body2">
                                 {recipe.title}
                             </Typography>
                             </CardContent>
@@ -60,12 +64,12 @@ class ReceipeList extends Component {
                                 <FormControlLabel
                                 labelPlacement="end"
                                 className={classes.likeButton}
-                                control={<Checkbox checked= {recipe.liked}disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
+                                control={<Checkbox checked= {recipe.liked}disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} name="liked" />} 
                                 label={recipe.likes}
                                 />
                                 <FormControlLabel
                                 className={classes.saveButton}
-                                control={<Checkbox disableRipple={true} onChange={()=>clickStar(recipe.id)} icon={<BookmarkBorderIcon fontSize="large"/>} checkedIcon={<BookmarkIcon fontSize="large" style={{color: yellow[600] }}/>} name="saved" />} 
+                                control={<Checkbox disableRipple={true} onChange={()=>clickStar(recipe.id)} icon={<BookmarkBorderIcon/>} checkedIcon={<BookmarkIcon style={{color: yellow[600] }}/>} name="saved" />} 
                                 /> 
                             </div>
                         </CardActions>

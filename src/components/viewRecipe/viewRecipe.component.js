@@ -165,9 +165,10 @@ class ViewRecipe extends Component {
                 <div className="recommendations">
                 {this.state.top3_recipe.map((recipe)=>(
                     <div key={uid(recipe.title)} className="view-other">
+                        <Link to={"/viewrecipe/"+ this.state.uid + "/" + recipe.id}>
                         <Card className={classes.card}>
                             <CardActionArea>
-                                <Link to={"/viewrecipe/"+ this.state.uid + "/" + recipe.id}/>
+                                
                                 <CardMedia
                                     height="200"
                                     component="img"
@@ -181,6 +182,7 @@ class ViewRecipe extends Component {
                                 </CardContent>
                             </CardActionArea>
                         </Card>
+                        </Link>
                     </div>
                     ))}
                 </div>
