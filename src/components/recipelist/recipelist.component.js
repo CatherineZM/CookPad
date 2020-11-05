@@ -60,7 +60,7 @@ class ReceipeList extends Component {
                                 <FormControlLabel
                                 labelPlacement="end"
                                 className={classes.likeButton}
-                                control={<Checkbox disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
+                                control={<Checkbox checked= {recipe.liked}disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
                                 label={recipe.likes}
                                 />
                                 <FormControlLabel

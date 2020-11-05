@@ -20,7 +20,7 @@ const styles = {
 
 class TopRecipes extends Component {
     render(){
-        const {classes, clickRecipe, recipes, top3_recipe, userid} = this.props;
+        const {classes, recipes, top3_recipe, userid} = this.props;
         return(
             <div id="top-recipe">
                 {top3_recipe.map((id)=>(

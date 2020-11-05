@@ -43,7 +43,7 @@ class HomePageRightPanel extends Component {
                             <TableCell className={classes.cell} id="recipe-likes">
                                 <FormControlLabel
                                     labelPlacement="end"
-                                    control={<Checkbox disableRipple={true} onChange={()=>clickHeart(recipe)} icon={<FavoriteBorder fontSize="small"/>} checkedIcon={<Favorite fontSize="small"/>} name="liked" />} 
+                                    control={<Checkbox checked= {recipes[recipe].liked} disableRipple={true} onChange={()=>clickHeart(recipe)} icon={<FavoriteBorder fontSize="small"/>} checkedIcon={<Favorite fontSize="small"/>} name="liked" />} 
                                     label={recipes[recipe].likes}
                                 />
                             </TableCell>

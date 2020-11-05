@@ -24,6 +24,7 @@ export default class EditRecipe extends Component {
         super(props);
         this.state = {
             uid: this.props.match.params.uid,
+            rid: this.props.match.params.rid,
             RecipeName: 'Butter Chicken',
             Description: '',
             cuisinetype: [{name: "Soup", id: 7}],
@@ -60,12 +61,12 @@ export default class EditRecipe extends Component {
 
     ReturnView=(e)=>{
         e.preventDefault();
-        window.location = "/viewprofile/"+this.state.uid+"/"+ this.state.uid
+        window.location = "/viewrecipe/"+this.state.uid+"/"+ this.state.rid
     }
 
     onCancel=(e)=>{
         e.preventDefault();
-        window.location = "/viewprofile/"+this.state.uid+"/"+ this.state.uid
+        window.location = "/viewrecipe/"+this.state.uid+"/"+ this.state.rid
     }
 
     onChangeRecipeName = (e) =>{

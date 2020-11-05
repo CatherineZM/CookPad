@@ -150,7 +150,7 @@ class ViewRecipe extends Component {
                                 <FormControlLabel
                                 className={classes.likeButton}
                                 labelPlacement="end"
-                                control={<Checkbox disableRipple={true} onChange={()=>this.clickHeart(this.state.recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
+                                control={<Checkbox checked= {this.state.recipe.liked}disableRipple={true} onChange={()=>this.clickHeart(this.state.recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
                                 label={this.state.recipe.likes}
                                 />
                                 <FormControlLabel
