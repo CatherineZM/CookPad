@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar/navbar.component";
-import { FaHeart, FaBookmark } from "react-icons/fa";
 import { Link } from "react-router-dom"
 import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
@@ -8,12 +7,39 @@ import Steps from "./steps.component"
 import {uid} from "react-uid"
 import './viewRecipe.css'
 
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import BookmarkIcon from '@material-ui/icons/Bookmark';
+import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
+import { yellow } from '@material-ui/core/colors';
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 // hardcoded images
 import recipe1 from '../../recipes/butter-chicken.jpg'
 import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
 import recipe3 from '../../recipes/ramen.jpg'
 
-export default class ViewRecipe extends Component {
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = {
+    card:{
+        borderRadius: 20,
+    },
+    likeButton:{
+        paddingLeft: 40,
+    },
+    saveButton: {
+        marginLeft: 385,
+    },
+  };
+
+class ViewRecipe extends Component {
     constructor(props){
         super(props);
         // the current recipe will be fetch from database
@@ -99,37 +125,66 @@ export default class ViewRecipe extends Component {
     }
 
     render(){
+        const {classes} = this.props;
         return(
             <div>
-            
             <Container maxWidth="md">
                 <Navbar uid={this.state.uid}/>
                 <div className="recipe-des">
-                    <img src={this.state.recipe.src} alt="" width="600px" height="400px"/>
-                    <div className="recipe-des-text">
-                        <span id="title">{this.state.recipe.title+" "}</span>
-                    <p id="author"><Link to={"/viewprofile/"+ this.state.recipe.creator.uid+ "/" + this.state.uid}>{"By: "+this.state.recipe.creator.username}</Link></p>
-                        {this.state.recipe.collected && <FaBookmark className="star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
-                        {!this.state.recipe.collected && <FaBookmark className="hollow-star" onClick={()=>this.clickStar(this.state.recipe.id)}/>}  
-                        <span id="like-count">{this.state.recipe.likes}</span>
-                        {this.state.recipe.liked && <FaHeart className="likes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
-                        {!this.state.recipe.liked && <FaHeart className="dislikes" onClick={()=>this.clickHeart(this.state.recipe.id)}/>}
-                    </div>
-
+                    <Card className={classes.card}>
+                        <CardMedia
+                            component="img"
+                            alt={this.state.recipe.title}
+                            image={this.state.recipe.src}
+                        />
+                        <CardContent>
+                        <Typography gutterBottom variant="body" component="h4">
+                            {this.state.recipe.title}
+                        </Typography>
+                        <Typography variant="body2" color="textSecondary" component="p">
+                            <Link to={"/viewprofile/"+ this.state.recipe.creator.uid+ "/" + this.state.uid}>{"By: "+this.state.recipe.creator.username}</Link>
+                        </Typography>
+                        </CardContent>
+                        <CardActions disableSpacing>
+                            <div className="like-class">
+                                <FormControlLabel
+                                className={classes.likeButton}
+                                labelPlacement="end"
+                                control={<Checkbox disableRipple={true} onChange={()=>this.clickHeart(this.state.recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
+                                label={this.state.recipe.likes}
+                                />
+                                <FormControlLabel
+                                className={classes.saveButton}
+                                control={<Checkbox disableRipple={true} onChange={()=>this.clickStar(this.state.recipe.id)} icon={<BookmarkBorderIcon fontSize="large"/>} checkedIcon={<BookmarkIcon fontSize="large" style={{color: yellow[600] }}/>} name="saved" />} 
+                                /> 
+                            </div>
+                        </CardActions>
+                    </Card>
                 </div>
 
                 <div className="recommendations">
                 {this.state.top3_recipe.map((recipe)=>(
-                    <div key={uid(recipe.title)}>
-                        <Link to={"/viewrecipe/"+ this.state.uid + "/" + recipe.id}>
-                        <img src={recipe.src} alt="" height="200px" width="260px"></img>
-                        </Link>
-                    <div>{recipe.title}</div>
+                    <div key={uid(recipe.title)} className="view-other">
+                        <Card className={classes.card}>
+                            <CardActionArea>
+                                <Link to={"/viewrecipe/"+ this.state.uid + "/" + recipe.id}/>
+                                <CardMedia
+                                    height="200"
+                                    component="img"
+                                    alt={recipe.title}
+                                    image={recipe.src}
+                                />
+                                <CardContent>
+                                <Typography gutterBottom variant="body" component="h6">
+                                    {recipe.title}
+                                </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
                     </div>
                     ))}
                 </div>
                 
-
                 <div className="mid-section">
                     <Steps
                         steps={this.state.recipe.steps}
@@ -154,3 +209,5 @@ export default class ViewRecipe extends Component {
         )
     }
 } 
+
+export default withStyles(styles)(ViewRecipe);

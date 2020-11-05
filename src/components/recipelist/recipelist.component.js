@@ -20,6 +20,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
     root: {
         maxWidth: 380,
+        borderRadius: 20,
     },
     media: {
         height: 250,
@@ -56,7 +57,6 @@ class ReceipeList extends Component {
                         </CardActionArea>
                         <CardActions disableSpacing>
                             <div className="like-class">
-                                
                                 <FormControlLabel
                                 labelPlacement="end"
                                 className={classes.likeButton}
@@ -69,7 +69,7 @@ class ReceipeList extends Component {
                                 /> 
                             </div>
                         </CardActions>
-                        </Card>
+                    </Card>
                 </div>   
             ))}
             </div>

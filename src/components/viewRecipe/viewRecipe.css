@@ -1,4 +1,3 @@
-
 .recipe-ingredients{
     max-width:300px;
     background-color: white;
@@ -28,10 +27,6 @@
     border-radius: 10%;
 }
 
-img{
-    border-radius: 10%;
-}
-
 .recipe-steps{
     max-width: 600px;
     background-color: white;
@@ -41,7 +36,6 @@ img{
     margin-top: 10px;
     margin-left: 20px;
 }
-
 
 .recipe-des-text #like-count{
     position: relative;
@@ -59,44 +53,6 @@ img{
     margin-left: 10px;
 }
 
-.likes{
-    color: red;
-    border-radius: 10px;
-    border-color: black;
-    cursor: pointer;
-    float: right;
-    margin-top: 5px;
-    margin-right: 10px;
-}
-
-.dislikes{
-    color: white;
-    stroke:red;
-    stroke-width: 30;
-    cursor: pointer;
-    float: right;
-    margin-top: 5px;
-    margin-right: 10px;
-}
-
-
-.star{
-    color:black;
-    border-radius: 10px;
-    margin-right: 10px;
-    cursor: pointer;
-    float: right;
-    margin-right: 25px;
-    margin-top: 5px;
-}
-
-.hollow-star{
-    color: white;
-    stroke:  black;
-    margin-right: 10px;
-    stroke-width: 30;
-    cursor: pointer;
-    float: right;
-    margin-right: 25px;
-    margin-top: 5px;
+.view-other{
+    margin-bottom: 10px;
 }

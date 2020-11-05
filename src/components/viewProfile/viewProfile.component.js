@@ -98,13 +98,11 @@ export default class ViewProfile extends Component {
                 user: currUser
             })
         }
-        
     }
 
     render(){
         return(
             <div>
-            
             <Container maxWidth='md'>
                 <Navbar uid={this.state.curruid}/>
                 <div id="user-profile">
