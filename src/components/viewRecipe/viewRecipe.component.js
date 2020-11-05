@@ -51,7 +51,7 @@ class ViewRecipe extends Component {
                 {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]}
             ],
             recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7], collected: false,
-            creator:{uid:1, username:"Mo"}, 
+            creator:{uid:1, username:"Catherine"}, 
             ingredients: [
                 {ingredient:"Butter", measure:"2 tablespoons"},
                 {ingredient:"Medium onion", measure:"1 (medium diced)"},

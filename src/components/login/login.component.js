@@ -54,7 +54,7 @@ export default class Login extends Component {
                     </div>
                 </form>
                 <div className = "link-signup">Don't have an account?{" "}
-                <Link to='signup' className="text-blue-500 hover:text-blue-600">Sign up here</Link>
+                <Link to='signup'>Sign up here</Link>
                 <br/>
                 </div>
             </Container>  

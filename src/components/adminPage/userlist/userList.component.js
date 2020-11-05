@@ -43,7 +43,7 @@ class UserList extends Component {
                 </TableHead>
                     <TableBody>
                         {this.state.users.map(user => (
-                        <TableRow class="user_row" key={uid(user.username)}>
+                        <TableRow className="user_row" key={uid(user.username)}>
                             <TableCell className = "uid" align = 'center'>
                                 {user.uid}
                             </TableCell>

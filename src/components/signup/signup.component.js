@@ -90,7 +90,7 @@ export default class Signup extends Component {
                     </div>
                 </form>
                 <div className = "link-signup">Already have an account?{" "}
-                <Link to='/' className="text-blue-500 hover:text-blue-600">Log in here</Link>
+                <Link to='/'>Log in here</Link>
                 <br/>
                 </div>
             </Container>  
