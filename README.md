@@ -20,7 +20,7 @@ npm start
 
 ## login credentials
 Login as a regular user:
-      * username: user
+  * username: user
   * password: user
 
 Login as an admin:
@@ -28,44 +28,44 @@ Login as an admin:
   * password: admin
 
 ## Regular User Sample Workflow:
-1. Click on "Sign up here" on the login page to navigate to the signup page. To **Sign up**, You need to enter the following fields:
+Click on "Sign up here" on the login page to navigate to the signup page. To **Sign up**, You need to enter the following fields:
   * Username
   * Password
   * Description (optional)
   * Profile picture
-2. Click on "Login here" on the sign up page to navigate to the login page. To **Login** as a regular user, enter:
+Click on "Login here" on the sign up page to navigate to the login page. To **Login** as a regular user, enter:
   * username: user
   * password: user
-3. On the homepage, you can:
+On the homepage, you can:
   * **View all recipes**
   * **Search for a recipe** by applying filters on the left hand side of the homepage
   * **Like or dislike** the recipe by clicking on the heart icon
   * **add a recipe to "My Collection"** by clicking on the collection icon
   * **View a particular recipe** by cliking on the recipe image
-4. Now, navigate yourself to the my collection page by clicking on "My Collection" in the navigation bar, you can:
+Now, navigate yourself to the my collection page by clicking on "My Collection" in the navigation bar, you can:
   * **View all your collection**
   * **Like or dislike** any of the recipes in your collection
   * **Remove any recipe from your collection** by clicking on the collection icon (This feature will be implemented in phase2)
   * **View any of the recipe in your collection in details** by clicking on the recipe image
-5. Click on any of the recipes in your collection. It will navigate you to the "view recipe" page. On this page, you can:
+Click on any of the recipes in your collection. It will navigate you to the "view recipe" page. On this page, you can:
   * click on the recipe creator's name to **View the recipe creator’s profile**
   * **Delete a recipe** by clicking on the delete button
   * **Edit a recipe** by clicking on the edit button, the edit page allows you to:
      * remove or add any steps or ingredients
      * change the recipe name, description, cuisine type and recipe picture
      * Click "Update Recipe" to save your changes
-6. Click on "My Profile" on the navgation bar. On this page, you can:
+Click on "My Profile" on the navgation bar. On this page, you can:
   * **View your own profile and your recipes**.
   * "Edit Profile" to **update your profile description and the size of your image**
-7. Let's create a new recipe. Click on "Create a recipe" on the navigation bar to **Create your own recipe**:
+Let's create a new recipe. Click on "Create a recipe" on the navigation bar to **Create your own recipe**:
   * Enter recipe name and description(optional)
   * Select Cuisine Type(s) using the drop down list and use the cross mark to remove a type
   * click on "add ingredients" to add a new ingredient and use the drop down list to select measurements.
   * click on "add steps" to add a new step
   * You can remove an ingredient or a step by click on the "remove" button
   * You can upload a picture of your recipe
-8. You can **go back to home page** by clicking on "COOKPAD" in the navigation bar
-9. Click on "Logout" on the navgation bar to **Logout**
+You can **go back to home page** by clicking on "COOKPAD" in the navigation bar
+Click on "Logout" on the navgation bar to **Logout**
 
 ## Admin User Sample Workflow:
 1. Login in as as admin:
