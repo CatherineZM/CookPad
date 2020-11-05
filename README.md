@@ -44,6 +44,9 @@ Login as an admin:
   * **Like or dislike** the recipe by clicking on the heart icon
   * **add a recipe to "My Collection"** by clicking on the collection icon
   * **View a particular recipe** by cliking on the recipe image
+  * on the top recipes panels to check the top recipes, click the heart icons to give a like and click on the name of the recipe to view the recipe
+  * You can also check the details about the top recipes by clicking on the images below the "top recipes" table
+  * use the next and previous arrow on the slide show to switch between recipes (the slideshow can also autoplay)
   
 4. Now, navigate yourself to the my collection page by clicking on "My Collection" in the navigation bar, you can:
   * **View all your collection**
