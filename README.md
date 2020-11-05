@@ -62,6 +62,7 @@ Login as an admin:
      * remove or add any steps or ingredients
      * change the recipe name, description, cuisine type and recipe picture
      * Click "Update Recipe" to save your changes
+  * You can also checkout some recommended recipes on the right of the page
 
 7. Let's create a new recipe. Click on "Create a recipe" on the navigation bar to **Create your own recipe**:
   * Enter recipe name and description(optional)
