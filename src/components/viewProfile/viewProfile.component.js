@@ -100,6 +100,10 @@ export default class ViewProfile extends Component {
         }
     }
 
+    clickRecipe=(userid,rid)=>{
+        window.location = "/viewrecipe/"+ userid + "/" + rid;
+    }
+
     render(){
         return(
             <div>
@@ -119,6 +123,7 @@ export default class ViewProfile extends Component {
                         recipes={this.state.recipes}
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
+                        clickRecipe = {this.clickRecipe}
                         userid={this.state.uid}
                     />    
                     </div>  
