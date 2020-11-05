@@ -20,7 +20,7 @@ npm start
 
 ## login credentials
 Login as a regular user:
-  * username: user
+      * username: user
   * password: user
 
 Login as an admin:
