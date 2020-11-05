@@ -51,17 +51,17 @@ Login as an admin:
   * **Remove any recipe from your collection** by clicking on the collection icon (This feature will be implemented in phase2)
   * **View any of the recipe in your collection in details** by clicking on the recipe image
   
-5. Click on any of the recipes in your collection. It will navigate you to the "view recipe" page. On this page, you can:
+5. Click on "My Profile" on the navgation bar. On this page, you can:
+  * **View your own profile and your recipes**.
+  * "Edit Profile" to **update your profile description and the size of your image**
+
+6. Click on any of the recipes on "My Profile" page. It will navigate you to the "view recipe" page. On this page, you can:
   * click on the recipe creator's name to **View the recipe creator’s profile**
   * **Delete a recipe** by clicking on the delete button
   * **Edit a recipe** by clicking on the edit button, the edit page allows you to:
      * remove or add any steps or ingredients
      * change the recipe name, description, cuisine type and recipe picture
      * Click "Update Recipe" to save your changes
-
-6. Click on "My Profile" on the navgation bar. On this page, you can:
-  * **View your own profile and your recipes**.
-  * "Edit Profile" to **update your profile description and the size of your image**
 
 7. Let's create a new recipe. Click on "Create a recipe" on the navigation bar to **Create your own recipe**:
   * Enter recipe name and description(optional)
