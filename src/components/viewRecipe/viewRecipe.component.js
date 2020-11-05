@@ -51,7 +51,7 @@ class ViewRecipe extends Component {
                 {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]}
             ],
             recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7], collected: false,
-            creator:{uid:127, username:"Raon"}, 
+            creator:{uid:1, username:"Mo"}, 
             ingredients: [
                 {ingredient:"Butter", measure:"2 tablespoons"},
                 {ingredient:"Medium onion", measure:"1 (medium diced)"},
@@ -120,7 +120,7 @@ class ViewRecipe extends Component {
         if (window.confirm('Are you sure you wish to delete this item?')){
             // delete item in database
             console.log("item deleted")
-            window.location = "/myrecipes/" + this.state.uid
+            window.location = "/viewprofile/" + this.state.uid + "/" + this.state.uid
         } 
     }
 
@@ -138,10 +138,10 @@ class ViewRecipe extends Component {
                             image={this.state.recipe.src}
                         />
                         <CardContent>
-                        <Typography gutterBottom variant="body" component="h4">
+                        <Typography gutterBottom variant="h4" component="h4">
                             {this.state.recipe.title}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography variant="h6" color="textSecondary" component="h6">
                             <Link to={"/viewprofile/"+ this.state.recipe.creator.uid+ "/" + this.state.uid}>{"By: "+this.state.recipe.creator.username}</Link>
                         </Typography>
                         </CardContent>
@@ -176,7 +176,7 @@ class ViewRecipe extends Component {
                                     image={recipe.src}
                                 />
                                 <CardContent>
-                                <Typography gutterBottom variant="body" component="h6">
+                                <Typography gutterBottom variant="h6" component="h6">
                                     {recipe.title}
                                 </Typography>
                                 </CardContent>

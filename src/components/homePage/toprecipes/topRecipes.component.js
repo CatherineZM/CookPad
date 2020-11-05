@@ -35,7 +35,7 @@ class TopRecipes extends Component {
                                         image={recipes[id].src}
                                     />
                                     <CardContent>
-                                    <Typography gutterBottom variant="body" component="h6">
+                                    <Typography gutterBottom variant="h6" component="h6">
                                     {recipes[id].title}
                                     </Typography>
                                     </CardContent>

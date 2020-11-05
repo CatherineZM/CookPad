@@ -54,7 +54,7 @@ class ReceipeList extends Component {
                             image={recipe.src}
                             />
                             <CardContent className={classes.title}>
-                            <Typography gutterBottom variant="body" component="body2">
+                            <Typography gutterBottom variant="h6" component="h6">
                                 {recipe.title}
                             </Typography>
                             </CardContent>

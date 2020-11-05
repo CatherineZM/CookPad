@@ -24,7 +24,7 @@ export default class ViewProfile extends Component {
         this.state = {
             uid: this.props.match.params.uid,
             // the following information is fetched from database according to curruid
-            user: user_lst.find(usr=>usr.uid == this.props.match.params.uid),
+            user: user_lst.find(usr=>usr.uid === parseInt(this.props.match.params.uid)),
             userpicture: {src: ProfilePic},
             recipes: [
                 {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
@@ -32,8 +32,8 @@ export default class ViewProfile extends Component {
             ],
             curruid: this.props.match.params.curruid
         }
-        console.log(this.state.user)
-        console.log(this.props.match.params.uid)
+        // console.log(this.state.user)
+        // console.log(this.props.match.params.uid)
     }
 
     clickHeart=(rid)=>{
@@ -52,7 +52,7 @@ export default class ViewProfile extends Component {
                 }
             }
         })
-        console.log(this.state.recipes)
+        // console.log(this.state.recipes)
     }
 
     clickStar=(rid)=>{
@@ -92,7 +92,7 @@ export default class ViewProfile extends Component {
     componentWillReceiveProps(nextProps){
         if (nextProps.match.params.uid !== this.props.match.params.uid){
             const currUid = nextProps.match.params.uid
-            const currUser = user_lst.find(usr=>usr.uid == currUid)
+            const currUser = user_lst.find(parseInt(usr=>usr.uid) === currUid)
             this.setState({
                 uid: currUid,
                 user: currUser
@@ -124,7 +124,7 @@ export default class ViewProfile extends Component {
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
                         clickRecipe = {this.clickRecipe}
-                        userid={this.state.uid}
+                        userid={this.state.curruid}
                     />    
                     </div>  
                 </div>

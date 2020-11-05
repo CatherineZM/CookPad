@@ -17,7 +17,7 @@ export default class Navbar extends Component {
         super(props);
         this.state = {
             uid: this.props.uid,
-            isAdmin: user_lst.find(usr => usr.uid == this.props.uid).isAdmin
+            isAdmin: user_lst.find(usr => usr.uid === parseInt(this.props.uid)).isAdmin
         }
 
     }
@@ -49,10 +49,10 @@ export default class Navbar extends Component {
                 </div>
                 
                 <ul>
-                    <li><Link to={"/addrecipe/"+this.state.uid}>Create a Recipe</Link></li>
-                    <li><Link to={"/mycollection/"+this.state.uid}>My Collection</Link></li>
-                    <li><Link to={"/viewprofile/"+this.state.uid+"/"+ this.state.uid}>My Profile</Link></li>
-                    <this.adminPageGenerator/>
+                    {!this.state.isAdmin && <li><Link to={"/addrecipe/"+this.state.uid}>Create a Recipe</Link></li>}
+                    {!this.state.isAdmin && <li><Link to={"/mycollection/"+this.state.uid}>My Collection</Link></li>}
+                    {!this.state.isAdmin && <li><Link to={"/viewprofile/"+this.state.uid+"/"+ this.state.uid}>My Profile</Link></li>}
+                    {this.state.isAdmin && <li><Link to={"/adminpage/"+this.state.uid}>Admin Page</Link></li>}
                     <li><Link to="/">Logout</Link></li>
                 </ul>
             </div>

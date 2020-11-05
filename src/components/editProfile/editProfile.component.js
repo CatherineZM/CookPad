@@ -17,10 +17,10 @@ export default class EditProfile extends Component {
         this.state = {
             uid: this.props.match.params.uid,
             // the following information is fetched from database according to curruid
-            username: "Nora", 
+            username: "Catherine", 
             userpicture: {src: ProfilePic},
             picturePreview: null, 
-            description: "I love Chinese Food!!!",
+            description: "I love baking!!!",
             recipes: [
                 {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
                 {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}

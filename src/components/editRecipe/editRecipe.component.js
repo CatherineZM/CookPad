@@ -215,7 +215,7 @@ export default class EditRecipe extends Component {
                         {
                             this.state.Steps.map((step, index) => {
                                 return(
-                                    <div class="row" key={index}>
+                                    <div className="row" key={index}>
                                         <Col className = "col" xs = {10}>
                                             <textarea 
                                                 type = "Steps" 

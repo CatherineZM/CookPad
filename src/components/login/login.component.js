@@ -22,7 +22,7 @@ export default class Login extends Component {
         // fetch users data from the backend database and perform the check
         // for now hardcode admin and user
         if (this.state.username === "admin" && this.state.password === "admin"){
-            window.location = '/homepage/0';
+            window.location = '/adminpage/0';
         } else if(this.state.username === "user" && this.state.password === "user") {
             window.location = '/homepage/1';
         } else {
