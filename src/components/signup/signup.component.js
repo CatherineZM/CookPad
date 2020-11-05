@@ -46,7 +46,8 @@ export default class Signup extends Component {
 
     onSubmit=(e)=>{
         e.preventDefault();
-        // create a new user object and push the user to backend database
+        // create a new user object and 
+        // requires server calls to push the user to backend database
         window.location = "..";
     }
 

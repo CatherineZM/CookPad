@@ -17,6 +17,9 @@ import recipe8 from '../../recipes/greek-salad.png'
 export default class MyCollection extends Component {
     constructor(props){
         super(props);
+
+        // the follwing information about the recipes are fetched from the database
+        // it requires server calls to do that 
         this.state = {
             uid: this.props.match.params.uid,
             recipes: [
@@ -33,10 +36,11 @@ export default class MyCollection extends Component {
     }
 
     componentDidMount() {
+        // requires server calls to initialize collections 
     }
 
     clickHeart=(rid)=>{
-        // need to update the information into database
+        // requires server calls to update the likes field in the recipe
         let new_recipes = this.state.recipes;
         this.state.recipes.forEach((recipe, idx)=>{
             if(recipe.id === rid){
@@ -54,7 +58,7 @@ export default class MyCollection extends Component {
     }
     
     clickStar=(rid)=>{
-        // need to update the information into database
+        // requires server calls to update the add to collection field in user's data
         let new_recipes = this.state.recipes;
         this.state.recipes.forEach((recipe, idx)=>{
             if(recipe.id === rid){

@@ -22,6 +22,8 @@ const CuisineTypes =[
 export default class EditRecipe extends Component {
     constructor(props){
         super(props);
+
+        // requires server call to fetch the recipe information
         this.state = {
             uid: this.props.match.params.uid,
             rid: this.props.match.params.rid,
@@ -57,10 +59,13 @@ export default class EditRecipe extends Component {
     }
 
     componentDidMount() {
+        // this is where the server calls are invoked
+        // state variable is updated here
     }
 
     ReturnView=(e)=>{
         e.preventDefault();
+        // server calls are required to push the updated recipe to the server
         window.location = "/viewrecipe/"+this.state.uid+"/"+ this.state.rid
     }
 

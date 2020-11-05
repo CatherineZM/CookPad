@@ -42,7 +42,8 @@ const styles = {
 class ViewRecipe extends Component {
     constructor(props){
         super(props);
-        // the current recipe will be fetch from database
+        
+        // requires server calls to update the information based on the recipe id
         this.state = {
             uid: this.props.match.params.uid,
             rid: this.props.match.params.rid,
@@ -81,11 +82,11 @@ class ViewRecipe extends Component {
     }
 
     componentDidMount() {
-        // the current recipe will be fetch from database
+        // requires server calls to initialize recipe information
     }
 
     clickStar=(rid)=>{
-        // need to update the information into database
+        // requires server calls to update the recipe information
         let new_recipe = this.state.recipe;
         if(this.state.recipe.collected){
             new_recipe.collected = false;
@@ -97,7 +98,7 @@ class ViewRecipe extends Component {
     }
 
     clickHeart=(rid)=>{
-        // need to update the information into database
+        // requires server calls to update the recipe information
         let new_recipe = this.state.recipe;
         if(this.state.recipe.liked){
             new_recipe.liked = false;
@@ -118,7 +119,7 @@ class ViewRecipe extends Component {
     deleteRecipe=(e)=>{
         e.preventDefault();
         if (window.confirm('Are you sure you wish to delete this item?')){
-            // delete item in database
+            // requires server calls to delete item in database
             console.log("item deleted")
             window.location = "/viewprofile/" + this.state.uid + "/" + this.state.uid
         } 

@@ -28,6 +28,23 @@ class UserList extends Component {
         e.preventDefault();
         window.location = "/viewprofile/"+uid+"/"+this.state.uid; 
     }
+
+    onBan(e, uid){
+        e.preventDefault();
+        if (window.confirm('Are you sure you wish to ban this user?')){
+            // requires server call to change the banned field of the user
+        } 
+    }
+
+    onPromote(e, uid){
+        e.preventDefault();
+        if (window.confirm('Are you sure you wish to promote this user?')){
+            // requires server call to change the isAdmin field of the user
+        } 
+        
+    }
+
+
     render() {
         const {classes} = this.props;
         return(
@@ -54,8 +71,8 @@ class UserList extends Component {
                                 <button id="view-profile" className="btn btn-outline-primary" onClick={(e)=>this.onViewProfile(e,user.uid)}>View Profile</button>  
                             </TableCell>
                             <TableCell className = "Operations" align = 'center'>
-                                <button id = "banButton" className="btn btn-primary" onClick={()=>{}}> Ban </button>
-                                <button id = "promoteButton" className="btn btn-primary" onClick={()=>{}}> Promote </button>
+                                <button id = "banButton" className="btn btn-primary" onClick={(e)=>this.onBan(e, user.uid)}> Ban </button>
+                                <button id = "promoteButton" className="btn btn-primary" onClick={(e)=>this.onPromote(e, user.uid)}> Promote </button>
                             </TableCell>
                         </TableRow>
                         ))}

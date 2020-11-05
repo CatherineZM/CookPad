@@ -38,11 +38,11 @@ export default class HomePage extends Component {
     constructor(props){
         super(props);
 
+        // the data will be fetched from the database and calculated in component_DidMount callback
         this.state = {
             uid: this.props.match.params.uid,
             slide_idx: 0,
             num_slides: 3,
-            // the data will be fetched from the database and calculated in component_DidMount callback
             // this is the index into the recipes array
             top3_recipe: [0, 1, 2],
             // categories 
@@ -138,7 +138,7 @@ export default class HomePage extends Component {
     }
 
     clickStar=(rid)=>{
-        // need to update the information into database
+        // require server call to update recipe information
         const new_recipes = [];
         const new_displayed_recipes = [];
         this.state.recipes.forEach((recipe)=>{
@@ -169,7 +169,7 @@ export default class HomePage extends Component {
     }
 
     clickHeart=(rid)=>{
-        // need to update the information into database
+        // require server call to update recipe information
         const new_recipes = [];
         const new_displayed_recipes = [];
         this.state.recipes.forEach((recipe)=>{

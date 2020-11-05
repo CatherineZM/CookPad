@@ -21,9 +21,9 @@ export default class ViewProfile extends Component {
     constructor(props){
         super(props);
         
+        // requires server calls to fetch the recipes info and user profile info
         this.state = {
             uid: this.props.match.params.uid,
-            // the following information is fetched from database according to curruid
             user: user_lst.find(usr=>usr.uid === parseInt(this.props.match.params.uid)),
             userpicture: {src: ProfilePic},
             recipes: [
@@ -32,8 +32,10 @@ export default class ViewProfile extends Component {
             ],
             curruid: this.props.match.params.curruid
         }
-        // console.log(this.state.user)
-        // console.log(this.props.match.params.uid)
+    }
+
+    componentDidMount() {
+        // requires server calls to initialize recipes and user profile
     }
 
     clickHeart=(rid)=>{

@@ -14,9 +14,9 @@ export default class EditProfile extends Component {
     constructor(props){
         super(props);
         
+        // requires server calle to fetch the following information
         this.state = {
             uid: this.props.match.params.uid,
-            // the following information is fetched from database according to curruid
             username: "Catherine", 
             userpicture: {src: ProfilePic},
             picturePreview: null, 
@@ -29,11 +29,11 @@ export default class EditProfile extends Component {
     }
 
     componentDidMount() {
-        // fetch user information and other recipes user created
+        // requires server call to fetch user information and recipes user created
     }
 
     clickHeart=(rid)=>{
-        // need to update the information into database
+        // requires server call to update the information
         let new_recipes = this.state.recipes;
         this.state.recipes.forEach((recipe, idx)=>{
             if(recipe.id === rid){
@@ -52,7 +52,7 @@ export default class EditProfile extends Component {
     }
 
     clickStar=(rid)=>{
-        // need to update the information into database
+        // requires server call to update the information
         let new_recipes = this.state.recipes;
         this.state.recipes.forEach((recipe, idx)=>{
             if(recipe.id === rid){
@@ -70,7 +70,8 @@ export default class EditProfile extends Component {
 
     editprofile=(e)=>{
         e.preventDefault();
-        
+        // requires server call to push the new profile picture 
+        // and the new description into the server 
         window.location = "/viewprofile/" + this.state.uid + "/" +this.state.uid;
     }
 
@@ -92,6 +93,10 @@ export default class EditProfile extends Component {
         if (e.keyCode === 13){
             this.setState({description: this.state.description + '\n'});
         };
+    }
+
+    clickRecipe=(userid,rid)=>{
+        window.location = "/viewrecipe/"+ userid + "/" + rid;
     }
 
     render(){
@@ -132,6 +137,7 @@ export default class EditProfile extends Component {
                         recipes={this.state.recipes}
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
+                        clickRecipe = {this.clickRecipe}
                         userid={this.state.uid}
                     />    
                 </div>

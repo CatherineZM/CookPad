@@ -90,7 +90,8 @@ export default class AddRecipe extends Component {
 
     onSubmit=(e)=>{
         e.preventDefault();
-        // push the recipe to the database
+        // push the recipe to the server
+        // pushing to database requires server call
         window.location = "/homepage/" + this.state.uid;
     }
 
