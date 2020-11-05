@@ -76,6 +76,7 @@ export default class MyCollection extends Component {
             <Container maxWidth='md'>
                 <Navbar uid={this.state.uid}/>
                 <div id="my-collection">
+                <b>My Collection</b>
                 <ReceipeList 
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}

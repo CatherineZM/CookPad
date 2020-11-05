@@ -25,10 +25,10 @@ const styles = {
         height: 250,
     },
     likeButton:{
-        paddingRight:10,
+        paddingLeft: 20,
     },
     saveButton: {
-        paddingLeft: 195,
+        marginLeft: 180,
     },
   };
 
@@ -56,17 +56,16 @@ class ReceipeList extends Component {
                         </CardActionArea>
                         <CardActions disableSpacing>
                             <div className="like-class">
+                                
                                 <FormControlLabel
                                 labelPlacement="end"
                                 className={classes.likeButton}
-                                control={<Checkbox disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder />} checkedIcon={<Favorite />} name="liked" />} 
+                                control={<Checkbox disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
                                 label={recipe.likes}
                                 />
                                 <FormControlLabel
-                                labelPlacement="end"
                                 className={classes.saveButton}
-                                control={<Checkbox disableRipple={true} onChange={()=>clickStar(recipe.id)} icon={<BookmarkBorderIcon />} checkedIcon={<BookmarkIcon style={{color: yellow[500] }}/>} name="saved" />} 
-                                label="Save"
+                                control={<Checkbox disableRipple={true} onChange={()=>clickStar(recipe.id)} icon={<BookmarkBorderIcon fontSize="large"/>} checkedIcon={<BookmarkIcon fontSize="large" style={{color: yellow[600] }}/>} name="saved" />} 
                                 /> 
                             </div>
                         </CardActions>

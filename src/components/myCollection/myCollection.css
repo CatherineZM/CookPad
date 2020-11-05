@@ -5,3 +5,9 @@
     margin-left: 5%;
     max-width: 800px;
 }
+
+#my-collection b{  
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 30px;
+}

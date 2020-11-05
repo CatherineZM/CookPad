@@ -5,10 +5,17 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell';
-import {Link} from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 import "./userlist.css"
 
-export default class UserList extends Component {
+const styles = {
+    head:{
+        fontSize: '16pt',
+        fontWeight: 400,
+    },
+  };
+
+class UserList extends Component {
     constructor(props){
         super(props);
         this.state= {
@@ -22,15 +29,16 @@ export default class UserList extends Component {
         window.location = "/viewprofile/"+uid+"/"+this.state.uid; 
     }
     render() {
+        const {classes} = this.props;
         return(
             <div className="user-list">
             <Table>
                 <TableHead id="table-head">
                     <TableRow>
-                        <TableCell align = 'center'>uid</TableCell>
-                        <TableCell align = 'center'>Username</TableCell>
-                        <TableCell align = 'center'>View Profiles</TableCell>
-                        <TableCell align = 'center'>Mange</TableCell>
+                        <TableCell className={classes.head} align = 'center'>uid</TableCell>
+                        <TableCell className={classes.head} align = 'center'>Username</TableCell>
+                        <TableCell className={classes.head} align = 'center'>View Profiles</TableCell>
+                        <TableCell className={classes.head} align = 'center'>Mange</TableCell>
                     </TableRow>
                 </TableHead>
                     <TableBody>
@@ -57,3 +65,5 @@ export default class UserList extends Component {
         )
     }
 }
+
+export default withStyles(styles)(UserList);

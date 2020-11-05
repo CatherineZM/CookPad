@@ -116,12 +116,14 @@ export default class ViewProfile extends Component {
                 
                 <div id="user-recipes">
                     <h4>{this.state.user.name + "'s Recipes"}</h4>
+                    <div id="recipe-list">
                     <ReceipeList 
                         recipes={this.state.recipes}
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
                         userid={this.state.uid}
                     />    
+                    </div>  
                 </div>
             </Container>
             </div> 
