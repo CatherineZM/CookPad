@@ -108,6 +108,7 @@ export default class AddRecipe extends Component {
                         <input 
                             type = "Name" 
                             required 
+                            placeholder="Your Recipe Name" 
                             className = "form-control" 
                             value = {this.state.RecipeName} 
                             onChange={this.onChangeRecipeName}

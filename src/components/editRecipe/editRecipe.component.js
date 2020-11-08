@@ -211,7 +211,7 @@ export default class EditRecipe extends Component {
                         } 
                     </div>
                     <div className="AddIngredient-btn">
-                        <button id="add-ingredient" className = "btn btn-outline-primary" type = "Add-Ingredients" onClick={this.addIngredientsRow} >
+                        <button id="add-ingredient" className = "btn btn-outline-primary" type = "button" onClick={this.addIngredientsRow} >
                             Add Ingredients
                         </button>
                     </div>
@@ -242,7 +242,7 @@ export default class EditRecipe extends Component {
                         }
                     </div>
                     <div className="AddSteps-btn">
-                        <button id = "add-step" className = "btn btn-outline-primary" type = "Add-Steps" onClick={this.addStepsRow} >
+                        <button id = "add-step" className = "btn btn-outline-primary" type = "button" onClick={this.addStepsRow} >
                             Add Steps
                         </button> 
                     </div>
