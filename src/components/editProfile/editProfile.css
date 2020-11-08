@@ -28,7 +28,12 @@
 #profile-input textarea{
     width: 200px;
     margin-left: 30px;
-    margin-top: 10px;
     min-height: 200px;
+    text-align: left;
+}
+
+#profile-input input{
+    width: 200px;
+    margin-left: 30px;
     text-align: left;
 }

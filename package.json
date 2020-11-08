@@ -24,6 +24,7 @@
     "react-dropdown": "^1.9.0",
     "react-icons": "^3.11.0",
     "react-images-upload": "^1.2.8",
+    "react-input-mask": "^2.0.4",
     "react-multi-select-component": "^3.0.4",
     "react-native": "^0.63.3",
     "react-native-vector-icons": "^7.1.0",

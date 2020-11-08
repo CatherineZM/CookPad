@@ -13,6 +13,11 @@ export default class HomePageLeftPanel extends Component {
             <div id="left-panel">
             <Table>
                 <TableBody size="small" aria-label="a dense table">
+                    <TableRow>
+                        <TableCell></TableCell>
+                        <TableCell>All</TableCell>
+                        <TableCell><input type="checkbox" onChange={clickAll} checked={all_checked}/></TableCell>
+                    </TableRow>
                     {categories.map( (category) => (
                         <TableRow key={uid(category.text)}>
                             <TableCell><img src={category.src} alt={category.text}/></TableCell>
@@ -20,11 +25,6 @@ export default class HomePageLeftPanel extends Component {
                             <TableCell><input type="checkbox" name={category.id} onChange={clickCategory} checked={category.checked}/></TableCell>
                         </TableRow> 
                     ))}
-                    <TableRow>
-                        <TableCell></TableCell>
-                        <TableCell>All</TableCell>
-                        <TableCell><input type="checkbox" onChange={clickAll} checked={all_checked}/></TableCell>
-                    </TableRow>
                 </TableBody>
             </Table>
             </div>

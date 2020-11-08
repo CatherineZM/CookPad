@@ -39,6 +39,7 @@ export default class Navbar extends Component {
                 </div>
                 
                 <ul>
+                    <li><Link to={"/homepage/"+this.state.uid}>Home Page</Link></li>
                     {!this.state.isAdmin && <li><Link to={"/addrecipe/"+this.state.uid}>Create a Recipe</Link></li>}
                     {!this.state.isAdmin && <li><Link to={"/mycollection/"+this.state.uid}>My Collection</Link></li>}
                     {!this.state.isAdmin && <li><Link to={"/viewprofile/"+this.state.uid+"/"+ this.state.uid}>My Profile</Link></li>}

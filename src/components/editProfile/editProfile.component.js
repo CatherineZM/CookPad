@@ -17,6 +17,7 @@ export default class EditProfile extends Component {
         // requires server calle to fetch the following information
         this.state = {
             uid: this.props.match.params.uid,
+            password: "user",
             username: "Catherine", 
             userpicture: {src: ProfilePic},
             picturePreview: null, 
@@ -83,6 +84,11 @@ export default class EditProfile extends Component {
         this.setState({preview})
     }
 
+    onChangePassword=(e)=>{
+        e.preventDefault();
+        this.setState({password: e.target.value});
+    }
+
     onChangeDescription=(e)=>{
         e.preventDefault();
         this.setState({description: e.target.value});
@@ -120,6 +126,9 @@ export default class EditProfile extends Component {
                             /> 
                         </div>    
                         <div className="form-group" id="profile-input">
+                            <div>Change Password:</div>
+                            <input type="password" className = "form-control" value={this.state.password} onChange={this.onChangePassword}/>
+                            <div>Change Profile Description:</div>
                             <textarea className = "form-control" value={this.state.description} onChange={this.onChangeDescription}/>
                             <button type="button"
                                     className = "btn btn-outline-primary"
