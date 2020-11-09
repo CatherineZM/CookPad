@@ -97,3 +97,4 @@ Login as an admin:
 6. multiselect-react-dropdown
 7. react-dropdown
 8. react-avatar
+9. react-expand-collapse
