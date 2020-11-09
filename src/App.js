@@ -11,7 +11,6 @@ import Login from "./components/login/login.component";
 import EditProfile from "./components/editProfile/editProfile.component";
 import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
-import MyCollection from './components/myCollection/myCollection.component';
 import ViewProfile from './components/viewProfile/viewProfile.component';
 
 export class App extends React.Component{
@@ -27,7 +26,6 @@ export class App extends React.Component{
             <Route path="/addrecipe/:uid" component = {AddRecipe}/>
             <Route path="/editrecipe/:uid/:rid" component = {EditRecipe}/>
             <Route path="/editprofile/:uid" component = {EditProfile}/>
-            <Route path="/mycollection/:uid" component = {MyCollection}/>
             <Route exact path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
             <Route exact path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
           </Switch>

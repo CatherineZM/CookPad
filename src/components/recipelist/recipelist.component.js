@@ -21,7 +21,7 @@ const styles = {
     root: {
         maxWidth: 180,
         height: 350,
-        borderRadius: 20,
+        borderRadius: 25,
     },
     title:{
         height: 80,
@@ -42,7 +42,7 @@ class ReceipeList extends Component {
     render(){
         const {classes, recipes, clickRecipe, clickHeart, clickStar, userid} = this.props;
         return(
-            <div className="horizontal-scrollable">
+            <div className="vertical-scrollable">
             {recipes.map( (recipe) => (
                 <div key={uid(recipe.title)} className="recipe-container">
                         <Card className={classes.root}>

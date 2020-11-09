@@ -22,6 +22,7 @@
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.14.0",
     "react-dropdown": "^1.9.0",
+    "react-expand-collapse": "^0.2.0",
     "react-icons": "^3.11.0",
     "react-images-upload": "^1.2.8",
     "react-input-mask": "^2.0.4",
