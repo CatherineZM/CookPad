@@ -42,7 +42,7 @@ class ReceipeList extends Component {
     render(){
         const {classes, recipes, clickRecipe, clickHeart, clickStar, userid} = this.props;
         return(
-            <div>
+            <div className="horizontal-scrollable">
             {recipes.map( (recipe) => (
                 <div key={uid(recipe.title)} className="recipe-container">
                         <Card className={classes.root}>

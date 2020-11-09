@@ -7,6 +7,11 @@ import Avatar from 'react-avatar';
 
 // hard coded images
 import ProfilePic from'./default-profile-pic.png' 
+import recipe5 from '../../recipes/spaghetti.png'
+import recipe6 from '../../recipes/apple-pie.png'
+import recipe7 from '../../recipes/homemade-pizza.png'
+import recipe8 from '../../recipes/greek-salad.png'
+import recipe9 from '../../recipes/seafood-sandwiches.png'
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 import { FaRegEdit } from "react-icons/fa";
@@ -27,6 +32,11 @@ export default class ViewProfile extends Component {
             user: user_lst.find(usr=>usr.uid === parseInt(this.props.match.params.uid)),
             userpicture: {src: ProfilePic},
             recipes: [
+                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
+                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
+                {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
+                {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]},
+                {id:8, src:recipe9, liked: false, collected: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
                 {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
                 {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
             ],
@@ -120,7 +130,7 @@ export default class ViewProfile extends Component {
                 
                 <div id="user-recipes">
                     <h4>{this.state.user.name + "'s Recipes"}</h4>
-                    <div id="recipe-list">
+        
                     <ReceipeList 
                         recipes={this.state.recipes}
                         clickHeart={this.clickHeart}
@@ -128,7 +138,7 @@ export default class ViewProfile extends Component {
                         clickRecipe = {this.clickRecipe}
                         userid={this.state.curruid}
                     />    
-                    </div>  
+                    
                 </div>
             </Container>
             </div> 
