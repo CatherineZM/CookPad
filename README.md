@@ -48,15 +48,10 @@ Login as an admin:
   * You can also check the details about the top recipes by clicking on the images below the "top recipes" table
   * use the next and previous arrow on the slide show to switch between recipes (the slideshow can also autoplay)
   
-4. Now, navigate yourself to the my collection page by clicking on "My Collection" in the navigation bar, you can:
-  * **View all your collection**
-  * **Like or dislike** any of the recipes in your collection
-  * **Remove any recipe from your collection** by clicking on the collection icon (This feature will be implemented in phase2)
-  * **View any of the recipe in your collection in details** by clicking on the recipe image
-  
 5. Click on "My Profile" on the navgation bar. On this page, you can:
-  * **View your own profile and your recipes**.
-  * "Edit Profile" to **update your profile description and the size of your image**
+  * **View your own profile, your recipes, and your collection**.
+  * "Edit Profile" to **update your profile description, the size of your image, and password**
+  * Click on "View" to expand "my recipes or my collections"
 
 6. Click on any of the recipes on "My Profile" page. It will navigate you to the "view recipe" page. On this page, you can:
   * click on the recipe creator's name to **View the recipe creator’s profile**
@@ -75,7 +70,7 @@ Login as an admin:
   * You can remove an ingredient or a step by click on the "remove" button
   * You can upload a picture of your recipe
 
-8. You can **go back to home page** by clicking on "COOKPAD" in the navigation bar
+8. You can **go back to home page** by clicking on "COOKPAD" or "Home Page" in the navgation bar
 
 9. Click on "Logout" on the navgation bar to **Logout**
 
@@ -89,6 +84,8 @@ Login as an admin:
 2. An admin can **Ban users** by clicking on "Ban" button
 
 3. An admin can **Promote users as admins** by clicking on "Promote" button
+
+4. An admin can **View HomePage** by clicking on "HomePage" in the navgation bar. This allows admins to check if there are any inappropriate contents.
 
 ## Third Party Libraries:
 1. Bootstrap
