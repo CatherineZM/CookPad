@@ -48,12 +48,12 @@ Login as an admin:
   * You can also check the details about the top recipes by clicking on the images below the "top recipes" table
   * use the next and previous arrow on the slide show to switch between recipes (the slideshow can also autoplay)
   
-5. Click on "My Profile" on the navgation bar. On this page, you can:
+4. Click on "My Profile" on the navgation bar. On this page, you can:
   * **View your own profile, your recipes, and your collection**.
   * "Edit Profile" to **update your profile description, the size of your image, and password**
   * Click on "View" to expand "my recipes or my collections"
 
-6. Click on any of the recipes on "My Profile" page. It will navigate you to the "view recipe" page. On this page, you can:
+5. Click on any of the recipes on "My Profile" page. It will navigate you to the "view recipe" page. On this page, you can:
   * click on the recipe creator's name to **View the recipe creator’s profile**
   * **Delete a recipe** by clicking on the delete button
   * **Edit a recipe** by clicking on the edit button, the edit page allows you to:
@@ -62,7 +62,7 @@ Login as an admin:
      * Click "Update Recipe" to save your changes
   * You can also checkout some recommended recipes on the right of the page
 
-7. Let's create a new recipe. Click on "Create a recipe" on the navigation bar to **Create your own recipe**:
+6. Let's create a new recipe. Click on "Create a recipe" on the navigation bar to **Create your own recipe**:
   * Enter recipe name and description(optional)
   * Select Cuisine Type(s) using the drop down list and use the cross mark to remove a type
   * click on "add ingredients" to add a new ingredient and use the drop down list to select measurements.
@@ -70,9 +70,9 @@ Login as an admin:
   * You can remove an ingredient or a step by click on the "remove" button
   * You can upload a picture of your recipe
 
-8. You can **go back to home page** by clicking on "COOKPAD" or "Home Page" in the navgation bar
+7. You can **go back to home page** by clicking on "COOKPAD" or "Home Page" in the navgation bar
 
-9. Click on "Logout" on the navgation bar to **Logout**
+8. Click on "Logout" on the navgation bar to **Logout**
 
 ## Admin User Sample Workflow:
 1. Login in as as admin:
