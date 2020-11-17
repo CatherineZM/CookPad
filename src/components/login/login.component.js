@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import './login.css'
-import Container from "@material-ui/core/container"
+import Container from "@material-ui/core/Container"
 import cookpadIcon from '../homePage/images/cookpad.png'
 
 export default class Login extends Component {
