@@ -180,7 +180,7 @@ export default class EditProfile extends Component {
     CollectionRecipeGenerator=()=>{
         if(this.state.recipeExpanded){
             return <div id="collection-recipeswithEx">
-                <h4>Your Collection
+                <h4>My Collection
                 <this.CollectionExpandButtonGenerator/>
                 </h4>
                 <Collapse in={this.state.collectionExpanded}>
@@ -198,7 +198,7 @@ export default class EditProfile extends Component {
             </div>
         }else if(!this.state.recipeExpanded){
             return <div id="collection-recipes">
-                    <h4>Your Collection
+                    <h4>My Collection
                     <this.CollectionExpandButtonGenerator/>
                     </h4>
                     <Collapse in={this.state.collectionExpanded}>
@@ -253,7 +253,7 @@ export default class EditProfile extends Component {
                 </div>
                 
                 <div id="user-recipes">
-                    <h4>Your Recipes
+                    <h4>My Recipes
                     <this.RecipeExpandButtonGenerator/>
                     </h4>
                     <Collapse in={this.state.recipeExpanded}>
