@@ -48,8 +48,8 @@ function isMongoError(error) { // checks for first error returned by promise rej
 /*** API Routes below ************************************/
 const recipeRouter = require('./routes/recipe');
 const userRouter = require('./routes/user');
-app.use('/api/recipe', recipeRouter);
-app.use('/api/user', userRouter);
+app.use('/api/recipes', recipeRouter);
+app.use('/api/users', userRouter);
 
 /*************************************************/
 // Express server listening...

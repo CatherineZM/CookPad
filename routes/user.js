@@ -4,7 +4,7 @@ const { mongoose } = require('../db/mongoose')
 
 /** User resource routes **/
 // a POST route to *create* a user
-// use http://localhost:5000/api/user/add to create a user
+// use http://localhost:5000/api/users/add to create a user
 router.route('/add').post(async (req, res) => {
 	// check mongoose connection established.
 	if (mongoose.connection.readyState != 1) {
@@ -35,7 +35,7 @@ router.route('/add').post(async (req, res) => {
 
 
 // a GET route to get all users
-// use http://localhost:5000/api/user/ to get all users
+// use http://localhost:5000/api/users/ to get all users
 router.route('/').get(async (req, res) => {
 	// check mongoose connection established.
 	if (mongoose.connection.readyState != 1) {
