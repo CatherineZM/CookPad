@@ -125,8 +125,8 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
 	const user = new User({
 		username: req.body.username,
 		password: req.body.password,
-		description: req.body.description,
-		isAdmin: false,
+        description: req.body.description,
+        isAdmin: false
 	})
 
 	try{

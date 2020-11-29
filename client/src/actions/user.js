@@ -63,3 +63,34 @@ export const logout = (app) => {
             console.log(error);
         });
 };
+
+export const signup = (signupComp, app) => {
+    // create our request constructor with all the parameters we need
+    const request = new Request("/api/users", {
+        method: "post",
+        body: JSON.stringify(signupComp.state),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    // send the request with fetch()
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+            alert("Sign up success!");
+            // if(json.currentUser !== undefined){
+            //     app.setState({ currentUser: json.currentUser })
+            // }
+        })
+        .catch(error=>{
+            alert("Could not Sign up!");
+            console.log(error);
+        })
+}
