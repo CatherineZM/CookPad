@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
 
+import {signup} from "../../actions/user";
 import './signup.css'
 import Container from "@material-ui/core/Container"
 import cookpadIcon from '../homePage/images/cookpad.png'
@@ -45,11 +46,31 @@ export default class Signup extends Component {
         this.setState({ description: e.target.value });
     }
 
-    onSubmit=(e)=>{
+    onSubmit=(e, app)=>{
         e.preventDefault();
+        
         // create a new user object and 
         // requires server calls to push the user to backend database
-        window.location = "..";
+        if (this.validator()){
+            signup(this, app);
+            window.location = "..";
+        }
+    }
+
+    validator(){
+        let isValid = true;
+        
+        if (this.state.username.length < 1){
+            isValid = false;
+            alert("Username cannot be empty");
+            return isValid;
+        }
+        if (this.state.password.length < 6){
+            isValid = false;
+            alert("Password must be at least 6 characters");
+            return isValid;
+        }
+        return isValid;
     }
 
     render(){

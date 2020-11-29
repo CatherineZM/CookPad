@@ -19,12 +19,11 @@ const UserSchema = new mongoose.Schema({
 	},
 	description: {
 		type: String,
-		required: false,
-		minlength: 6
+		required: false
 	},
 	isAdmin:{
 		type: Boolean,
-		required: true,
+		required: true
 	}
 })
 
