@@ -25,11 +25,11 @@ export default class AdminPage extends Component {
 
 
     render(){
+        const { history, app } = this.props;
         return(
             <div>
-                
                 <Container maxWidth='md'>     
-                <Navbar uid={this.state.uid}/>  
+                <Navbar app={app}/>
                     <UserList users={this.state.users} uid={this.state.uid}/>     
                 </Container>
             </div>  

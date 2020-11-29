@@ -8,7 +8,8 @@ import cookpadIcon from '../homePage/images/cookpad.png'
 
 export default class Signup extends Component {
     constructor(props){
-        super(props);        
+        super(props);     
+        this.props.history.push("/signup");   
         this.state = {
             username: '',
             password: '',
@@ -54,8 +55,6 @@ export default class Signup extends Component {
     render(){
         return(
             <div className="signup-page">
-            
-            
             <Container maxWidth='md'> 
                 <div className = "logo">
                     <img src={cookpadIcon} alt="cookpad"/>

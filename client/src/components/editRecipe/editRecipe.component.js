@@ -127,11 +127,12 @@ export default class EditRecipe extends Component {
     }
 
     render(){
+        const { history, app } = this.props;
+
         return(
             <div> 
-            
             <Container maxWidth='md'>
-                <Navbar uid={this.state.uid}/>
+                <Navbar app={app}/>
                 <form onSubmit={this.ReturnView} className="edit-recipe">
                     <b>Edit Your Recipe</b>
                     <div className="form-group">

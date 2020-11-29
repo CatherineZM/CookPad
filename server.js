@@ -26,30 +26,136 @@ const { ObjectID } = require('mongodb')
 const bodyParser = require('body-parser') 
 app.use(bodyParser.json())
 
+// express-session for managing user sessions
+const session = require("express-session");
+app.use(bodyParser.urlencoded({ extended: true }));
+
 /*** Helper functions below **********************************/
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
 	return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
 }
 
-/*** Webpage routes below **********************************/
-/// We only allow specific parts of our public directory to be access, rather than giving
-/// access to the entire directory.
+// middleware for mongo connection error for routes that need it
+const mongoChecker = (req, res, next) => {
+    // check mongoose connection established.
+    if (mongoose.connection.readyState != 1) {
+        log('Issue with mongoose connection')
+        res.status(500).send('Internal server error')
+        return;
+    } else {
+        next()  
+    }   
+}
 
-// // static js directory
-// app.use("/js", express.static(path.join(__dirname, '/public/js')))
+// Middleware for authentication of resources
+const authenticate = (req, res, next) => {
+    if (req.session.user) {
+        User.findById(req.session.user).then((user) => {
+            if (!user) {
+                return Promise.reject()
+            } else {
+                req.user = user
+                next()
+            }
+        }).catch((error) => {
+            res.status(401).send("Unauthorized")
+        })
+    } else {
+        res.status(401).send("Unauthorized")
+    }
+}
 
-// // route for root
-// app.get('/', (req, res) => {
-// 	res.sendFile(path.join(__dirname, '/public/dashboard.html'))
-// })
+/*** Session handling **************************************/
+// Create a session and session cookie
+app.use(
+    session({
+        secret: "our hardcoded secret",
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            expires: 60000,
+            httpOnly: true
+        }
+    })
+);
 
-/*********************************************************/
+// A route to login and create a session
+app.post("/users/login", (req, res) => {
+    const username = req.body.username;
+    const password = req.body.password;
+
+    // log(username, password);
+    User.findByUsernamePassword(username, password)
+        .then(user => {
+            req.session.user = user._id;
+            req.session.username = user.username;
+            res.send({ currentUser: user });
+        })
+        .catch(error => {
+            res.status(400).send()
+        });
+});
+
+// A route to logout a user
+app.get("/users/logout", (req, res) => {
+    req.session.destroy(error => {
+        if (error) {
+            res.status(500).send(error);
+        } else {
+            res.send()
+        }
+    });
+});
+
+// A route to check if a user is logged in on the session
+app.get("/users/check-session", (req, res) => {
+    if (req.session.user) {
+        res.send({ currentUser: req.session.username });
+    } else {
+        res.status(401).send();
+    }
+});
+
 
 /*** API Routes below ************************************/
-const recipeRouter = require('./routes/recipe');
-const userRouter = require('./routes/user');
-app.use('/api/recipes', recipeRouter);
-app.use('/api/users', userRouter);
+// User API Route
+// create a user
+app.post('/api/users', mongoChecker, async(req, res)=>{
+	// create a new user
+	const user = new User({
+		username: req.body.username,
+		password: req.body.password,
+		description: req.body.description,
+		isAdmin: false,
+	})
+
+	try{
+		const newUser = await user.save()
+		res.send(newUser)
+	} catch(error) {
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	}
+})
+
+/*** Webpage routes below **********************************/
+// Serve the build
+app.use(express.static(path.join(__dirname, "/client/build")));
+
+// All routes other than above will go to index.html
+app.get("*", (req, res) => {
+    // check for page routes that we expect in the frontend to provide correct status code.
+    const goodPageRoutes = ["/", "/login", "/homepage"];
+    if (!goodPageRoutes.includes(req.url)) {
+        res.status(404);
+    }
+
+    // send index.html
+    res.sendFile(path.join(__dirname, "/client/build/index.html"));
+});
 
 /*************************************************/
 // Express server listening...

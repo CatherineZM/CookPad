@@ -23,10 +23,9 @@ import { FaRegSave } from "react-icons/fa";
 export default class EditProfile extends Component {
     constructor(props){
         super(props);
-        
+        this.props.history.push('/editprofile');
         // requires server calle to fetch the following information
         this.state = {
-            uid: this.props.match.params.uid,
             password: "user",
             username: "Catherine", 
             userpicture: {src: ProfilePic},
@@ -89,7 +88,6 @@ export default class EditProfile extends Component {
                 }
             }
         })
-        console.log(this.state.recipes)
     }
 
     clickStar=(rid)=>{
@@ -106,14 +104,13 @@ export default class EditProfile extends Component {
                 }
             }
         })
-        console.log(this.state.recipes)
     }
 
     editprofile=(e)=>{
         e.preventDefault();
         // requires server call to push the new profile picture 
         // and the new description into the server 
-        window.location = "/viewprofile/" + this.state.uid + "/" +this.state.uid;
+        this.props.history.push("/viewprofile");
     }
 
     onClose=(e)=>{
@@ -141,8 +138,8 @@ export default class EditProfile extends Component {
         };
     }
 
-    clickRecipe=(userid,rid)=>{
-        window.location = "/viewrecipe/"+ userid + "/" + rid;
+    clickRecipe=(rid)=>{
+        this.props.histor.push("/viewrecipe/"+rid);
     }
 
     RecipeExpandButtonGenerator=()=>{
@@ -181,7 +178,7 @@ export default class EditProfile extends Component {
         if(this.state.recipeExpanded){
             return <div id="collection-recipeswithEx">
                 <h4>My Collection
-                <this.CollectionExpandButtonGenerator/>
+                {/* <this.CollectionExpandButtonGenerator/> */}
                 </h4>
                 <Collapse in={this.state.collectionExpanded}>
                     <div className="recipe-list">
@@ -199,7 +196,7 @@ export default class EditProfile extends Component {
         }else if(!this.state.recipeExpanded){
             return <div id="collection-recipes">
                     <h4>My Collection
-                    <this.CollectionExpandButtonGenerator/>
+                    {/* <this.CollectionExpandButtonGenerator/> */}
                     </h4>
                     <Collapse in={this.state.collectionExpanded}>
                         <div className="recipe-list">
@@ -208,7 +205,6 @@ export default class EditProfile extends Component {
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
-                                userid={this.state.curruid}
                             />    
                         </div>
                         
@@ -218,11 +214,12 @@ export default class EditProfile extends Component {
     }
 
     render(){
+        const { history, app } = this.props;
         return(
             <div className="edit-profile">
             
             <Container maxWidth='md'>
-                <Navbar uid={this.state.uid}/>
+                <Navbar app={app}/>
                 
                 <div id="user-profile">
                     <h4>{this.state.username + "'s Profile"}</h4>
@@ -263,7 +260,6 @@ export default class EditProfile extends Component {
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
-                                userid={this.state.curruid}
                             />    
                         </div>
                     </Collapse>

@@ -1,0 +1,43 @@
+{
+  "files": {
+    "main.css": "/static/css/main.fabb6476.chunk.css",
+    "main.js": "/static/js/main.8faea9c0.chunk.js",
+    "main.js.map": "/static/js/main.8faea9c0.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.6a44330e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.6a44330e.js.map",
+    "static/css/2.420e7b89.chunk.css": "/static/css/2.420e7b89.chunk.css",
+    "static/js/2.8a58fe9e.chunk.js": "/static/js/2.8a58fe9e.chunk.js",
+    "static/js/2.8a58fe9e.chunk.js.map": "/static/js/2.8a58fe9e.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.c541b89c1e48c6ddb8b553f5c8bc7dd9.js": "/precache-manifest.c541b89c1e48c6ddb8b553f5c8bc7dd9.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/2.420e7b89.chunk.css.map": "/static/css/2.420e7b89.chunk.css.map",
+    "static/css/main.fabb6476.chunk.css.map": "/static/css/main.fabb6476.chunk.css.map",
+    "static/js/2.8a58fe9e.chunk.js.LICENSE.txt": "/static/js/2.8a58fe9e.chunk.js.LICENSE.txt",
+    "static/media/Chicken-Noodle-Soup.jpg": "/static/media/Chicken-Noodle-Soup.ca9324ff.jpg",
+    "static/media/UploadIcon.svg": "/static/media/UploadIcon.1cedb6e9.svg",
+    "static/media/apple-pie.png": "/static/media/apple-pie.afb26e5d.png",
+    "static/media/butter-chicken.jpg": "/static/media/butter-chicken.34e7fb10.jpg",
+    "static/media/default-profile-pic.png": "/static/media/default-profile-pic.8fed3c43.png",
+    "static/media/greek-salad.png": "/static/media/greek-salad.3bae4b97.png",
+    "static/media/homemade-pizza.png": "/static/media/homemade-pizza.f02debc0.png",
+    "static/media/lemon-zucchini-bread.jpg": "/static/media/lemon-zucchini-bread.bb159091.jpg",
+    "static/media/noodles.png": "/static/media/noodles.efafcbc7.png",
+    "static/media/ramen.jpg": "/static/media/ramen.a82338c8.jpg",
+    "static/media/salad.png": "/static/media/salad.ad998962.png",
+    "static/media/sandwich.png": "/static/media/sandwich.cc032ac8.png",
+    "static/media/seafood-sandwiches.png": "/static/media/seafood-sandwiches.1fc1a826.png",
+    "static/media/seafood-stew.png": "/static/media/seafood-stew.60fdcbaf.png",
+    "static/media/seafood.png": "/static/media/seafood.a2862b82.png",
+    "static/media/soup.png": "/static/media/soup.f287703c.png",
+    "static/media/spaghetti.png": "/static/media/spaghetti.af76d152.png",
+    "static/media/vanilla-cake.png": "/static/media/vanilla-cake.2da2612d.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.6a44330e.js",
+    "static/css/2.420e7b89.chunk.css",
+    "static/js/2.8a58fe9e.chunk.js",
+    "static/css/main.fabb6476.chunk.css",
+    "static/js/main.8faea9c0.chunk.js"
+  ]
+}

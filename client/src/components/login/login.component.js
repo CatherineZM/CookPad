@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
+import {login} from "../../actions/user";
+
 import './login.css'
 import Container from "@material-ui/core/container"
 import cookpadIcon from '../homePage/images/cookpad.png'
@@ -7,7 +9,7 @@ import cookpadIcon from '../homePage/images/cookpad.png'
 export default class Login extends Component {
     constructor(props){
         super(props);
-
+        this.props.history.push("/login");
         this.state = {
             username: '',
             password: '',
@@ -17,30 +19,21 @@ export default class Login extends Component {
     onChangeUsername=(e)=>{ this.setState({ username: e.target.value }); }
     onChangePassword=(e)=>{ this.setState({ password: e.target.value }); }
 
-    onSubmit=(e)=>{
+    onSubmit=(e, app)=>{
         e.preventDefault();
-        // fetch users data from the backend database and perform the check
-        // for now hardcode admin and user
-        if (this.state.username === "admin" && this.state.password === "admin"){
-            window.location = '/adminpage/0';
-        } else if(this.state.username === "user" && this.state.password === "user") {
-            window.location = '/homepage/1';
-        } else {
-            alert("Username does not exist or Password does not match!");
-        }     
+        login(this, app);
     }
 
     render(){
+        const { app } = this.props
         return(
             <div className="login-page">
-            
-            
             <Container maxWidth='md'> 
                 <div className = "logo">
                     <img src={cookpadIcon} alt="cookpad"/>
                     <span className = "name">COOKPAD</span>
                 </div>
-                <form className="login-form" onSubmit={this.onSubmit}>
+                <form className="login-form" onSubmit={(e)=>this.onSubmit(e, app)}>
                     <div className="form-group">
                         <label>Username: </label>
                         <input type="username" required placeholder="E.g: 123" className="form-control" value={this.state.username} onChange={this.onChangeUsername}/>

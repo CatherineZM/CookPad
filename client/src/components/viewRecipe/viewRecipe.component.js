@@ -42,11 +42,8 @@ const styles = {
 class ViewRecipe extends Component {
     constructor(props){
         super(props);
-        
         // requires server calls to update the information based on the recipe id
         this.state = {
-            uid: this.props.match.params.uid,
-            rid: this.props.match.params.rid,
             top3_recipe:[
                 {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
                 {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]}
@@ -113,24 +110,24 @@ class ViewRecipe extends Component {
 
     editRecipe=(e)=>{
         e.preventDefault();
-        window.location = "/editRecipe/" + this.state.uid + "/" + this.state.recipe.id
+        this.props.history.push("/editRecipe/" + this.state.recipe.id);
     }
 
-    deleteRecipe=(e)=>{
+    deleteRecipe=(e, app)=>{
         e.preventDefault();
         if (window.confirm('Are you sure you wish to delete this item?')){
             // requires server calls to delete item in database
             console.log("item deleted")
-            window.location = "/viewprofile/" + this.state.uid + "/" + this.state.uid
+            this.props.history.push("/viewprofile/"+ app.state.currentUser._id)
         } 
     }
 
     render(){
-        const {classes} = this.props;
+        const {classes, app} = this.props;
         return(
             <div>
             <Container maxWidth="md">
-                <Navbar uid={this.state.uid}/>
+                <Navbar app={app}/>
                 <div className="recipe-des">
                     <Card className={classes.card}>
                         <CardMedia
@@ -143,7 +140,7 @@ class ViewRecipe extends Component {
                             {this.state.recipe.title}
                         </Typography>
                         <Typography variant="h6" color="textSecondary" component="h6">
-                            <Link to={"/viewprofile/"+ this.state.recipe.creator.uid+ "/" + this.state.uid}>{"By: "+this.state.recipe.creator.username}</Link>
+                            <Link to={"/viewprofile/"+ this.state.recipe.creator.uid}>{"By: "+this.state.recipe.creator.username}</Link>
                         </Typography>
                         </CardContent>
                         <CardActions disableSpacing>
@@ -204,7 +201,7 @@ class ViewRecipe extends Component {
                         <form float="left" onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
                     </div>
                     <div className="view-recipe-form-group">
-                        <form onSubmit={this.deleteRecipe}><input type="submit" value="Delete" className="btn btn-primary"/></form>
+                        <form onSubmit={(e)=>this.deleteRecipe(e, app)}><input type="submit" value="Delete" className="btn btn-primary"/></form>
                     </div>
                 </div>
             </Container> 

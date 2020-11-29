@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
-import { BrowserRouter as Router, Route, Switch} from "react-router-dom"
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+import { checkSession } from "./actions/user";
 import "bootstrap/dist/css/bootstrap.min.css"
 
 import AdminPage from "./components/adminPage/adminPage.component";
@@ -14,24 +15,39 @@ import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import ViewProfile from './components/viewProfile/viewProfile.component';
 
 export class App extends React.Component{
+  constructor(props){
+    super(props);
+    checkSession(this);
+  }
+
+  state = {
+    currentUser: null
+  }
+
   render(){
+    const { currentUser } = this.state;
     return (
-      <div>
-        <Router>
+        <BrowserRouter>
           <Switch>
-            <Route path="/" exact component = {Login}/>
-            <Route path="/signup" component = {Signup}/>
-            <Route path="/adminpage/:uid" component = {AdminPage}/>
-            <Route path="/homepage/:uid" component = {HomePage}/>
-            <Route path="/addrecipe/:uid" component = {AddRecipe}/>
-            <Route path="/editrecipe/:uid/:rid" component = {EditRecipe}/>
-            <Route path="/editprofile/:uid" component = {EditProfile}/>
-            <Route exact path="/viewrecipe/:uid/:rid" component = {ViewRecipe}/>
-            <Route exact path="/viewprofile/:uid/:curruid" component = {ViewProfile}/>
+            <Route
+              exact path={["/", "/login", "/homepage"] /* any of these URLs are accepted. */ }
+              render={ props => (
+                <div className="app">
+                    {!currentUser ? <Login {...props} app={this} /> : <HomePage {...props} app={this} />}
+                </div>   
+            )}
+            />
+            {/* <Route path="/" exact render={props=><Login {...props}/>}/> */}
+            <Route path="/signup" exact render={props=><Signup {...props} app={this}/>}/>
+            <Route path="/adminpage" exact render={props=><AdminPage {...props} app={this}/>}/>
+            {/* <Route path="/homepage" exact render={props=><HomePage {...props}/>}/> */}
+            <Route path="/addrecipe" exact render={props=><AddRecipe {...props} app={this}/>}/>
+            <Route path="/editrecipe/:rid" exact render={props=><EditRecipe {...props} app={this}/>}/>
+            <Route path="/editprofile/:uid" exact render={props=><EditProfile {...props} app={this}/>}/>
+            <Route path="/viewrecipe/:rid" exact render={props=><ViewRecipe {...props} app={this}/>}/>
+            <Route path="/viewprofile/:uid" exact render={props=><ViewProfile {...props} app={this}/>}/>
           </Switch>
-        </Router>
-      </div>
-      
+        </BrowserRouter>
     );
   }
   

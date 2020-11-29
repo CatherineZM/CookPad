@@ -40,13 +40,13 @@ const styles = {
 class ReceipeList extends Component {
     
     render(){
-        const {classes, recipes, clickRecipe, clickHeart, clickStar, userid} = this.props;
+        const {classes, recipes, clickRecipe, clickHeart, clickStar} = this.props;
         return(
             <div className="vertical-scrollable">
             {recipes.map( (recipe) => (
                 <div key={uid(recipe.title)} className="recipe-container">
                         <Card className={classes.root}>
-                        <CardActionArea onClick={()=>clickRecipe(userid,recipe.id)}>
+                        <CardActionArea onClick={()=>clickRecipe(recipe.id)}>
                             <CardMedia
                             className={classes.media}
                             component="img"

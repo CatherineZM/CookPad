@@ -21,20 +21,13 @@ import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 import { FaRegEdit } from "react-icons/fa";
 
-const user_lst = [
-    {uid: 0, username: "admin", name: "Nora", description: "I love Chinese Food!!!", isAdmin: true},
-    {uid: 1, username: "user", name: "Catherine", description: "I love baking!!!", isAdmin: false},
-    {uid: 127, username: "raon", name: "Raon", description: "I love blahblah!!!", isAdmin: false}
-    ]
-
 export default class ViewProfile extends Component {
     constructor(props){
         super(props);
-        
         // requires server calls to fetch the recipes info and user profile info
         this.state = {
             uid: this.props.match.params.uid,
-            user: user_lst.find(usr=>usr.uid === parseInt(this.props.match.params.uid)),
+            user: {uid: 1, username: "Catherine", description: "I love baking!!!", isAdmin: false},
             userpicture: {src: ProfilePic},
             recipes: [
                 {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
@@ -53,7 +46,6 @@ export default class ViewProfile extends Component {
             {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
             {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
             {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]}],
-            curruid: this.props.match.params.curruid,
             recipeExpanded: false,
             collectionExpanded: false,
         }
@@ -71,6 +63,7 @@ export default class ViewProfile extends Component {
             this.setState({ recipeExpanded: true });
         }
     }
+
     handleCollectionExpandClick= () => {
         if(this.state.collectionExpanded){
             this.setState({ collectionExpanded: false });
@@ -95,7 +88,6 @@ export default class ViewProfile extends Component {
                 }
             }
         })
-        // console.log(this.state.recipes)
     }
 
     clickStar=(rid)=>{
@@ -112,24 +104,20 @@ export default class ViewProfile extends Component {
                 }
             }
         })
-        console.log(this.state.recipes)
     }
 
     editprofile=(e)=>{
         e.preventDefault();
-        window.location = "/editprofile/"+this.state.uid;
+        this.props.history.push("/editprofile");
     }
 
     editButtonGenerator=()=>{
-        if (this.state.uid === this.state.curruid){
-            return <button type="button"
-                    className = "btn btn-outline-primary"
-                    onClick={this.editprofile}>
-                    <FaRegEdit/>
-                    Edit Profile
-                    </button>  
-        }
-        return null
+        return <button type="button"
+            className = "btn btn-outline-primary"
+            onClick={this.editprofile}>
+            <FaRegEdit/>
+            Edit Profile
+            </button>
     }
 
     RecipeExpandButtonGenerator=()=>{
@@ -163,27 +151,16 @@ export default class ViewProfile extends Component {
                     </button>
         }
     }
-    
-    componentWillReceiveProps(nextProps){
-        if (nextProps.match.params.uid !== this.props.match.params.uid){
-            const currUid = nextProps.match.params.uid
-            const currUser = user_lst.find(parseInt(usr=>usr.uid) === currUid)
-            this.setState({
-                uid: currUid,
-                user: currUser
-            })
-        }
-    }
 
-    clickRecipe=(userid,rid)=>{
-        window.location = "/viewrecipe/"+ userid + "/" + rid;
+    clickRecipe=(rid)=>{
+        this.props.history.push("/viewrecipe/" + rid);
     }
 
     CollectionRecipeGenerator=()=>{
         if(this.state.recipeExpanded){
             return <div id="collection-recipeswithEx">
                 <h4>My Collection
-                <this.CollectionExpandButtonGenerator/>
+                {/* <this.CollectionExpandButtonGenerator/> */}
                 </h4>
                 <Collapse in={this.state.collectionExpanded}>
                     <div className="recipe-list">
@@ -192,16 +169,14 @@ export default class ViewProfile extends Component {
                             clickHeart={this.clickHeart}
                             clickStar={this.clickStar}
                             clickRecipe = {this.clickRecipe}
-                            userid={this.state.curruid}
                         />    
                     </div>
-                    
                 </Collapse> 
             </div>
         }else if(!this.state.recipeExpanded){
             return <div id="collection-recipes">
                     <h4>My Collection
-                    <this.CollectionExpandButtonGenerator/>
+                    {/* <this.CollectionExpandButtonGenerator/> */}
                     </h4>
                     <Collapse in={this.state.collectionExpanded}>
                         <div className="recipe-list">
@@ -210,22 +185,21 @@ export default class ViewProfile extends Component {
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
-                                userid={this.state.curruid}
                             />    
                         </div>
-                        
                     </Collapse> 
                 </div>
         }
     }
 
     render(){
+        const { history, app } = this.props;
         return(
             <div>
             <Container maxWidth='md'>
-                <Navbar uid={this.state.curruid}/>
+                <Navbar app={app}/>
                 <div id="user-profile">
-                    <h4>{this.state.user.name + "'s Profile"}</h4>
+                    <h4>{this.state.user.username + "'s Profile"}</h4>
                     <Avatar id="user-picture" name="user" size="150" round={true} src={this.state.userpicture.src}/> 
                     <div>{this.state.user.description}</div>
                     <this.editButtonGenerator/>
@@ -243,7 +217,6 @@ export default class ViewProfile extends Component {
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
-                                userid={this.state.curruid}
                             />    
                         </div>
                     </Collapse>

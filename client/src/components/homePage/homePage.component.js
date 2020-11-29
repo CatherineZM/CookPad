@@ -37,10 +37,9 @@ import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 export default class HomePage extends Component {
     constructor(props){
         super(props);
-
+        this.props.history.push("/homepage");
         // the data will be fetched from the database and calculated in component_DidMount callback
         this.state = {
-            uid: this.props.match.params.uid,
             slide_idx: 0,
             num_slides: 3,
             // this is the index into the recipes array
@@ -133,8 +132,8 @@ export default class HomePage extends Component {
         dots[this.state.slide_idx].className += " active";
     }
 
-    clickRecipe=(userid,rid)=>{
-        window.location = "/viewrecipe/"+ userid + "/" + rid;
+    clickRecipe=(rid)=>{
+        this.props.history.push("/viewrecipe/"+ rid);
     }
 
     clickStar=(rid)=>{
@@ -265,11 +264,12 @@ export default class HomePage extends Component {
     }
 
     render(){
+        const { history, app } = this.props;
         return(
             <div id="body">
                 
                 <Container maxWidth='md'>
-                    <Navbar uid={this.state.uid}/>
+                    <Navbar app={app}/>
                     <HomePageLeftPanel
                         categories={this.state.categories}
                         clickCategory={this.clickCategory}
@@ -290,7 +290,6 @@ export default class HomePage extends Component {
                         clickRecipe={this.clickRecipe}
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
-                        userid={this.state.uid}
                         />
                     </div>
 

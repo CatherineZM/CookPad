@@ -15,7 +15,7 @@ const defaultUnit = UnitType[0];
 export default class AddRecipe extends Component {
     constructor(props){
         super(props);
-        
+        this.props.history.push("/addrecipe");
         this.state = {
             uid: this.props.match.params.uid,
             RecipeName: '',
@@ -92,15 +92,16 @@ export default class AddRecipe extends Component {
         e.preventDefault();
         // push the recipe to the server
         // pushing to database requires server call
-        window.location = "/homepage/" + this.state.uid;
+        this.props.history.push("/homepage/"+this.state.uid);
     }
 
     render(){ 
+        const { history, app } = this.props;
+
         return(
             <div>
-            
             <Container maxWidth='md'>
-                <Navbar uid={this.state.uid}/>
+                <Navbar app={app}/>
                 <form onSubmit = {this.onSubmit} className="add-recipe">
                     <b>Create A Recipe</b>
                     <div className = "Recipe-form">
