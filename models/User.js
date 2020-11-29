@@ -20,7 +20,7 @@ const UserSchema = new mongoose.Schema({
 	description: {
 		type: String,
 		required: false,
-		minlength: 6
+		minlength: 0
 	},
 	isAdmin:{
 		type: Boolean,

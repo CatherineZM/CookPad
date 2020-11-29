@@ -10,7 +10,28 @@ const Recipe = mongoose.model('Recipe', {
 	},
 	description: {
 		type: String,
-		required: false
+		required: false,
+		minlength: 1,
+	},
+	liked_uid:{
+		type: [mongoose.Schema.Types.ObjectId],
+		required: true
+	},
+	likes:{
+		type: Number,
+		required: true,
+	},
+	collected_uid:{
+		type: [mongoose.Schema.Types.ObjectId],
+		required: true,
+	},
+	categories:{
+		type: [Number],
+		required: true,
+	},
+	creator:{
+		type: mongoose.Schema.Types.ObjectId,
+		required: true
 	}
 })
 
