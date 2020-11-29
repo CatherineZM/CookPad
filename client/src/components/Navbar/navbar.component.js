@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom'
+import {logout} from "../../actions/user";
 import AppBar from '@material-ui/core/AppBar'
 import IconButton from '@material-ui/core/IconButton'
 import SearchIcon from '@material-ui/icons/Search';
@@ -37,7 +38,7 @@ export default class Navbar extends Component {
                     {!app.state.currentUser.isAdmin && <li><Link to={"/addrecipe"}>Create a Recipe</Link></li>}
                     {!app.state.currentUser.isAdmin && <li><Link to={"/viewprofile/"+ app.state.currentUser._id}>My Profile</Link></li>}
                     {app.state.currentUser.isAdmin && <li><Link to={"/adminpage"}>Admin Page</Link></li>}
-                    <li><Link to="/">Logout</Link></li>
+                    <li><Link to="/" onClick={()=>logout(app)}>Logout</Link></li>
                 </ul>
             </div>
             </AppBar>

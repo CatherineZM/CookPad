@@ -37,15 +37,14 @@ export class App extends React.Component{
                 </div>   
             )}
             />
-            {/* <Route path="/" exact render={props=><Login {...props}/>}/> */}
             <Route path="/signup" exact render={props=><Signup {...props} app={this}/>}/>
             <Route path="/adminpage" exact render={props=><AdminPage {...props} app={this}/>}/>
-            {/* <Route path="/homepage" exact render={props=><HomePage {...props}/>}/> */}
             <Route path="/addrecipe" exact render={props=><AddRecipe {...props} app={this}/>}/>
             <Route path="/editrecipe/:rid" exact render={props=><EditRecipe {...props} app={this}/>}/>
             <Route path="/editprofile/:uid" exact render={props=><EditProfile {...props} app={this}/>}/>
             <Route path="/viewrecipe/:rid" exact render={props=><ViewRecipe {...props} app={this}/>}/>
             <Route path="/viewprofile/:uid" exact render={props=><ViewProfile {...props} app={this}/>}/>
+            <Route render={() => <div>404 Not found</div>} />
           </Switch>
         </BrowserRouter>
     );
