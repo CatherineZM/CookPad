@@ -23,9 +23,9 @@ export default class EditRecipe extends Component {
     constructor(props){
         super(props);
 
+        this.props.history.push('/editrecipe/'+this.props.match.params.rid)
         // requires server call to fetch the recipe information
         this.state = {
-            uid: this.props.match.params.uid,
             rid: this.props.match.params.rid,
             RecipeName: 'Butter Chicken',
             Description: '',

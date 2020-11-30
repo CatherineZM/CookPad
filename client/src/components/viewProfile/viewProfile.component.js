@@ -25,10 +25,11 @@ import {getUser} from "../../actions/user";
 export default class ViewProfile extends Component {
     constructor(props, app){
         super(props);
+        
         // requires server calls to fetch the recipes info and user profile info
         this.state = {
             uid: this.props.match.params.uid,
-            user: {uid: 1, username: "Catherine", description: "I love baking!!!", isAdmin: false},
+            user: {},
             userpicture: {src: ProfilePic},
             recipes: [
                 {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
@@ -50,8 +51,8 @@ export default class ViewProfile extends Component {
             recipeExpanded: false,
             collectionExpanded: false,
         }
+        this.props.history.push('/viewprofile/'+this.props.match.params.uid);
         getUser(this, app);
-
     }
 
 
@@ -111,7 +112,7 @@ export default class ViewProfile extends Component {
 
     editprofile=(e)=>{
         e.preventDefault();
-        this.props.history.push("/editprofile");
+        this.props.history.push("/editprofile/"+ this.state.uid);
     }
 
     editButtonGenerator=()=>{
@@ -163,7 +164,7 @@ export default class ViewProfile extends Component {
         if(this.state.recipeExpanded){
             return <div id="collection-recipeswithEx">
                 <h4>My Collection
-                {/* <this.CollectionExpandButtonGenerator/> */}
+                {this.CollectionExpandButtonGenerator()}
                 </h4>
                 <Collapse in={this.state.collectionExpanded}>
                     <div className="recipe-list">
@@ -179,7 +180,7 @@ export default class ViewProfile extends Component {
         }else if(!this.state.recipeExpanded){
             return <div id="collection-recipes">
                     <h4>My Collection
-                    {/* <this.CollectionExpandButtonGenerator/> */}
+                    {this.CollectionExpandButtonGenerator()}
                     </h4>
                     <Collapse in={this.state.collectionExpanded}>
                         <div className="recipe-list">

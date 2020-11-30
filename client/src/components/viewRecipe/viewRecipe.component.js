@@ -42,6 +42,7 @@ const styles = {
 class ViewRecipe extends Component {
     constructor(props){
         super(props);
+        this.props.history.push('/viewrecipe/'+this.props.match.params.rid);
         // requires server calls to update the information based on the recipe id
         this.state = {
             top3_recipe:[

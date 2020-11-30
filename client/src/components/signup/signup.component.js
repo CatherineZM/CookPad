@@ -53,7 +53,7 @@ export default class Signup extends Component {
         // requires server calls to push the user to backend database
         if (this.validator()){
             signup(this, app);
-            window.location = "..";
+            this.props.history.push("/login");
         }
     }
 

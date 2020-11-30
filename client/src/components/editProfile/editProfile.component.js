@@ -21,11 +21,11 @@ import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 import { FaRegSave } from "react-icons/fa";
 
 export default class EditProfile extends Component {
-    constructor(props){
+    constructor(props, app){
         super(props);
-        this.props.history.push('/editprofile');
-        // requires server calle to fetch the following information
+        
         this.state = {
+            uid: this.props.match.params.uid,
             password: "user",
             username: "Catherine", 
             userpicture: {src: ProfilePic},
@@ -51,6 +51,7 @@ export default class EditProfile extends Component {
             recipeExpanded: false,
             collectionExpanded: false,
         }
+        this.props.history.push('/editprofile/'+ this.props.match.params.uid);
     }
 
     componentDidMount() {
@@ -110,7 +111,7 @@ export default class EditProfile extends Component {
         e.preventDefault();
         // requires server call to push the new profile picture 
         // and the new description into the server 
-        this.props.history.push("/viewprofile");
+        this.props.history.push("/viewprofile/"+this.state.uid);
     }
 
     onClose=(e)=>{

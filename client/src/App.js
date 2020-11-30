@@ -38,12 +38,36 @@ export class App extends React.Component{
             )}
             />
             <Route path="/signup" exact render={props=><Signup {...props} app={this}/>}/>
-            <Route path="/adminpage" exact render={props=><AdminPage {...props} app={this}/>}/>
-            <Route path="/addrecipe" exact render={props=><AddRecipe {...props} app={this}/>}/>
-            <Route path="/editrecipe/:rid" exact render={props=><EditRecipe {...props} app={this}/>}/>
-            <Route path="/editprofile/:uid" exact render={props=><EditProfile {...props} app={this}/>}/>
-            <Route path="/viewrecipe/:rid" exact render={props=><ViewRecipe {...props} app={this}/>}/>
-            <Route path="/viewprofile/:uid" exact render={props=><ViewProfile {...props} app={this}/>}/>
+            <Route path="/adminpage" exact render={props=>(
+              <div className="app">
+                {!currentUser ? <Login {...props} app={this} /> : <AdminPage {...props} app={this} />}
+              </div>
+            )}/>
+            <Route path="/addrecipe" exact render={props=>(
+              <div className="app">
+                {!currentUser ? <Login {...props} app={this} /> : <AddRecipe {...props} app={this} />}
+              </div>
+            )}/>
+            <Route path="/editrecipe/:rid" exact render={props=>(
+              <div className="app">
+                {!currentUser ? <Login {...props} app={this} /> : <EditRecipe {...props} app={this} />}
+              </div>
+            )}/>
+            <Route path="/editprofile/:uid" exact render={props=>(
+              <div className="app">
+                {!currentUser ? <Login {...props} app={this} /> : <EditProfile {...props} app={this} />}
+              </div>
+            )}/>
+            <Route path="/viewrecipe/:rid" exact render={props=>(
+              <div className="app">
+                {!currentUser ? <Login {...props} app={this} /> : <ViewRecipe {...props} app={this} />}
+              </div>
+            )}/>
+            <Route path="/viewprofile/:uid" exact render={props=>(
+              <div className="app">
+                {!currentUser ? <Login {...props} app={this} /> : <ViewProfile {...props} app={this} />}
+              </div>
+            )}/>
             <Route render={() => <div>404 Not found</div>} />
           </Switch>
         </BrowserRouter>
