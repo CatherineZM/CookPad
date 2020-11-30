@@ -184,6 +184,33 @@ app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	}
 })
 
+// User API Route
+app.post('/api/recipes', mongoChecker, async(req, res)=>{
+    // create a new recipe
+    const recipe = new Recipe({
+        title: req.body.title,
+        description: req.body.description,
+        liked_uid: [],
+        likes: 0,
+        collected_uid: [],
+        categories: req.body.categories,
+        creator: req.body.creator,
+    })
+
+    console.log(recipe)
+    try{
+        const newRecipe = await recipe.save()
+		res.send(newRecipe)
+    } catch(error) {
+        if(isMongoError(error)){
+            res.status(500).send('Internal Server Error')
+        } else {
+            res.status(400).send('Bad Request')
+        }
+    }
+})
+
+
 /*** Webpage routes below **********************************/
 // Serve the build
 app.use(express.static(path.join(__dirname, "/client/build")));
