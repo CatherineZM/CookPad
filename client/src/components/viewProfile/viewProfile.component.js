@@ -21,6 +21,7 @@ import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 import { FaRegEdit } from "react-icons/fa";
 import {getUser} from "../../actions/user";
+import {getMyRecipe, getMyCollection} from "../../actions/recipe";
 
 export default class ViewProfile extends Component {
     constructor(props){
@@ -31,17 +32,21 @@ export default class ViewProfile extends Component {
             user: {},
             userpicture: {src: ProfilePic},
             recipes: [],
-            collectRecipes:[],
+            collectedRecipes:[],
             recipeExpanded: false,
             collectionExpanded: false,
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
-        getUser(this);
+        
     }
 
 
     componentDidMount() {
         // requires server calls to initialize recipes and user profile
+        getUser(this);
+        getMyRecipe(this);
+        getMyCollection(this);
+        
     }
 
     handleRecipeExpandClick = () => {
@@ -156,7 +161,7 @@ export default class ViewProfile extends Component {
                 <Collapse in={this.state.collectionExpanded}>
                     <div className="recipe-list">
                         <ReceipeList   
-                            recipes={this.state.collectRecipes}
+                            recipes={this.state.collectedRecipes}
                             clickHeart={this.clickHeart}
                             clickStar={this.clickStar}
                             clickRecipe = {this.clickRecipe}
@@ -172,7 +177,7 @@ export default class ViewProfile extends Component {
                     <Collapse in={this.state.collectionExpanded}>
                         <div className="recipe-list">
                             <ReceipeList   
-                                recipes={this.state.collectRecipes}
+                                recipes={this.state.collectedRecipes}
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
