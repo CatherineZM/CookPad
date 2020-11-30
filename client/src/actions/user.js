@@ -94,3 +94,28 @@ export const signup = (signupComp, app) => {
             console.log(error);
         })
 }
+
+export const getUser = (viewProfileComp, app) => {
+    const request = new Request(`/api/users/${viewProfileComp.state.uid}`, {
+        method: "get",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+            viewProfileComp.setState({user: json})
+            
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}

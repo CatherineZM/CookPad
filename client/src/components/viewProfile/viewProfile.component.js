@@ -20,9 +20,10 @@ import recipe9 from '../../recipes/seafood-sandwiches.png'
 import recipe10 from '../../recipes/seafood-stew.png'
 import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 import { FaRegEdit } from "react-icons/fa";
+import {getUser} from "../../actions/user";
 
 export default class ViewProfile extends Component {
-    constructor(props){
+    constructor(props, app){
         super(props);
         // requires server calls to fetch the recipes info and user profile info
         this.state = {
@@ -49,6 +50,8 @@ export default class ViewProfile extends Component {
             recipeExpanded: false,
             collectionExpanded: false,
         }
+        getUser(this, app);
+
     }
 
 

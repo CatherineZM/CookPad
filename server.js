@@ -28,6 +28,7 @@ app.use(bodyParser.json())
 
 // express-session for managing user sessions
 const session = require("express-session");
+const e = require('express');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 /*** Helper functions below **********************************/
@@ -45,6 +46,27 @@ const mongoChecker = (req, res, next) => {
     } else {
         next()  
     }   
+}
+
+const uidValidator = (req, res, next) => {
+    const id = req.params.uid;
+
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send("Invalid ID")
+		return; 
+    } else {
+        next();
+    }
+}
+
+const ridValidator = (req, res, next) => {
+    const id = req.params.rid;
+    if (!ObjectID.isValid(id)) {
+        res.status(404).send("Invalid ID")
+		return; 
+    } else {
+        next();
+    }
 }
 
 // Middleware for authentication of resources
@@ -132,6 +154,27 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
 	try{
 		const newUser = await user.save()
 		res.send(newUser)
+	} catch(error) {
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	}
+})
+
+app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
+	
+	const uid = req.params.uid;
+
+	try{
+        const user = await User.findById(uid)
+        if (!user){
+            res.status(404).send("Resource not found")
+        } else {
+            res.send(user)
+        }
+		
 	} catch(error) {
 		if(isMongoError(error)){
 			res.status(500).send('Internal Server Error')
