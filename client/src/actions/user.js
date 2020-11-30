@@ -116,3 +116,5 @@ export const getUser = (viewProfileComp) => {
             console.log(error);
         })
 }
+
+// export const getRecipes = ()

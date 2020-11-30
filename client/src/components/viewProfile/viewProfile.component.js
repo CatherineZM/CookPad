@@ -30,23 +30,8 @@ export default class ViewProfile extends Component {
             uid: this.props.match.params.uid,
             user: {},
             userpicture: {src: ProfilePic},
-            recipes: [
-                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
-                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
-                {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
-                {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]},
-                {id:8, src:recipe9, liked: false, collected: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
-                {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
-                {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
-            ],
-            collectRecipes:[{id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
-            {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
-            {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
-            {id:3, src:recipe4, liked: false, collected: false, title:'Vanilla Cake', likes:76, categories:[0]},
-            {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
-            {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
-            {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
-            {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]}],
+            recipes: [],
+            collectRecipes:[],
             recipeExpanded: false,
             collectionExpanded: false,
         }
@@ -114,13 +99,16 @@ export default class ViewProfile extends Component {
         this.props.history.push("/editprofile/"+ this.state.uid);
     }
 
-    editButtonGenerator=()=>{
-        return <button type="button"
+    editButtonGenerator=(app)=>{
+        if (app.state.currentUser === this.state.user._id){
+            return <button type="button"
             className = "btn btn-outline-primary"
             onClick={this.editprofile}>
             <FaRegEdit/>
             Edit Profile
             </button>
+        }
+        
     }
 
     RecipeExpandButtonGenerator=()=>{
@@ -205,13 +193,13 @@ export default class ViewProfile extends Component {
                     <h4>{this.state.user.username + "'s Profile"}</h4>
                     <Avatar id="user-picture" name="user" size="150" round={true} src={this.state.userpicture.src}/> 
                     <div>{this.state.user.description}</div>
-                    <this.editButtonGenerator/>
+                    {this.editButtonGenerator(app)}
                 </div>
                 
                 
                 <div id="user-recipes">
                     <h4>My Recipes
-                    <this.RecipeExpandButtonGenerator/>
+                    <this.RecipeExpandButtonGenerator />
                     </h4>
                     <Collapse in={this.state.recipeExpanded}>
                         <div className="recipe-list">
