@@ -25,6 +25,18 @@ const UserSchema = new mongoose.Schema({
 	isAdmin:{
 		type: Boolean,
 		required: true
+	},
+	likedRecipes:{
+		type: [mongoose.Schema.Types.ObjectId],
+		required: false
+	},
+	collectedRecipes:{
+		type: [mongoose.Schema.Types.ObjectId],
+		required: false,
+	},
+	myRecipes: {
+		type: [mongoose.Schema.Types.ObjectId],
+		required: false,
 	}
 })
 

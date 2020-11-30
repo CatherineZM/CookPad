@@ -64,7 +64,7 @@ export const logout = (app) => {
         });
 };
 
-export const signup = (signupComp, app) => {
+export const signup = (signupComp) => {
     // create our request constructor with all the parameters we need
     const request = new Request("/api/users", {
         method: "post",
@@ -85,9 +85,6 @@ export const signup = (signupComp, app) => {
         .then(json=>{
             console.log(json)
             alert("Sign up success!");
-            // if(json.currentUser !== undefined){
-            //     app.setState({ currentUser: json.currentUser })
-            // }
         })
         .catch(error=>{
             alert("Could not Sign up!");
@@ -95,7 +92,7 @@ export const signup = (signupComp, app) => {
         })
 }
 
-export const getUser = (viewProfileComp, app) => {
+export const getUser = (viewProfileComp) => {
     const request = new Request(`/api/users/${viewProfileComp.state.uid}`, {
         method: "get",
         headers: {

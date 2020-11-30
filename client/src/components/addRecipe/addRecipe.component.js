@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import axios from "axios";
 import './addRecipe.css'
 import Navbar from "../Navbar/navbar.component";
 import Dropdown from 'react-dropdown';
@@ -17,13 +18,13 @@ export default class AddRecipe extends Component {
         super(props);
         this.props.history.push("/addrecipe");
         this.state = {
-            uid: this.props.match.params.uid,
-            RecipeName: '',
-            Description: '',
-            Ingredients: [{name:"", quantity:"", unit:""}],
-            Steps:[],
-            RecipeImages: [],
-            CuisineTypes :[
+            name: '',
+            description: '',
+            ingredients: [{name:"", quantity:"", unit:""}],
+            steps:[],
+            RecipeImage: [],
+            selectedCategories:[],
+            categories :[
                 {name: "Cake", id: 0},
                 {name: "Noodles", id: 1},
                 {name: "Pie", id: 2},
@@ -38,65 +39,105 @@ export default class AddRecipe extends Component {
 
     onChangeRecipeName = (e) =>{
         e.preventDefault();
-        this.setState({ RecipeName: e.target.value });
+        this.setState({ name: e.target.value });
     }
 
     onChangeDescription = (e) =>{
         e.preventDefault();
-        this.setState({ Description: e.target.value });
+        this.setState({ description: e.target.value });
     }
 
     onChangeIngredientsName = (e,index)=>{
-        let ingredients = this.state.Ingredients;
-        ingredients[index].name = e.target.value;
-        this.setState({ Ingredients: ingredients });
+        const newIngredients = this.state.ingredients;
+        newIngredients[index].name = e.target.value;
+        this.setState({ ingredients: newIngredients });
     }
 
     onChangeIngredientsQuan=(e,index)=>{
-        let ingredients = this.state.Ingredients;
-        ingredients[index].quantity = e.target.value;
-        this.setState({ Ingredients: ingredients });
+        const NewIngredients = this.state.ingredients;
+        NewIngredients[index].quantity = e.target.value;
+        this.setState({ ingredients: NewIngredients });
     }
 
     addIngredientsRow=()=>{
-       this.setState((prevState)=>({Ingredients:[...prevState.Ingredients, {name: "", age:"", unit:""}],
+       this.setState((prevState)=>({ingredients:[...prevState.ingredients, {name: "", age:"", unit:""}],
         }));
     }
 
     onChangeRemoveIngredients=(index)=>{
-        this.state.Ingredients.splice(index,1);
-        this.setState({Ingredients: this.state.Ingredients})
+        const NewIngredients = this.state.ingredients
+        NewIngredients.splice(index,1);
+        this.setState({ingredients: NewIngredients})
     }
 
     onChangeSteps=(e,index)=>{
-        let steps = this.state.Steps;
-        steps[index] = e.target.value;
-        this.setState({ Steps: steps });
+        const newSteps = this.state.steps;
+        newSteps[index] = e.target.value;
+        this.setState({ steps: newSteps });
     }
 
     addStepsRow=()=>{
-        this.setState((prevState)=>({Steps:[...prevState.Steps, ""],
+        this.setState((prevState)=>({steps:[...prevState.steps, ""],
         }));
     }
 
     onChangeRemoveSteps=(index)=>{
-        this.state.Steps.splice(index,1);
-        this.setState({Steps: this.state.Steps})
+        this.state.steps.splice(index,1);
+        this.setState({steps: this.state.steps})
     }
 
     onImageUpload=(picture)=>{
-        this.setState({RecipeImages: this.state.RecipeImages.concat(picture),});
+        this.setState({RecipeImage: this.state.RecipeImage.concat(picture)});
     }
 
-    onSubmit=(e)=>{
+    onSelect=(selectedList)=>{
+        this.setState({selectedCategories: selectedList})
+        console.log(this.state.selectedCategories)
+    }
+     
+    onRemove=(selectedList)=>{
+        this.setState({selectedCategories: selectedList})
+    }
+
+    onSubmit=async(e)=>{
         e.preventDefault();
-        // push the recipe to the server
-        // pushing to database requires server call
-        this.props.history.push("/homepage/"+this.state.uid);
+        const formData = new FormData();
+        formData.append('file', this.state.RecipeImage[0]);
+
+        try{
+            const res1 = await axios.post('/upload', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            const { filePath } = res1.data;
+
+            const recipe = {
+                name: this.state.name,
+                description: this.state.description,
+                categories: [0,1,2], // TODO: change this later
+                creator: this.props.app.state.currentUser._id,
+                steps: this.state.steps,
+                ingredients: this.state.ingredients,
+                filePath: filePath
+            }
+
+            const res2 = await axios.post('/api/recipes', recipe);
+            console.log(res2)
+        }catch(err){
+            if(err.response.status === 500){
+                console.log('There was a problem with the server')
+            } else{
+                console.log(err)
+            }
+        }
+        // push the recipe to the server, use the filepath and filename
+        
+        this.props.history.push("/homepage");
     }
 
     render(){ 
-        const { history, app } = this.props;
+        const { app } = this.props;
 
         return(
             <div>
@@ -111,7 +152,7 @@ export default class AddRecipe extends Component {
                             required 
                             placeholder="Your Recipe Name" 
                             className = "form-control" 
-                            value = {this.state.RecipeName} 
+                            value = {this.state.name} 
                             onChange={this.onChangeRecipeName}
                         />
                     </div>
@@ -121,7 +162,7 @@ export default class AddRecipe extends Component {
                             type = "Description" 
                             placeholder="optional" 
                             className = "form-control" 
-                            value = {this.state.Description} 
+                            value = {this.state.description} 
                             onChange={this.onChangeDescription}
                         />
                     </div>
@@ -129,7 +170,7 @@ export default class AddRecipe extends Component {
                         <label>Cuisine Type: </label>
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
-                            options={this.state.CuisineTypes} 
+                            options={this.state.categories} 
                             selectedValues={this.state.selectedValue} 
                             onSelect={this.onSelect} 
                             onRemove={this.onRemove} 
@@ -139,7 +180,7 @@ export default class AddRecipe extends Component {
                     <div className = "Ingredient-form" >
                         <label> Recipe Ingredients: </label>
                          {
-                            this.state.Ingredients.map((Ingredient, index) => {
+                            this.state.ingredients.map((Ingredient, index) => {
                                 return(
                                     <div className="row" id="Ingredient-row" key={index}>
                                         <Col className="col" xs={5}>
@@ -190,7 +231,7 @@ export default class AddRecipe extends Component {
                     <div className = "Step-form">
                         <label> Recipe Steps: </label>
                         {
-                            this.state.Steps.map((step, index) => {
+                            this.state.steps.map((step, index) => {
                                 return(
                                     <div className="row" key={index}>
                                         <Col className = "col" xs = {10}>

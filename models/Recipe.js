@@ -1,8 +1,14 @@
 /* Recipe mongoose model */
 const mongoose = require('mongoose')
 
+const IngredientSchma = new mongoose.Schema({
+    name: String,
+	quantity: String,
+	unit: String
+});
+
 const Recipe = mongoose.model('Recipe', {
-	title: {
+	name: {
 		type: String,
 		required: true,
 		minlegth: 1,
@@ -13,16 +19,8 @@ const Recipe = mongoose.model('Recipe', {
 		required: false,
 		minlength: 1,
 	},
-	liked_uid:{
-		type: [mongoose.Schema.Types.ObjectId],
-		required: true
-	},
 	likes:{
 		type: Number,
-		required: true,
-	},
-	collected_uid:{
-		type: [mongoose.Schema.Types.ObjectId],
 		required: true,
 	},
 	categories:{
@@ -32,6 +30,18 @@ const Recipe = mongoose.model('Recipe', {
 	creator:{
 		type: mongoose.Schema.Types.ObjectId,
 		required: true
+	},
+	steps:{
+		type: [String],
+		required: true,
+	},
+	ingredients:{
+		type: [IngredientSchma],
+		required: true,
+	},
+	filePath: {
+		type: String,
+		required: false,
 	}
 })
 

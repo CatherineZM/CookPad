@@ -264,7 +264,7 @@ export default class HomePage extends Component {
     }
 
     render(){
-        const { history, app } = this.props;
+        const { app } = this.props;
         return(
             <div id="body">
                 

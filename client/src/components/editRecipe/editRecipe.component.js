@@ -66,12 +66,12 @@ export default class EditRecipe extends Component {
     ReturnView=(e)=>{
         e.preventDefault();
         // server calls are required to push the updated recipe to the server
-        window.location = "/viewrecipe/"+this.state.uid+"/"+ this.state.rid
+        this.props.history.push("/viewrecipe/"+this.state.rid)
     }
 
     onCancel=(e)=>{
         e.preventDefault();
-        window.location = "/viewrecipe/"+this.state.uid+"/"+ this.state.rid
+        this.props.history.push("/viewrecipe/"+this.state.rid)
     }
 
     onChangeRecipeName = (e) =>{
@@ -127,7 +127,7 @@ export default class EditRecipe extends Component {
     }
 
     render(){
-        const { history, app } = this.props;
+        const { app } = this.props;
 
         return(
             <div> 

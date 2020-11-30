@@ -31,6 +31,27 @@ const session = require("express-session");
 const e = require('express');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+// uploading files
+const fileUpload = require('express-fileUpload');
+app.use(fileUpload());
+app.post('/upload', (req, res) => {
+    console.log(req);
+    if(req.files === null){
+        return res.status(400).json({ msg: 'No file uploaded'});
+    }
+    
+    const file = req.files.file;
+    file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
+        if(err){
+            console.error(err);
+            return res.status(500).send(err)
+        }
+    })
+
+    res.json({filePath: `/uploads/${file.name}`});
+})
+
+
 /*** Helper functions below **********************************/
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
 	return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
@@ -188,16 +209,16 @@ app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
     // create a new recipe
     const recipe = new Recipe({
-        title: req.body.title,
+        name: req.body.name,
         description: req.body.description,
-        liked_uid: [],
         likes: 0,
-        collected_uid: [],
         categories: req.body.categories,
         creator: req.body.creator,
+        steps: req.body.steps,
+        ingredients: req.body.ingredients,
+        filePath: req.body.filePath,
     })
 
-    console.log(recipe)
     try{
         const newRecipe = await recipe.save()
 		res.send(newRecipe)

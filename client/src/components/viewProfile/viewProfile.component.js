@@ -23,10 +23,9 @@ import { FaRegEdit } from "react-icons/fa";
 import {getUser} from "../../actions/user";
 
 export default class ViewProfile extends Component {
-    constructor(props, app){
+    constructor(props){
         super(props);
         
-        // requires server calls to fetch the recipes info and user profile info
         this.state = {
             uid: this.props.match.params.uid,
             user: {},
@@ -52,7 +51,7 @@ export default class ViewProfile extends Component {
             collectionExpanded: false,
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
-        getUser(this, app);
+        getUser(this);
     }
 
 
@@ -197,7 +196,7 @@ export default class ViewProfile extends Component {
     }
 
     render(){
-        const { history, app } = this.props;
+        const { app } = this.props;
         return(
             <div>
             <Container maxWidth='md'>
