@@ -231,7 +231,36 @@ app.post('/api/recipes', mongoChecker, async(req, res)=>{
     }
 })
 
+//get all recipes
+app.get('/api/recipes', async(req, res)=>{
+    try{
+        const recipes = await Recipe.find()
+		res.send({recipes})
+    } catch(error) {
+        log(error)
+        res.status(500).send('Internal Server Error')
+    }
+})
 
+//get recipe by its id
+app.get('/api/recipes/:rid', [ridValidator, mongoChecker],async (req, res) =>{
+    const rid = req.params.rid
+
+	try {
+		const recipe = await Recipe.findById(rid)
+		if (!recipe) {
+			res.status(404).send('Resource not found')  
+		} else {   
+			res.send(recipe)
+		}
+	} catch(error) {
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}  
+	}
+})
 /*** Webpage routes below **********************************/
 // Serve the build
 app.use(express.static(path.join(__dirname, "/client/build")));

@@ -58,3 +58,28 @@ export const getMyCollection = (viewProfileComp) => {
 
     viewProfileComp.setState({collectedRecipes: myCollectedRecipes})
 }
+export const addRecipe = (newRecipeComp) => {
+    const request = new Request("/api/recipes", {
+        method: "post",
+        body: JSON.stringify(newRecipeComp.state),
+        headers: {
+            'Content-Type': 'multipart/form-data'
+        }
+    })
+
+    // send the request with fetch()
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+            alert("Added A New Recipe!");
+        })
+        .catch(error=>{
+            alert("Could not Add Recipe!");
+            console.log(error);
+        })
+}

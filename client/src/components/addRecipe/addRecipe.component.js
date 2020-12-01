@@ -9,6 +9,8 @@ import ImageUploader from 'react-images-upload';
 import 'react-dropdown/style.css';
 import Col from 'react-bootstrap/Col';
 
+import {addRecipe} from "../../actions/recipe"
+
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 
 const defaultUnit = UnitType[0];
@@ -22,9 +24,9 @@ export default class AddRecipe extends Component {
             description: '',
             ingredients: [{name:"", quantity:"", unit:""}],
             steps:[],
-            RecipeImage: [],
-            selectedCategories:[],
-            categories :[
+            filePath: '',
+            categories:[],
+            categoriesOptions :[
                 {name: "Cake", id: 0},
                 {name: "Noodles", id: 1},
                 {name: "Pie", id: 2},
@@ -91,48 +93,18 @@ export default class AddRecipe extends Component {
     }
 
     onSelect=(selectedList)=>{
-        this.setState({selectedCategories: selectedList})
-        console.log(this.state.selectedCategories)
+        this.setState({categories: selectedList.id})
+        console.log(this.state.categories)
     }
      
     onRemove=(selectedList)=>{
         this.setState({selectedCategories: selectedList})
     }
 
-    onSubmit=async(e)=>{
+    onSubmit=async(e,app)=>{
         e.preventDefault();
-        const formData = new FormData();
-        formData.append('file', this.state.RecipeImage[0]);
-
-        try{
-            const res1 = await axios.post('/upload', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-            const { filePath } = res1.data;
-
-            const recipe = {
-                name: this.state.name,
-                description: this.state.description,
-                categories: [0,1,2], // TODO: change this later
-                creator: this.props.app.state.currentUser._id,
-                steps: this.state.steps,
-                ingredients: this.state.ingredients,
-                filePath: filePath
-            }
-
-            const res2 = await axios.post('/api/recipes', recipe);
-            console.log(res2)
-        }catch(err){
-            if(err.response.status === 500){
-                console.log('There was a problem with the server')
-            } else{
-                console.log(err)
-            }
-        }
+        addRecipe(this,app);
         // push the recipe to the server, use the filepath and filename
-        
         this.props.history.push("/homepage");
     }
 
@@ -170,7 +142,7 @@ export default class AddRecipe extends Component {
                         <label>Cuisine Type: </label>
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
-                            options={this.state.categories} 
+                            options={this.state.categoriesOptions} 
                             selectedValues={this.state.selectedValue} 
                             onSelect={this.onSelect} 
                             onRemove={this.onRemove} 
