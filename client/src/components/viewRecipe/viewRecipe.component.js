@@ -5,6 +5,7 @@ import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
 import {uid} from "react-uid"
+import {getRecipe} from "../../actions/recipe"
 import './viewRecipe.css'
 
 import Card from '@material-ui/core/Card';
@@ -42,45 +43,33 @@ const styles = {
 class ViewRecipe extends Component {
     constructor(props){
         super(props);
-        this.props.history.push('/viewrecipe/'+this.props.match.params.rid);
+        this.props.history.push('/viewrecipe/5fc6d4eb6db5830cb4a1586d');
+        //this.props.history.push('/viewrecipe/'+this.props.match.params.rid);
         // requires server calls to update the information based on the recipe id
         this.state = {
             top3_recipe:[
                 {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
                 {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]}
             ],
-            recipe: {id:0, src:recipe1, liked: false, title:'Butter Chicken', likes: 123, categories:[7], collected: false,
-            creator:{uid:1, username:"Catherine"}, 
-            ingredients: [
-                {ingredient:"Butter", measure:"2 tablespoons"},
-                {ingredient:"Medium onion", measure:"1 (medium diced)"},
-                {ingredient:"Red pepper", measure:"1 (small dice)"},
-                {ingredient:"Garlic cloves", measure:"3 (minced)"},
-                {ingredient:"Grated ginger", measure:"1 tablespoon"},
-                {ingredient:"Garam masala", measure:"1 teaspoon"},
-                {ingredient:"Cumin", measure:"1 teaspoon"},
-                {ingredient:"Red chili powder", measure:"1 teaspoon"},
-                {ingredient:"Diced tomatoes", measure:"14 ounces"},
-                {ingredient:"Heavy cream", measure:"1 cup"},
-                {ingredient:"Salt and pepper", measure:"To taste"}
-            ], 
-            steps: [
-                "Heat a large pan to medium high heat and add the olive oil. Add the chicken and cook for 5 minutes, stirring, until the chicken is browned. Remove the chicken and set it aside.", 
-                "Melt the butter in the same pan. Add the onion and peppers and cook them 5 minutes to soften.",
-                "Add the garlic and ginger and cook 1 minute, until they become fragrant.",
-                "Add the garam masala, cumin, red chili powder, salt and pepper. Stir and cook for 1 minute.",
-                "Stir in the diced tomatoes. Bring to a quick boil, then reduce the heat and simmer for 15 minutes to break everything down.",
-                "Transfer the sauce to a blender or food processor and process until smooth. You can thin it out with a bit of water if you’d like.",
-                "Strain the sauce back into the pan. The point is to make the sauce very smooth and heat through.",
-                "Stir in the cream and add the chicken back to the pan. Heat and simmer for 10 minutes, or until the chicken is cooked through and the sauce thickens up a bit.",
-                "Serve with cooked white rice and enjoy!"
-            ]
-        }
+            liked: false,
+            collected: false,
+            recipe:{
+                name: "",
+                description: "",
+                likes: 0,
+                categories: [],
+                creatorUsername: "",
+                creatorId: "",
+                steps: [],
+                ingredients: [{name:"", quantity:"", unit: ""}],
+                filePath: "",
+            }
         }
     }
 
     componentDidMount() {
         // requires server calls to initialize recipe information
+        getRecipe(this, "5fc6d4eb6db5830cb4a1586d")
     }
 
     clickStar=(rid)=>{
@@ -97,16 +86,16 @@ class ViewRecipe extends Component {
 
     clickHeart=(rid)=>{
         // requires server calls to update the recipe information
-        let new_recipe = this.state.recipe;
-        if(this.state.recipe.liked){
-            new_recipe.liked = false;
-            new_recipe.likes--;
-            this.setState({ recipes: new_recipe });
-        }else{
-            new_recipe.liked = true;
-            new_recipe.likes++;
-            this.setState({ recipes: new_recipe });
-        }
+        // let new_recipe = this.state.recipe;
+        // if(this.state.recipe.liked){
+        //     new_recipe.liked = false;
+        //     new_recipe.likes--;
+        //     this.setState({ recipes: new_recipe });
+        // }else{
+        //     new_recipe.liked = true;
+        //     new_recipe.likes++;
+        //     this.setState({ recipes: new_recipe });
+        // }
     }
 
     editRecipe=(e)=>{
@@ -133,15 +122,15 @@ class ViewRecipe extends Component {
                     <Card className={classes.card}>
                         <CardMedia
                             component="img"
-                            alt={this.state.recipe.title}
-                            image={this.state.recipe.src}
+                            alt={this.state.recipe.name}
+                            image={this.state.recipe.filePath}
                         />
                         <CardContent>
                         <Typography gutterBottom variant="h4" component="h4">
-                            {this.state.recipe.title}
+                            {this.state.recipe.name}
                         </Typography>
                         <Typography variant="h6" color="textSecondary" component="h6">
-                            <Link to={"/viewprofile/"+ this.state.recipe.creator.uid}>{"By: "+this.state.recipe.creator.username}</Link>
+                            <Link to={"/viewprofile/"+ this.state.recipe.creatorId}>{"By: "+this.state.recipe.creatorUsername}</Link>
                         </Typography>
                         </CardContent>
                         <CardActions disableSpacing>
@@ -149,21 +138,21 @@ class ViewRecipe extends Component {
                                 <FormControlLabel
                                 className={classes.likeButton}
                                 labelPlacement="end"
-                                control={<Checkbox checked= {this.state.recipe.liked}disableRipple={true} onChange={()=>this.clickHeart(this.state.recipe.id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
+                                control={<Checkbox checked= {this.state.liked}disableRipple={true} onChange={()=>this.clickHeart(this.state.recipe._id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
                                 label={this.state.recipe.likes}
                                 />
                                 <FormControlLabel
                                 className={classes.saveButton}
-                                control={<Checkbox disableRipple={true} onChange={()=>this.clickStar(this.state.recipe.id)} icon={<BookmarkBorderIcon fontSize="large"/>} checkedIcon={<BookmarkIcon fontSize="large" style={{color: yellow[600] }}/>} name="saved" />} 
+                                control={<Checkbox disableRipple={this.state.collected} onChange={()=>this.clickStar(this.state.recipe._id)} icon={<BookmarkBorderIcon fontSize="large"/>} checkedIcon={<BookmarkIcon fontSize="large" style={{color: yellow[600] }}/>} name="saved" />} 
                                 /> 
                             </div>
                         </CardActions>
                     </Card>
                 </div>
 
-                <div className="recommendations">
+                {/* <div className="recommendations">
                 {this.state.top3_recipe.map((recipe)=>(
-                    <div key={uid(recipe.title)} className="view-other">
+                    <div key={uid(recipe.name)} className="view-other">
                         <Link to={"/viewrecipe/" + recipe.id}>
                         <Card className={classes.card}>
                             <CardActionArea>
@@ -183,7 +172,7 @@ class ViewRecipe extends Component {
                         </Link>
                     </div>
                     ))}
-                </div>
+                </div> */}
                 
                 <div className="mid-section">
                     <Steps
@@ -196,14 +185,14 @@ class ViewRecipe extends Component {
                 </div>
 
                 {/* only show the two button if they belong to the user */}
-                <div>
+                {this.state.recipe.creatorId === this.props.app.state.currentUser._id && <div>
                     <div className="view-recipe-form-group">
                         <form float="left" onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
                     </div>
                     <div className="view-recipe-form-group">
                         <form onSubmit={(e)=>this.deleteRecipe(e, app)}><input type="submit" value="Delete" className="btn btn-primary"/></form>
                     </div>
-                </div>
+                </div>}
             </Container> 
             </div> 
         )

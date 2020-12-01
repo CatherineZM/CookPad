@@ -27,9 +27,13 @@ const Recipe = mongoose.model('Recipe', {
 		type: [Number],
 		required: true,
 	},
-	creator:{
+	creatorId:{
 		type: mongoose.Schema.Types.ObjectId,
-		required: true
+		required: true,
+	},
+	creatorUsername: {
+		type: String,
+		require: true,
 	},
 	steps:{
 		type: [String],

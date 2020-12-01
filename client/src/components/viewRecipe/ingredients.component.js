@@ -19,9 +19,9 @@ export default class Ingredients extends Component {
                         </TableRow>
                     {ingredients.map((ingredient)=>{
                     return(
-                        <TableRow key={uid(ingredient.ingredient)}>
-                            <TableCell>{ingredient.ingredient}</TableCell>
-                            <TableCell>{ingredient.measure}</TableCell>
+                        <TableRow key={uid(ingredient.name)}>
+                            <TableCell>{ingredient.name}</TableCell>
+                            <TableCell>{ingredient.quantity}{ingredient.unit}</TableCell>
                         </TableRow>
                     )
                     })}

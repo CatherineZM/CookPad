@@ -24,6 +24,8 @@ export default class AddRecipe extends Component {
             description: '',
             ingredients: [{name:"", quantity:"", unit:""}],
             steps:[],
+            creatorId: '',
+            creatorUsername: '',
             filePath: '',
             categories:[],
             categoriesOptions :[

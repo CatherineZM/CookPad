@@ -24,9 +24,7 @@ export const getMyRecipe = (viewProfileComp) => {
             })
         
     });
-
-    viewProfileComp.setState({recipes: myRecipes})
-    
+    viewProfileComp.setState({recipes: myRecipes})  
 }
 
 export const getMyCollection = (viewProfileComp) => {
@@ -55,9 +53,10 @@ export const getMyCollection = (viewProfileComp) => {
             })
         
     });
-
     viewProfileComp.setState({collectedRecipes: myCollectedRecipes})
 }
+
+
 export const addRecipe = (newRecipeComp) => {
     const request = new Request("/api/recipes", {
         method: "post",
@@ -82,4 +81,36 @@ export const addRecipe = (newRecipeComp) => {
             alert("Could not Add Recipe!");
             console.log(error);
         })
+}
+
+export const getRecipe = (comp, rid) => {
+    const request = new Request(`/api/recipes/${rid}`, {
+        method: "get",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+            comp.setState({recipe: json})
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
+
+export const getTopRecipes = ()=>{
+
+}
+
+export const updateLikes = ()=>{
+    
 }
