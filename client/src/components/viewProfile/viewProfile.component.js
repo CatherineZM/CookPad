@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from "@material-ui/core/Container"
 import './viewProfile.css'
 import Navbar from "../Navbar/navbar.component"
-import ReceipeList from '../recipelist/recipelist.component'
+import RecipeList from '../recipelist/recipelist.component'
 import Avatar from 'react-avatar';
 import {Collapse} from 'react-bootstrap'
 
@@ -160,7 +160,7 @@ export default class ViewProfile extends Component {
                 </h4>
                 <Collapse in={this.state.collectionExpanded}>
                     <div className="recipe-list">
-                        <ReceipeList   
+                        <RecipeList   
                             recipes={this.state.collectedRecipes}
                             clickHeart={this.clickHeart}
                             clickStar={this.clickStar}
@@ -176,7 +176,7 @@ export default class ViewProfile extends Component {
                     </h4>
                     <Collapse in={this.state.collectionExpanded}>
                         <div className="recipe-list">
-                            <ReceipeList   
+                            <RecipeList   
                                 recipes={this.state.collectedRecipes}
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
@@ -208,7 +208,7 @@ export default class ViewProfile extends Component {
                     </h4>
                     <Collapse in={this.state.recipeExpanded}>
                         <div className="recipe-list">
-                            <ReceipeList   
+                            <RecipeList   
                                 recipes={this.state.recipes}
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}

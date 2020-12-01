@@ -7,7 +7,7 @@ import RecipeSlideShow from './slideshow/recipeSlideShow.component'
 import HomePageLeftPanel from './leftpanel/homePageLeftPanel.component'
 import Navbar from '../Navbar/navbar.component'
 import HomePageRightPanel from './rightpanel/homePageRightPanel.component'
-import ReceipeList from '../recipelist/recipelist.component'
+import RecipeList from '../recipelist/recipelist.component'
 import TopRecipes from "./toprecipes/topRecipes.component"
 
 import cakeIcon from './images/cake.png'
@@ -285,7 +285,7 @@ export default class HomePage extends Component {
                             decrSlide={this.decrSlide}
                             incrSlide={this.incrSlide}
                         />
-                        <ReceipeList 
+                        <RecipeList 
                         recipes={this.state.displayed_recipes}
                         clickRecipe={this.clickRecipe}
                         clickHeart={this.clickHeart}

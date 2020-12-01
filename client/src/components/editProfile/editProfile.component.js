@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Container from '@material-ui/core/Container'
 import './editProfile.css'
 import Navbar from "../Navbar/navbar.component"
-import ReceipeList from '../recipelist/recipelist.component'
+import RecipeList from '../recipelist/recipelist.component'
 import Avatar from 'react-avatar-edit';
 import {Collapse} from 'react-bootstrap'
 
@@ -183,7 +183,7 @@ export default class EditProfile extends Component {
                 </h4>
                 <Collapse in={this.state.collectionExpanded}>
                     <div className="recipe-list">
-                        <ReceipeList   
+                        <RecipeList   
                             recipes={this.state.collectRecipes}
                             clickHeart={this.clickHeart}
                             clickStar={this.clickStar}
@@ -201,7 +201,7 @@ export default class EditProfile extends Component {
                     </h4>
                     <Collapse in={this.state.collectionExpanded}>
                         <div className="recipe-list">
-                            <ReceipeList   
+                            <RecipeList   
                                 recipes={this.state.collectRecipes}
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
@@ -256,7 +256,7 @@ export default class EditProfile extends Component {
                     </h4>
                     <Collapse in={this.state.recipeExpanded}>
                         <div className="recipe-list">
-                            <ReceipeList   
+                            <RecipeList   
                                 recipes={this.state.recipes}
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}

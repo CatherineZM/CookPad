@@ -37,7 +37,7 @@ const styles = {
     },
   };
 
-class ReceipeList extends Component {
+class RecipeList extends Component {
     
     render(){
         const {classes, recipes, clickRecipe, clickHeart, clickStar} = this.props;
@@ -81,4 +81,4 @@ class ReceipeList extends Component {
     }
 }
 
-export default withStyles(styles)(ReceipeList);
+export default withStyles(styles)(RecipeList);
