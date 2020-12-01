@@ -20,6 +20,7 @@ export default class AddRecipe extends Component {
         super(props);
         this.props.history.push("/addrecipe");
         this.state = {
+            creator: this.props.app.state.currentUser._id,
             name: '',
             description: '',
             ingredients: [{name:"", quantity:"", unit:""}],
@@ -56,9 +57,9 @@ export default class AddRecipe extends Component {
     }
 
     onChangeIngredientsQuan=(e,index)=>{
-        const NewIngredients = this.state.ingredients;
-        NewIngredients[index].quantity = e.target.value;
-        this.setState({ ingredients: NewIngredients });
+        const newIngredients = this.state.ingredients;
+        newIngredients[index].quantity = e.target.value;
+        this.setState({ ingredients: newIngredients });
     }
 
     addIngredientsRow=()=>{
@@ -89,7 +90,7 @@ export default class AddRecipe extends Component {
     }
 
     onImageUpload=(picture)=>{
-        this.setState({RecipeImage: this.state.RecipeImage.concat(picture)});
+        this.setState({filePath: this.state.filePath.concat(picture)});
     }
 
     onSelect=(selectedList)=>{
@@ -98,7 +99,7 @@ export default class AddRecipe extends Component {
     }
      
     onRemove=(selectedList)=>{
-        this.setState({selectedCategories: selectedList})
+        this.setState({categories: selectedList})
     }
 
     onSubmit=async(e,app)=>{
@@ -143,11 +144,11 @@ export default class AddRecipe extends Component {
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
                             options={this.state.categoriesOptions} 
-                            selectedValues={this.state.selectedValue} 
+                            selectedValues={this.state.categories} 
                             onSelect={this.onSelect} 
-                            onRemove={this.onRemove} 
+                            onRemove={this.onRemove}
                             displayValue="name" 
-                        />
+                        />    
                     </div>
                     <div className = "Ingredient-form" >
                         <label> Recipe Ingredients: </label>

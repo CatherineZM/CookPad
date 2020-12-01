@@ -261,6 +261,40 @@ app.get('/api/recipes/:rid', [ridValidator, mongoChecker],async (req, res) =>{
 		}  
 	}
 })
+
+//edit recipe
+app.patch('/api/recipes/:uid/:rid', [uidValidator,ridValidator, mongoChecker],async (req, res) =>{
+    const uid = req.params.uid
+    const rid = req.params.rid
+
+    try{
+        const recipeToEdit = await Recipe.findById(rid)
+        if(recipeToEdit.creator == uid){
+            if(!recipeToEdit){   
+                res.status(404).send('Resource not found')  
+            } else {   
+                recipeToEdit.name = req.body.name
+                recipeToEdit.description = req.body.description
+                recipeToEdit.categories = req.body.categories
+                recipeToEdit.steps = req.body.steps
+                recipeToEdit.ingredients = req.body.ingredients
+                if(req.body.filePath != null){
+                    recipeToEdit.filePath = req.body.filePath
+                }
+                recipeToEdit.save()
+                res.send(recipeToEdit)
+            }
+        }else{
+            res.status(404).send('No authentication to edit')
+        }
+    } catch(error) {
+        if(isMongoError(error)){
+            res.status(500).send('Internal Server Error')
+        } else {
+            res.status(400).send('Bad Request')
+        }
+    }
+})
 /*** Webpage routes below **********************************/
 // Serve the build
 app.use(express.static(path.join(__dirname, "/client/build")));

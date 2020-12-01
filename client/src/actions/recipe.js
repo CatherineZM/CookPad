@@ -59,10 +59,23 @@ export const getMyCollection = (viewProfileComp) => {
     viewProfileComp.setState({collectedRecipes: myCollectedRecipes})
 }
 export const addRecipe = (newRecipeComp) => {
+    const newRecipe = {};
+    newRecipe.creator = newRecipeComp.state.creator;
+    newRecipe.name = newRecipeComp.state.name;
+    newRecipe.ingredients = newRecipeComp.state.ingredients;
+    newRecipe.steps = newRecipeComp.state.steps;
+    newRecipe.description = newRecipeComp.state.description;
+    newRecipe.filePath = newRecipeComp.state.filePath;
+    newRecipe.categories = newRecipeComp.state.categories;
+
+    console.log("state ready to send a request:");
+    console.log(newRecipe);
+
     const request = new Request("/api/recipes", {
         method: "post",
-        body: JSON.stringify(newRecipeComp.state),
+        body: JSON.stringify(newRecipe),
         headers: {
+            Accept: "application/json, text/plain, */*",
             'Content-Type': 'multipart/form-data'
         }
     })
