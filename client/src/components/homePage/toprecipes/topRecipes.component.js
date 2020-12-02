@@ -19,12 +19,12 @@ const styles = {
 
 class TopRecipes extends Component {
     render(){
-        const {classes, recipes, top3_recipe, userid} = this.props;
+        const {classes, recipes, top3_recipe} = this.props;
         return(
             <div id="top-recipe">
                 {top3_recipe.map((id)=>(
                     <div key={uid(recipes[id].name)} className="view-other">
-                        <Link to={"/viewrecipe/"+ userid + "/" + recipes[id]._id}>
+                        <Link to={"/viewrecipe/"+ recipes[id]._id}>
                             <Card className={classes.card}>
                                 <CardActionArea >
                                     <CardMedia

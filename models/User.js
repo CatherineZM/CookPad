@@ -28,7 +28,7 @@ const UserSchema = new mongoose.Schema({
 	},
 	likedRecipes:{
 		type: [mongoose.Schema.Types.ObjectId],
-		required: false
+		required: false,
 	},
 	collectedRecipes:{
 		type: [mongoose.Schema.Types.ObjectId],

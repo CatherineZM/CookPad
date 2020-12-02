@@ -202,7 +202,6 @@ app.get('/api/users', mongoChecker, async(req, res)=>{
 })
 
 app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
-	
 	const uid = req.params.uid;
 
 	try{
@@ -312,13 +311,9 @@ update a user
     "isAdmin": <boolean>
 }
 */
-
-app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
-	
+app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{	
     const uid = req.params.uid;
     const FieldToUpdate = {}
-
-    
 
 	try{
         const user = await User.findById(uid)
@@ -346,8 +341,6 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 		}
 	}
 })
-
-
 
 
 // User API Route

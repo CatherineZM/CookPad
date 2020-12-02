@@ -266,6 +266,7 @@ export default class HomePage extends Component {
                         clickRecipe={this.clickRecipe}
                         clickHeart={this.clickHeart}
                         clickStar={this.clickStar}
+                        app={app}
                         />
                     </div>
 
@@ -273,13 +274,13 @@ export default class HomePage extends Component {
                     top3_recipe={this.state.top3_recipe} 
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}
-                    userid={this.state.uid}
+                    app={app}
                     />
                     
                     <TopRecipes
                     top3_recipe={this.state.top3_recipe}
                     recipes={this.state.recipes}
-                    userid={this.state.uid}
+                    app={app}
                     />
                 </Container> 
             </div>
