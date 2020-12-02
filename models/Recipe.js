@@ -17,7 +17,6 @@ const Recipe = mongoose.model('Recipe', {
 	description: {
 		type: String,
 		required: false,
-		minlength: 1,
 	},
 	likes:{
 		type: Number,

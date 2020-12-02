@@ -62,7 +62,8 @@ export const getMyCollection = (viewProfileComp) => {
 
 export const addRecipe = (newRecipeComp) => {
     const newRecipe = {};
-    newRecipe.creator = newRecipeComp.state.creator;
+    newRecipe.creatorId = newRecipeComp.state.creatorId;
+    newRecipe.creatorUsername = newRecipeComp.state.creatorUsername;
     newRecipe.name = newRecipeComp.state.name;
     if(newRecipeComp.state.description == null){
         newRecipe.description = "none";
@@ -81,31 +82,10 @@ export const addRecipe = (newRecipeComp) => {
     console.log("state ready to send a request:");
     console.log(newRecipe);
 
-    const request = new Request("/api/recipes", {
-        method: "post",
-        body: JSON.stringify(newRecipe),
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-        }
-    })
 
-    // send the request with fetch()
-    fetch(request)
-        .then(res=>{
-            if(res.status === 200){
-                alert("Success");
-                return res.json();
-            }
-        })
-        .then(json=>{
-            console.log(json)
-            alert("Added A New Recipe!");
-        })
-        .catch(error=>{
-            alert("Could not Add Recipe!");
-            console.log(error);
-        })
+    axios.post('/api/recipes/', newRecipe)
+        .then(res => console.log(res.data));
+   
 }
 
 export const getRecipe = (comp, rid) => {

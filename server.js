@@ -359,9 +359,6 @@ app.post('/api/recipes', mongoChecker, async(req, res)=>{
         ingredients: req.body.ingredients,
         filePath: req.body.filePath,
     })
-    console.log(recipe);
-    const image = req.body.filePath;
-    console.log("image: " + image);
 
     try{
         const newRecipe = await recipe.save()

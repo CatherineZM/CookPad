@@ -18,14 +18,13 @@ export default class AddRecipe extends Component {
         super(props);
         this.props.history.push("/addrecipe");
         this.state = {
-            creator: this.props.app.state.currentUser._id,
+            creatorId: this.props.app.state.currentUser._id,
+            creatorUsername: this.props.app.state.currentUser.username,
             name: '',
             description: '',
             ingredients: [{name:"", quantity:"", unit:""}],
             steps:[""],
-            creatorId: '',
-            creatorUsername: '',
-            filePath: "https://react.semantic-ui.com/images/avatar/small/matthew.png",
+            filePath: "/upload/timetable.png",
             categories:[],
             categoriesOptions :[
                 {name: "Cake", id: 0},
@@ -97,6 +96,7 @@ export default class AddRecipe extends Component {
     }
 
     onImageUpload=(picture)=>{
+        console.log(picture)
         this.setState({filePath: this.state.filePath.concat(picture)});
     }
 
@@ -115,8 +115,8 @@ export default class AddRecipe extends Component {
 
     onSubmit=async(e,app)=>{
         e.preventDefault();
+        console.log(this.state)
         addRecipe(this,app);
-        // push the recipe to the server, use the filepath and filename
         this.props.history.push("/homepage");
     }
 
