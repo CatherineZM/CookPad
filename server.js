@@ -169,12 +169,29 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
 		username: req.body.username,
 		password: req.body.password,
         description: req.body.description,
-        isAdmin: false
+        isAdmin: false,
+        likedRecipes: [],
+        collectedRecipes: [],
+        myRecipes: []
 	})
 
 	try{
 		const newUser = await user.save()
 		res.send(newUser)
+	} catch(error) {
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	}
+})
+
+app.get('/api/users', mongoChecker, async(req, res)=>{
+	
+	try{
+        const user = await User.find()  
+        res.send(user)
 	} catch(error) {
 		if(isMongoError(error)){
 			res.status(500).send('Internal Server Error')
@@ -204,6 +221,134 @@ app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 		}
 	}
 })
+
+/*
+add a new recipe to recipe lists
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+*/
+app.post('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
+	
+    const uid = req.params.uid;
+    const idToPush = {}
+
+    if (req.body.likedRecipes) {
+        idToPush.likedRecipes = req.body.likedRecipes
+    }
+    if (req.body.collectedRecipes){
+        idToPush.collectedRecipes = req.body.collectedRecipes
+    }
+    if (req.body.myRecipes) {
+        idToPush.myRecipes = req.body.myRecipes
+    }
+
+	try{
+        const user = await User.findOneAndUpdate({_id: uid}, {$push: idToPush}, {new: true, useFindAndModify: false})
+        if (!user){
+            res.status(404).send("Resource not found")
+        } else {
+            res.send(user)
+        }
+		
+	} catch(error) {
+        log(error)
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	}
+})
+
+/*
+add a new recipe to recipe lists
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+*/
+app.delete('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
+	
+    const uid = req.params.uid;
+    const idToDelete = {}
+
+    if (req.body.likedRecipes) {
+        idToDelete.likedRecipes = req.body.likedRecipes
+    }
+    if (req.body.collectedRecipes){
+        idToDelete.collectedRecipes = req.body.collectedRecipes
+    }
+    if (req.body.myRecipes) {
+        idToDelete.myRecipes = req.body.myRecipes
+    }
+
+	try{
+        const user = await User.findOneAndUpdate({_id: uid}, {$pull: idToDelete}, {new: true, useFindAndModify: false})
+        if (!user){
+            res.status(404).send("Resource not found")
+        } else {
+            res.send(user)
+        }
+		
+	} catch(error) {
+        log(error)
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	}
+})
+
+/*
+update a user
+{
+    "password": <new password>,
+    "description": <new description>,
+    "isAdmin": <boolean>
+}
+*/
+
+app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
+	
+    const uid = req.params.uid;
+    const FieldToUpdate = {}
+
+    
+
+	try{
+        const user = await User.findById(uid)
+        if (!user){
+            res.status(404).send("Resource not found")
+        } else {
+            if (req.body.password) {
+                user.password = req.body.password
+            }
+            if (req.body.description){
+                user.description = req.body.description
+            }
+            if (req.body.isAdmin === true || req.body.isAdmin === false) {
+                user.isAdmin = req.body.isAdmin
+            }
+            
+            const newUser = await user.save()
+            res.send(newUser)
+        }
+	} catch(error) {
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	}
+})
+
+
+
 
 // User API Route
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
