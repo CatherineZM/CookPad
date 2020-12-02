@@ -217,7 +217,7 @@ export default class ViewProfile extends Component {
                                 <div>Edit your Description:</div>
                                 <textarea className = "form-control" value={this.state.user.description} onChange={this.onChangeDescription}/>
                                 <button type="button"
-                                        className = "btn btn-outline-primary"
+                                        className = "btn btn-outline-primary save-button"
                                         onClick={this.saveProfile}>
                                     <FaRegSave/>
                                     Save Profile

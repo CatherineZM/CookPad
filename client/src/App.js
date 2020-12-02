@@ -9,7 +9,6 @@ import AddRecipe from "./components/addRecipe/addRecipe.component";
 import EditRecipe from "./components/editRecipe/editRecipe.component";
 import HomePage from "./components/homePage/homePage.component";
 import Login from "./components/login/login.component";
-import EditProfile from "./components/editProfile/editProfile.component";
 import Signup from "./components/signup/signup.component";
 import ViewRecipe from './components/viewRecipe/viewRecipe.component';
 import ViewProfile from './components/viewProfile/viewProfile.component';
@@ -53,11 +52,6 @@ export class App extends React.Component{
                 {!currentUser ? <Login {...props} app={this} /> : <EditRecipe {...props} app={this} />}
               </div>
             )}/>
-            {/* <Route path="/editprofile/:uid" exact render={props=>(
-              <div className="app">
-                {!currentUser ? <Login {...props} app={this} /> : <EditProfile {...props} app={this} />}
-              </div>
-            )}/> */}
             <Route path="/viewrecipe/:rid" exact render={props=>(
               <div className="app">
                 {!currentUser ? <Login {...props} app={this} /> : <ViewRecipe {...props} app={this} />}

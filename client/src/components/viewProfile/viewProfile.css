@@ -73,3 +73,7 @@ h4 button {
     border-radius: 25px;
     margin-left: 315px;
 }
+
+.save-button {
+    margin-top: 10px;
+}
