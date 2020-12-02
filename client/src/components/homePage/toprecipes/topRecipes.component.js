@@ -23,19 +23,19 @@ class TopRecipes extends Component {
         return(
             <div id="top-recipe">
                 {top3_recipe.map((id)=>(
-                    <div key={uid(recipes[id].title)} className="view-other">
-                        <Link to={"/viewrecipe/"+ userid + "/" + recipes[id].id}>
+                    <div key={uid(recipes[id].name)} className="view-other">
+                        <Link to={"/viewrecipe/"+ userid + "/" + recipes[id]._id}>
                             <Card className={classes.card}>
                                 <CardActionArea >
                                     <CardMedia
                                         height="200"
                                         component="img"
-                                        alt={recipes[id].title}
-                                        image={recipes[id].src}
+                                        alt={recipes[id].name}
+                                        image={recipes[id].filePath}
                                     />
                                     <CardContent>
                                     <Typography gutterBottom variant="h6" component="h6">
-                                    {recipes[id].title}
+                                    {recipes[id].name}
                                     </Typography>
                                     </CardContent>
                                 </CardActionArea>

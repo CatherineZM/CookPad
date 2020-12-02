@@ -378,7 +378,7 @@ app.post('/api/recipes', mongoChecker, async(req, res)=>{
 })
 
 //get all recipes
-app.get('/api/recipes', async(req, res)=>{
+app.get('/api/recipes', mongoChecker, async(req, res)=>{
     try{
         const recipes = await Recipe.find()
 		res.send({recipes})

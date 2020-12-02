@@ -26,7 +26,7 @@ const styles = {
 
 class HomePageRightPanel extends Component {
     render(){
-        const {classes, top3_recipe, recipes, clickHeart, userid} = this.props;
+        const {classes, top3_recipe, recipes, clickHeart} = this.props;
         return(
             <div id="right-panel">
             <Table size="small" aria-label="a dense table">
@@ -36,14 +36,14 @@ class HomePageRightPanel extends Component {
                         <TableCell className="likes-count" align="left">Likes</TableCell>
                     </TableRow>
                     {top3_recipe.map((recipe)=>(
-                        <TableRow id="table-row" key={uid(recipes[recipe].title)}>
+                        <TableRow id="table-row" key={uid(recipes[recipe].name)}>
                             <TableCell className={classes.cell} id="recipe-name">
-                                <Link to={"/viewrecipe/"+userid+"/"+recipes[recipe].id}>{recipes[recipe].title}</Link>
+                                <Link to={"/viewrecipe/"+recipes[recipe]._id}>{recipes[recipe].name}</Link>
                             </TableCell>
                             <TableCell className={classes.cell} id="recipe-likes">
                                 <FormControlLabel
                                     labelPlacement="end"
-                                    control={<Checkbox checked= {recipes[recipe].liked} disableRipple={true} onChange={()=>clickHeart(recipe)} icon={<FavoriteBorder fontSize="small"/>} checkedIcon={<Favorite fontSize="small"/>} name="liked" />} 
+                                    control={<Checkbox checked= {true} disableRipple={true} onChange={()=>clickHeart(recipe)} icon={<FavoriteBorder fontSize="small"/>} checkedIcon={<Favorite fontSize="small"/>} name="liked" />} 
                                     label={recipes[recipe].likes}
                                 />
                             </TableCell>

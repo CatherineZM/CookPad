@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {getAllRecipes} from '../../actions/recipe';
 import Container from '@material-ui/core/Container';
 
 import './homePage.css'
@@ -19,31 +20,20 @@ import seafoodIcon from './images/seafood.png'
 import soupIcon from './images/soup.png'
 import noodlesIcon from './images/noodles.png'
 
-// hardcoded images
-import recipe1 from '../../recipes/butter-chicken.jpg'
-import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
-import recipe3 from '../../recipes/ramen.jpg'
-import recipe4 from '../../recipes/vanilla-cake.png'
-import recipe5 from '../../recipes/spaghetti.png'
-import recipe6 from '../../recipes/apple-pie.png'
-import recipe7 from '../../recipes/homemade-pizza.png'
-import recipe8 from '../../recipes/greek-salad.png'
-import recipe9 from '../../recipes/seafood-sandwiches.png'
-import recipe10 from '../../recipes/seafood-stew.png'
-import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
-
 // mappings between categories and id
 // 0: cake; 1: noodles; 2: pie; 3: pizza; 4: salads; 5: sandwiches; 6: seafood; 7: soup 
 export default class HomePage extends Component {
     constructor(props){
         super(props);
+        
         this.props.history.push("/homepage");
-        // the data will be fetched from the database and calculated in component_DidMount callback
+        
+
         this.state = {
             slide_idx: 0,
             num_slides: 3,
             // this is the index into the recipes array
-            top3_recipe: [0, 1, 2],
+            top3_recipe: [],
             // categories 
             categories: [
                 {id:0, src:cakeIcon, text:'Cake', checked:true},
@@ -56,41 +46,18 @@ export default class HomePage extends Component {
                 {id:7, src:soupIcon, text:'Soup', checked:true}
             ],
             all_checked: true,
-            // the data will be fetched from the database
-            recipes: [
-                {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
-                {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
-                {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
-                {id:3, src:recipe4, liked: false, collected: false, title:'Vanilla Cake', likes:76, categories:[0]},
-                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
-                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
-                {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
-                {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]},
-                {id:8, src:recipe9, liked: false, collected: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
-                {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
-                {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
-            ],
-            displayed_recipes: [
-                {id:0, src:recipe1, liked: false, collected: false, title:'Butter Chicken', likes: 123, categories:[7]},
-                {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
-                {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]},
-                {id:3, src:recipe4, liked: false, collected: false, title:'Vanilla Cake', likes:76, categories:[0]},
-                {id:4, src:recipe5, liked: false, collected: false, title:'Homemade Spaghetti', likes:65, categories:[1]},
-                {id:5, src:recipe6, liked: false, collected: false, title:'Apple Pie', likes:63, categories:[2]},
-                {id:6, src:recipe7, liked: false, collected: false, title:'Homemade Pizza', likes:62, categories:[3]},
-                {id:7, src:recipe8, liked: false, collected: false, title:'Greek Salad', likes:60, categories:[4]},
-                {id:8, src:recipe9, liked: false, collected: false, title:'Seafood Sandwiches', likes:58, categories:[5, 6]},
-                {id:9, src:recipe10, liked: false, collected: false, title:'Spicy seafood stew', likes:50, categories:[6, 7]},
-                {id:10, src:recipe11, liked: false, collected: false, title:'Chicken Noodle Soup', likes:47, categories:[7]}
-            ]
+            recipes: [],
+            displayed_recipes: []
         }
+        getAllRecipes(this);
     }
 
     componentDidMount() {
         this.interval = setInterval(() => {
             this.autoShowSlides();
         }, 3000)
-        // initialize recipes, displayed recipes, top3_recipe id
+
+        // TODO: init top3_recipe
     }
 
     componentWillUnmount() {
@@ -263,6 +230,21 @@ export default class HomePage extends Component {
         }
     }
 
+    slideshowGenerator=()=>{
+        if(this.state.top3_recipe && this.state.top3_recipe.length){
+            return <RecipeSlideShow 
+            imgsrc={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].filePath}
+            imgalt={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].name}
+            imgtext={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].name}
+            decrSlide={this.decrSlide}
+            incrSlide={this.incrSlide}
+        />
+        }else{
+            return null;
+        }
+        
+    }
+
     render(){
         const { app } = this.props;
         return(
@@ -278,13 +260,7 @@ export default class HomePage extends Component {
                     />                    
 
                     <div id="middle-panel">
-                        <RecipeSlideShow 
-                            imgsrc={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].src}
-                            imgalt={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].title}
-                            imgtext={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].title}
-                            decrSlide={this.decrSlide}
-                            incrSlide={this.incrSlide}
-                        />
+                        <this.slideshowGenerator/>
                         <RecipeList 
                         recipes={this.state.displayed_recipes}
                         clickRecipe={this.clickRecipe}
