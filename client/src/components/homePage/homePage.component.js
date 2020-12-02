@@ -174,7 +174,7 @@ export default class HomePage extends Component {
                 third_largest = second_largest;
                 second_largest = first_largest;
                 first_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
-                thrid_idx = second_idx;
+                third_idx = second_idx;
                 second_idx = first_idx;
                 first_idx = i;
             }else if(this.props.app.state.currentUser.likedRecipes[i].likes > second_largest){
@@ -183,7 +183,7 @@ export default class HomePage extends Component {
                 third_idx = second_idx;
                 second_idx = i;
             }else if(this.props.app.state.currentUser.likedRecipes[i].likes > third_largest){
-                third_largest = this.props.app.state.currentUser.likedRecipes[i].likes;s
+                third_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
                 third_idx = i;
             }
         }
