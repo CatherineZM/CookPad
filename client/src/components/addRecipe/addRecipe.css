@@ -22,3 +22,9 @@ textarea{
     resize: none;
     height: fit-content;
 }
+
+#units {
+    border-radius:5%;
+    height: 38px;
+    width: 100%;
+}

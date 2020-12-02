@@ -2,7 +2,8 @@ import axios from "axios";
 
 export const getMyRecipe = (viewProfileComp) => {
     const myRecipes = []
-    viewProfileComp.user.myRecipes.forEach(rid => {
+    console.log(viewProfileComp.state.user)
+    viewProfileComp.state.user.myRecipes.forEach(rid => {
         const request = new Request(`/api/recipes/${rid}`, {
             method: "get",
             headers: {
@@ -31,7 +32,7 @@ export const getMyRecipe = (viewProfileComp) => {
 
 export const getMyCollection = (viewProfileComp) => {
     const myCollectedRecipes = []
-    viewProfileComp.user.collectedRecipes.forEach(rid => {
+    viewProfileComp.state.user.collectedRecipes.forEach(rid => {
         const request = new Request(`/api/recipes/${rid}`, {
             method: "get",
             headers: {
@@ -63,11 +64,19 @@ export const addRecipe = (newRecipeComp) => {
     const newRecipe = {};
     newRecipe.creator = newRecipeComp.state.creator;
     newRecipe.name = newRecipeComp.state.name;
+    if(newRecipeComp.state.description == null){
+        newRecipe.description = "none";
+    }else{
+        newRecipe.description = newRecipeComp.state.description;
+    }
+    newRecipe.categories = newRecipeComp.state.categories;
     newRecipe.ingredients = newRecipeComp.state.ingredients;
     newRecipe.steps = newRecipeComp.state.steps;
-    newRecipe.description = newRecipeComp.state.description;
-    newRecipe.filePath = newRecipeComp.state.filePath;
-    newRecipe.categories = newRecipeComp.state.categories;
+    if(newRecipeComp.state.filePath == null){
+        newRecipe.filePath = "none";
+    }else{
+        newRecipe.filePath = newRecipeComp.state.filePath;
+    }
 
     console.log("state ready to send a request:");
     console.log(newRecipe);
@@ -77,7 +86,7 @@ export const addRecipe = (newRecipeComp) => {
         body: JSON.stringify(newRecipe),
         headers: {
             Accept: "application/json, text/plain, */*",
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": "application/json",
         }
     })
 
@@ -85,6 +94,7 @@ export const addRecipe = (newRecipeComp) => {
     fetch(request)
         .then(res=>{
             if(res.status === 200){
+                alert("Success");
                 return res.json();
             }
         })

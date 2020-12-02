@@ -13,8 +13,6 @@ import {addRecipe} from "../../actions/recipe"
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 
-const defaultUnit = UnitType[0];
-
 export default class AddRecipe extends Component {
     constructor(props){
         super(props);
@@ -27,7 +25,7 @@ export default class AddRecipe extends Component {
             steps:[],
             creatorId: '',
             creatorUsername: '',
-            filePath: '',
+            filePath: "https://react.semantic-ui.com/images/avatar/small/matthew.png",
             categories:[],
             categoriesOptions :[
                 {name: "Cake", id: 0},
@@ -64,6 +62,13 @@ export default class AddRecipe extends Component {
         this.setState({ ingredients: newIngredients });
     }
 
+    onSelectIngredientsUnit=(e,index)=>{
+        const newIngredients = this.state.ingredients;
+        newIngredients[index].unit = e.target.value;
+        this.setState({ ingredients: newIngredients });
+        console.log(e.target.value);
+    }
+
     addIngredientsRow=()=>{
        this.setState((prevState)=>({ingredients:[...prevState.ingredients, {name: "", age:"", unit:""}],
         }));
@@ -95,13 +100,17 @@ export default class AddRecipe extends Component {
         this.setState({filePath: this.state.filePath.concat(picture)});
     }
 
-    onSelect=(selectedList)=>{
-        this.setState({categories: selectedList.id})
+    onSelect=(selectedList, selectedItem)=>{
+        const newCategories = this.state.categories;
+        newCategories.push(selectedItem.id);
+        this.setState({categories: newCategories})
         console.log(this.state.categories)
     }
      
-    onRemove=(selectedList)=>{
-        this.setState({categories: selectedList})
+    onRemoveCategories=(selectedList, removedItem)=>{
+        const removeItemID = removedItem.id
+        
+        this.setState({categories: this.state.categories})
     }
 
     onSubmit=async(e,app)=>{
@@ -145,8 +154,7 @@ export default class AddRecipe extends Component {
                         <label>Cuisine Type: </label>
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
-                            options={this.state.categoriesOptions} 
-                            selectedValues={this.state.categories} 
+                            options={this.state.categoriesOptions}  
                             onSelect={this.onSelect} 
                             onRemove={this.onRemove}
                             displayValue="name" 
@@ -179,13 +187,20 @@ export default class AddRecipe extends Component {
                                             />
                                         </Col>
                                         <Col className="col" xs={3}>
-                                            <Dropdown
-                                                className = "UnitSelector"
-                                                options={UnitType} 
-                                                onChange={this._onSelect} 
-                                                placeholder ={defaultUnit}
-                                                value={Ingredient.unit} 
-                                            />
+                                            <select class="form-control "name="units" id="units" onChange={(e)=>this.onSelectIngredientsUnit(e,index)}>
+                                                <option value={UnitType[0]}>{UnitType[0]}</option>
+                                                <option value={UnitType[1]}>{UnitType[1]}</option>
+                                                <option value={UnitType[2]}>{UnitType[2]}</option>
+                                                <option value={UnitType[3]}>{UnitType[3]}</option>
+                                                <option value={UnitType[4]}>{UnitType[4]}</option>
+                                                <option value={UnitType[5]}>{UnitType[5]}</option>
+                                                <option value={UnitType[6]}>{UnitType[6]}</option>
+                                                <option value={UnitType[7]}>{UnitType[7]}</option>
+                                                <option value={UnitType[8]}>{UnitType[8]}</option>
+                                                <option value={UnitType[9]}>{UnitType[9]}</option>
+                                                <option value={UnitType[10]}>{UnitType[10]}</option>
+                                                <option value={UnitType[11]}>{UnitType[11]}</option>
+                                            </select>                                            
                                         </Col>
                                         <Col className ="col" xs={1}>
                                             <button 
