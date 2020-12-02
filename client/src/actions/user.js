@@ -190,3 +190,28 @@ export const DeleteFromRecipeList = (uid, recipeList) => {
             console.log(error);
         })
 }
+
+export const updateUser = (uid, updateInfo) => {
+    const request = new Request(`/api/users/${uid}`, {
+        method: "PATCH",
+        body: JSON.stringify(updateInfo),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
+

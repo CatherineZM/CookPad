@@ -11,7 +11,7 @@ import {setRecipe} from '../../actions/recipe'
 // hard coded images
 import ProfilePic from'./default-profile-pic.png' 
 import { FaRegEdit, FaRegSave } from "react-icons/fa";
-import {getUser} from "../../actions/user";
+import {getUser, updateUser} from "../../actions/user";
 import {getMyRecipe, getMyCollection} from "../../actions/recipe";
 
 export default class ViewProfile extends Component {
@@ -24,6 +24,7 @@ export default class ViewProfile extends Component {
             userpicture: {src: ProfilePic},
             recipes: [],
             collectedRecipes:[],
+            newPassword: null,
             recipeExpanded: false,
             collectionExpanded: false,
             inEdit:false
@@ -130,9 +131,7 @@ export default class ViewProfile extends Component {
 
     onChangePassword=(e)=>{
         e.preventDefault();
-        const newUser = this.state.user
-        newUser.password = e.target.value
-        this.setState({user: newUser})
+        this.setState({newPassword: e.target.value})
     }
 
     onChangeDescription=(e)=>{
@@ -157,6 +156,23 @@ export default class ViewProfile extends Component {
 
     saveProfile=(e)=>{
         e.preventDefault();
+        const updateInfo = {
+            description: this.state.user.description
+        }
+        
+        if (this.state.newPassword !== null && this.state.newPassword !== ""){
+            if (this.state.newPassword.length < 5){
+                alert("Password needs a minimum length of 5")
+                return
+            } else{
+                updateInfo.password = this.state.newPassword
+                this.state.user.password = this.state.newPassword
+                this.state.newPassword = null
+            }
+        }
+        
+        console.log(updateInfo)
+        updateUser(this.state.uid, updateInfo)
         this.setState({inEdit: false})
 
     }
@@ -167,7 +183,7 @@ export default class ViewProfile extends Component {
             className = "btn btn-outline-primary"
             onClick={this.editProfile}>
             <FaRegEdit/>
-            Edit Profile
+            {"  Edit Profile"}
             </button>
         }
         
@@ -196,9 +212,9 @@ export default class ViewProfile extends Component {
                                 /> 
                             </div>    
                             <div className="form-group" id="profile-input">
-                                <div>Change Password:</div>
+                                <div>New Password:</div>
                                 <input type="password" className = "form-control" onChange={this.onChangePassword}/>
-                                <div>Change Profile Description:</div>
+                                <div>Edit your Description:</div>
                                 <textarea className = "form-control" value={this.state.user.description} onChange={this.onChangeDescription}/>
                                 <button type="button"
                                         className = "btn btn-outline-primary"
@@ -258,7 +274,7 @@ export default class ViewProfile extends Component {
                 
                 
                 <div id="user-recipes">
-                    <h4>My Recipes
+                    <h4>{app.state.currentUser._id === this.state.user._id ? "My Recipes" : `${this.state.user.username}'s Recipes`}
                     <this.RecipeExpandButtonGenerator/>
                     </h4>
                     <Collapse in={this.state.recipeExpanded}>
@@ -276,7 +292,7 @@ export default class ViewProfile extends Component {
 
                 { this.state.recipeExpanded && 
                     <div id="collection-recipeswithEx">
-                    <h4>My Collection
+                    <h4>{app.state.currentUser._id === this.state.user._id ? "My Collection" : `${this.state.user.username}'s Collection`}
                     <this.CollectionExpandButtonGenerator/>
                     </h4>
                     <Collapse in={this.state.collectionExpanded}>
