@@ -26,7 +26,7 @@ const styles = {
 
 class HomePageRightPanel extends Component {
     render(){
-        const {classes, top3_recipe, recipes, clickHeart} = this.props;
+        const {classes, top3_recipe, recipes, clickHeart, app} = this.props;
         return(
             <div id="right-panel">
             <Table size="small" aria-label="a dense table">
@@ -43,7 +43,7 @@ class HomePageRightPanel extends Component {
                             <TableCell className={classes.cell} id="recipe-likes">
                                 <FormControlLabel
                                     labelPlacement="end"
-                                    control={<Checkbox checked= {true} disableRipple={true} onChange={()=>clickHeart(recipe)} icon={<FavoriteBorder fontSize="small"/>} checkedIcon={<Favorite fontSize="small"/>} name="liked" />} 
+                                    control={<Checkbox checked={app.state.currentUser.likedRecipes && app.state.currentUser.likedRecipes.includes(recipes[recipe]._id)} disableRipple={true} onChange={()=>clickHeart(recipes[recipe]._id)} icon={<FavoriteBorder fontSize="small"/>} checkedIcon={<Favorite fontSize="small"/>} name="liked" />} 
                                     label={recipes[recipe].likes}
                                 />
                             </TableCell>

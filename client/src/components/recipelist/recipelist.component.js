@@ -40,7 +40,7 @@ const styles = {
 class RecipeList extends Component {
     
     render(){
-        const {classes, recipes, clickRecipe, clickHeart, clickStar} = this.props;
+        const {classes, recipes, clickRecipe, clickHeart, clickStar, app} = this.props;
         return(
             <div className="vertical-scrollable">
             {recipes.map( (recipe) => (
@@ -64,12 +64,12 @@ class RecipeList extends Component {
                                 <FormControlLabel
                                 labelPlacement="end"
                                 className={classes.likeButton}
-                                control={<Checkbox checked={true} disableRipple={true} onChange={()=>clickHeart(recipe._id)} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} name="liked" />} 
+                                control={<Checkbox checked={app.state.currentUser.likedRecipes && app.state.currentUser.likedRecipes.includes(recipe._id)} disableRipple={true} onChange={()=>clickHeart(recipe._id)} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} name="liked" />} 
                                 label={recipe.likes}
                                 />
                                 <FormControlLabel
                                 className={classes.saveButton}
-                                control={<Checkbox disableRipple={true} onChange={()=>clickStar(recipe.id)} icon={<BookmarkBorderIcon/>} checkedIcon={<BookmarkIcon style={{color: yellow[600] }}/>} name="saved" />} 
+                                control={<Checkbox checked={app.state.currentUser.likedRecipes && app.state.currentUser.collectedRecipes.includes(recipe._id)} disableRipple={true} onChange={()=>clickStar(recipe._id)} icon={<BookmarkBorderIcon/>} checkedIcon={<BookmarkIcon style={{color: yellow[600] }}/>} name="saved" />} 
                                 /> 
                             </div>
                         </CardActions>

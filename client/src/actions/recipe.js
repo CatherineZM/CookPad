@@ -162,7 +162,31 @@ export const getAllRecipes = (comp)=>{
             console.log(json)
             comp.setState({recipes: json.recipes})
             comp.setState({displayed_recipes: json.recipes})
-            comp.setState({top3_recipe: [0,1,2]})
+            
+            // update top three recipes
+            let first_largest = -1;
+            let second_largest = -1;
+            let third_largest = -1;
+            let first_idx = -1;
+            let second_idx = -1;
+            let third_idx = -1;
+            for(let i=0; i< json.recipes.length; i++){
+                if(json.recipes[i].likes > first_largest){
+                    third_largest = second_largest;
+                    second_largest = first_largest;
+                    first_largest = json.recipes[i].likes;
+                    first_idx = i;
+                }else if(json.recipes[i].likes > second_largest){
+                    third_largest = second_largest;
+                    second_largest = json.recipes[i].likes;
+                    second_idx = i;
+                }else if(json.recipes[i].likes > third_largest){
+                    third_largest = json.recipes[i].likes;
+                    third_idx = i;
+                }
+            }
+            comp.setState({ top3_recipe: [first_idx, second_idx, third_idx]})
+            console.log(comp.state.top3_recipe)
         })
         .catch(error=>{
             console.log(error);

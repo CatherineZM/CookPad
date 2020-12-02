@@ -169,7 +169,7 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
 		username: req.body.username,
 		password: req.body.password,
         description: req.body.description,
-        isAdmin: false
+        isAdmin: false,
 	})
 
 	try{
@@ -184,8 +184,8 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
 	}
 })
 
+// get a user based on uid
 app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
-	
 	const uid = req.params.uid;
 
 	try{
@@ -205,7 +205,25 @@ app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	}
 })
 
-// User API Route
+// change a user
+app.post('/api/users/:id', mongoChecker, async(req, res)=>{
+    try{
+        const user = await User.findById(req.params.id)
+        user.likedRecipes.push(req.body.likedRecipes)
+        user.collectedRecipes.push(req.body.collectedRecipes)
+        user.myRecipes.push(req.body.myRecipes)
+        await user.save()
+		res.send(user)
+	} catch(error) {
+		if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}
+	}
+})
+
+// Recipe API Route ----------------------------------------------------
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
     // create a new recipe
     const recipe = new Recipe({
