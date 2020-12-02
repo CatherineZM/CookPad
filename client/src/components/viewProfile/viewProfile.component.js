@@ -29,7 +29,7 @@ export default class ViewProfile extends Component {
         
         this.state = {
             uid: this.props.match.params.uid,
-            user: this.props.app.state.currentUser,
+            user: {},
             userpicture: {src: ProfilePic},
             recipes: [],
             collectedRecipes:[],
@@ -37,14 +37,19 @@ export default class ViewProfile extends Component {
             collectionExpanded: false,
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
+        getUser(this, ()=>{
+            getMyRecipe(this);
+            getMyCollection(this);
+        })
+        console.log(this.state.collectedRecipes)
+
         
     }
 
 
     componentDidMount() {
         // requires server calls to initialize recipes and user profile
-        getMyRecipe(this);
-        getMyCollection(this);
+        
         
     }
 
@@ -164,6 +169,7 @@ export default class ViewProfile extends Component {
                             clickHeart={this.clickHeart}
                             clickStar={this.clickStar}
                             clickRecipe = {this.clickRecipe}
+                            app = {this.props.app}
                         />    
                     </div>
                 </Collapse> 
@@ -180,6 +186,7 @@ export default class ViewProfile extends Component {
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
+                                app = {this.props.app}
                             />    
                         </div>
                     </Collapse> 
@@ -212,6 +219,7 @@ export default class ViewProfile extends Component {
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
+                                app={app}
                             />    
                         </div>
                     </Collapse>

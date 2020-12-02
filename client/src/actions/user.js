@@ -92,7 +92,7 @@ export const signup = (signupComp) => {
         })
 }
 
-export const getUser = (viewProfileComp) => {
+export const getUser = (viewProfileComp, callback) => {
     const request = new Request(`/api/users/${viewProfileComp.state.uid}`, {
         method: "get",
         headers: {
@@ -112,9 +112,13 @@ export const getUser = (viewProfileComp) => {
             viewProfileComp.setState({user: json})
             
         })
+        .then(()=>{
+            callback()
+        })
         .catch(error=>{
             console.log(error);
         })
+
 }
 
 
