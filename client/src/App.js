@@ -53,11 +53,11 @@ export class App extends React.Component{
                 {!currentUser ? <Login {...props} app={this} /> : <EditRecipe {...props} app={this} />}
               </div>
             )}/>
-            <Route path="/editprofile/:uid" exact render={props=>(
+            {/* <Route path="/editprofile/:uid" exact render={props=>(
               <div className="app">
                 {!currentUser ? <Login {...props} app={this} /> : <EditProfile {...props} app={this} />}
               </div>
-            )}/>
+            )}/> */}
             <Route path="/viewrecipe/:rid" exact render={props=>(
               <div className="app">
                 {!currentUser ? <Login {...props} app={this} /> : <ViewRecipe {...props} app={this} />}

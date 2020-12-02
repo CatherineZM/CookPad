@@ -120,17 +120,48 @@ export default class ViewProfile extends Component {
         this.setState({dummy: 0})
     }
 
-    editprofile=(e)=>{
+    onClose=(e)=>{
+        this.setState({preview: null})
+    }
+      
+    onCrop=(e,preview)=>{
+        this.setState({preview})
+    }
+
+    onChangePassword=(e)=>{
+        e.preventDefault();
+        this.state.user.password = e.target.value
+    }
+
+    onChangeDescription=(e)=>{
+        e.preventDefault();
+        this.state.user.description = e.target.value
+    }
+
+    enterKeyHandler(e){
+        e.preventDefault();
+        if (e.keyCode === 13){
+            this.state.user.description = e.target.value + '\n'
+        };
+    }
+
+    editProfile=(e)=>{
         e.preventDefault();
         // this.props.history.push("/editprofile/"+ this.state.uid);
         this.setState({inEdit: true})
+    }
+
+    saveProfile=(e)=>{
+        e.preventDefault();
+        this.setState({inEdit: false})
+
     }
 
     editButtonGenerator=(app)=>{
         if (app.state.currentUser._id === this.state.user._id){
             return <button type="button"
             className = "btn btn-outline-primary"
-            onClick={this.editprofile}>
+            onClick={this.editProfile}>
             <FaRegEdit/>
             Edit Profile
             </button>
@@ -148,8 +179,8 @@ export default class ViewProfile extends Component {
                     </div>
         } else {
             return  <div id="user-profile">
-                        <h4>{this.state.username + "'s Profile"}</h4>
-                        <form onSubmit={this.editprofile}>
+                        <h4>{this.state.user.username + "'s Profile"}</h4>
+                        <form onSubmit={this.saveProfile}>
                             <div id="picture-change">
                                 <Avatar 
                                     width={200}
@@ -162,12 +193,12 @@ export default class ViewProfile extends Component {
                             </div>    
                             <div className="form-group" id="profile-input">
                                 <div>Change Password:</div>
-                                <input type="password" className = "form-control" value={this.state.password} onChange={this.onChangePassword}/>
+                                <input type="password" className = "form-control" onChange={this.onChangePassword}/>
                                 <div>Change Profile Description:</div>
-                                <textarea className = "form-control" value={this.state.description} onChange={this.onChangeDescription}/>
+                                <textarea className = "form-control" value={this.state.user.description} onChange={this.onChangeDescription}/>
                                 <button type="button"
                                         className = "btn btn-outline-primary"
-                                        onClick={this.editprofile}>
+                                        onClick={this.saveProfile}>
                                     <FaRegSave/>
                                     Save Profile
                                 </button>    
