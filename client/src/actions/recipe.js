@@ -143,6 +143,32 @@ export const deleteRecipe = (rid) => {
         })
 }
 
+export const getAllRecipes = (comp)=>{
+    const request = new Request(`/api/recipes`, {
+        method: "get",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+            comp.setState({recipes: json.recipes})
+            comp.setState({displayed_recipes: json.recipes})
+            comp.setState({top3_recipe: [0,1,2]})
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
+
 export const getTopRecipes = ()=>{
 
 }

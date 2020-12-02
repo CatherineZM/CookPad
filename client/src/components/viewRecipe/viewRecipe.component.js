@@ -38,6 +38,7 @@ class ViewRecipe extends Component {
         super(props);
         // TODO: change it to the line commented
         this.props.history.push('/viewrecipe/5fc6d4eb6db5830cb4a1586d');
+        
         //this.props.history.push('/viewrecipe/'+this.props.match.params.rid);
         // requires server calls to update the information based on the recipe id
         this.state = {
@@ -56,10 +57,6 @@ class ViewRecipe extends Component {
                 filePath: "",
             }
         }
-    }
-
-    componentDidMount() {
-        // TODO: change this ID to this.props.match.params.rid
         getRecipe(this, "5fc6d4eb6db5830cb4a1586d")
     }
 
@@ -100,7 +97,7 @@ class ViewRecipe extends Component {
             // TODO: need to update the myRecipe list of user
             deleteRecipe(this.state.recipe._id)
             console.log("item deleted")
-            //this.props.history.push("/viewprofile/"+ this.props.app.state.currentUser._id)
+            this.props.history.push("/viewprofile/"+ this.props.app.state.currentUser._id)
         } 
     }
 

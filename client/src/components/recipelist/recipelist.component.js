@@ -44,18 +44,18 @@ class RecipeList extends Component {
         return(
             <div className="vertical-scrollable">
             {recipes.map( (recipe) => (
-                <div key={uid(recipe.title)} className="recipe-container">
+                <div key={uid(recipe.name)} className="recipe-container">
                         <Card className={classes.root}>
-                        <CardActionArea onClick={()=>clickRecipe(recipe.id)}>
+                        <CardActionArea onClick={()=>clickRecipe(recipe._id)}>
                             <CardMedia
                             className={classes.media}
                             component="img"
-                            alt={recipe.title}
-                            image={recipe.src}
+                            alt={recipe.name}
+                            image={recipe.filePath}
                             />
                             <CardContent className={classes.title}>
                             <Typography gutterBottom variant="h6" component="h6">
-                                {recipe.title}
+                                {recipe.name}
                             </Typography>
                             </CardContent>
                         </CardActionArea>
@@ -64,7 +64,7 @@ class RecipeList extends Component {
                                 <FormControlLabel
                                 labelPlacement="end"
                                 className={classes.likeButton}
-                                control={<Checkbox checked= {recipe.liked}disableRipple={true} onChange={()=>clickHeart(recipe.id)} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} name="liked" />} 
+                                control={<Checkbox checked={true} disableRipple={true} onChange={()=>clickHeart(recipe._id)} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} name="liked" />} 
                                 label={recipe.likes}
                                 />
                                 <FormControlLabel
