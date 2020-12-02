@@ -61,11 +61,19 @@ export const addRecipe = (newRecipeComp) => {
     const newRecipe = {};
     newRecipe.creator = newRecipeComp.state.creator;
     newRecipe.name = newRecipeComp.state.name;
+    if(newRecipeComp.state.description == null){
+        newRecipe.description = "none";
+    }else{
+        newRecipe.description = newRecipeComp.state.description;
+    }
+    newRecipe.categories = newRecipeComp.state.categories;
     newRecipe.ingredients = newRecipeComp.state.ingredients;
     newRecipe.steps = newRecipeComp.state.steps;
-    newRecipe.description = newRecipeComp.state.description;
-    newRecipe.filePath = newRecipeComp.state.filePath;
-    newRecipe.categories = newRecipeComp.state.categories;
+    if(newRecipeComp.state.filePath == null){
+        newRecipe.filePath = "none";
+    }else{
+        newRecipe.filePath = newRecipeComp.state.filePath;
+    }
 
     console.log("state ready to send a request:");
     console.log(newRecipe);
