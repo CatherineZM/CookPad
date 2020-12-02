@@ -1,6 +1,7 @@
 export const getMyRecipe = (viewProfileComp) => {
     const myRecipes = []
-    viewProfileComp.user.myRecipes.forEach(rid => {
+    console.log(viewProfileComp.state.user)
+    viewProfileComp.state.user.myRecipes.forEach(rid => {
         const request = new Request(`/api/recipes/${rid}`, {
             method: "get",
             headers: {
@@ -29,7 +30,7 @@ export const getMyRecipe = (viewProfileComp) => {
 
 export const getMyCollection = (viewProfileComp) => {
     const myCollectedRecipes = []
-    viewProfileComp.user.collectedRecipes.forEach(rid => {
+    viewProfileComp.state.user.collectedRecipes.forEach(rid => {
         const request = new Request(`/api/recipes/${rid}`, {
             method: "get",
             headers: {
