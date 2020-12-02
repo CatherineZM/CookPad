@@ -9,7 +9,7 @@ import ImageUploader from 'react-images-upload';
 import Col from 'react-bootstrap/Col';
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
-const CuisineTypes =[
+const categoriesOptions =[
     {name: "Cake", id: 0},
     {name: "Noodles", id: 1},
     {name: "Pie", id: 2},
@@ -27,10 +27,10 @@ export default class EditRecipe extends Component {
         // requires server call to fetch the recipe information
         this.state = {
             rid: this.props.match.params.rid,
-            RecipeName: 'Butter Chicken',
-            Description: '',
-            cuisinetype: [{name: "Soup", id: 7}],
-            Ingredients: [
+            name: 'Butter Chicken',
+            description: '',
+            categories: [7],
+            ingredients: [
                 {name:"Butter", quantity:"2", unit:6},
                 {name:"Medium onion", quantity:"1", unit:0},
                 {name:"Red pepper", quantity:"1", unit:0},
@@ -43,18 +43,18 @@ export default class EditRecipe extends Component {
                 {name:"Heavy cream", quantity:"1", unit:4},
                 {name:"Salt and pepper", quantity:"To taste", unit:0}
             ],
-            Steps:[
-                {content: "Heat a large pan to medium high heat and add the olive oil. Add the chicken and cook for 5 minutes, stirring, until the chicken is browned. Remove the chicken and set it aside.", id: 0}, 
-                {content: "Melt the butter in the same pan. Add the onion and peppers and cook them 5 minutes to soften.", id: 1},
-                {content:"Add the garlic and ginger and cook 1 minute, until they become fragrant.",id: 2},
-                {content:"Add the garam masala, cumin, red chili powder, salt and pepper. Stir and cook for 1 minute.",id: 3},
-                {content:"Stir in the diced tomatoes. Bring to a quick boil, then reduce the heat and simmer for 15 minutes to break everything down.",id: 4},
-                {content:"Transfer the sauce to a blender or food processor and process until smooth. You can thin it out with a bit of water if you’d like.",id: 5},
-                {content:"Strain the sauce back into the pan. The point is to make the sauce very smooth and heat through.",id: 6},
-                {content:"Stir in the cream and add the chicken back to the pan. Heat and simmer for 10 minutes, or until the chicken is cooked through and the sauce thickens up a bit.",id: 7},
-                {content:"Serve with cooked white rice and enjoy!",id: 8}
+            steps:[
+                "Heat a large pan to medium high heat and add the olive oil. Add the chicken and cook for 5 minutes, stirring, until the chicken is browned. Remove the chicken and set it aside.", 
+                "Melt the butter in the same pan. Add the onion and peppers and cook them 5 minutes to soften.",
+                "Add the garlic and ginger and cook 1 minute, until they become fragrant.",
+                "Add the garam masala, cumin, red chili powder, salt and pepper. Stir and cook for 1 minute.",
+                "Stir in the diced tomatoes. Bring to a quick boil, then reduce the heat and simmer for 15 minutes to break everything down.",
+                "Transfer the sauce to a blender or food processor and process until smooth. You can thin it out with a bit of water if you’d like.",
+                "Strain the sauce back into the pan. The point is to make the sauce very smooth and heat through.",
+                "Stir in the cream and add the chicken back to the pan. Heat and simmer for 10 minutes, or until the chicken is cooked through and the sauce thickens up a bit.",
+                "Serve with cooked white rice and enjoy!"
             ],
-            RecipeImage: recipe1
+            filePath: recipe1
         }
     }
 
@@ -76,54 +76,54 @@ export default class EditRecipe extends Component {
 
     onChangeRecipeName = (e) =>{
         e.preventDefault();
-        this.setState({ RecipeName: e.target.value });
+        this.setState({ name: e.target.value });
     }
 
     onChangeDescription = (e) =>{
         e.preventDefault();
-        this.setState({ Description: e.target.value });
+        this.setState({ description: e.target.value });
     }
 
     onChangeIngredientsName = (e,index)=>{
-        let ingredients = this.state.Ingredients;
+        let ingredients = this.state.ingredients;
         ingredients[index].name = e.target.value;
-        this.setState({ Ingredients: ingredients });
+        this.setState({ ingredients: ingredients });
     }
 
     onChangeIngredientsQuan=(e,index)=>{
-        let ingredients = this.state.Ingredients;
+        let ingredients = this.state.ingredients;
         ingredients[index].quantity = e.target.value;
-        this.setState({ Ingredients: ingredients });
+        this.setState({ ingredients: ingredients });
     }
 
     addIngredientsRow=()=>{
-       this.setState((prevState)=>({Ingredients:[...prevState.Ingredients, {name: "", age:"", unit:""}],
+       this.setState((prevState)=>({ingredients:[...prevState.ingredients, {name: "", quantity:"", unit:""}],
         }));
     }
 
     onChangeRemoveIngredients=(index)=>{
-        this.state.Ingredients.splice(index,1);
-        this.setState({Ingredients: this.state.Ingredients})
+        this.state.ingredients.splice(index,1);
+        this.setState({ingredients: this.state.ingredients})
     }
 
     onChangeSteps=(e,index)=>{
-        let steps = this.state.Steps;
+        let steps = this.state.steps;
         steps[index] = e.target.value;
-        this.setState({ Steps: steps });
+        this.setState({ steps: steps });
     }
 
     addStepsRow=()=>{
-        this.setState((prevState)=>({Steps:[...prevState.Steps, ""],
+        this.setState((prevState)=>({steps:[...prevState.steps, ""],
         }));
     }
 
     onChangeRemoveSteps=(index)=>{
-        this.state.Steps.splice(index,1);
-        this.setState({Steps: this.state.Steps})
+        this.state.steps.splice(index,1);
+        this.setState({steps: this.state.steps})
     }
 
     onImageUpload=(picture)=>{
-        this.setState({RecipeImage: this.state.RecipeImage.concat(picture)});
+        this.setState({filePath: this.state.filePath.concat(picture)});
     }
 
     render(){
@@ -141,7 +141,7 @@ export default class EditRecipe extends Component {
                             type = "Name" 
                             required 
                             className = "form-control" 
-                            value = {this.state.RecipeName} 
+                            value = {this.state.name} 
                             onChange={this.onChangeRecipeName}
                         />
                     </div>
@@ -151,7 +151,7 @@ export default class EditRecipe extends Component {
                             type = "Description" 
                             placeholder="optional" 
                             className = "form-control" 
-                            value = {this.state.Description} 
+                            value = {this.state.description} 
                             onChange={this.onChangeDescription}
                         />
                     </div>
@@ -159,8 +159,8 @@ export default class EditRecipe extends Component {
                         <label>Cuisine Type: </label>
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
-                            options={CuisineTypes} 
-                            selectedValues={this.state.cuisinetype} 
+                            options={categoriesOptions} 
+                            selectedValues={this.state.categories} 
                             onSelect={this.onSelect} 
                             onRemove={this.onRemove} 
                             displayValue="name" 
@@ -227,7 +227,7 @@ export default class EditRecipe extends Component {
                                                 type = "Steps" 
                                                 required 
                                                 className = "form-control" 
-                                                value = {step.content} 
+                                                value = {step} 
                                                 onChange={(e)=>this.onChangeSteps(e,index)}
                                             />
                                         </Col>
@@ -250,7 +250,7 @@ export default class EditRecipe extends Component {
                     <div className = "Recipe-form">
                         <label>Please upload a picture of your recipe if you want to update: </label>
                         <div>
-                            <img alt="recipe" className="Image"src={recipe1}/> 
+                            <img alt="recipe" className="Image"src={this.state.filePath}/> 
                             <ImageUploader
                                 withIcon = {false}
                                 withPreview = {true}
