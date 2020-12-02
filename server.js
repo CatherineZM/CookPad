@@ -183,8 +183,7 @@ app.post("/users/login", (req, res) => {
     // log(username, password);
     User.findByUsernamePassword(username, password)
         .then(user => {
-            req.session.user = user._id;
-            req.session.username = user.username;
+            req.session.user = user;
             res.send({ currentUser: user });
         })
         .catch(error => {
@@ -206,6 +205,7 @@ app.get("/users/logout", (req, res) => {
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
     if (req.session.user) {
+
         res.send({ currentUser: req.session.user });
     } else {
         res.status(401).send();

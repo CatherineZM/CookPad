@@ -10,7 +10,7 @@ import {setRecipe} from '../../actions/recipe'
 
 // hard coded images
 import ProfilePic from'./default-profile-pic.png' 
-import { FaRegEdit } from "react-icons/fa";
+import { FaRegEdit, FaRegSave } from "react-icons/fa";
 import {getUser} from "../../actions/user";
 import {getMyRecipe, getMyCollection} from "../../actions/recipe";
 
@@ -26,18 +26,19 @@ export default class ViewProfile extends Component {
             collectedRecipes:[],
             recipeExpanded: false,
             collectionExpanded: false,
-            dummy: 0,
+            inEdit:false
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
-        getUser(this, ()=>{
-            getMyRecipe(this);
-            getMyCollection(this);
-        })
+        
         console.log(this.state.collectedRecipes)
     }
 
 
     componentDidMount() {
+        getUser(this, ()=>{
+            getMyRecipe(this);
+            getMyCollection(this);
+        })
     }
 
     handleRecipeExpandClick = () => {
@@ -119,21 +120,92 @@ export default class ViewProfile extends Component {
         this.setState({dummy: 0})
     }
 
-    editprofile=(e)=>{
+    onClose=(e)=>{
+        this.setState({preview: null})
+    }
+      
+    onCrop=(e,preview)=>{
+        this.setState({preview})
+    }
+
+    onChangePassword=(e)=>{
         e.preventDefault();
-        this.props.history.push("/editprofile/"+ this.state.uid);
+        this.state.user.password = e.target.value
+    }
+
+    onChangeDescription=(e)=>{
+        e.preventDefault();
+        this.state.user.description = e.target.value
+    }
+
+    enterKeyHandler(e){
+        e.preventDefault();
+        if (e.keyCode === 13){
+            this.state.user.description = e.target.value + '\n'
+        };
+    }
+
+    editProfile=(e)=>{
+        e.preventDefault();
+        // this.props.history.push("/editprofile/"+ this.state.uid);
+        this.setState({inEdit: true})
+    }
+
+    saveProfile=(e)=>{
+        e.preventDefault();
+        this.setState({inEdit: false})
+
     }
 
     editButtonGenerator=(app)=>{
-        if (app.state.currentUser === this.state.user._id){
+        if (app.state.currentUser._id === this.state.user._id){
             return <button type="button"
             className = "btn btn-outline-primary"
-            onClick={this.editprofile}>
+            onClick={this.editProfile}>
             <FaRegEdit/>
             Edit Profile
             </button>
         }
         
+    }
+
+    profileGenerator = (app)=>{
+        if (!this.state.inEdit){
+            return  <div id="user-profile">
+                        <h4>{this.state.user.username + "'s Profile"}</h4>
+                        <Avatar id="user-picture" name="user" size="150" round={true} src={this.state.userpicture.src}/> 
+                        <div id="user-description">{this.state.user.description}</div>
+                        {this.editButtonGenerator(app)}
+                    </div>
+        } else {
+            return  <div id="user-profile">
+                        <h4>{this.state.user.username + "'s Profile"}</h4>
+                        <form onSubmit={this.saveProfile}>
+                            <div id="picture-change">
+                                <Avatar 
+                                    width={200}
+                                    height={200} 
+                                    round={true} 
+                                    onCrop={this.onCrop}
+                                    onClose={this.onClose}
+                                    src={this.state.userpicture.src}
+                                /> 
+                            </div>    
+                            <div className="form-group" id="profile-input">
+                                <div>Change Password:</div>
+                                <input type="password" className = "form-control" onChange={this.onChangePassword}/>
+                                <div>Change Profile Description:</div>
+                                <textarea className = "form-control" value={this.state.user.description} onChange={this.onChangeDescription}/>
+                                <button type="button"
+                                        className = "btn btn-outline-primary"
+                                        onClick={this.saveProfile}>
+                                    <FaRegSave/>
+                                    Save Profile
+                                </button>    
+                            </div>  
+                        </form>
+                    </div>
+        }
     }
 
     RecipeExpandButtonGenerator=()=>{
@@ -178,12 +250,7 @@ export default class ViewProfile extends Component {
             <div>
             <Container maxWidth='md'>
                 <Navbar app={app}/>
-                <div id="user-profile">
-                    <h4>{this.state.user.username + "'s Profile"}</h4>
-                    <Avatar id="user-picture" name="user" size="150" round={true} src={this.state.userpicture.src}/> 
-                    <div>{this.state.user.description}</div>
-                    {this.editButtonGenerator(app)}
-                </div>
+                {this.profileGenerator(app)}
                 
                 
                 <div id="user-recipes">
