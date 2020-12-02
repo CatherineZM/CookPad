@@ -115,30 +115,6 @@ app.post("/images", multipartMiddleware, (req, res) => {
         });
 });
 
-// // a GET route to get all images
-// app.get("/images", (req, res) => {
-//     Image.find().then(
-//         images => {
-//             res.send({ images });
-//         },
-//         error => {
-//             res.status(500).send(error); // server error
-//         }
-//     );
-// });
-
-// // a GET route to get one image
-// app.get("/images/:id", (req, res) => {
-//     Image.findbyId(req.params.id).then(
-//         image => {
-//             res.send({ image });
-//         },
-//         error => {
-//             res.status(500).send(error); // server error
-//         }
-//     );
-// });
-
 /// a DELETE route to remove an image by its id.
 app.delete("/images/:imageId", (req, res) => {
     const imageId = req.params.imageId;
