@@ -22,7 +22,7 @@ export default class AddRecipe extends Component {
             name: '',
             description: '',
             ingredients: [{name:"", quantity:"", unit:""}],
-            steps:[],
+            steps:[""],
             creatorId: '',
             creatorUsername: '',
             filePath: "https://react.semantic-ui.com/images/avatar/small/matthew.png",
@@ -107,9 +107,9 @@ export default class AddRecipe extends Component {
         console.log(this.state.categories)
     }
      
-    onRemoveCategories=(selectedList, removedItem)=>{
-        const removeItemID = removedItem.id
-        
+    onRemove=(selectedList, removedItem)=>{
+        const index = this.state.categories.findIndex((element) => element == removedItem.id)
+        this.state.categories.splice(index,1);
         this.setState({categories: this.state.categories})
     }
 
@@ -144,7 +144,8 @@ export default class AddRecipe extends Component {
                         <label> Recipe Description: </label>
                         <input 
                             type = "Description" 
-                            placeholder="optional" 
+                            required
+                            placeholder="Enter description for your recipe" 
                             className = "form-control" 
                             value = {this.state.description} 
                             onChange={this.onChangeDescription}
