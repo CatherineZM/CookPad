@@ -130,12 +130,16 @@ export default class ViewProfile extends Component {
 
     onChangePassword=(e)=>{
         e.preventDefault();
-        this.state.user.password = e.target.value
+        const newUser = this.state.user
+        newUser.password = e.target.value
+        this.setState({user: newUser})
     }
 
     onChangeDescription=(e)=>{
         e.preventDefault();
-        this.state.user.description = e.target.value
+        const newUser = this.state.user
+        newUser.description = e.target.value
+        this.setState({user: newUser})
     }
 
     enterKeyHandler(e){

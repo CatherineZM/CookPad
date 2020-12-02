@@ -175,7 +175,7 @@ export default class EditProfile extends Component {
         }
     }
 
-    CollectionRecipeGenerator=()=>{
+    CollectionRecipeGenerator=(app)=>{
         if(this.state.recipeExpanded){
             return <div id="collection-recipeswithEx">
                 <h4>My Collection
@@ -239,7 +239,7 @@ export default class EditProfile extends Component {
                         </div>    
                         <div className="form-group" id="profile-input">
                             <div>Change Password:</div>
-                            <input type="password" className = "form-control" value={this.state.password} onChange={this.onChangePassword}/>
+                            <input type="password" className = "form-control" onChange={this.onChangePassword}/>
                             <div>Change Profile Description:</div>
                             <textarea className = "form-control" value={this.state.description} onChange={this.onChangeDescription}/>
                             <button type="button"
@@ -268,7 +268,7 @@ export default class EditProfile extends Component {
                         </div>
                     </Collapse>
                 </div>
-                <this.CollectionRecipeGenerator/>
+                {this.CollectionRecipeGenerator(app)}
             </Container> 
             </div>
         )

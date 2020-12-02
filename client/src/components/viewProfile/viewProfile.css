@@ -16,6 +16,8 @@
 #user-description {
     margin-top: 10px;
     margin-bottom: 10px;
+    overflow-wrap: break-word;
+    padding: 30px;
 }
 
 .edit-button{
