@@ -153,7 +153,7 @@ app.get("/users/logout", (req, res) => {
 // A route to check if a user is logged in on the session
 app.get("/users/check-session", (req, res) => {
     if (req.session.user) {
-        res.send({ currentUser: req.session.username });
+        res.send({ currentUser: req.session.user });
     } else {
         res.status(401).send();
     }
@@ -230,7 +230,6 @@ add a new recipe to recipe lists
 }
 */
 app.post('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
-	
     const uid = req.params.uid;
     const idToPush = {}
 
@@ -263,7 +262,7 @@ app.post('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 })
 
 /*
-add a new recipe to recipe lists
+delete a new recipe to recipe lists
 {
     "likedRecipes": <rid>,
     "collectedRecipes": <rid>,
@@ -278,9 +277,11 @@ app.delete('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
     if (req.body.likedRecipes) {
         idToDelete.likedRecipes = req.body.likedRecipes
     }
+    
     if (req.body.collectedRecipes){
         idToDelete.collectedRecipes = req.body.collectedRecipes
     }
+
     if (req.body.myRecipes) {
         idToDelete.myRecipes = req.body.myRecipes
     }
@@ -343,7 +344,7 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 })
 
 
-// User API Route
+// Recipe API Route ---------------------------------------------------
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
     // create a new recipe
     const recipe = new Recipe({
@@ -370,7 +371,7 @@ app.post('/api/recipes', mongoChecker, async(req, res)=>{
     }
 })
 
-//get all recipes
+// get all recipes
 app.get('/api/recipes', mongoChecker, async(req, res)=>{
     try{
         const recipes = await Recipe.find()
@@ -381,8 +382,8 @@ app.get('/api/recipes', mongoChecker, async(req, res)=>{
     }
 })
 
-//get recipe by its id
-app.get('/api/recipes/:rid', [ridValidator, mongoChecker],async (req, res) =>{
+// get recipe by its id
+app.get('/api/recipes/:rid', [ridValidator, mongoChecker], async(req, res) =>{
     const rid = req.params.rid
 
 	try {
@@ -401,31 +402,42 @@ app.get('/api/recipes/:rid', [ridValidator, mongoChecker],async (req, res) =>{
 	}
 })
 
-//edit recipe
-app.patch('/api/recipes/:uid/:rid', [uidValidator, ridValidator, mongoChecker], async (req, res) =>{
-    const uid = req.params.uid
+// edit recipe
+app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>{
     const rid = req.params.rid
 
     try{
         const recipeToEdit = await Recipe.findById(rid)
-        if(recipeToEdit.creator == uid){
-            if(!recipeToEdit){   
-                res.status(404).send('Resource not found')  
-            } else {   
+        if (!recipeToEdit){
+            res.status(404).send("Resource not found")
+        } else {
+            if(req.body.name){
                 recipeToEdit.name = req.body.name
-                recipeToEdit.description = req.body.description
-                recipeToEdit.categories = req.body.categories
-                recipeToEdit.steps = req.body.steps
-                recipeToEdit.ingredients = req.body.ingredients
-                if(req.body.filePath != null){
-                    recipeToEdit.filePath = req.body.filePath
-                }
-                recipeToEdit.save()
-                res.send(recipeToEdit)
             }
-        }else{
-            res.status(404).send('No authentication to edit')
+            if(req.body.description){
+                recipeToEdit.description = req.body.description
+            }
+            if(req.body.likes){
+                recipeToEdit.likes = req.body.likes
+            }
+            if(req.body.categories){
+                recipeToEdit.categories = req.body.categories
+            }
+            if(req.body.steps){
+                recipeToEdit.steps = req.body.steps
+            }
+            if(req.body.ingredients){
+                recipeToEdit.ingredients = req.body.ingredients
+            }
+            if(req.body.filePath != null){
+                recipeToEdit.filePath = req.body.filePath
+            }
+
+            const newRecipe = await recipeToEdit.save()
+            res.send(newRecipe)
         }
+        
+        
     } catch(error) {
         if(isMongoError(error)){
             res.status(500).send('Internal Server Error')

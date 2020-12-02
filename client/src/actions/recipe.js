@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export const getMyRecipe = (viewProfileComp) => {
     const myRecipes = []
     viewProfileComp.user.myRecipes.forEach(rid => {
@@ -193,10 +195,35 @@ export const getAllRecipes = (comp)=>{
         })
 }
 
-export const getTopRecipes = ()=>{
+export const getTopRecipes = () => {
 
 }
 
-export const updateLikes = ()=>{
+// set a recipe field 
+export const setRecipe = (rid, newRecipe) => {
+    // const request = new Request(`/api/recipes/${rid}`, {
+    //     method: "post",
+    //     body: JSON.stringify(newRecipe),
+    //     headers: {
+    //         Accept: "application/json, text/plain, */*",
+    //         'Content-Type': 'multipart/form-data'
+    //     }
+    // })
 
+    axios.patch(`/api/recipes/${rid}`, newRecipe)
+    .then(res => console.log(res.data));
+    // console.log(request)
+    // send the request with fetch()
+    // fetch(request)
+    //     .then(res=>{
+    //         if(res.status === 200){
+    //             return res.json();
+    //         }
+    //     })
+    //     .then(json=>{
+    //         console.log(json)
+    //     })
+    //     .catch(error=>{
+    //         console.log(error);
+    //     })
 }

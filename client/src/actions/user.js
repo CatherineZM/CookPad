@@ -117,4 +117,72 @@ export const getUser = (viewProfileComp) => {
         })
 }
 
+// modify recipe list of the user
+/*
+add a new recipe to recipe lists
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+*/
+export const addToRecipeList = (uid, recipeList) => {
+    // create our request constructor with all the parameters we need
+    const request = new Request(`/api/users/${uid}`, {
+        method: "post",
+        body: JSON.stringify(recipeList),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
 
+    console.log(request)
+    // send the request with fetch()
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
+
+/*
+delete a new recipe to recipe lists
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+*/
+export const DeleteFromRecipeList = (uid, recipeList) => {
+    // create our request constructor with all the parameters we need
+    const request = new Request(`/api/users/${uid}`, {
+        method: "delete",
+        body: JSON.stringify(recipeList),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    // send the request with fetch()
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}

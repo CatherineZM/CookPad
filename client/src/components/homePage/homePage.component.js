@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {getAllRecipes} from '../../actions/recipe';
+import {getAllRecipes, setRecipe} from '../../actions/recipe';
+import {addToRecipeList, DeleteFromRecipeList} from '../../actions/user';
 import Container from '@material-ui/core/Container';
 
 import './homePage.css'
@@ -25,10 +26,7 @@ import noodlesIcon from './images/noodles.png'
 export default class HomePage extends Component {
     constructor(props){
         super(props);
-        
         this.props.history.push("/homepage");
-        
-
         this.state = {
             slide_idx: 0,
             num_slides: 3,
@@ -56,8 +54,6 @@ export default class HomePage extends Component {
         this.interval = setInterval(() => {
             this.autoShowSlides();
         }, 3000)
-
-        // TODO: init top3_recipe
     }
 
     componentWillUnmount() {
@@ -104,69 +100,70 @@ export default class HomePage extends Component {
     }
 
     clickStar=(rid)=>{
-        // require server call to update recipe information
-        const new_recipes = [];
-        const new_displayed_recipes = [];
-        this.state.recipes.forEach((recipe)=>{
-            const new_recipe = Object.create(recipe)
-            if(recipe.id === rid){
-                if(new_recipe.collected){
-                    new_recipe.collected = false;
-                }else{
-                    new_recipe.collected = true;
-                }
-            }
-            new_recipes.push(new_recipe)
-        })
+        if(this.props.app.state.currentUser.collectedRecipes.includes(rid)){
+            this.props.app.state.currentUser.collectedRecipes = this.props.app.state.currentUser.collectedRecipes.filter(recipe=> recipe !== rid)
+            DeleteFromRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+        }else{
+            this.props.app.state.currentUser.collectedRecipes.push(rid)
+            addToRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+        }
 
-        this.setState({ recipes: new_recipes });
-        this.state.displayed_recipes.forEach((recipe)=>{
-            const new_recipe = Object.create(recipe)
-            if(new_recipe.id === rid){
-                if(new_recipe.collected){
-                    new_recipe.collected = false;
-                }else{
-                    new_recipe.collected = true;
-                }
-            }
-            new_displayed_recipes.push(new_recipe)
-        })
-        this.setState({ displayed_recipes: new_displayed_recipes });
+        this.setState({num_slides: 3})
     }
 
     clickHeart=(rid)=>{
-        // require server call to update recipe information
+        console.log(rid)
+        let newLikes = 0;
         const new_recipes = [];
         const new_displayed_recipes = [];
-        this.state.recipes.forEach((recipe)=>{
-            const new_recipe = Object.create(recipe)
-            if(recipe.id === rid){
-                if(new_recipe.liked){
-                    new_recipe.liked = false;
+        if(this.props.app.state.currentUser.likedRecipes.includes(rid)){
+            this.props.app.state.currentUser.likedRecipes = this.props.app.state.currentUser.likedRecipes.filter(recipe=> recipe !== rid)
+            DeleteFromRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            this.state.recipes.forEach((recipe)=>{
+                const new_recipe = Object.create(recipe)
+                if(recipe._id === rid){
                     new_recipe.likes--;
-                }else{
-                    new_recipe.liked = true;
-                    new_recipe.likes++;
+                    newLikes = new_recipe.likes;
                 }
-            }
-            new_recipes.push(new_recipe)
-        })
+                new_recipes.push(new_recipe)
+            })
+            this.setState({ recipes: new_recipes });
 
-        this.setState({ recipes: new_recipes });
-        this.state.displayed_recipes.forEach((recipe)=>{
+            this.state.displayed_recipes.forEach((recipe)=>{
             const new_recipe = Object.create(recipe)
-            if(new_recipe.id === rid){
-                if(new_recipe.liked){
-                    new_recipe.liked = false;
-                    new_recipe.likes--;
-                }else{
-                    new_recipe.liked = true;
-                    new_recipe.likes++;
-                }
+            if(new_recipe._id === rid){
+                new_recipe.likes--;
             }
             new_displayed_recipes.push(new_recipe)
-        })
-        this.setState({ displayed_recipes: new_displayed_recipes });
+            })
+            this.setState({ displayed_recipes: new_displayed_recipes });
+        }else{
+            this.props.app.state.currentUser.likedRecipes.push(rid)
+            addToRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            this.state.recipes.forEach((recipe)=>{
+                const new_recipe = Object.create(recipe)
+                if(recipe._id === rid){
+                    new_recipe.likes++;
+                    newLikes = new_recipe.likes;
+                }
+                new_recipes.push(new_recipe)
+            })
+            this.setState({ recipes: new_recipes });
+
+            this.state.displayed_recipes.forEach((recipe)=>{
+                const new_recipe = Object.create(recipe)
+                if(new_recipe._id === rid){
+                    new_recipe.likes++;
+                }
+                new_displayed_recipes.push(new_recipe)
+            })
+            this.setState({ displayed_recipes: new_displayed_recipes });
+        }
+
+        console.log(this.state.recipes)
+        // server call to update recipe
+        console.log(newLikes)
+        setRecipe(rid, {likes: newLikes})
 
         // update top three recipes
         let first_largest = 0;
@@ -175,18 +172,18 @@ export default class HomePage extends Component {
         let first_idx = 0;
         let second_idx = 0;
         let third_idx = 0;
-        for(let i=0; i< new_recipes.length; i++){
-            if(new_recipes[i].likes > first_largest){
+        for(let i=0; i< this.props.app.state.currentUser.likedRecipes.length; i++){
+            if(this.props.app.state.currentUser.likedRecipes[i].likes > first_largest){
                 third_largest = second_largest;
                 second_largest = first_largest;
-                first_largest = new_recipes[i].likes;
+                first_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
                 first_idx = i;
-            }else if(new_recipes[i].likes > second_largest){
+            }else if(this.props.app.state.currentUser.likedRecipes[i].likes > second_largest){
                 third_largest = second_largest;
-                second_largest = new_recipes[i].likes;
+                second_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
                 second_idx = i;
-            }else if(new_recipes[i].likes > third_largest){
-                third_largest = new_recipes[i].likes;
+            }else if(this.props.app.state.currentUser.likedRecipes[i].likes > third_largest){
+                third_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
                 third_idx = i;
             }
         }
