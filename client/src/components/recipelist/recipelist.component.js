@@ -69,7 +69,7 @@ class RecipeList extends Component {
                                 />
                                 <FormControlLabel
                                 className={classes.saveButton}
-                                control={<Checkbox checked={app.state.currentUser.likedRecipes && app.state.currentUser.collectedRecipes.includes(recipe._id)} disableRipple={true} onChange={()=>clickStar(recipe._id)} icon={<BookmarkBorderIcon/>} checkedIcon={<BookmarkIcon style={{color: yellow[600] }}/>} name="saved" />} 
+                                control={<Checkbox checked={app.state.currentUser.collectedRecipes && app.state.currentUser.collectedRecipes.includes(recipe._id)} disableRipple={true} onChange={()=>clickStar(recipe._id)} icon={<BookmarkBorderIcon/>} checkedIcon={<BookmarkIcon style={{color: yellow[600] }}/>} name="saved" />} 
                                 /> 
                             </div>
                         </CardActions>

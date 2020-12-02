@@ -5,20 +5,11 @@ import Navbar from "../Navbar/navbar.component"
 import RecipeList from '../recipelist/recipelist.component'
 import Avatar from 'react-avatar';
 import {Collapse} from 'react-bootstrap'
+import {DeleteFromRecipeList, addToRecipeList} from '../../actions/user';
+import {setRecipe} from '../../actions/recipe'
 
 // hard coded images
 import ProfilePic from'./default-profile-pic.png' 
-import recipe1 from '../../recipes/butter-chicken.jpg'
-import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
-import recipe3 from '../../recipes/ramen.jpg'
-import recipe4 from '../../recipes/vanilla-cake.png'
-import recipe5 from '../../recipes/spaghetti.png'
-import recipe6 from '../../recipes/apple-pie.png'
-import recipe7 from '../../recipes/homemade-pizza.png'
-import recipe8 from '../../recipes/greek-salad.png'
-import recipe9 from '../../recipes/seafood-sandwiches.png'
-import recipe10 from '../../recipes/seafood-stew.png'
-import recipe11 from '../../recipes/Chicken-Noodle-Soup.jpg'
 import { FaRegEdit } from "react-icons/fa";
 import {getUser} from "../../actions/user";
 import {getMyRecipe, getMyCollection} from "../../actions/recipe";
@@ -35,6 +26,7 @@ export default class ViewProfile extends Component {
             collectedRecipes:[],
             recipeExpanded: false,
             collectionExpanded: false,
+            dummy: 0,
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
         getUser(this, ()=>{
@@ -42,15 +34,10 @@ export default class ViewProfile extends Component {
             getMyCollection(this);
         })
         console.log(this.state.collectedRecipes)
-
-        
     }
 
 
     componentDidMount() {
-        // requires server calls to initialize recipes and user profile
-        
-        
     }
 
     handleRecipeExpandClick = () => {
@@ -70,37 +57,66 @@ export default class ViewProfile extends Component {
     }
 
      clickHeart=(rid)=>{
-        // need to update the information into database
-        let new_recipes = this.state.recipes;
-        this.state.recipes.forEach((recipe, idx)=>{
-            if(recipe.id === rid){
-                if(recipe.liked){
-                    new_recipes[idx].liked = false;
-                    new_recipes[idx].likes--;
-                    this.setState({ recipes: new_recipes });
-                }else{
-                    new_recipes[idx].liked = true;
-                    new_recipes[idx].likes++;
-                    this.setState({ recipes: new_recipes });
+        let newLikes = 0;
+        const new_recipes = [];
+        const new_collectedRecipes = [];
+        if(this.props.app.state.currentUser.likedRecipes.includes(rid)){
+            this.props.app.state.currentUser.likedRecipes = this.props.app.state.currentUser.likedRecipes.filter(recipe=> recipe !== rid)
+            DeleteFromRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            this.state.recipes.forEach((recipe)=>{
+                const new_recipe = Object.create(recipe)
+                if(recipe._id === rid){
+                    new_recipe.likes--;
+                    newLikes = new_recipe.likes;
                 }
-            }
-        })
+                new_recipes.push(new_recipe)
+            })
+            this.setState({ recipes: new_recipes });
+
+            this.state.collectedRecipes.forEach((recipe)=>{
+                const new_recipe = Object.create(recipe)
+                if(new_recipe._id === rid){
+                    new_recipe.likes--;
+                }
+                new_collectedRecipes.push(new_recipe)
+            })
+            this.setState({ collectedRecipes: new_collectedRecipes });
+        }else{
+            this.props.app.state.currentUser.likedRecipes.push(rid)
+            addToRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            this.state.recipes.forEach((recipe)=>{
+                const new_recipe = Object.create(recipe)
+                if(recipe._id === rid){
+                    new_recipe.likes++;
+                    newLikes = new_recipe.likes;
+                }
+                new_recipes.push(new_recipe)
+            })
+            this.setState({ recipes: new_recipes });
+
+            this.state.collectedRecipes.forEach((recipe)=>{
+                const new_recipe = Object.create(recipe)
+                if(new_recipe._id === rid){
+                    new_recipe.likes++;
+                }
+                new_collectedRecipes.push(new_recipe)
+            })
+            this.setState({ collectedRecipes: new_collectedRecipes });
+        }
+
+        // server call to update recipe
+        setRecipe(rid, {likes: newLikes})
     }
 
     clickStar=(rid)=>{
-        // need to update the information into database
-        let new_recipes = this.state.recipes;
-        this.state.recipes.forEach((recipe, idx)=>{
-            if(recipe.id === rid){
-                if(recipe.collected){
-                    new_recipes[idx].collected = false;
-                    this.setState({ recipes: new_recipes });
-                }else{
-                    new_recipes[idx].collected = true;
-                    this.setState({ recipes: new_recipes });
-                }
-            }
-        })
+        if(this.props.app.state.currentUser.collectedRecipes.includes(rid)){
+            this.props.app.state.currentUser.collectedRecipes = this.props.app.state.currentUser.collectedRecipes.filter(recipe=> recipe !== rid)
+            DeleteFromRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+        }else{
+            this.props.app.state.currentUser.collectedRecipes.push(rid)
+            addToRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+        }
+        this.setState({dummy: 0})
     }
 
     editprofile=(e)=>{
@@ -156,44 +172,6 @@ export default class ViewProfile extends Component {
         this.props.history.push("/viewrecipe/" + rid);
     }
 
-    CollectionRecipeGenerator=()=>{
-        if(this.state.recipeExpanded){
-            return <div id="collection-recipeswithEx">
-                <h4>My Collection
-                {this.CollectionExpandButtonGenerator()}
-                </h4>
-                <Collapse in={this.state.collectionExpanded}>
-                    <div className="recipe-list">
-                        <RecipeList   
-                            recipes={this.state.collectedRecipes}
-                            clickHeart={this.clickHeart}
-                            clickStar={this.clickStar}
-                            clickRecipe = {this.clickRecipe}
-                            app = {this.props.app}
-                        />    
-                    </div>
-                </Collapse> 
-            </div>
-        }else if(!this.state.recipeExpanded){
-            return <div id="collection-recipes">
-                    <h4>My Collection
-                    {this.CollectionExpandButtonGenerator()}
-                    </h4>
-                    <Collapse in={this.state.collectionExpanded}>
-                        <div className="recipe-list">
-                            <RecipeList   
-                                recipes={this.state.collectedRecipes}
-                                clickHeart={this.clickHeart}
-                                clickStar={this.clickStar}
-                                clickRecipe = {this.clickRecipe}
-                                app = {this.props.app}
-                            />    
-                        </div>
-                    </Collapse> 
-                </div>
-        }
-    }
-
     render(){
         const { app } = this.props;
         return(
@@ -210,7 +188,7 @@ export default class ViewProfile extends Component {
                 
                 <div id="user-recipes">
                     <h4>My Recipes
-                    <this.RecipeExpandButtonGenerator />
+                    <this.RecipeExpandButtonGenerator/>
                     </h4>
                     <Collapse in={this.state.recipeExpanded}>
                         <div className="recipe-list">
@@ -224,7 +202,44 @@ export default class ViewProfile extends Component {
                         </div>
                     </Collapse>
                 </div>
-                <this.CollectionRecipeGenerator/>
+
+                { this.state.recipeExpanded && 
+                    <div id="collection-recipeswithEx">
+                    <h4>My Collection
+                    <this.CollectionExpandButtonGenerator/>
+                    </h4>
+                    <Collapse in={this.state.collectionExpanded}>
+                        <div className="recipe-list">
+                            <RecipeList   
+                                recipes={this.state.collectedRecipes}
+                                clickHeart={this.clickHeart}
+                                clickStar={this.clickStar}
+                                clickRecipe = {this.clickRecipe}
+                                app = {this.props.app}
+                            />    
+                        </div>
+                    </Collapse> 
+                    </div>
+                }
+
+                { !this.state.recipeExpanded && 
+                    <div id="collection-recipes">
+                        <h4>My Collection
+                        <this.CollectionExpandButtonGenerator/>
+                        </h4>
+                        <Collapse in={this.state.collectionExpanded}>
+                            <div className="recipe-list">
+                                <RecipeList   
+                                    recipes={this.state.collectedRecipes}
+                                    clickHeart={this.clickHeart}
+                                    clickStar={this.clickStar}
+                                    clickRecipe = {this.clickRecipe}
+                                    app = {this.props.app}
+                                />    
+                            </div>
+                        </Collapse> 
+                    </div>
+                }
             </Container>
             </div> 
         )

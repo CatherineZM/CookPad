@@ -4,7 +4,8 @@ import { Link } from "react-router-dom"
 import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
-import {getRecipe, deleteRecipe} from "../../actions/recipe"
+import {getRecipe, deleteRecipe, setRecipe} from "../../actions/recipe"
+import {addToRecipeList, DeleteFromRecipeList} from "../../actions/user"
 import './viewRecipe.css'
 
 import Card from '@material-ui/core/Card';
@@ -36,10 +37,7 @@ const styles = {
 class ViewRecipe extends Component {
     constructor(props){
         super(props);
-        // TODO: change it to the line commented
-        this.props.history.push('/viewrecipe/5fc6d4eb6db5830cb4a1586d');
-        
-        //this.props.history.push('/viewrecipe/'+this.props.match.params.rid);
+        this.props.history.push('/viewrecipe/'+this.props.match.params.rid);
         // requires server calls to update the information based on the recipe id
         this.state = {
             liked: false,
@@ -57,33 +55,35 @@ class ViewRecipe extends Component {
                 filePath: "",
             }
         }
-        getRecipe(this, "5fc6d4eb6db5830cb4a1586d")
+        getRecipe(this, this.props.match.params.rid)
     }
 
     clickStar=(rid)=>{
-        // // requires server calls to update the recipe information
-        // let new_recipe = this.state.recipe;
-        // if(this.state.recipe.collected){
-        //     new_recipe.collected = false;
-        //     this.setState({ recipes: new_recipe });
-        // }else{
-        //     new_recipe.collected = true;
-        //     this.setState({ recipes: new_recipe });
-        // }
+        if(this.props.app.state.currentUser.collectedRecipes.includes(rid)){
+            this.props.app.state.currentUser.collectedRecipes = this.props.app.state.currentUser.collectedRecipes.filter(recipe=> recipe !== rid)
+            DeleteFromRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+            this.setState({collected: false})
+        }else{
+            this.props.app.state.currentUser.collectedRecipes.push(rid)
+            addToRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+            this.setState({collected: true})
+        }
     }
 
     clickHeart=(rid)=>{
-        // requires server calls to update the recipe information
-        // let new_recipe = this.state.recipe;
-        // if(this.state.recipe.liked){
-        //     new_recipe.liked = false;
-        //     new_recipe.likes--;
-        //     this.setState({ recipes: new_recipe });
-        // }else{
-        //     new_recipe.liked = true;
-        //     new_recipe.likes++;
-        //     this.setState({ recipes: new_recipe });
-        // }
+        let newRecipe = this.state.recipe;
+        if(this.props.app.state.currentUser.likedRecipes.includes(rid)){
+            this.props.app.state.currentUser.likedRecipes = this.props.app.state.currentUser.likedRecipes.filter(recipe=> recipe !== rid)
+            DeleteFromRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            newRecipe.likes--;
+            this.setState({ likes: newRecipe });
+        }else{
+            this.props.app.state.currentUser.likedRecipes.push(rid)
+            addToRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            newRecipe.likes++;
+            this.setState({ recipes: newRecipe });
+        }
+        setRecipe(rid, {likes: newRecipe.likes})
     }
 
     editRecipe=(e)=>{
@@ -94,7 +94,7 @@ class ViewRecipe extends Component {
     deleteRecipe=(e)=>{
         e.preventDefault();
         if (window.confirm('Are you sure you wish to delete this item?')){
-            // TODO: need to update the myRecipe list of user
+            DeleteFromRecipeList(this.props.app.state.currentUser._id, {myRecipes: this.state.recipe._id})
             deleteRecipe(this.state.recipe._id)
             console.log("item deleted")
             this.props.history.push("/viewprofile/"+ this.props.app.state.currentUser._id)
@@ -144,12 +144,12 @@ class ViewRecipe extends Component {
                                 <FormControlLabel
                                 className={classes.likeButton}
                                 labelPlacement="end"
-                                control={<Checkbox checked= {this.state.liked}disableRipple={true} onChange={()=>this.clickHeart(this.state.recipe._id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
+                                control={<Checkbox checked={this.props.app.state.currentUser.likedRecipes && this.props.app.state.currentUser.likedRecipes.includes(this.state.recipe._id)} disableRipple={true} onChange={()=>this.clickHeart(this.state.recipe._id)} icon={<FavoriteBorder fontSize="large"/>} checkedIcon={<Favorite fontSize="large"/>} name="liked" />} 
                                 label={this.state.recipe.likes}
                                 />
                                 <FormControlLabel
                                 className={classes.saveButton}
-                                control={<Checkbox disableRipple={this.state.collected} onChange={()=>this.clickStar(this.state.recipe._id)} icon={<BookmarkBorderIcon fontSize="large"/>} checkedIcon={<BookmarkIcon fontSize="large" style={{color: yellow[600] }}/>} name="saved" />} 
+                                control={<Checkbox checked={this.props.app.state.currentUser.collectedRecipes && this.props.app.state.currentUser.collectedRecipes.includes(this.state.recipe._id)} disableRipple={true} onChange={()=>this.clickStar(this.state.recipe._id)} icon={<BookmarkBorderIcon fontSize="large"/>} checkedIcon={<BookmarkIcon fontSize="large" style={{color: yellow[600] }}/>} name="saved" />} 
                                 /> 
                             </div>
                         </CardActions>

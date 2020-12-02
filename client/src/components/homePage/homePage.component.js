@@ -112,7 +112,6 @@ export default class HomePage extends Component {
     }
 
     clickHeart=(rid)=>{
-        console.log(rid)
         let newLikes = 0;
         const new_recipes = [];
         const new_displayed_recipes = [];
@@ -160,9 +159,7 @@ export default class HomePage extends Component {
             this.setState({ displayed_recipes: new_displayed_recipes });
         }
 
-        console.log(this.state.recipes)
         // server call to update recipe
-        console.log(newLikes)
         setRecipe(rid, {likes: newLikes})
 
         // update top three recipes
