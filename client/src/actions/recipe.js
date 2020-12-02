@@ -120,10 +120,33 @@ export const getRecipe = (comp, rid) => {
         })
 }
 
+export const deleteRecipe = (rid) => {
+    const request = new Request(`/api/recipes/${rid}`, {
+        method: "delete",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
+
 export const getTopRecipes = ()=>{
 
 }
 
 export const updateLikes = ()=>{
-    
+
 }

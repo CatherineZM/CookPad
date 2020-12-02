@@ -264,7 +264,7 @@ app.get('/api/recipes/:rid', [ridValidator, mongoChecker],async (req, res) =>{
 })
 
 //edit recipe
-app.patch('/api/recipes/:uid/:rid', [uidValidator,ridValidator, mongoChecker],async (req, res) =>{
+app.patch('/api/recipes/:uid/:rid', [uidValidator, ridValidator, mongoChecker], async (req, res) =>{
     const uid = req.params.uid
     const rid = req.params.rid
 
@@ -296,6 +296,20 @@ app.patch('/api/recipes/:uid/:rid', [uidValidator,ridValidator, mongoChecker],as
         }
     }
 })
+
+// delete a recipe
+app.delete('/api/recipes/:rid', [ridValidator, mongoChecker], async(req, res) => {
+    try{
+        const recipe = await Recipe.findByIdAndDelete(req.params.rid);
+        return res.send(recipe);
+    } catch(error) {
+        if(isMongoError(error)){
+			res.status(500).send('Internal Server Error')
+		} else {
+			res.status(400).send('Bad Request')
+		}  
+    }
+});
 /*** Webpage routes below **********************************/
 // Serve the build
 app.use(express.static(path.join(__dirname, "/client/build")));

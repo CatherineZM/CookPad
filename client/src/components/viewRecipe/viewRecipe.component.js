@@ -4,12 +4,10 @@ import { Link } from "react-router-dom"
 import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
-import {uid} from "react-uid"
-import {getRecipe} from "../../actions/recipe"
+import {getRecipe, deleteRecipe} from "../../actions/recipe"
 import './viewRecipe.css'
 
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -21,11 +19,6 @@ import BookmarkBorderIcon from '@material-ui/icons/BookmarkBorder';
 import { yellow } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-// hardcoded images
-import recipe1 from '../../recipes/butter-chicken.jpg'
-import recipe2 from '../../recipes/lemon-zucchini-bread.jpg'
-import recipe3 from '../../recipes/ramen.jpg'
-
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
@@ -43,17 +36,15 @@ const styles = {
 class ViewRecipe extends Component {
     constructor(props){
         super(props);
+        // TODO: change it to the line commented
         this.props.history.push('/viewrecipe/5fc6d4eb6db5830cb4a1586d');
         //this.props.history.push('/viewrecipe/'+this.props.match.params.rid);
         // requires server calls to update the information based on the recipe id
         this.state = {
-            top3_recipe:[
-                {id:1, src:recipe2, liked: false, collected: false, title:'Lemon Zucchini Bread', likes: 100, categories:[0]},
-                {id:2, src:recipe3, liked: false, collected: false, title:'Ramen', likes:98, categories:[1]}
-            ],
             liked: false,
             collected: false,
             recipe:{
+                _id: 0,
                 name: "",
                 description: "",
                 likes: 0,
@@ -68,20 +59,20 @@ class ViewRecipe extends Component {
     }
 
     componentDidMount() {
-        // requires server calls to initialize recipe information
+        // TODO: change this ID to this.props.match.params.rid
         getRecipe(this, "5fc6d4eb6db5830cb4a1586d")
     }
 
     clickStar=(rid)=>{
-        // requires server calls to update the recipe information
-        let new_recipe = this.state.recipe;
-        if(this.state.recipe.collected){
-            new_recipe.collected = false;
-            this.setState({ recipes: new_recipe });
-        }else{
-            new_recipe.collected = true;
-            this.setState({ recipes: new_recipe });
-        }
+        // // requires server calls to update the recipe information
+        // let new_recipe = this.state.recipe;
+        // if(this.state.recipe.collected){
+        //     new_recipe.collected = false;
+        //     this.setState({ recipes: new_recipe });
+        // }else{
+        //     new_recipe.collected = true;
+        //     this.setState({ recipes: new_recipe });
+        // }
     }
 
     clickHeart=(rid)=>{
@@ -103,13 +94,31 @@ class ViewRecipe extends Component {
         this.props.history.push("/editRecipe/" + this.state.recipe.id);
     }
 
-    deleteRecipe=(e, app)=>{
+    deleteRecipe=(e)=>{
         e.preventDefault();
         if (window.confirm('Are you sure you wish to delete this item?')){
-            // requires server calls to delete item in database
+            // TODO: need to update the myRecipe list of user
+            deleteRecipe(this.state.recipe._id)
             console.log("item deleted")
-            this.props.history.push("/viewprofile/"+ app.state.currentUser._id)
+            //this.props.history.push("/viewprofile/"+ this.props.app.state.currentUser._id)
         } 
+    }
+
+    editDeleteButtonGen=()=>{
+        if(this.state.recipe.creatorId === this.props.app.state.currentUser._id){
+            return (
+            <div>
+            <div className="view-recipe-form-group">
+                <form float="left" onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
+            </div>
+            <div className="view-recipe-form-group">
+                <form onSubmit={this.deleteRecipe}><input type="submit" value="Delete" className="btn btn-primary"/></form>
+            </div>
+            </div>);
+        } else {
+            return null;
+        }
+
     }
 
     render(){
@@ -149,30 +158,6 @@ class ViewRecipe extends Component {
                         </CardActions>
                     </Card>
                 </div>
-
-                {/* <div className="recommendations">
-                {this.state.top3_recipe.map((recipe)=>(
-                    <div key={uid(recipe.name)} className="view-other">
-                        <Link to={"/viewrecipe/" + recipe.id}>
-                        <Card className={classes.card}>
-                            <CardActionArea>
-                                <CardMedia
-                                    height="200"
-                                    component="img"
-                                    alt={recipe.title}
-                                    image={recipe.src}
-                                />
-                                <CardContent>
-                                <Typography gutterBottom variant="h6" component="h6">
-                                    {recipe.title}
-                                </Typography>
-                                </CardContent>
-                            </CardActionArea>
-                        </Card>
-                        </Link>
-                    </div>
-                    ))}
-                </div> */}
                 
                 <div className="mid-section">
                     <Steps
@@ -184,15 +169,7 @@ class ViewRecipe extends Component {
                     />
                 </div>
 
-                {/* only show the two button if they belong to the user */}
-                {this.state.recipe.creatorId === this.props.app.state.currentUser._id && <div>
-                    <div className="view-recipe-form-group">
-                        <form float="left" onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
-                    </div>
-                    <div className="view-recipe-form-group">
-                        <form onSubmit={(e)=>this.deleteRecipe(e, app)}><input type="submit" value="Delete" className="btn btn-primary"/></form>
-                    </div>
-                </div>}
+                <this.editDeleteButtonGen/>
             </Container> 
             </div> 
         )
