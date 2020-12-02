@@ -346,17 +346,21 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 // User API Route
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
     // create a new recipe
+    console.log(req.body.name);
     const recipe = new Recipe({
         name: req.body.name,
         description: req.body.description,
         likes: 0,
         categories: req.body.categories,
-        creatorId: req.body.creatorId,
-        creatorUsername: req.body.creatorUsername,
+        creator: req.body.creator,
+        //creatorUsername: req.body.creatorUsername,
         steps: req.body.steps,
         ingredients: req.body.ingredients,
         filePath: req.body.filePath,
     })
+    console.log(recipe);
+    const image = req.body.filePath;
+    console.log("image: " + image);
 
     try{
         const newRecipe = await recipe.save()

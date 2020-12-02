@@ -13,8 +13,6 @@ import {addRecipe} from "../../actions/recipe"
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 
-const defaultUnit = UnitType[0];
-
 export default class AddRecipe extends Component {
     constructor(props){
         super(props);
@@ -27,7 +25,7 @@ export default class AddRecipe extends Component {
             steps:[],
             creatorId: '',
             creatorUsername: '',
-            filePath: '',
+            filePath: "https://react.semantic-ui.com/images/avatar/small/matthew.png",
             categories:[],
             categoriesOptions :[
                 {name: "Cake", id: 0},

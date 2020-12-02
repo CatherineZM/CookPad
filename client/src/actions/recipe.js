@@ -84,7 +84,7 @@ export const addRecipe = (newRecipeComp) => {
         body: JSON.stringify(newRecipe),
         headers: {
             Accept: "application/json, text/plain, */*",
-            'Content-Type': 'multipart/form-data'
+            "Content-Type": "application/json",
         }
     })
 
@@ -92,6 +92,7 @@ export const addRecipe = (newRecipeComp) => {
     fetch(request)
         .then(res=>{
             if(res.status === 200){
+                alert("Success");
                 return res.json();
             }
         })
