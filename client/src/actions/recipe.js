@@ -219,7 +219,7 @@ export const getTop2Recipes = (comp, rid)=>{
             console.log(json)
             comp.setState({recipes: json.recipes})
             comp.setState({displayed_recipes: json.recipes})
-            
+            comp.setState({ top2_recipes: []})
             // update top 2 recipes
             let first_largest = -1;
             let second_largest = -1;

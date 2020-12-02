@@ -168,7 +168,7 @@ class ViewRecipe extends Component {
                 
                 {this.state.top2_recipes && this.state.top2_recipes.length>0 && 
                 <div className="recommendations">
-                    
+                    <h4>Recommendations</h4>
                 {this.state.top2_recipes.map((recipe)=>(
                     <div key={uid(recipe.name)} className="view-other">
                         <Link to={"/viewrecipe/" + recipe._id} onClick={()=>this.refresh(recipe._id)}>
