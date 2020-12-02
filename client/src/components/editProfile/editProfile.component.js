@@ -189,7 +189,7 @@ export default class EditProfile extends Component {
                             clickStar={this.clickStar}
                             clickRecipe = {this.clickRecipe}
                             userid={this.state.curruid}
-                            app={app}
+                            app={this.props.app}
                         />    
                     </div>
                     
@@ -207,7 +207,7 @@ export default class EditProfile extends Component {
                                 clickHeart={this.clickHeart}
                                 clickStar={this.clickStar}
                                 clickRecipe = {this.clickRecipe}
-                                app={app}
+                                app={this.props.app}
                             />    
                         </div>
                         

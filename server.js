@@ -13,7 +13,8 @@ app.use(cors());
 
 // mongoose and mongo connection
 const { mongoose } = require('./db/mongoose')
-mongoose.set('bufferCommands', false);  // don't buffer db requests if the db server isn't connected - minimizes http requests hanging if this is the case.
+mongoose.set('bufferCommands', false); // don't buffer db requests if the db server isn't connected - minimizes http requests hanging if this is the case.
+mongoose.set('useFindAndModify', false); // for some deprecation issues
 
 // import the mongoose models
 const { User } = require('./models/User')
@@ -31,26 +32,9 @@ const session = require("express-session");
 const e = require('express');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// uploading files
-const fileUpload = require('express-fileUpload');
-app.use(fileUpload());
-app.post('/upload', (req, res) => {
-    console.log(req);
-    if(req.files === null){
-        return res.status(400).json({ msg: 'No file uploaded'});
-    }
-    
-    const file = req.files.file;
-    file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
-        if(err){
-            console.error(err);
-            return res.status(500).send(err)
-        }
-    })
-
-    res.json({filePath: `/uploads/${file.name}`});
-})
-
+// multipart middleware: allows you to access uploaded file from req.file
+const multipart = require('connect-multiparty');
+const multipartMiddleware = multipart();
 
 /*** Helper functions below **********************************/
 function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
@@ -71,7 +55,6 @@ const mongoChecker = (req, res, next) => {
 
 const uidValidator = (req, res, next) => {
     const id = req.params.uid;
-
     if (!ObjectID.isValid(id)) {
         res.status(404).send("Invalid ID")
 		return; 
@@ -107,6 +90,76 @@ const authenticate = (req, res, next) => {
         res.status(401).send("Unauthorized")
     }
 }
+
+
+
+// cloudinary: configure using credentials found on your Cloudinary Dashboard
+// sign up for a free account here: https://cloudinary.com/users/register/free
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'dcbkumvzn',
+    api_key: '724245945181957',
+    api_secret: 'Fz7Syp9Ak3PHwdbwS0DmePhWXjQ'
+});
+
+/*********************************************************/
+/*** Image API Routes below ************************************/
+// a POST route to *create* an image
+app.post("/images", multipartMiddleware, (req, res) => {
+    // Use uploader.upload API to upload image to cloudinary server.
+    cloudinary.uploader.upload(
+        req.files.file.path, // req.files contains uploaded files
+        function (result) {
+            // Save image to the database
+            res.send({imageId: result.public_id, imageUrl: result.url});
+        });
+});
+
+// // a GET route to get all images
+// app.get("/images", (req, res) => {
+//     Image.find().then(
+//         images => {
+//             res.send({ images });
+//         },
+//         error => {
+//             res.status(500).send(error); // server error
+//         }
+//     );
+// });
+
+// // a GET route to get one image
+// app.get("/images/:id", (req, res) => {
+//     Image.findbyId(req.params.id).then(
+//         image => {
+//             res.send({ image });
+//         },
+//         error => {
+//             res.status(500).send(error); // server error
+//         }
+//     );
+// });
+
+/// a DELETE route to remove an image by its id.
+app.delete("/images/:imageId", (req, res) => {
+    const imageId = req.params.imageId;
+    // Delete an image by its id (NOT the database ID, but its id on the cloudinary server)
+    // on the cloudinary server
+    cloudinary.uploader.destroy(imageId, function (result) {
+
+        // Delete the image from the database
+        Image.findOneAndRemove({ image_id: imageId })
+            .then(img => {
+                if (!img) {
+                    res.status(404).send();
+                } else {
+                    res.send(img);
+                }
+            })
+            .catch(error => {
+                res.status(500).send(); // server error, could not delete.
+            });
+    });
+});
 
 /*** Session handling **************************************/
 // Create a session and session cookie
@@ -160,7 +213,7 @@ app.get("/users/check-session", (req, res) => {
 });
 
 
-/*** API Routes below ************************************/
+/*** User API below ************************************/
 // User API Route
 // create a user
 app.post('/api/users', mongoChecker, async(req, res)=>{
@@ -314,7 +367,6 @@ update a user
 */
 app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{	
     const uid = req.params.uid;
-    const FieldToUpdate = {}
 
 	try{
         const user = await User.findById(uid)
@@ -343,8 +395,8 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	}
 })
 
-
-// Recipe API Route ---------------------------------------------------
+/*** User API below ************************************/
+// create a recipe
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
     // create a new recipe
     console.log(req.body.name);
@@ -357,7 +409,8 @@ app.post('/api/recipes', mongoChecker, async(req, res)=>{
         creatorUsername: req.body.creatorUsername,
         steps: req.body.steps,
         ingredients: req.body.ingredients,
-        filePath: req.body.filePath,
+        imageUrl: req.body.imageUrl,
+        imageId: req.body.imageId,
     })
 
     try{
@@ -430,8 +483,9 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
             if(req.body.ingredients){
                 recipeToEdit.ingredients = req.body.ingredients
             }
-            if(req.body.filePath != null){
-                recipeToEdit.filePath = req.body.filePath
+            if(req.body.imageUrl != null){
+                recipeToEdit.imageUrl = req.body.imageUrl
+                cloudinary.uploader.destroy(req.body.imageId, function (result) {})
             }
 
             const newRecipe = await recipeToEdit.save()
@@ -451,8 +505,10 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
 // delete a recipe
 app.delete('/api/recipes/:rid', [ridValidator, mongoChecker], async(req, res) => {
     try{
-        const recipe = await Recipe.findByIdAndDelete(req.params.rid);
-        return res.send(recipe);
+        const recipe1 = await Recipe.findById(req.params.rid);
+        cloudinary.uploader.destroy(recipe1.imageId, function (result) {})
+        const recipe2 = await Recipe.findByIdAndDelete(req.params.rid);
+        return res.send(recipe2);
     } catch(error) {
         if(isMongoError(error)){
 			res.status(500).send('Internal Server Error')

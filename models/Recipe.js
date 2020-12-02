@@ -42,7 +42,11 @@ const Recipe = mongoose.model('Recipe', {
 		type: [IngredientSchma],
 		required: true,
 	},
-	filePath: {
+	imageUrl: {
+		type: String,
+		required: false,
+	},
+	imageId: {
 		type: String,
 		required: false,
 	}
