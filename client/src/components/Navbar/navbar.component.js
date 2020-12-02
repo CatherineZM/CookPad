@@ -36,6 +36,7 @@ export default class Navbar extends Component {
                 <ul>
                     <li><Link to={"/homepage"}>Home Page</Link></li>
                     {!app.state.currentUser.isAdmin && <li><Link to={"/addrecipe"}>Create a Recipe</Link></li>}
+                    {console.log(app.state.currentUser)}
                     {!app.state.currentUser.isAdmin && <li><Link to={"/viewprofile/"+ app.state.currentUser._id}>My Profile</Link></li>}
                     {app.state.currentUser.isAdmin && <li><Link to={"/adminpage"}>Admin Page</Link></li>}
                     <li><Link to="/" onClick={()=>logout(app)}>Logout</Link></li>

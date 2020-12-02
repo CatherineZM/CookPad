@@ -29,7 +29,7 @@ export default class ViewProfile extends Component {
         
         this.state = {
             uid: this.props.match.params.uid,
-            user: {},
+            user: this.props.app.state.currentUser,
             userpicture: {src: ProfilePic},
             recipes: [],
             collectedRecipes:[],
@@ -43,7 +43,6 @@ export default class ViewProfile extends Component {
 
     componentDidMount() {
         // requires server calls to initialize recipes and user profile
-        getUser(this);
         getMyRecipe(this);
         getMyCollection(this);
         
