@@ -24,7 +24,8 @@ export default class AddRecipe extends Component {
             description: '',
             ingredients: [{name:"", quantity:"", unit:""}],
             steps:[""],
-            filePath: "/upload/timetable.png",
+            file: {},
+            filePath: "/uploads/timetable.png",
             categories:[],
             categoriesOptions :[
                 {name: "Cake", id: 0},
@@ -96,8 +97,7 @@ export default class AddRecipe extends Component {
     }
 
     onImageUpload=(picture)=>{
-        console.log(picture)
-        this.setState({filePath: this.state.filePath.concat(picture)});
+        this.setState({file: picture[0]});
     }
 
     onSelect=(selectedList, selectedItem)=>{
@@ -115,9 +115,7 @@ export default class AddRecipe extends Component {
 
     onSubmit=async(e,app)=>{
         e.preventDefault();
-        console.log(this.state)
         addRecipe(this,app);
-        this.props.history.push("/homepage");
     }
 
     render(){ 

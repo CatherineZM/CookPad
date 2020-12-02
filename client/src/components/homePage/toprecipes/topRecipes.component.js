@@ -31,7 +31,7 @@ class TopRecipes extends Component {
                                         height="200"
                                         component="img"
                                         alt={recipes[id].name}
-                                        image={recipes[id].filePath}
+                                        image={recipes[id].imageUrl}
                                     />
                                     <CardContent>
                                     <Typography gutterBottom variant="h6" component="h6">

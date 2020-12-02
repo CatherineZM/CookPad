@@ -129,7 +129,7 @@ class ViewRecipe extends Component {
                         <CardMedia
                             component="img"
                             alt={this.state.recipe.name}
-                            image={this.state.recipe.filePath}
+                            image={this.state.recipe.imageUrl}
                         />
                         <CardContent>
                         <Typography gutterBottom variant="h4" component="h4">

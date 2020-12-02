@@ -51,7 +51,7 @@ class RecipeList extends Component {
                             className={classes.media}
                             component="img"
                             alt={recipe.name}
-                            image={recipe.filePath}
+                            image={recipe.imageUrl}
                             />
                             <CardContent className={classes.title}>
                             <Typography gutterBottom variant="h6" component="h6">

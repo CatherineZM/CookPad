@@ -174,13 +174,16 @@ export default class HomePage extends Component {
                 third_largest = second_largest;
                 second_largest = first_largest;
                 first_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
+                thrid_idx = second_idx;
+                second_idx = first_idx;
                 first_idx = i;
             }else if(this.props.app.state.currentUser.likedRecipes[i].likes > second_largest){
                 third_largest = second_largest;
                 second_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
+                third_idx = second_idx;
                 second_idx = i;
             }else if(this.props.app.state.currentUser.likedRecipes[i].likes > third_largest){
-                third_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
+                third_largest = this.props.app.state.currentUser.likedRecipes[i].likes;s
                 third_idx = i;
             }
         }
@@ -227,7 +230,7 @@ export default class HomePage extends Component {
     slideshowGenerator=()=>{
         if(this.state.top3_recipe && this.state.top3_recipe.length){
             return <RecipeSlideShow 
-            imgsrc={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].filePath}
+            imgsrc={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].imageUrl}
             imgalt={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].name}
             imgtext={this.state.recipes[this.state.top3_recipe[this.state.slide_idx]].name}
             decrSlide={this.decrSlide}
