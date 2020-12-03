@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import UserList from "./userlist/userList.component"
-import './style.css'
+import './adminPage.css'
 import Navbar from '../Navbar/navbar.component'
 import Container from "@material-ui/core/Container"
 
-const user_lst = [
-    {uid: 0, username: "admin", name: "Nora", description: "I love Chinese Food!!!", isAdmin: true},
-    {uid: 1, username: "user", name: "Mo", description: "I love my boyfriend!!!", isAdmin: false}
-    ]
+import {getAllUser} from "../../actions/user";
+
+
 
 export default class AdminPage extends Component {
     constructor(props){
         super(props);
 
         this.state = { 
-            users: user_lst,
+            users: [],
             uid: this.props.match.params.uid
         }
+
+        // getAllUser(this)
     }
 
     componentDidMount() {
@@ -30,7 +31,8 @@ export default class AdminPage extends Component {
             <div>
                 <Container maxWidth='md'>     
                 <Navbar app={app}/>
-                    <UserList users={this.state.users} uid={this.state.uid}/>     
+                    <UserList app={app} history={history}/> 
+                    {console.log(this.state.users)}  
                 </Container>
             </div>  
         )
