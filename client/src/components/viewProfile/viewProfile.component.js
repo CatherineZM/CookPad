@@ -27,7 +27,8 @@ export default class ViewProfile extends Component {
             newPassword: null,
             recipeExpanded: false,
             collectionExpanded: false,
-            inEdit:false
+            inEdit:false,
+            preview:null
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
         getUser(this, ()=>{
