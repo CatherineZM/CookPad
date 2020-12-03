@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import UserList from "./userlist/userList.component"
-import './style.css'
+import './adminPage.css'
 import Navbar from '../Navbar/navbar.component'
 import Container from "@material-ui/core/Container"
 

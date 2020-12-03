@@ -30,16 +30,19 @@ export default class ViewProfile extends Component {
             inEdit:false
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
-        
+        getUser(this, ()=>{
+            getMyRecipe(this);
+            getMyCollection(this);
+        })
         console.log(this.state.collectedRecipes)
     }
 
 
     componentDidMount() {
-        getUser(this, ()=>{
-            getMyRecipe(this);
-            getMyCollection(this);
-        })
+        // getUser(this, ()=>{
+        //     getMyRecipe(this);
+        //     getMyCollection(this);
+        // })
     }
 
     handleRecipeExpandClick = () => {

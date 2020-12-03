@@ -1,6 +1,7 @@
 .user-list{
     margin-top: 20px;
     background-color: white;
+    border-radius: 25px;
 }
 
 .user-list #promoteButton{
