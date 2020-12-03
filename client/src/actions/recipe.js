@@ -87,8 +87,10 @@ export const getMyRecipe = (viewProfileComp) => {
                 }
             })
             .then(json=>{
-                console.log(json)
-                myRecipes.push(json)
+                if(json){
+                    console.log(json)
+                    myRecipes.push(json)
+                }   
             })
             .catch(error=>{
                 console.log(error);
@@ -196,7 +198,7 @@ export const getRecipe = (comp, rid) => {
 }
 
 // delete recipe list from all users
-export const deleteRecipeAllUsers = (rid) => {
+export const deleteRecipeAllUsers = (rid, deleteComp) => {
     const request = new Request(`/api/users/`, {
         method: "get",
         headers: {
@@ -217,7 +219,10 @@ export const deleteRecipeAllUsers = (rid) => {
                     {myRecipes: rid, likedRecipes: rid, collectedRecipes: rid}
                 )
             })
-        })
+            return;
+        }).then(
+            deleteComp.props.history.push("/viewprofile/"+ deleteComp.props.app.state.currentUser._id)
+        )
         .catch(error=>{
             console.log(error);
         })
@@ -241,8 +246,7 @@ export const deleteRecipe = (rid, deleteComp) => {
         })
         .then(json=>{
             // delete the recipe from all user's 
-            deleteRecipeAllUsers(rid);
-            deleteComp.props.history.push("/viewprofile/"+ deleteComp.props.app.state.currentUser._id)
+                deleteRecipeAllUsers(rid, deleteComp)
         })
         .catch(error=>{
             console.log(error);

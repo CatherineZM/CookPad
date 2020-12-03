@@ -375,7 +375,6 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 // create a recipe
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
     // create a new recipe
-    console.log(req.body.name);
     const recipe = new Recipe({
         name: req.body.name,
         description: req.body.description,
