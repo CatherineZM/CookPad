@@ -5,7 +5,7 @@ import Navbar from "../Navbar/navbar.component"
 import RecipeList from '../recipelist/recipelist.component'
 import Avatar from 'react-avatar';
 import {Collapse} from 'react-bootstrap'
-import {DeleteFromRecipeList, addToRecipeList} from '../../actions/user';
+import {DeleteFromRecipeList, addToRecipeList} from '../../actions/recipe';
 import {setRecipe} from '../../actions/recipe'
 
 // hard coded images

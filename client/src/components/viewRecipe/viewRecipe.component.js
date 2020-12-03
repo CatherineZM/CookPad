@@ -4,8 +4,7 @@ import { Link } from "react-router-dom"
 import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
-import {getRecipe, deleteRecipe, setRecipe, getTop2Recipes} from "../../actions/recipe"
-import {addToRecipeList, DeleteFromRecipeList} from "../../actions/user"
+import {getRecipe, deleteRecipe, setRecipe, getTop2Recipes, DeleteFromRecipeList, addToRecipeList} from "../../actions/recipe"
 import {uid} from "react-uid"
 import './viewRecipe.css'
 
@@ -101,7 +100,6 @@ class ViewRecipe extends Component {
     deleteRecipe=(e)=>{
         e.preventDefault();
         if (window.confirm('Are you sure you wish to delete this item?')){
-            DeleteFromRecipeList(this.props.app.state.currentUser._id, {myRecipes: this.state.recipe._id})
             deleteRecipe(this.state.recipe._id, this)
         } 
     }
@@ -122,11 +120,12 @@ class ViewRecipe extends Component {
         }
 
     }
-
     refresh=(rid)=>{
         getRecipe(this, rid)
         getTop2Recipes(this, rid);
     }
+
+    recommendationGen
 
     render(){
         const {classes, app} = this.props;
@@ -166,11 +165,11 @@ class ViewRecipe extends Component {
                     </Card>
                 </div>
                 
-                {this.state.top2_recipes && this.state.top2_recipes.length>0 && 
+                {this.state.top2_recipes && this.state.top2_recipes.length === 2 && this.state.top2_recipes[0].length && this.state.top2_recipes[1].length &&
                 <div className="recommendations">
                     <h4>Recommendations</h4>
                 {this.state.top2_recipes.map((recipe)=>(
-                    <div key={uid(recipe.name)} className="view-other">
+                    <div key={uid(recipe._id)} className="view-other">
                         <Link to={"/viewrecipe/" + recipe._id} onClick={()=>this.refresh(recipe._id)}>
                         <Card className={classes.card}>
                             <CardActionArea>

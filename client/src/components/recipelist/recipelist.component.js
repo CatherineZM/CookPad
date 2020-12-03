@@ -44,7 +44,7 @@ class RecipeList extends Component {
         return(
             <div className="vertical-scrollable">
             {recipes.map( (recipe) => (
-                <div key={uid(recipe.name)} className="recipe-container">
+                <div key={uid(recipe._id)} className="recipe-container">
                         <Card className={classes.root}>
                         <CardActionArea onClick={()=>clickRecipe(recipe._id)}>
                             <CardMedia

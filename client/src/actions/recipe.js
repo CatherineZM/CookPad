@@ -1,4 +1,72 @@
 import axios from "axios";
+// modify recipe list of the user
+/*
+add a new recipe to recipe lists
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+*/
+export const addToRecipeList = (uid, recipeList) => {
+    // create our request constructor with all the parameters we need
+    const request = new Request(`/api/users/${uid}`, {
+        method: "post",
+        body: JSON.stringify(recipeList),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    console.log(request)
+    // send the request with fetch()
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
+/*
+delete a new recipe to recipe lists
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+*/
+export const DeleteFromRecipeList = (uid, recipeList) => {
+    // create our request constructor with all the parameters we need
+    const request = new Request(`/api/users/${uid}`, {
+        method: "delete",
+        body: JSON.stringify(recipeList),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    // send the request with fetch()
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
 
 export const getMyRecipe = (viewProfileComp) => {
     const myRecipes = []
@@ -85,10 +153,14 @@ export const addRecipe = async(newRecipeComp) => {
         newRecipe.steps = newRecipeComp.state.steps;
         newRecipe.imageUrl = res.data.imageUrl;
         newRecipe.imageId = res.data.imageId;
-
-        axios.post('/api/recipes/', newRecipe);
+        
+        const res1 = await axios.post('/api/recipes/', newRecipe);
         console.log(newRecipe)
         alert("The Recipe has been succesfully created!")
+
+        // add to user's my recipe list
+        console.log(res1)
+        await addToRecipeList(newRecipeComp.props.app.state.currentUser._id, {myRecipes: res1.data._id})
         newRecipeComp.props.history.push("/viewprofile/"+ newRecipeComp.props.app.state.currentUser._id)
     } catch(error) {
         if(error.response.status === 500){
@@ -97,7 +169,6 @@ export const addRecipe = async(newRecipeComp) => {
             console.log(error)
         }
     }
-   
 }
 
 export const getRecipe = (comp, rid) => {
@@ -124,6 +195,35 @@ export const getRecipe = (comp, rid) => {
         })
 }
 
+// delete recipe list from all users
+export const deleteRecipeAllUsers = (rid) => {
+    const request = new Request(`/api/users/`, {
+        method: "get",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            json.map(user=>{
+                DeleteFromRecipeList(user._id, 
+                    {myRecipes: rid, likedRecipes: rid, collectedRecipes: rid}
+                )
+            })
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+
+}
+
 export const deleteRecipe = (rid, deleteComp) => {
     const request = new Request(`/api/recipes/${rid}`, {
         method: "delete",
@@ -140,6 +240,8 @@ export const deleteRecipe = (rid, deleteComp) => {
             }
         })
         .then(json=>{
+            // delete the recipe from all user's 
+            deleteRecipeAllUsers(rid);
             deleteComp.props.history.push("/viewprofile/"+ deleteComp.props.app.state.currentUser._id)
         })
         .catch(error=>{

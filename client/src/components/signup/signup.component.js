@@ -65,9 +65,9 @@ export default class Signup extends Component {
             alert("Username cannot be empty");
             return isValid;
         }
-        if (this.state.password.length < 5){
+        if (this.state.password.length < 4){
             isValid = false;
-            alert("Password needs a minimum length of 5");
+            alert("Password needs a minimum length of 4");
             return isValid;
         }
         return isValid;
