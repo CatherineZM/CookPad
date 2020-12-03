@@ -7,6 +7,8 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from '@material-ui/core/styles';
 import "./userlist.css"
+import App from '../../../App';
+import {promoteUser, getAllUser} from '../../../actions/user'
 
 const styles = {
     head:{
@@ -19,14 +21,14 @@ class UserList extends Component {
     constructor(props){
         super(props);
         this.state= {
-            uid : this.props.uid,
-            users : this.props.users
+            users : []
         }
+        getAllUser(this)
     }
 
     onViewProfile=(e,uid)=>{
         e.preventDefault();
-        window.location = "/viewprofile/"+uid+"/"+this.state.uid; 
+        this.props.history.push(`/viewprofile/${uid}`)
     }
 
     onBan(e, uid){
@@ -40,13 +42,23 @@ class UserList extends Component {
         e.preventDefault();
         if (window.confirm('Are you sure you wish to promote this user?')){
             // requires server call to change the isAdmin field of the user
+            const newUsers = this.state.users
+            promoteUser(uid)
+            for (let user of newUsers){
+                if (user._id === uid){
+                    user.isAdmin = true
+                    break
+                }
+            }
+            this.setState({users: newUsers})
         } 
+    
         
     }
 
 
     render() {
-        const {classes} = this.props;
+        const {classes, app} = this.props;
         return(
             <div className="user-list">
             <Table>
@@ -59,20 +71,21 @@ class UserList extends Component {
                     </TableRow>
                 </TableHead>
                     <TableBody>
+                        {console.log(this.state.users)}
                         {this.state.users.map(user => (
                         <TableRow className="user_row" key={uid(user.username)}>
-                            <TableCell className = "uid" align = 'center'>
-                                {user.uid}
+                            <TableCell className = "admin-level" align = 'center'>
+                                {user.isAdmin ? "Admin":"Standard"}
                             </TableCell>
                             <TableCell className = "username" align = 'center'>
                                 {user.username}
                             </TableCell>
                             <TableCell className = "Profile" align = 'center'>
-                                <button id="view-profile" className="btn btn-outline-primary" onClick={(e)=>this.onViewProfile(e,user.uid)}>View Profile</button>  
+                                <button id="view-profile" className="btn btn-outline-primary" onClick={(e)=>this.onViewProfile(e,user._id)}>View Profile</button>  
                             </TableCell>
                             <TableCell className = "Operations" align = 'center'>
-                                <button id = "banButton" className="btn btn-primary" onClick={(e)=>this.onBan(e, user.uid)}> Ban </button>
-                                <button id = "promoteButton" className="btn btn-primary" onClick={(e)=>this.onPromote(e, user.uid)}> Promote </button>
+                                <button id = "banButton" className="btn btn-primary" onClick={(e)=>this.onBan(e, user._id)}> Ban </button>
+                                <button id = "promoteButton" className="btn btn-primary" onClick={(e)=>this.onPromote(e, user._id)}> Promote </button>
                             </TableCell>
                         </TableRow>
                         ))}

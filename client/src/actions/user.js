@@ -92,6 +92,38 @@ export const signup = (signupComp) => {
         })
 }
 
+export const getAllUser = (userListComp) => {
+    const request = new Request("/api/users", {
+        method: "get",
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+            const users = []
+            for (let user in json){
+                users.push(json[user])
+            }
+            console.log(users)
+            userListComp.setState({users: users})
+            
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+
+}
+
+
 export const getUser = (viewProfileComp, callback) => {
     const request = new Request(`/api/users/${viewProfileComp.state.uid}`, {
         method: "get",
@@ -215,3 +247,27 @@ export const updateUser = (uid, updateInfo) => {
         })
 }
 
+
+export const promoteUser = (uid) => {
+    const request = new Request(`/api/users/${uid}`, {
+        method: "PATCH",
+        body: JSON.stringify({isAdmin: true}),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+}
