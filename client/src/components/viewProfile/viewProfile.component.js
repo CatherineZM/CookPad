@@ -113,15 +113,31 @@ export default class ViewProfile extends Component {
         setRecipe(rid, {likes: newLikes})
     }
 
-    clickStar=(rid)=>{
+    clickStar=async(rid)=>{
         if(this.props.app.state.currentUser.collectedRecipes.includes(rid)){
             this.props.app.state.currentUser.collectedRecipes = this.props.app.state.currentUser.collectedRecipes.filter(recipe=> recipe !== rid)
-            DeleteFromRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+            await DeleteFromRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
         }else{
             this.props.app.state.currentUser.collectedRecipes.push(rid)
-            addToRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
+            await addToRecipeList(this.props.app.state.currentUser._id, {collectedRecipes: rid})
         }
-        this.setState({dummy: 0})
+
+        let new_collectedRecipes = [];
+        let added_id = [];
+        this.state.collectedRecipes.forEach((recipe)=>{
+            const new_recipe = Object.create(recipe)
+            if(this.props.app.state.currentUser.collectedRecipes.includes(new_recipe._id)){
+                added_id.push(new_recipe._id)
+                new_collectedRecipes.push(new_recipe)
+            }
+        })
+        this.state.recipes.forEach((recipe)=>{
+            const new_recipe = Object.create(recipe)
+            if(this.props.app.state.currentUser.collectedRecipes.includes(new_recipe._id) && !added_id.includes(new_recipe._id)){
+                new_collectedRecipes.push(new_recipe)
+            }
+        })
+        this.setState({ collectedRecipes: new_collectedRecipes });
     }
 
     onClose=(e)=>{
