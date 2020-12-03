@@ -30,9 +30,6 @@
     position: relative;
 }
 
-#user-profile div{
-    padding-top: 10px;
-}
 
 #user-recipes {
     background-color: white;
@@ -76,4 +73,13 @@ h4 button {
 
 .save-button {
     margin-top: 10px;
+}
+
+#profile-pic{
+    margin: 10px;
+    border-radius: 100%;
+}
+
+#change-pic{
+    overflow: hidden;
 }

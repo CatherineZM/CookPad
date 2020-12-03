@@ -29,16 +29,19 @@ export default class Signup extends Component {
         this.setState({ password: e.target.value });
     }
 
-    onImageLoad=(e)=>{
-        this.setState({profilePic: e.target.value});
+    onImageLoad=(img)=>{
+        this.setState({profilePic: img});
+        console.log(img)
     }
 
-    onClose=(e)=>{
+    onClose=()=>{
         this.setState({preview: null})
     }
       
-    onCrop=(e,preview)=>{
-        this.setState({preview})
+    onCrop=(preview)=>{
+        const img = new Blob([preview], {type: "image/png"})
+        this.setState({profilePic: img})
+        console.log(this.state.profilePic)
     }
 
     onChangeDescription = (e)=>{
@@ -55,6 +58,7 @@ export default class Signup extends Component {
             signup(this, app);
             this.props.history.push("/login");
         }
+        console.log(this.state)
     }
 
     validator(){
@@ -84,11 +88,11 @@ export default class Signup extends Component {
                 <form className="signup-form" onSubmit={this.onSubmit}>
                     <div className="form-group" id="upload-pic">
                         <Avatar 
-                            width={430}
+                            width={420}
                             height={250} 
-                            round={true} 
+                            round={true}
                             label={"Choose a profile picture"}
-                            onImageLoad={this.onImageLoad}
+                            onFileLoad={this.onImageLoad}
                             onCrop={this.onCrop}
                             onClose={this.onClose}
                             src={this.state.profilePic}

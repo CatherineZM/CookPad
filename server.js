@@ -201,8 +201,11 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
         isAdmin: false,
         likedRecipes: [],
         collectedRecipes: [],
-        myRecipes: []
-	})
+        myRecipes: [],
+        imageUrl: req.body.imageUrl,
+        imageId: req.body.imageId
+    })
+    console.log(user)
 
 	try{
 		const newUser = await user.save()
@@ -354,6 +357,10 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
             }
             if (req.body.description){
                 user.description = req.body.description
+            }
+            if (req.body.imageUrl){
+                user.imageUrl = req.body.imageUrl
+                user.imageId = req.body.imageId
             }
             if (req.body.isAdmin === true || req.body.isAdmin === false) {
                 user.isAdmin = req.body.isAdmin

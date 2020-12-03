@@ -1,3 +1,5 @@
+import axios from "axios";
+
 // send a request to check if a user is logged in through the session cookie
 export const checkSession = (app) => {
     const url = "/users/check-session";
@@ -64,32 +66,32 @@ export const logout = (app) => {
         });
 };
 
-export const signup = (signupComp) => {
+export const signup = async(signupComp) => {
     // create our request constructor with all the parameters we need
-    const request = new Request("/api/users", {
-        method: "post",
-        body: JSON.stringify(signupComp.state),
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json"
-        }
-    })
-
-    // send the request with fetch()
-    fetch(request)
-        .then(res=>{
-            if(res.status === 200){
-                return res.json();
+    const formData = new FormData();   
+    formData.append('file', signupComp.state.profilePic);
+    
+    console.log(formData)
+    try {
+        const res0 = await axios.post('/images', formData, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
             }
         })
-        .then(json=>{
-            console.log(json)
-            alert("Sign up success!");
-        })
-        .catch(error=>{
-            alert("Could not Sign up!");
-            console.log(error);
-        })
+        console.log(res0.data)
+        const newUser = signupComp.state
+        newUser.imageUrl = res0.data.imageUrl
+        newUser.imageId = res0.data.imageId
+        console.log(newUser)
+        const res1 = await axios.post("/api/users", newUser)
+        alert("Sign up success!");
+
+
+    } catch(error) {
+        alert("Could not Sign up!");
+        console.log(error)
+    }
+    
 }
 
 export const getAllUser = (userListComp) => {
@@ -153,28 +155,33 @@ export const getUser = (viewProfileComp, callback) => {
 
 }
 
-export const updateUser = (uid, updateInfo) => {
-    const request = new Request(`/api/users/${uid}`, {
-        method: "PATCH",
-        body: JSON.stringify(updateInfo),
-        headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json"
-        }
-    })
+export const updateUser = async(comp, updateInfo, callback) => {
+    if (updateInfo.profilePic){
+        const formData = new FormData();   
+        formData.append('file', updateInfo.profilePic);
 
-    fetch(request)
-        .then(res=>{
-            if(res.status === 200){
-                return res.json();
-            }
-        })
-        .then(json=>{
-            console.log(json)
-        })
-        .catch(error=>{
-            console.log(error);
-        })
+        try {
+            const res0 = await axios.post('/images', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            updateInfo.imageUrl = res0.data.imageUrl
+            updateInfo.imageId = res0.data.imageId
+        } catch (error){
+            console.log(error)
+        }
+    }
+
+    try {
+        const res1 = await axios.patch(`/api/users/${comp.state.uid}`, updateInfo)
+        console.log(res1)
+        comp.state.user.imageUrl = updateInfo.imageUrl
+        comp.state.user.imageId = updateInfo.imageId
+        callback(comp)
+    } catch (error){
+        console.log(error)
+    }
 }
 
 
