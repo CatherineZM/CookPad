@@ -53,7 +53,7 @@ export default class HomePage extends Component {
     componentDidMount() {
         this.interval = setInterval(() => {
             this.autoShowSlides();
-        }, 3000)
+        }, 3000)   
     }
 
     componentWillUnmount() {
@@ -87,12 +87,14 @@ export default class HomePage extends Component {
     }
 
     autoShowSlides = () => {
-        this.incrSlide();
-        const dots = document.getElementsByClassName("dot");
-        for (let i = 0; i < dots.length; i++) {
-            dots[i].className = dots[i].className.replace(" active", "");
+        if(this.state.recipes && this.state.recipes.length >=3){
+            this.incrSlide();
+            const dots = document.getElementsByClassName("dot");
+            for (let i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            dots[this.state.slide_idx].className += " active";
         }
-        dots[this.state.slide_idx].className += " active";
     }
 
     clickRecipe=(rid)=>{
@@ -257,7 +259,7 @@ export default class HomePage extends Component {
                     />                    
 
                     <div id="middle-panel">
-                        <this.slideshowGenerator/>
+                        {this.state.recipes && this.state.recipes.length >= 3 && <this.slideshowGenerator/>}
                         <RecipeList 
                         recipes={this.state.displayed_recipes}
                         clickRecipe={this.clickRecipe}
@@ -267,18 +269,20 @@ export default class HomePage extends Component {
                         />
                     </div>
 
+                    {this.state.recipes && this.state.recipes.length >= 3 &&
                     <HomePageRightPanel 
                     top3_recipe={this.state.top3_recipe} 
                     recipes={this.state.recipes}
                     clickHeart={this.clickHeart}
                     app={app}
-                    />
+                    />}
                     
+                    {this.state.recipes && this.state.recipes.length >= 3 &&
                     <TopRecipes
                     top3_recipe={this.state.top3_recipe}
                     recipes={this.state.recipes}
                     app={app}
-                    />
+                    />}
                 </Container> 
             </div>
         )

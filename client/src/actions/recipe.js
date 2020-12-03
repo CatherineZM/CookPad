@@ -89,7 +89,7 @@ export const addRecipe = async(newRecipeComp) => {
         axios.post('/api/recipes/', newRecipe);
         console.log(newRecipe)
         alert("The Recipe has been succesfully created!")
-        newRecipeComp.setState({});
+        newRecipeComp.props.history.push("/viewprofile/"+ newRecipeComp.props.app.state.currentUser._id)
     } catch(error) {
         if(error.response.status === 500){
             console.log('There was a problem with the server')
@@ -140,8 +140,7 @@ export const deleteRecipe = (rid, deleteComp) => {
             }
         })
         .then(json=>{
-            console.log(json) 
-            deleteComp.props.history.push("/viewprofile/"+ this.props.app.state.currentUser._id)
+            deleteComp.props.history.push("/viewprofile/"+ deleteComp.props.app.state.currentUser._id)
         })
         .catch(error=>{
             console.log(error);

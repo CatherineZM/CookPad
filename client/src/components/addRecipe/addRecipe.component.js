@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-import axios from "axios";
 import './addRecipe.css'
 import Navbar from "../Navbar/navbar.component";
-import Dropdown from 'react-dropdown';
 import Container from "@material-ui/core/Container"
 import {Multiselect} from 'multiselect-react-dropdown';
 import ImageUploader from 'react-images-upload';
@@ -25,7 +23,7 @@ export default class AddRecipe extends Component {
             ingredients: [{name:"", quantity:"", unit:""}],
             steps:[""],
             file: {},
-            filePath: "/uploads/timetable.png",
+            filePath: "",
             categories:[],
             categoriesOptions :[
                 {name: "Cake", id: 0},
@@ -108,7 +106,7 @@ export default class AddRecipe extends Component {
     }
      
     onRemove=(selectedList, removedItem)=>{
-        const index = this.state.categories.findIndex((element) => element == removedItem.id)
+        const index = this.state.categories.findIndex((element) => element === removedItem.id)
         this.state.categories.splice(index,1);
         this.setState({categories: this.state.categories})
     }
