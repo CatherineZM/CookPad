@@ -4,12 +4,14 @@ import { Link } from "react-router-dom"
 import Container from "@material-ui/core/Container"
 import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
-import {getRecipe, deleteRecipe, setRecipe} from "../../actions/recipe"
+import {getRecipe, deleteRecipe, setRecipe, getTop2Recipes} from "../../actions/recipe"
 import {addToRecipeList, DeleteFromRecipeList} from "../../actions/user"
+import {uid} from "react-uid"
 import './viewRecipe.css'
 
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
+import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
@@ -53,10 +55,15 @@ class ViewRecipe extends Component {
                 steps: [],
                 ingredients: [{name:"", quantity:"", unit: ""}],
                 filePath: "",
-            }
+            },
+            top2_recipes:[],
+            dummy: 0,
         }
         getRecipe(this, this.props.match.params.rid)
+        // no duplicate with the current rid
+        getTop2Recipes(this, this.props.match.params.rid);
     }
+
 
     clickStar=(rid)=>{
         if(this.props.app.state.currentUser.collectedRecipes.includes(rid)){
@@ -95,9 +102,7 @@ class ViewRecipe extends Component {
         e.preventDefault();
         if (window.confirm('Are you sure you wish to delete this item?')){
             DeleteFromRecipeList(this.props.app.state.currentUser._id, {myRecipes: this.state.recipe._id})
-            deleteRecipe(this.state.recipe._id)
-            console.log("item deleted")
-            this.props.history.push("/viewprofile/"+ this.props.app.state.currentUser._id)
+            deleteRecipe(this.state.recipe._id, this)
         } 
     }
 
@@ -116,6 +121,11 @@ class ViewRecipe extends Component {
             return null;
         }
 
+    }
+
+    refresh=(rid)=>{
+        getRecipe(this, rid)
+        getTop2Recipes(this, rid);
     }
 
     render(){
@@ -155,6 +165,32 @@ class ViewRecipe extends Component {
                         </CardActions>
                     </Card>
                 </div>
+                
+                {this.state.top2_recipes && this.state.top2_recipes.length>0 && 
+                <div className="recommendations">
+                    <h4>Recommendations</h4>
+                {this.state.top2_recipes.map((recipe)=>(
+                    <div key={uid(recipe.name)} className="view-other">
+                        <Link to={"/viewrecipe/" + recipe._id} onClick={()=>this.refresh(recipe._id)}>
+                        <Card className={classes.card}>
+                            <CardActionArea>
+                                <CardMedia
+                                    height="200"
+                                    component="img"
+                                    alt={recipe.name}
+                                    image={recipe.imageUrl}
+                                />
+                                <CardContent>
+                                <Typography gutterBottom variant="h6" component="h6">
+                                    {recipe.name}
+                                </Typography>
+                                </CardContent>
+                            </CardActionArea>
+                        </Card>
+                        </Link>
+                    </div>
+                    ))}
+                </div>}
                 
                 <div className="mid-section">
                     <Steps
