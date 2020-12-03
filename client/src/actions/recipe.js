@@ -165,7 +165,7 @@ export const addRecipe = async(newRecipeComp) => {
         await addToRecipeList(newRecipeComp.props.app.state.currentUser._id, {myRecipes: res1.data._id})
         newRecipeComp.props.history.push("/viewprofile/"+ newRecipeComp.props.app.state.currentUser._id)
     } catch(error) {
-        if(error.response.status === 500){
+        if(error.res1.status === 500){
             console.log('There was a problem with the server')
         } else{
             console.log(error)
