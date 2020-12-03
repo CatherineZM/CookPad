@@ -3,7 +3,7 @@ import Container from "@material-ui/core/Container"
 import './viewProfile.css'
 import Navbar from "../Navbar/navbar.component"
 import RecipeList from '../recipelist/recipelist.component'
-import Avatar from 'react-avatar';
+import Avatar from 'react-avatar-edit';
 import {Collapse} from 'react-bootstrap'
 import {DeleteFromRecipeList, addToRecipeList} from '../../actions/recipe';
 import {setRecipe} from '../../actions/recipe'
@@ -21,7 +21,7 @@ export default class ViewProfile extends Component {
         this.state = {
             uid: this.props.match.params.uid,
             user: {},
-            userpicture: {src: ProfilePic},
+            profilePic: null,
             recipes: [],
             collectedRecipes:[],
             newPassword: null,
@@ -141,12 +141,19 @@ export default class ViewProfile extends Component {
         this.setState({ collectedRecipes: new_collectedRecipes });
     }
 
-    onClose=(e)=>{
-        this.setState({preview: null})
+    onClose=()=>{
+        this.setState({profilePic: null})
     }
       
-    onCrop=(e,preview)=>{
-        this.setState({preview})
+    onCrop=(preview)=>{
+        const img = new Blob([preview], {type: "image/png"})
+        this.setState({profilePic: img})
+        console.log(this.state.profilePic)
+    }
+
+    onImageLoad=(img)=>{
+        this.setState({profilePic: img});
+        console.log(img)
     }
 
     onChangePassword=(e)=>{
@@ -177,7 +184,8 @@ export default class ViewProfile extends Component {
     saveProfile=(e)=>{
         e.preventDefault();
         const updateInfo = {
-            description: this.state.user.description
+            description: this.state.user.description,
+            profilePic: this.state.profilePic
         }
         
         if (this.state.newPassword !== null && this.state.newPassword !== ""){
@@ -192,8 +200,11 @@ export default class ViewProfile extends Component {
         }
         
         console.log(updateInfo)
-        updateUser(this.state.uid, updateInfo)
-        this.setState({inEdit: false})
+        updateUser(this, updateInfo, (comp)=>{
+            comp.setState({inEdit:false})
+        })
+
+        
 
     }
 
@@ -213,29 +224,37 @@ export default class ViewProfile extends Component {
         if (!this.state.inEdit){
             return  <div id="user-profile">
                         <h4>{this.state.user.username + "'s Profile"}</h4>
-                        <Avatar id="user-picture" name="user" size="150" round={true} src={this.state.userpicture.src}/> 
+                        <div id="profile-pic">
+                            <img src={this.state.user.imageUrl}/> 
+                        </div>
                         <div id="user-description">{this.state.user.description}</div>
                         {this.editButtonGenerator(app)}
                     </div>
         } else {
             return  <div id="user-profile">
                         <h4>{this.state.user.username + "'s Profile"}</h4>
-                        <form onSubmit={this.saveProfile}>
-                            <div id="picture-change">
+                        <form className="signup-form" onSubmit={this.saveProfile}>
+                            <div className="form-group" id="change-pic">
                                 <Avatar 
-                                    width={200}
-                                    height={200} 
-                                    round={true} 
+                                    width={250}
+                                    height={250} 
+                                    round={true}
+                                    label={"Change profile picture"}
+                                    onFileLoad={this.onImageLoad}
                                     onCrop={this.onCrop}
                                     onClose={this.onClose}
-                                    src={this.state.userpicture.src}
+                                    src={this.state.user.imageUrl}
                                 /> 
                             </div>    
                             <div className="form-group" id="profile-input">
-                                <div>New Password:</div>
-                                <input type="password" className = "form-control" onChange={this.onChangePassword}/>
-                                <div>Edit your Description:</div>
-                                <textarea className = "form-control" value={this.state.user.description} onChange={this.onChangeDescription}/>
+                                <div className="form-group">
+                                    <label> New Password: </label>
+                                    <input type="password" className = "form-control" onChange={this.onChangePassword}/>
+                                </div>
+                                <div className="form-group">
+                                    <label>Edit your Description: </label>
+                                    <textarea className = "form-control" value={this.state.user.description} onChange={this.onChangeDescription}/>
+                                </div>
                                 <button type="button"
                                         className = "btn btn-outline-primary save-button"
                                         onClick={this.saveProfile}>

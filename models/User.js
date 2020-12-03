@@ -37,6 +37,14 @@ const UserSchema = new mongoose.Schema({
 	myRecipes: {
 		type: [mongoose.Schema.Types.ObjectId],
 		required: false,
+	},
+	imageUrl: {
+		type: String,
+		required: false,
+	},
+	imageId: {
+		type: String,
+		required: false,
 	}
 })
 
