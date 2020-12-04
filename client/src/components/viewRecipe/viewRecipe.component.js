@@ -94,7 +94,7 @@ class ViewRecipe extends Component {
 
     editRecipe=(e)=>{
         e.preventDefault();
-        this.props.history.push("/editRecipe/" + this.state.recipe.id);
+        this.props.history.push("/editRecipe/" + this.state.recipe._id);
     }
 
     deleteRecipe=(e)=>{
@@ -120,6 +120,7 @@ class ViewRecipe extends Component {
         }
 
     }
+    
     refresh=(rid)=>{
         getRecipe(this, rid)
         getTop2Recipes(this, rid);

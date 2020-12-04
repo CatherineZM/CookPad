@@ -8,6 +8,8 @@ import Dropdown from 'react-dropdown';
 import ImageUploader from 'react-images-upload'; 
 import Col from 'react-bootstrap/Col';
 
+import {getRecipe, setRecipe} from "../../actions/recipe";
+
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 const categoriesOptions =[
     {name: "Cake", id: 0},
@@ -27,40 +29,32 @@ export default class EditRecipe extends Component {
         // requires server call to fetch the recipe information
         this.state = {
             rid: this.props.match.params.rid,
-            name: 'Butter Chicken',
-            description: '',
-            categories: [7],
-            ingredients: [
-                {name:"Butter", quantity:"2", unit:6},
-                {name:"Medium onion", quantity:"1", unit:0},
-                {name:"Red pepper", quantity:"1", unit:0},
-                {name:"Garlic cloves", quantity:"3", unit:0},
-                {name:"Grated ginger", quantity:"1", unit:6},
-                {name:"Garam masala", quantity:"1", unit:5},
-                {name:"Cumin", quantity:"1", unit:5},
-                {name:"Red chili powder", quantity:"1", unit:5},
-                {name:"Diced tomatoes", quantity:"14", unit:9},
-                {name:"Heavy cream", quantity:"1", unit:4},
-                {name:"Salt and pepper", quantity:"To taste", unit:0}
-            ],
-            steps:[
-                "Heat a large pan to medium high heat and add the olive oil. Add the chicken and cook for 5 minutes, stirring, until the chicken is browned. Remove the chicken and set it aside.", 
-                "Melt the butter in the same pan. Add the onion and peppers and cook them 5 minutes to soften.",
-                "Add the garlic and ginger and cook 1 minute, until they become fragrant.",
-                "Add the garam masala, cumin, red chili powder, salt and pepper. Stir and cook for 1 minute.",
-                "Stir in the diced tomatoes. Bring to a quick boil, then reduce the heat and simmer for 15 minutes to break everything down.",
-                "Transfer the sauce to a blender or food processor and process until smooth. You can thin it out with a bit of water if you’d like.",
-                "Strain the sauce back into the pan. The point is to make the sauce very smooth and heat through.",
-                "Stir in the cream and add the chicken back to the pan. Heat and simmer for 10 minutes, or until the chicken is cooked through and the sauce thickens up a bit.",
-                "Serve with cooked white rice and enjoy!"
-            ],
-            filePath: recipe1
+            recipe:{
+                name: "",
+                description: "",
+                categories: [],
+                ingredients: [{name:"", quantity:"", unit: ""}],
+                steps:[""],
+                file:{},
+                filePath: "",
+                creatorUsername: "",
+                creatorId: ""
+            },
+            selectedCategories:[]
         }
+        getRecipe(this, this.props.match.params.rid)
     }
 
     componentDidMount() {
         // this is where the server calls are invoked
-        // state variable is updated here
+        // state variable is updated hereexport
+    }
+
+    assignSelectedCategories=()=>{
+        for(var i=0; i<this.state.recipe.categories.length; i++){
+            this.state.selectedCategories.push(categoriesOptions[this.state.recipe.categories[i]])
+            console.log(this.state.selectedCategories)
+        }
     }
 
     ReturnView=(e)=>{
@@ -74,6 +68,11 @@ export default class EditRecipe extends Component {
         this.props.history.push("/viewrecipe/"+this.state.rid)
     }
 
+    onSubmit=(e)=>{
+        e.preventDefault();
+        setRecipe(this.state.rid,this)
+    }
+
     onChangeRecipeName = (e) =>{
         e.preventDefault();
         this.setState({ name: e.target.value });
@@ -85,13 +84,13 @@ export default class EditRecipe extends Component {
     }
 
     onChangeIngredientsName = (e,index)=>{
-        let ingredients = this.state.ingredients;
+        let ingredients = this.state.recipe.ingredients;
         ingredients[index].name = e.target.value;
         this.setState({ ingredients: ingredients });
     }
 
     onChangeIngredientsQuan=(e,index)=>{
-        let ingredients = this.state.ingredients;
+        let ingredients = this.state.recipe.ingredients;
         ingredients[index].quantity = e.target.value;
         this.setState({ ingredients: ingredients });
     }
@@ -102,12 +101,12 @@ export default class EditRecipe extends Component {
     }
 
     onChangeRemoveIngredients=(index)=>{
-        this.state.ingredients.splice(index,1);
-        this.setState({ingredients: this.state.ingredients})
+        this.state.recipe.ingredients.splice(index,1);
+        this.setState({ingredients: this.state.recipe.ingredients})
     }
 
     onChangeSteps=(e,index)=>{
-        let steps = this.state.steps;
+        let steps = this.recipe.state.steps;
         steps[index] = e.target.value;
         this.setState({ steps: steps });
     }
@@ -118,12 +117,25 @@ export default class EditRecipe extends Component {
     }
 
     onChangeRemoveSteps=(index)=>{
-        this.state.steps.splice(index,1);
-        this.setState({steps: this.state.steps})
+        this.state.recipe.steps.splice(index,1);
+        this.setState({steps: this.state.recipe.steps})
     }
 
     onImageUpload=(picture)=>{
-        this.setState({filePath: this.state.filePath.concat(picture)});
+        this.setState({filePath: this.state.recipe.filePath.concat(picture)});
+    }
+
+    onSelect=(selectedList, selectedItem)=>{
+        const newCategories = this.state.recipe.categories;
+        newCategories.push(selectedItem.id);
+        this.setState({categories: newCategories})
+        console.log(this.state.recipe.categories)
+    }
+     
+    onRemove=(selectedList, removedItem)=>{
+        const index = this.state.recipe.categories.findIndex((element) => element === removedItem.id)
+        this.state.recipe.categories.splice(index,1);
+        this.setState({categories: this.state.recipe.categories})
     }
 
     render(){
@@ -141,7 +153,7 @@ export default class EditRecipe extends Component {
                             type = "Name" 
                             required 
                             className = "form-control" 
-                            value = {this.state.name} 
+                            value = {this.state.recipe.name} 
                             onChange={this.onChangeRecipeName}
                         />
                     </div>
@@ -151,7 +163,7 @@ export default class EditRecipe extends Component {
                             type = "Description" 
                             placeholder="optional" 
                             className = "form-control" 
-                            value = {this.state.description} 
+                            value = {this.state.recipe.description} 
                             onChange={this.onChangeDescription}
                         />
                     </div>
@@ -160,7 +172,7 @@ export default class EditRecipe extends Component {
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
                             options={categoriesOptions} 
-                            selectedValues={this.state.categories} 
+                            selectedValues={this.state.selectedCategories}
                             onSelect={this.onSelect} 
                             onRemove={this.onRemove} 
                             displayValue="name" 
@@ -169,16 +181,16 @@ export default class EditRecipe extends Component {
                     <div className = "Ingredient-form" >
                         <label> Recipe Ingredients: </label>
                         {
-                            this.state.Ingredients.map((Ingredient, index) => {
+                            this.state.recipe.ingredients.map((ingredient, index) => {
                                 return(
                                     <div className="row" id="Ingredient-row" key={index}>
                                         <Col className="col" xs={5}>
                                             <input 
-                                                type = "Ingredients" 
+                                                type = "ingredients" 
                                                 required 
                                                 placeholder="name"
                                                 className = "form-control"
-                                                value = {Ingredient.name} 
+                                                value = {ingredient.name} 
                                                 onChange={(e)=>this.onChangeIngredientsName(e,index)}
                                             />
                                         </Col>
@@ -188,7 +200,7 @@ export default class EditRecipe extends Component {
                                                 required 
                                                 placeholder="quantity"
                                                 className = "form-control" 
-                                                value = {Ingredient.quantity} 
+                                                value = {ingredient.quantity} 
                                                 onChange={(e)=>this.onChangeIngredientsQuan(e,index)}
                                             />
                                         </Col>
@@ -197,7 +209,7 @@ export default class EditRecipe extends Component {
                                                 className = "UnitSelector"
                                                 options={UnitType} 
                                                 onChange={this._onSelect} 
-                                                value={UnitType[Ingredient.unit]} 
+                                                value={ingredient.unit} 
                                             />
                                         </Col>
                                         <Col className ="col" xs={1}>
@@ -219,7 +231,7 @@ export default class EditRecipe extends Component {
                     <div className = "Step-form">
                         <label> Recipe Steps: </label>
                         {
-                            this.state.Steps.map((step, index) => {
+                            this.state.recipe.steps.map((step, index) => {
                                 return(
                                     <div className="row" key={index}>
                                         <Col className = "col" xs = {10}>
@@ -250,7 +262,7 @@ export default class EditRecipe extends Component {
                     <div className = "Recipe-form">
                         <label>Please upload a picture of your recipe if you want to update: </label>
                         <div>
-                            <img alt="recipe" className="Image"src={this.state.filePath}/> 
+                            <img alt="recipe" className="Image" src={this.state.recipe.imageUrl} /> 
                             <ImageUploader
                                 withIcon = {false}
                                 withPreview = {true}
@@ -265,6 +277,7 @@ export default class EditRecipe extends Component {
                     <div className = "Recipe-form">
                         <input 
                             type = "Submit" 
+                            onSubmit = {this.onSubmit}
                             value = "Update Recipe" 
                             className = "btn btn-primary"
                         />
