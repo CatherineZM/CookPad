@@ -110,54 +110,10 @@ Login as an admin:
 13. connect-multiparty
 
 ## overview of the routes
-There are two models in the project: user and recipe. The fields and routes for each model will be explained in this section.
+There are two models in the project: user and recipe. The routes for each model will be explained in this section.
 
-### User Model
-```
-	username: {
-		type: String,
-		required: true,
-		minlength: 1,
-		trim: true,
-		unique: true,
-	}, 
-	password: {
-		type: String,
-		required: true,
-		minlength: 4
-	},
-	description: {
-		type: String,
-		required: false,
-		minlength: 0
-	},
-	isAdmin:{
-		type: Boolean,
-		required: true
-	},
-	likedRecipes:{
-		type: [mongoose.Schema.Types.ObjectId],
-		required: false,
-	},
-	collectedRecipes:{
-		type: [mongoose.Schema.Types.ObjectId],
-		required: false,
-	},
-	myRecipes: {
-		type: [mongoose.Schema.Types.ObjectId],
-		required: false,
-	},
-	imageUrl: {
-		type: String,
-		required: false,
-	},
-	imageId: {
-		type: String,
-		required: false,
-	}
-```
-#### User Routes
-1. Creating a user 
+### User Routes
+#### Creating a user 
 ```
 POST '/api/users'
 req.body = 
@@ -170,23 +126,23 @@ req.body =
 }
 ```
 
-2. Getting all users 
+#### Getting all users 
 ```
 GET '/api/users'
 ```
 
-3. Getting one user
+#### Getting one user
 ```
 GET '/api/users/:uid'
 ```
 
-4. Getting one user
+#### Getting one user
 ```
 GET '/api/users/:uid'
 ```
 
-5. Updating user profile
-purpose: this is called whenever users change profile information
+#### Updating user profile
+ * purpose: this is called whenever users change profile information
 ```
 PATCH'/api/users/:uid'
 req.body = 
@@ -199,9 +155,9 @@ req.body =
 }
 ```
 
-6. Updating user recipe list
-purpose: this is called whenever user create a new recipe or add a recipe to their collections or like a recipe
-Note: the propertites fields are not all required.
+#### Updating user recipe list
+ * purpose: this is called whenever user create a new recipe or add a recipe to their collections or like a recipe
+ * Note: the propertites fields are not all required.
 ```
 POST '/api/users/:uid'
 req.body = 
@@ -212,9 +168,9 @@ req.body =
 }
 ```
 
-7. Updating user recipe list
-purpose: this is called whenever user delete a new recipe or remove a recipe from their collections or dislike a recipe
-Note: the propertites fields are not all required.
+#### Updating user recipe list
+ * purpose: this is called whenever user delete a new recipe or remove a recipe from their collections or dislike a recipe
+ * Note: the propertites fields are not all required.
 ```
 DELETE '/api/users/:uid'
 req.body = 
@@ -225,57 +181,8 @@ req.body =
 }
 ```
 
-### Recipe Model
-```
- name: {
-		type: String,
-		required: true,
-		minlegth: 1,
-		trim: true
-	},
-	description: {
-		type: String,
-		required: false,
-	},
-	likes:{
-		type: Number,
-		required: true,
-	},
-	categories:{
-		type: [Number],
-		required: true,
-	},
-	creatorId:{
-		type: mongoose.Schema.Types.ObjectId,
-		required: true,
-	},
-	creatorUsername: {
-		type: String,
-		require: true,
-	},
-	steps:{
-		type: [String],
-		required: true,
-	},
-	ingredients:{
-		type: [{
-          name: String,
-	         quantity: String,
-	         unit: String}],
-		required: true,
-	},
-	imageUrl: {
-		type: String,
-		required: false,
-	},
-	imageId: {
-		type: String,
-		required: false,
-	}
-```
-
 ### Recipe Routes
-1. Creating a recipe
+#### Creating a recipe
 ```
 POST '/api/recipes'
 req.body = 
@@ -292,22 +199,22 @@ req.body =
 }
 ```
 
-2. Getting all recipes
+#### Getting all recipes
 ```
 GET '/api/recipes'
 ```
 
-3. Getting one recipe
+#### Getting one recipe
 ```
 GET '/api/recipes/:rid'
 ```
 
-4. Deleting recipe
+#### Deleting recipe
 ```
 DELETE '/api/recipes/:rid'
 ```
 
-5. Updating recipe
+#### Updating recipe
 ```
 PATCH '/api/recipes/:rid'
 req.body = 
