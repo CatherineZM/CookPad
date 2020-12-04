@@ -114,7 +114,7 @@ There are two models in the project: user and recipe. The fields and routes for 
 
 ### User Model
 ```
-username: {
+	username: {
 		type: String,
 		required: true,
 		minlength: 1,
@@ -157,25 +157,38 @@ username: {
 	}
 ```
 #### User Routes
+1. Creating a user 
 ```
-1. Creating a user: POST '/api/users'
+POST '/api/users'
 req.body = 
 {
         username: "user",
-		      password: "123456",
+	password: "123456",
         description: "I love Chinese food",
         imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
         imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
 }
+```
 
-2. Getting all users: GET '/api/users'
+2. Getting all users 
+```
+GET '/api/users'
+```
 
-3. Getting one user: GET '/api/users/:uid'
+3. Getting one user
+```
+GET '/api/users/:uid'
+```
 
-4. Getting one user: GET '/api/users/:uid'
+4. Getting one user
+```
+GET '/api/users/:uid'
+```
 
-5. Updating user profile: PATCH'/api/users/:uid'
+5. Updating user profile
 purpose: this is called whenever users change profile information
+```
+PATCH'/api/users/:uid'
 req.body = 
 {
         username: "user",
@@ -184,21 +197,26 @@ req.body =
         imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
         imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
 }
+```
 
-6. Updating user recipe list: POST '/api/users/:uid'
+6. Updating user recipe list
 purpose: this is called whenever user create a new recipe or add a recipe to their collections or like a recipe
 Note: the propertites fields are not all required.
+```
+POST '/api/users/:uid'
 req.body = 
 {
     "likedRecipes": <rid>,
     "collectedRecipes": <rid>,
     "myRecipes": <rid>
 }
+```
 
-
-7. Updating user recipe list: DELETE '/api/users/:uid'
+7. Updating user recipe list
 purpose: this is called whenever user delete a new recipe or remove a recipe from their collections or dislike a recipe
 Note: the propertites fields are not all required.
+```
+DELETE '/api/users/:uid'
 req.body = 
 {
     "likedRecipes": <rid>,
@@ -257,8 +275,9 @@ req.body =
 ```
 
 ### Recipe Routes
+1. Creating a recipe
 ```
-1. Creating a recipe: POST '/api/recipes'
+POST '/api/recipes'
 req.body = 
 {
         "name": "Butter Chicken",
@@ -271,14 +290,26 @@ req.body =
         "imageUrl": "recipeimageUrl", // this is obtained from cloudinary.uploader.upload
         "imageId": "recipeimageId", // this is obtained from cloudinary.uploader.upload
 }
+```
 
-2. Getting all recipes: GET '/api/recipes'
+2. Getting all recipes
+```
+GET '/api/recipes'
+```
 
-3. Getting one recipe: GET '/api/recipes/:rid'
+3. Getting one recipe
+```
+GET '/api/recipes/:rid'
+```
 
-4. Deleting recipe: DELETE '/api/recipes/:rid'
+4. Deleting recipe
+```
+DELETE '/api/recipes/:rid'
+```
 
-5. Updating recipe: PATCH '/api/recipes/:rid'
+5. Updating recipe
+```
+PATCH '/api/recipes/:rid'
 req.body = 
 {
          "name": "Pie",
