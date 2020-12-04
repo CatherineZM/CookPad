@@ -73,16 +73,17 @@ export const signup = async(signupComp) => {
     
     console.log(formData)
     try {
-        const res0 = await axios.post('/images', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        console.log(res0.data)
         const newUser = signupComp.state
-        newUser.imageUrl = res0.data.imageUrl
-        newUser.imageId = res0.data.imageId
-        console.log(newUser)
+        if (signupComp.state.profilePic){
+            const res0 = await axios.post('/images', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            console.log(res0.data)
+            newUser.imageUrl = res0.data.imageUrl
+            newUser.imageId = res0.data.imageId
+        }
         const res1 = await axios.post("/api/users", newUser)
         alert("Sign up success!");
 
@@ -156,11 +157,15 @@ export const getUser = (viewProfileComp, callback) => {
 }
 
 export const updateUser = async(comp, updateInfo, callback) => {
-    if (updateInfo.profilePic){
-        const formData = new FormData();   
-        formData.append('file', updateInfo.profilePic);
+    
+    
 
-        try {
+    try {
+        if (updateInfo.profilePic){
+            const formData = new FormData();   
+            formData.append('file', updateInfo.profilePic);
+    
+            
             const res0 = await axios.post('/images', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -168,16 +173,12 @@ export const updateUser = async(comp, updateInfo, callback) => {
             })
             updateInfo.imageUrl = res0.data.imageUrl
             updateInfo.imageId = res0.data.imageId
-        } catch (error){
-            console.log(error)
+            comp.state.user.imageUrl = updateInfo.imageUrl
+            comp.state.user.imageId = updateInfo.imageId
+            
         }
-    }
-
-    try {
         const res1 = await axios.patch(`/api/users/${comp.state.uid}`, updateInfo)
         console.log(res1)
-        comp.state.user.imageUrl = updateInfo.imageUrl
-        comp.state.user.imageId = updateInfo.imageId
         callback(comp)
     } catch (error){
         console.log(error)
@@ -207,4 +208,29 @@ export const promoteUser = (uid) => {
         .catch(error=>{
             console.log(error);
         })
+}
+
+export const deleteUser = (uid) => {
+    const request = new Request(`/api/users/${uid}`, {
+        method: "delete",
+        body: JSON.stringify({deleteUser: true}),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    
 }

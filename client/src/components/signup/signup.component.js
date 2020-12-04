@@ -40,6 +40,7 @@ export default class Signup extends Component {
       
     onCrop=(preview)=>{
         const img = new Blob([preview], {type: "image/png"})
+        
         this.setState({profilePic: img})
         console.log(this.state.profilePic)
     }

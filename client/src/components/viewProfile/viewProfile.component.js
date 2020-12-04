@@ -243,7 +243,6 @@ export default class ViewProfile extends Component {
                                     onFileLoad={this.onImageLoad}
                                     onCrop={this.onCrop}
                                     onClose={this.onClose}
-                                    src={this.state.user.imageUrl}
                                 /> 
                             </div>    
                             <div className="form-group" id="profile-input">

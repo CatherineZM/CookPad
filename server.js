@@ -304,36 +304,53 @@ delete a new recipe to recipe lists
 app.delete('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	
     const uid = req.params.uid;
-    const idToDelete = {}
 
-    if (req.body.likedRecipes) {
-        idToDelete.likedRecipes = req.body.likedRecipes
-    }
-    
-    if (req.body.collectedRecipes){
-        idToDelete.collectedRecipes = req.body.collectedRecipes
-    }
-
-    if (req.body.myRecipes) {
-        idToDelete.myRecipes = req.body.myRecipes
-    }
-
-	try{
-        const user = await User.findOneAndUpdate({_id: uid}, {$pull: idToDelete}, {new: true, useFindAndModify: false})
-        if (!user){
-            res.status(404).send("Resource not found")
-        } else {
-            res.send(user)
+    // Remove user
+    if (req.body.deleteUser){
+        try{
+            let user = await User.findById(uid);
+            cloudinary.uploader.destroy(user.imageId, function (result) {})
+            user = await User.findByIdAndDelete(uid);
+            return res.send(user);
+        } catch(error) {
+            if(isMongoError(error)){
+                res.status(500).send('Internal Server Error')
+            } else {
+                res.status(400).send('Bad Request')
+            }  
         }
-		
-	} catch(error) {
-        log(error)
-		if(isMongoError(error)){
-			res.status(500).send('Internal Server Error')
-		} else {
-			res.status(400).send('Bad Request')
-		}
-	}
+    } else { //remove certain recipes from user recipe lists
+        const idToDelete = {}
+
+        if (req.body.likedRecipes) {
+            idToDelete.likedRecipes = req.body.likedRecipes
+        }
+        
+        if (req.body.collectedRecipes){
+            idToDelete.collectedRecipes = req.body.collectedRecipes
+        }
+
+        if (req.body.myRecipes) {
+            idToDelete.myRecipes = req.body.myRecipes
+        }
+
+        try{
+            const user = await User.findOneAndUpdate({_id: uid}, {$pull: idToDelete}, {new: true, useFindAndModify: false})
+            if (!user){
+                res.status(404).send("Resource not found")
+            } else {
+                res.send(user)
+            }
+            
+        } catch(error) {
+            log(error)
+            if(isMongoError(error)){
+                res.status(500).send('Internal Server Error')
+            } else {
+                res.status(400).send('Bad Request')
+            }
+        }
+    }
 })
 
 /*

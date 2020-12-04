@@ -1,6 +1,9 @@
 # COOKPAD
 Cookpad is a recipe sharing app that allows food lovers to write food blogs and recipes and beginners to learn cooking. 
 
+## Basic Features
+In our web app, users will be able to post their recipes with steps and ingredients. To search for a recipe, users can apply different filters to filter out unwanted recipes. They can also add a recipe to their own collection so that it is easier for them to replicate it. Users can also give likes to a recipes and they will be able to get a sense of whether the recipe is worth trying by looking at the number of likes. The homepage will also display the top recipes for users in a slideshow. 
+
 ## Get started
 ### Clone the repo
 ```
@@ -13,15 +16,18 @@ Instal the npm packages described in the package.json:
 npm install
 ```
 
-Build and open the project:
+Build and open on local host:
 ```
-npm start
+npm run build-run
 ```
 
 ## login credentials
 Login as a regular user:
   * username: user
   * password: user
+or
+  * username: user2
+  * password: user2
 
 Login as an admin:
   * username: admin
@@ -35,8 +41,8 @@ Login as an admin:
   * Profile picture
   
 2. Click on "Login here" on the sign up page to navigate to the login page. To **Login** as a regular user, enter:
-  * username: user
-  * password: user
+  * username
+  * password
   
 3. On the homepage, you can:
   * **View all recipes**
@@ -81,7 +87,7 @@ Login as an admin:
   
 2. An admin can **View any user's profile** by clicking on "View Profile" button
 
-2. An admin can **Ban users** by clicking on "Ban" button
+2. An admin can **Delete users** by clicking on "Delete" button
 
 3. An admin can **Promote users as admins** by clicking on "Promote" button
 
@@ -98,3 +104,133 @@ Login as an admin:
 7. react-dropdown
 8. react-avatar
 9. react-expand-collapse
+10. react-select
+11. cloudinary
+12. cors
+13. connect-multiparty
+
+## overview of the routes
+There are two models in the project: user and recipe. The routes for each model will be explained in this section.
+
+### User Routes
+#### Creating a user 
+```
+POST '/api/users'
+req.body = 
+{
+        username: "user",
+	password: "123456",
+        description: "I love Chinese food",
+        imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
+        imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
+}
+```
+
+#### Getting all users 
+```
+GET '/api/users'
+```
+
+#### Getting one user
+```
+GET '/api/users/:uid'
+```
+
+#### Getting one user
+```
+GET '/api/users/:uid'
+```
+
+#### Updating user profile
+ * purpose: this is called whenever users change profile information
+```
+PATCH'/api/users/:uid'
+req.body = 
+{
+        username: "user",
+		      password: "123456",
+        description: "I love Chinese food",
+        imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
+        imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
+}
+```
+
+#### Updating user recipe list
+ * purpose: this is called whenever user create a new recipe or add a recipe to their collections or like a recipe
+ * Note: the propertites fields are not all required.
+```
+POST '/api/users/:uid'
+req.body = 
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+```
+
+#### Updating user recipe list
+ * purpose: this is called whenever user delete a new recipe or remove a recipe from their collections or dislike a recipe
+ * Note: the propertites fields are not all required.
+```
+DELETE '/api/users/:uid'
+req.body = 
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+```
+
+### Recipe Routes
+#### Creating a recipe
+```
+POST '/api/recipes'
+req.body = 
+{
+        "name": "Butter Chicken",
+        "description": "Butter Chicken",
+        "categories": [1,2,3],
+        "creatorId": "uid", // this is the _uid field of user
+        "creatorUsername": "user",
+        "steps": ["Add the chopped chicken into a medium bowl", "Mix well to coat and cover chicken"],
+        "ingredients": [{"name": "salt", "quantity": 1, "unit": "kg"}],
+        "imageUrl": "recipeimageUrl", // this is obtained from cloudinary.uploader.upload
+        "imageId": "recipeimageId", // this is obtained from cloudinary.uploader.upload
+}
+```
+
+#### Getting all recipes
+```
+GET '/api/recipes'
+```
+
+#### Getting one recipe
+```
+GET '/api/recipes/:rid'
+```
+
+#### Deleting recipe
+```
+DELETE '/api/recipes/:rid'
+```
+
+#### Updating recipe
+```
+PATCH '/api/recipes/:rid'
+req.body = 
+{
+         "name": "Pie",
+         "description": "Pie",
+         "likes": 123,
+         "categories": [0,1],
+         "steps": ["Dice unsalted butter into small cubes", "Add butter, flour, and salt into a food processor"]
+         "ingredients": [{"name": "sugar", "quantity": 1, "unit": "kg"}]
+         "imageUrl": "recipeimageUrl", // this is obtained from cloudinary.uploader.upload
+         "imageId": "recipeimageId", // this is obtained from cloudinary.uploader.upload
+}
+```
+
+## URL to the deployed web app
+```
+TODO
+```
