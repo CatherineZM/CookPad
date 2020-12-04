@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
+import {withRouter} from 'react-router-dom'
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
@@ -81,4 +81,4 @@ class RecipeList extends Component {
     }
 }
 
-export default withStyles(styles)(RecipeList);
+export default withRouter(withStyles(styles)(RecipeList));

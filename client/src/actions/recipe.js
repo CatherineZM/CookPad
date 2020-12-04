@@ -181,7 +181,6 @@ export const getRecipe = (comp, rid) => {
             "Content-Type": "application/json"
         }
     })
-    console.log(rid)
 
     fetch(request)
         .then(res=>{
