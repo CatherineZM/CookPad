@@ -13,7 +13,7 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
     card:{
         borderRadius: 20,
-        width:260,
+        width:250,
     },
   };
 

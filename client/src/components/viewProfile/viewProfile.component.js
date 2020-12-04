@@ -9,7 +9,7 @@ import {DeleteFromRecipeList, addToRecipeList} from '../../actions/recipe';
 import {setRecipe} from '../../actions/recipe'
 
 // hard coded images
-import ProfilePic from'./default-profile-pic.png' 
+import defaultPic from'./default-profile-pic.png' 
 import { FaRegEdit, FaRegSave } from "react-icons/fa";
 import {getUser, updateUser} from "../../actions/user";
 import {getMyRecipe, getMyCollection} from "../../actions/recipe";
@@ -225,7 +225,8 @@ export default class ViewProfile extends Component {
             return  <div id="user-profile">
                         <h4>{this.state.user.username + "'s Profile"}</h4>
                         <div id="profile-pic">
-                            <img src={this.state.user.imageUrl}/> 
+                            <img src={this.state.user.imageUrl ? this.state.user.imageUrl : defaultPic}
+                                style={{width:"inherit",  height:"inherit"}}/> 
                         </div>
                         <div id="user-description">{this.state.user.description}</div>
                         {this.editButtonGenerator(app)}
@@ -271,7 +272,7 @@ export default class ViewProfile extends Component {
             return <button type="button"
                     className = "btn btn-outline-primary" 
                     onClick={this.handleRecipeExpandClick}>
-                    Collapse 
+                    Close 
                     </button>
         }else{
             return <button type="button"
@@ -287,7 +288,7 @@ export default class ViewProfile extends Component {
             return <button type="button"
                     className = "btn btn-outline-primary" 
                     onClick={this.handleCollectionExpandClick}>
-                    Collapse 
+                    Close 
                     </button>
         }else{
             return <button type="button"
@@ -310,46 +311,26 @@ export default class ViewProfile extends Component {
                 <Navbar app={app}/>
                 {this.profileGenerator(app)}
                 
-                
-                <div id="user-recipes">
-                    <h4>{app.state.currentUser._id === this.state.user._id ? "My Recipes" : `${this.state.user.username}'s Recipes`}
-                    <this.RecipeExpandButtonGenerator/>
-                    </h4>
-                    <Collapse in={this.state.recipeExpanded}>
-                        <div className="recipe-list">
-                            <RecipeList   
-                                recipes={this.state.recipes}
-                                clickHeart={this.clickHeart}
-                                clickStar={this.clickStar}
-                                clickRecipe = {this.clickRecipe}
-                                app={app}
-                            />    
-                        </div>
-                    </Collapse>
-                </div>
-
-                { this.state.recipeExpanded && 
-                    <div id="collection-recipeswithEx">
-                    <h4>{app.state.currentUser._id === this.state.user._id ? "My Collection" : `${this.state.user.username}'s Collection`}
-                    <this.CollectionExpandButtonGenerator/>
-                    </h4>
-                    <Collapse in={this.state.collectionExpanded}>
-                        <div className="recipe-list">
-                            <RecipeList   
-                                recipes={this.state.collectedRecipes}
-                                clickHeart={this.clickHeart}
-                                clickStar={this.clickStar}
-                                clickRecipe = {this.clickRecipe}
-                                app = {this.props.app}
-                            />    
-                        </div>
-                    </Collapse> 
+                <div id="recipe-div">
+                    <div className="recipes-collaps">
+                        <h4>{app.state.currentUser._id === this.state.user._id ? "My Recipes" : `${this.state.user.username}'s Recipes`}
+                        <this.RecipeExpandButtonGenerator/>
+                        </h4>
+                        <Collapse in={this.state.recipeExpanded}>
+                            <div className="recipe-list">
+                                <RecipeList   
+                                    recipes={this.state.recipes}
+                                    clickHeart={this.clickHeart}
+                                    clickStar={this.clickStar}
+                                    clickRecipe = {this.clickRecipe}
+                                    app={app}
+                                />    
+                            </div>
+                        </Collapse>
                     </div>
-                }
 
-                { !this.state.recipeExpanded && 
-                    <div id="collection-recipes">
-                        <h4>My Collection
+                    <div className="recipes-collaps">
+                        <h4>{app.state.currentUser._id === this.state.user._id ? "My Collection" : `${this.state.user.username}'s Collection`}
                         <this.CollectionExpandButtonGenerator/>
                         </h4>
                         <Collapse in={this.state.collectionExpanded}>
@@ -364,7 +345,9 @@ export default class ViewProfile extends Component {
                             </div>
                         </Collapse> 
                     </div>
-                }
+
+                </div>
+                
             </Container>
             </div> 
         )

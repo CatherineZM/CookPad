@@ -7,7 +7,7 @@ import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-
+import {withRouter} from 'react-router-dom'
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
@@ -19,12 +19,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     root: {
-        maxWidth: 180,
-        height: 350,
+        width: 170,
+        height: 295,
         borderRadius: 25,
     },
     title:{
-        height: 80,
+        height: 35,
     },
     media: {
         height: 200,
@@ -81,4 +81,4 @@ class RecipeList extends Component {
     }
 }
 
-export default withStyles(styles)(RecipeList);
+export default withRouter(withStyles(styles)(RecipeList));

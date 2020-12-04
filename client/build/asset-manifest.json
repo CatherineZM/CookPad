@@ -1,22 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.8145af9e.chunk.css",
-    "main.js": "/static/js/main.6e2e987e.chunk.js",
-    "main.js.map": "/static/js/main.6e2e987e.chunk.js.map",
+    "main.css": "/static/css/main.e800f3fd.chunk.css",
+    "main.js": "/static/js/main.6ba05a42.chunk.js",
+    "main.js.map": "/static/js/main.6ba05a42.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.6a44330e.js",
     "runtime-main.js.map": "/static/js/runtime-main.6a44330e.js.map",
     "static/css/2.420e7b89.chunk.css": "/static/css/2.420e7b89.chunk.css",
-    "static/js/2.c864c46b.chunk.js": "/static/js/2.c864c46b.chunk.js",
-    "static/js/2.c864c46b.chunk.js.map": "/static/js/2.c864c46b.chunk.js.map",
+    "static/js/2.c021a80a.chunk.js": "/static/js/2.c021a80a.chunk.js",
+    "static/js/2.c021a80a.chunk.js.map": "/static/js/2.c021a80a.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.0ede91ef3206f63a04e708de238498c8.js": "/precache-manifest.0ede91ef3206f63a04e708de238498c8.js",
+    "precache-manifest.b3ac125a521b4348ca9f04ad97e7c0ed.js": "/precache-manifest.b3ac125a521b4348ca9f04ad97e7c0ed.js",
     "service-worker.js": "/service-worker.js",
     "static/css/2.420e7b89.chunk.css.map": "/static/css/2.420e7b89.chunk.css.map",
-    "static/css/main.8145af9e.chunk.css.map": "/static/css/main.8145af9e.chunk.css.map",
-    "static/js/2.c864c46b.chunk.js.LICENSE.txt": "/static/js/2.c864c46b.chunk.js.LICENSE.txt",
+    "static/css/main.e800f3fd.chunk.css.map": "/static/css/main.e800f3fd.chunk.css.map",
+    "static/js/2.c021a80a.chunk.js.LICENSE.txt": "/static/js/2.c021a80a.chunk.js.LICENSE.txt",
     "static/media/UploadIcon.svg": "/static/media/UploadIcon.1cedb6e9.svg",
     "static/media/butter-chicken.jpg": "/static/media/butter-chicken.34e7fb10.jpg",
-    "static/media/default-profile-pic.png": "/static/media/default-profile-pic.8fed3c43.png",
     "static/media/noodles.png": "/static/media/noodles.efafcbc7.png",
     "static/media/salad.png": "/static/media/salad.ad998962.png",
     "static/media/sandwich.png": "/static/media/sandwich.cc032ac8.png",
@@ -26,8 +25,8 @@
   "entrypoints": [
     "static/js/runtime-main.6a44330e.js",
     "static/css/2.420e7b89.chunk.css",
-    "static/js/2.c864c46b.chunk.js",
-    "static/css/main.8145af9e.chunk.css",
-    "static/js/main.6e2e987e.chunk.js"
+    "static/js/2.c021a80a.chunk.js",
+    "static/css/main.e800f3fd.chunk.css",
+    "static/js/main.6ba05a42.chunk.js"
   ]
 }

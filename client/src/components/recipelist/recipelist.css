@@ -9,8 +9,8 @@
 }
 
 .vertical-scrollable{
-    width: 400px;
-    height: 750px;
+    width: inherit;
+    max-height: inherit;
     overflow-y: scroll;
     overflow-x: hidden; 
     

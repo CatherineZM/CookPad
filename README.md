@@ -155,7 +155,7 @@ req.body =
 }
 ```
 
-#### Updating user recipe list
+#### Adding to user's recipe list
  * purpose: this is called whenever user create a new recipe or add a recipe to their collections or like a recipe
  * Note: the propertites fields are not all required.
 ```
@@ -168,7 +168,7 @@ req.body =
 }
 ```
 
-#### Updating user recipe list
+#### Deleting from user's recipe list
  * purpose: this is called whenever user delete a new recipe or remove a recipe from their collections or dislike a recipe
  * Note: the propertites fields are not all required.
 ```
@@ -180,6 +180,16 @@ req.body =
     "myRecipes": <rid>
 }
 ```
+
+#### Deleting user
+```
+DELETE '/api/users/:uid'
+req.body = 
+{
+    "deleteUser": "true"
+}
+```
+
 
 ### Recipe Routes
 #### Creating a recipe

@@ -259,13 +259,15 @@ export default class HomePage extends Component {
 
                     <div id="middle-panel">
                         {this.state.recipes && this.state.recipes.length >= 3 && <this.slideshowGenerator/>}
-                        <RecipeList 
-                        recipes={this.state.displayed_recipes}
-                        clickRecipe={this.clickRecipe}
-                        clickHeart={this.clickHeart}
-                        clickStar={this.clickStar}
-                        app={app}
-                        />
+                        <div id="recipe-list">
+                            <RecipeList 
+                            recipes={this.state.displayed_recipes}
+                            clickRecipe={this.clickRecipe}
+                            clickHeart={this.clickHeart}
+                            clickStar={this.clickStar}
+                            app={app}
+                            />
+                        </div>
                     </div>
 
                     {this.state.recipes && this.state.recipes.length >= 3 &&
