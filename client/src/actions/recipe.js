@@ -323,12 +323,11 @@ export const getTop2Recipes = (comp, rid)=>{
             console.log(json)
             comp.setState({recipes: json.recipes})
             comp.setState({displayed_recipes: json.recipes})
-            comp.setState({ top2_recipes: []})
             // update top 2 recipes
             let first_largest = -1;
             let second_largest = -1;
-            let first_recipe = {};
-            let second_recipe = {};
+            let first_recipe = false;
+            let second_recipe = false;
             for(let i=0; i< json.recipes.length; i++){
                 if(json.recipes[i]._id === rid){
                     continue;
@@ -342,7 +341,7 @@ export const getTop2Recipes = (comp, rid)=>{
                     second_recipe = json.recipes[i];
                 }
             }
-            console.log([first_recipe, second_recipe])
+            
             comp.setState({ top2_recipes: [first_recipe, second_recipe]})
         })
         .catch(error=>{

@@ -166,7 +166,7 @@ class ViewRecipe extends Component {
                     </Card>
                 </div>
                 
-                {this.state.top2_recipes && this.state.top2_recipes.length === 2 && this.state.top2_recipes[0].length && this.state.top2_recipes[1].length &&
+                {this.state.top2_recipes && this.state.top2_recipes.length === 2 && this.state.top2_recipes[0] && this.state.top2_recipes[1] &&
                 <div className="recommendations">
                     <h4>Recommendations</h4>
                 {this.state.top2_recipes.map((recipe)=>(
