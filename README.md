@@ -1,6 +1,9 @@
 # COOKPAD
 Cookpad is a recipe sharing app that allows food lovers to write food blogs and recipes and beginners to learn cooking. 
 
+## Basic Features
+In our web app, users will be able to post their recipes with steps and ingredients. To search for a recipe, users can apply different filters to filter out unwanted recipes. They can also add a recipe to their own collection so that it is easier for them to replicate it. Users can also give likes to a recipes and they will be able to get a sense of whether the recipe is worth trying by looking at the number of likes. The homepage will also display the top recipes for users in a slideshow. 
+
 ## Get started
 ### Clone the repo
 ```
@@ -13,15 +16,18 @@ Instal the npm packages described in the package.json:
 npm install
 ```
 
-Build and open the project:
+Build and open on local host:
 ```
-npm start
+npm run build-run
 ```
 
 ## login credentials
 Login as a regular user:
   * username: user
   * password: user
+or
+  * username: user2
+  * password: user2
 
 Login as an admin:
   * username: admin
@@ -35,8 +41,8 @@ Login as an admin:
   * Profile picture
   
 2. Click on "Login here" on the sign up page to navigate to the login page. To **Login** as a regular user, enter:
-  * username: user
-  * password: user
+  * username
+  * password
   
 3. On the homepage, you can:
   * **View all recipes**
@@ -81,7 +87,7 @@ Login as an admin:
   
 2. An admin can **View any user's profile** by clicking on "View Profile" button
 
-2. An admin can **Ban users** by clicking on "Ban" button
+2. An admin can **Delete users** by clicking on "Delete" button
 
 3. An admin can **Promote users as admins** by clicking on "Promote" button
 
@@ -98,3 +104,12 @@ Login as an admin:
 7. react-dropdown
 8. react-avatar
 9. react-expand-collapse
+10. react-select
+11. cloudinary
+12. cors
+13. connect-multiparty
+
+## URL to the deployed web app
+```
+TODO
+```
