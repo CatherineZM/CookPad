@@ -348,29 +348,6 @@ export default class ViewProfile extends Component {
 
                 </div>
                 
-
-                {/* { this.state.recipeExpanded && 
-                    <div id="collection-recipeswithEx">
-                    <h4>{app.state.currentUser._id === this.state.user._id ? "My Collection" : `${this.state.user.username}'s Collection`}
-                    <this.CollectionExpandButtonGenerator/>
-                    </h4>
-                    <Collapse in={this.state.collectionExpanded}>
-                        <div className="recipe-list">
-                            <RecipeList   
-                                recipes={this.state.collectedRecipes}
-                                clickHeart={this.clickHeart}
-                                clickStar={this.clickStar}
-                                clickRecipe = {this.clickRecipe}
-                                app = {this.props.app}
-                            />    
-                        </div>
-                    </Collapse> 
-                    </div>
-                }
-
-                { !this.state.recipeExpanded && 
-                    
-                } */}
             </Container>
             </div> 
         )
