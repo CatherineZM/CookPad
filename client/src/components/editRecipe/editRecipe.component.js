@@ -39,8 +39,7 @@ export default class EditRecipe extends Component {
                 filePath: "",
                 creatorUsername: "",
                 creatorId: ""
-            },
-            selectedCategories:[]
+            }
         }
         getRecipe(this, this.props.match.params.rid)
     }
@@ -48,13 +47,6 @@ export default class EditRecipe extends Component {
     componentDidMount() {
         // this is where the server calls are invoked
         // state variable is updated hereexport
-    }
-
-    assignSelectedCategories=()=>{
-        for(var i=0; i<this.state.recipe.categories.length; i++){
-            this.state.selectedCategories.push(categoriesOptions[this.state.recipe.categories[i]])
-            console.log(this.state.selectedCategories)
-        }
     }
 
     ReturnView=(e)=>{
@@ -172,7 +164,7 @@ export default class EditRecipe extends Component {
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
                             options={categoriesOptions} 
-                            selectedValues={this.state.selectedCategories}
+                            selectedValues={categoriesOptions.filter(c => this.state.recipe.categories.includes(c.id))}
                             onSelect={this.onSelect} 
                             onRemove={this.onRemove} 
                             displayValue="name" 
@@ -205,12 +197,20 @@ export default class EditRecipe extends Component {
                                             />
                                         </Col>
                                         <Col className="col" xs={3}>
-                                            <Dropdown
-                                                className = "UnitSelector"
-                                                options={UnitType} 
-                                                onChange={this._onSelect} 
-                                                value={ingredient.unit} 
-                                            />
+                                            <select class="form-control" value = {ingredient.unit} name="units" id="units" onChange={(e)=>this.onSelectIngredientsUnit(e,index)}>
+                                                <option value={UnitType[0]}>{UnitType[0]}</option>
+                                                <option value={UnitType[1]}>{UnitType[1]}</option>
+                                                <option value={UnitType[2]}>{UnitType[2]}</option>
+                                                <option value={UnitType[3]}>{UnitType[3]}</option>
+                                                <option value={UnitType[4]}>{UnitType[4]}</option>
+                                                <option value={UnitType[5]}>{UnitType[5]}</option>
+                                                <option value={UnitType[6]}>{UnitType[6]}</option>
+                                                <option value={UnitType[7]}>{UnitType[7]}</option>
+                                                <option value={UnitType[8]}>{UnitType[8]}</option>
+                                                <option value={UnitType[9]}>{UnitType[9]}</option>
+                                                <option value={UnitType[10]}>{UnitType[10]}</option>
+                                                <option value={UnitType[11]}>{UnitType[11]}</option>
+                                            </select>           
                                         </Col>
                                         <Col className ="col" xs={1}>
                                             <button 
