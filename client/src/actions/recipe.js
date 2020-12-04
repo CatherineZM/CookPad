@@ -218,11 +218,10 @@ export const deleteRecipeAllUsers = (rid, deleteComp) => {
                 DeleteFromRecipeList(user._id, 
                     {myRecipes: rid, likedRecipes: rid, collectedRecipes: rid}
                 )
-            })
-            return;
-        }).then(
-            deleteComp.props.history.push("/viewprofile/"+ deleteComp.props.app.state.currentUser._id)
-        )
+            }).then(
+                deleteComp.props.history.push("/viewprofile/"+ deleteComp.props.app.state.currentUser._id)
+            )
+        })
         .catch(error=>{
             console.log(error);
         })

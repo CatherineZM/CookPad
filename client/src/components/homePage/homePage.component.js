@@ -112,15 +112,16 @@ export default class HomePage extends Component {
         this.setState({num_slides: 3})
     }
 
-    clickHeart=(rid)=>{
+    clickHeart=async(rid)=>{
         let newLikes = 0;
         const new_recipes = [];
         const new_displayed_recipes = [];
         if(this.props.app.state.currentUser.likedRecipes.includes(rid)){
             this.props.app.state.currentUser.likedRecipes = this.props.app.state.currentUser.likedRecipes.filter(recipe=> recipe !== rid)
-            DeleteFromRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            await DeleteFromRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
             this.state.recipes.forEach((recipe)=>{
                 const new_recipe = Object.create(recipe)
+                console.log(new_recipe)
                 if(recipe._id === rid){
                     new_recipe.likes--;
                     newLikes = new_recipe.likes;
@@ -139,7 +140,7 @@ export default class HomePage extends Component {
             this.setState({ displayed_recipes: new_displayed_recipes });
         }else{
             this.props.app.state.currentUser.likedRecipes.push(rid)
-            addToRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
+            await addToRecipeList(this.props.app.state.currentUser._id, {likedRecipes: rid})
             this.state.recipes.forEach((recipe)=>{
                 const new_recipe = Object.create(recipe)
                 if(recipe._id === rid){
@@ -164,31 +165,34 @@ export default class HomePage extends Component {
         setRecipe(rid, {likes: newLikes})
 
         // update top three recipes
-        let first_largest = 0;
-        let second_largest = 0;
-        let third_largest = 0;
-        let first_idx = 0;
-        let second_idx = 0;
-        let third_idx = 0;
-        for(let i=0; i< this.props.app.state.currentUser.likedRecipes.length; i++){
-            if(this.props.app.state.currentUser.likedRecipes[i].likes > first_largest){
+        let first_largest = -1;
+        let second_largest = -1;
+        let third_largest = -1;
+        let first_idx = -1;
+        let second_idx = -1;
+        let third_idx = -1;
+        for(let i=0; i< this.state.recipes.length; i++){
+            if(this.state.recipes[i].likes >= first_largest){
                 third_largest = second_largest;
                 second_largest = first_largest;
-                first_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
+                first_largest = this.state.recipes[i].likes;
                 third_idx = second_idx;
                 second_idx = first_idx;
                 first_idx = i;
-            }else if(this.props.app.state.currentUser.likedRecipes[i].likes > second_largest){
+            }else if(this.state.recipes[i].likes >= second_largest){
                 third_largest = second_largest;
-                second_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
+                second_largest = this.state.recipes[i].likes;
                 third_idx = second_idx;
                 second_idx = i;
-            }else if(this.props.app.state.currentUser.likedRecipes[i].likes > third_largest){
-                third_largest = this.props.app.state.currentUser.likedRecipes[i].likes;
+            }else if(this.state.recipes[i].likes >= third_largest){
+                third_largest = this.state.recipes[i].likes;
                 third_idx = i;
             }
         }
         this.setState({ top3_recipe: [first_idx, second_idx, third_idx]})
+        console.log(this.state.top3_recipe)
+        console.log(this.state.recipes)
+        console.log(this.state.displayed_recipes)
     }
 
     clickCategory = (event)=>{
@@ -274,8 +278,6 @@ export default class HomePage extends Component {
                     <HomePageRightPanel 
                     top3_recipe={this.state.top3_recipe} 
                     recipes={this.state.recipes}
-                    clickHeart={this.clickHeart}
-                    app={app}
                     />}
                     
                     {this.state.recipes && this.state.recipes.length >= 3 &&
