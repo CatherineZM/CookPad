@@ -1,5 +1,5 @@
 
-import "./style.css"
+import "./recipeSlideShow.css"
 import React, { Component } from 'react';
 
 export default class RecipeSlideShow extends Component {

@@ -19,7 +19,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = {
     root: {
-        maxWidth: 180,
+        width: 170,
         height: 295,
         borderRadius: 25,
     },

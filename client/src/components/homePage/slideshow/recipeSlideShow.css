@@ -4,6 +4,7 @@
 #slideshow-container{
     background-color: #e6ecf0;
     border-radius: 25px;
+    margin-left: 10px;
 }
 
 .dot-container {
@@ -50,7 +51,7 @@
 
 /* Position the "next button" to the right */
 .next {
-    margin-left: 359px;
+    margin-left: 326px;
     border-radius: 3px 0 0 3px;
 }
 

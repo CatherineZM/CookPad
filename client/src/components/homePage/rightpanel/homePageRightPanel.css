@@ -1,10 +1,10 @@
 #right-panel {
-    margin-left: 10px;
+    margin-left: 20px;
     margin-top: 30px;
     float: left;
     background-color: white;
     border-radius: 25px;
-    width: 270px;
+    width: 250px;
 }
 
 #right-panel span{
@@ -13,20 +13,23 @@
 
 #right-panel #table-row .name{
     font-weight: bold;
-    padding-right: 50px;
+    padding-right: 45px;
+    padding-left: 25px;
 }
 
 #right-panel #table-row .likes-count{
     font-weight: bold;
+    padding-right: 40px;
 }
 
 #right-panel #table-row #recipe-name{
-    padding-right: 20px;
+    padding-left: 20px;
+    padding-right: 25px;
 }
 
 #right-panel #table-row #recipe-likes{
     padding-top: 15px;
-    padding-left: 0px;
+    padding-left: 20px;
     width: 70px;
 }
 
