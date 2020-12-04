@@ -109,6 +109,186 @@ Login as an admin:
 12. cors
 13. connect-multiparty
 
+## overview of the routes
+There are two models in the project: user and recipe. The fields and routes for each model will be explained in this section.
+### User
+#### User Model
+```
+username: {
+		type: String,
+		required: true,
+		minlength: 1,
+		trim: true,
+		unique: true,
+	}, 
+	password: {
+		type: String,
+		required: true,
+		minlength: 4
+	},
+	description: {
+		type: String,
+		required: false,
+		minlength: 0
+	},
+	isAdmin:{
+		type: Boolean,
+		required: true
+	},
+	likedRecipes:{
+		type: [mongoose.Schema.Types.ObjectId],
+		required: false,
+	},
+	collectedRecipes:{
+		type: [mongoose.Schema.Types.ObjectId],
+		required: false,
+	},
+	myRecipes: {
+		type: [mongoose.Schema.Types.ObjectId],
+		required: false,
+	},
+	imageUrl: {
+		type: String,
+		required: false,
+	},
+	imageId: {
+		type: String,
+		required: false,
+	}
+```
+#### User Routes
+##### Creating a user: POST '/api/users'
+```
+req.body = 
+{
+        username: "user",
+		      password: "123456",
+        description: "I love Chinese food",
+        imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
+        imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
+}
+```
+##### Getting all users: GET '/api/users'
+##### Getting one user: GET '/api/users/:uid'
+##### Getting one user: GET '/api/users/:uid'
+##### Updating user profile: PATCH'/api/users/:uid'
+purpose: this is called whenever users change profile information
+```
+req.body = 
+{
+        username: "user",
+		      password: "123456",
+        description: "I love Chinese food",
+        imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
+        imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
+}
+```
+##### Updating user recipe list: POST '/api/users/:uid'
+purpose: this is called whenever user create a new recipe or add a recipe to their collections or like a recipe
+Note: the propertites fields are not all required.
+```
+req.body = 
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+```
+##### Updating user recipe list: DELETE '/api/users/:uid'
+purpose: this is called whenever user delete a new recipe or remove a recipe from their collections or dislike a recipe
+Note: the propertites fields are not all required.
+```
+req.body = 
+{
+    "likedRecipes": <rid>,
+    "collectedRecipes": <rid>,
+    "myRecipes": <rid>
+}
+```
+
+### Recipe
+#### Recipe Model
+```
+ name: {
+		type: String,
+		required: true,
+		minlegth: 1,
+		trim: true
+	},
+	description: {
+		type: String,
+		required: false,
+	},
+	likes:{
+		type: Number,
+		required: true,
+	},
+	categories:{
+		type: [Number],
+		required: true,
+	},
+	creatorId:{
+		type: mongoose.Schema.Types.ObjectId,
+		required: true,
+	},
+	creatorUsername: {
+		type: String,
+		require: true,
+	},
+	steps:{
+		type: [String],
+		required: true,
+	},
+	ingredients:{
+		type: [{
+          name: String,
+	         quantity: String,
+	         unit: String}],
+		required: true,
+	},
+	imageUrl: {
+		type: String,
+		required: false,
+	},
+	imageId: {
+		type: String,
+		required: false,
+	}
+```
+#### Recipe Routes
+##### Creating a recipe: POST '/api/recipes'
+```
+req.body = 
+{
+        "name": "Butter Chicken",
+        "description": "Butter Chicken",
+        "categories": [1,2,3],
+        "creatorId": "uid", // this is the _uid field of user
+        "creatorUsername": "user",
+        "steps": ["Add the chopped chicken into a medium bowl", "Mix well to coat and cover chicken"],
+        "ingredients": [{"name": "salt", "quantity": 1, "unit": "kg"}],
+        "imageUrl": "recipeimageUrl", // this is obtained from cloudinary.uploader.upload
+        "imageId": "recipeimageId", // this is obtained from cloudinary.uploader.upload
+}
+```
+##### Getting all recipes: GET '/api/recipes'
+##### Getting one recipe: GET '/api/recipes/:rid'
+##### Deleting recipe: DELETE '/api/recipes/:rid'
+##### Updating recipe: PATCH '/api/recipes/:rid'
+```
+req.body = 
+{
+         "name": "Pie",
+         "description": "Pie",
+         "likes": 123,
+         "categories": [0,1],
+         "steps": ["Dice unsalted butter into small cubes", "Add butter, flour, and salt into a food processor"]
+         "ingredients": [{"name": "sugar", "quantity": 1, "unit": "kg"}]
+         "imageUrl": "recipeimageUrl", // this is obtained from cloudinary.uploader.upload
+         "imageId": "recipeimageId", // this is obtained from cloudinary.uploader.upload
+}
+```
+
 ## URL to the deployed web app
 ```
 TODO
