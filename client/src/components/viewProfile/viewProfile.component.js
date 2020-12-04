@@ -330,7 +330,7 @@ export default class ViewProfile extends Component {
                     </div>
 
                     <div className="recipes-collaps">
-                        <h4>My Collection
+                        <h4>{app.state.currentUser._id === this.state.user._id ? "My Collection" : `${this.state.user.username}'s Collection`}
                         <this.CollectionExpandButtonGenerator/>
                         </h4>
                         <Collapse in={this.state.collectionExpanded}>

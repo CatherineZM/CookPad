@@ -20,11 +20,11 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
     root: {
         maxWidth: 180,
-        height: 350,
+        height: 295,
         borderRadius: 25,
     },
     title:{
-        height: 80,
+        height: 35,
     },
     media: {
         height: 200,
