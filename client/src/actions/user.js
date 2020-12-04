@@ -73,16 +73,17 @@ export const signup = async(signupComp) => {
     
     console.log(formData)
     try {
-        const res0 = await axios.post('/images', formData, {
-            headers: {
-                'Content-Type': 'multipart/form-data'
-            }
-        })
-        console.log(res0.data)
         const newUser = signupComp.state
-        newUser.imageUrl = res0.data.imageUrl
-        newUser.imageId = res0.data.imageId
-        console.log(newUser)
+        if (signupComp.state.profilePic){
+            const res0 = await axios.post('/images', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            console.log(res0.data)
+            newUser.imageUrl = res0.data.imageUrl
+            newUser.imageId = res0.data.imageId
+        }
         const res1 = await axios.post("/api/users", newUser)
         alert("Sign up success!");
 
@@ -207,4 +208,29 @@ export const promoteUser = (uid) => {
         .catch(error=>{
             console.log(error);
         })
+}
+
+export const deleteUser = (uid) => {
+    const request = new Request(`/api/users/${uid}`, {
+        method: "delete",
+        body: JSON.stringify({deleteUser: true}),
+        headers: {
+            Accept: "application/json, text/plain, */*",
+            "Content-Type": "application/json"
+        }
+    })
+
+    fetch(request)
+        .then(res=>{
+            if(res.status === 200){
+                return res.json();
+            }
+        })
+        .then(json=>{
+            console.log(json)
+        })
+        .catch(error=>{
+            console.log(error);
+        })
+    
 }
