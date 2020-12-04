@@ -356,3 +356,28 @@ export const setRecipe = (rid, newRecipe) => {
     axios.patch(`/api/recipes/${rid}`, newRecipe)
     .then(res => console.log(res.data));
 }
+
+export const updateRecipe = async(comp, newRecipe) => {
+    try {
+        if (newRecipe.file){
+            const formData = new FormData();   
+            formData.append('file', newRecipe.file);
+            
+            const res0 = await axios.post('/images', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            newRecipe.imageUrl = res0.data.imageUrl
+            newRecipe.imageId = res0.data.imageId
+            comp.state.recipe.imageUrl = newRecipe.imageUrl
+            comp.state.recipe.imageId = newRecipe.imageId
+            
+        }
+        const res1 = await axios.patch(`/api/recipes/${comp.state.rid}`, newRecipe)
+        console.log(res1)
+        comp.props.history.push("/viewrecipe/"+ comp.state.rid)
+    } catch (error){
+        console.log(error)
+    }
+}
