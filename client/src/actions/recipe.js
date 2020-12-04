@@ -163,7 +163,7 @@ export const addRecipe = async(newRecipeComp) => {
         // add to user's my recipe list
         console.log(res1)
         await addToRecipeList(newRecipeComp.props.app.state.currentUser._id, {myRecipes: res1.data._id})
-        newRecipeComp.props.history.push("/viewprofile/"+ newRecipeComp.props.app.state.currentUser._id)
+        newRecipeComp.props.history.push("/homepage")
     } catch(error) {
         if(error.res1.status === 500){
             console.log('There was a problem with the server')
@@ -355,4 +355,29 @@ export const getTop2Recipes = (comp, rid)=>{
 export const setRecipe = (rid, newRecipe) => {
     axios.patch(`/api/recipes/${rid}`, newRecipe)
     .then(res => console.log(res.data));
+}
+
+export const updateRecipe = async(comp, newRecipe) => {
+    try {
+        if (newRecipe.file){
+            const formData = new FormData();   
+            formData.append('file', newRecipe.file);
+            
+            const res0 = await axios.post('/images', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            newRecipe.imageUrl = res0.data.imageUrl
+            newRecipe.imageId = res0.data.imageId
+            comp.state.recipe.imageUrl = newRecipe.imageUrl
+            comp.state.recipe.imageId = newRecipe.imageId
+            
+        }
+        const res1 = await axios.patch(`/api/recipes/${comp.state.rid}`, newRecipe)
+        console.log(res1)
+        comp.props.history.push("/viewrecipe/"+ comp.state.rid)
+    } catch (error){
+        console.log(error)
+    }
 }

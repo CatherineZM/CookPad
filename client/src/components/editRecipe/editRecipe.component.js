@@ -8,7 +8,7 @@ import Dropdown from 'react-dropdown';
 import ImageUploader from 'react-images-upload'; 
 import Col from 'react-bootstrap/Col';
 
-import {getRecipe, setRecipe} from "../../actions/recipe";
+import {getRecipe, updateRecipe} from "../../actions/recipe";
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];
 const categoriesOptions =[
@@ -52,7 +52,17 @@ export default class EditRecipe extends Component {
     ReturnView=(e)=>{
         e.preventDefault();
         // server calls are required to push the updated recipe to the server
-        this.props.history.push("/viewrecipe/"+this.state.rid)
+        const newRecipe = {
+            name: this.state.recipe.name,
+            description: this.state.recipe.description,
+            categories: this.state.recipe.categories,
+            ingredients: this.state.recipe.ingredients,
+            steps: this.state.recipe.steps,
+            file: this.state.recipe.file
+        }
+        console.log(newRecipe)
+        updateRecipe(this,newRecipe)
+        //this.props.history.push("/viewrecipe/"+this.state.rid)
     }
 
     onCancel=(e)=>{
@@ -60,74 +70,83 @@ export default class EditRecipe extends Component {
         this.props.history.push("/viewrecipe/"+this.state.rid)
     }
 
-    onSubmit=(e)=>{
-        e.preventDefault();
-        setRecipe(this.state.rid,this)
-    }
-
     onChangeRecipeName = (e) =>{
         e.preventDefault();
-        this.setState({ name: e.target.value });
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.name = e.target.value;
+        this.setState({ recipe: recipeCopy });
     }
 
     onChangeDescription = (e) =>{
         e.preventDefault();
-        this.setState({ description: e.target.value });
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.description = e.target.value;
+        this.setState({ recipe: recipeCopy });
     }
 
     onChangeIngredientsName = (e,index)=>{
-        let ingredients = this.state.recipe.ingredients;
-        ingredients[index].name = e.target.value;
-        this.setState({ ingredients: ingredients });
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.ingredients[index].name = e.target.value;
+        this.setState({ recipe: recipeCopy });
     }
 
     onChangeIngredientsQuan=(e,index)=>{
-        let ingredients = this.state.recipe.ingredients;
-        ingredients[index].quantity = e.target.value;
-        this.setState({ ingredients: ingredients });
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.ingredients[index].quantity = e.target.value;
+        this.setState({ recipe: recipeCopy });
+    }
+
+    onSelectIngredientsUnit=(e,index)=>{
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.ingredients[index].unit = e.target.value;
+        this.setState({ recipe: recipeCopy });
     }
 
     addIngredientsRow=()=>{
-       this.setState((prevState)=>({ingredients:[...prevState.ingredients, {name: "", quantity:"", unit:""}],
+       this.setState((prevState)=>({recipe:{...prevState.recipe,ingredients:[...prevState.recipe.ingredients, {name:"", quantity:"", unit: ""}]},
         }));
     }
 
     onChangeRemoveIngredients=(index)=>{
-        this.state.recipe.ingredients.splice(index,1);
-        this.setState({ingredients: this.state.recipe.ingredients})
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.ingredients.splice(index,1);
+        this.setState({ recipe: recipeCopy });
     }
 
     onChangeSteps=(e,index)=>{
-        let steps = this.recipe.state.steps;
-        steps[index] = e.target.value;
-        this.setState({ steps: steps });
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.steps[index] = e.target.value;
+        this.setState({ recipe: recipeCopy });
     }
 
     addStepsRow=()=>{
-        this.setState((prevState)=>({steps:[...prevState.steps, ""],
+        this.setState((prevState)=>({recipe:{...prevState.recipe,steps:[...prevState.recipe.steps, ""]},
         }));
     }
 
     onChangeRemoveSteps=(index)=>{
-        this.state.recipe.steps.splice(index,1);
-        this.setState({steps: this.state.recipe.steps})
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.steps.splice(index,1);
+        this.setState({ recipe: recipeCopy });
     }
 
     onImageUpload=(picture)=>{
-        this.setState({filePath: this.state.recipe.filePath.concat(picture)});
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.file = picture[0]
+        this.setState({ recipe: recipeCopy });
     }
 
     onSelect=(selectedList, selectedItem)=>{
-        const newCategories = this.state.recipe.categories;
-        newCategories.push(selectedItem.id);
-        this.setState({categories: newCategories})
-        console.log(this.state.recipe.categories)
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.categories.push(selectedItem.id);
+        this.setState({ recipe: recipeCopy });
     }
      
     onRemove=(selectedList, removedItem)=>{
         const index = this.state.recipe.categories.findIndex((element) => element === removedItem.id)
-        this.state.recipe.categories.splice(index,1);
-        this.setState({categories: this.state.recipe.categories})
+        let recipeCopy = JSON.parse(JSON.stringify(this.state.recipe))
+        recipeCopy.categories.splice(index,1);
+        this.setState({ recipe: recipeCopy });
     }
 
     render(){
@@ -277,7 +296,6 @@ export default class EditRecipe extends Component {
                     <div className = "Recipe-form">
                         <input 
                             type = "Submit" 
-                            onSubmit = {this.onSubmit}
                             value = "Update Recipe" 
                             className = "btn btn-primary"
                         />
