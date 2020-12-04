@@ -157,11 +157,15 @@ export const getUser = (viewProfileComp, callback) => {
 }
 
 export const updateUser = async(comp, updateInfo, callback) => {
-    if (updateInfo.profilePic){
-        const formData = new FormData();   
-        formData.append('file', updateInfo.profilePic);
+    
+    
 
-        try {
+    try {
+        if (updateInfo.profilePic){
+            const formData = new FormData();   
+            formData.append('file', updateInfo.profilePic);
+    
+            
             const res0 = await axios.post('/images', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
@@ -169,16 +173,12 @@ export const updateUser = async(comp, updateInfo, callback) => {
             })
             updateInfo.imageUrl = res0.data.imageUrl
             updateInfo.imageId = res0.data.imageId
-        } catch (error){
-            console.log(error)
+            comp.state.user.imageUrl = updateInfo.imageUrl
+            comp.state.user.imageId = updateInfo.imageId
+            
         }
-    }
-
-    try {
         const res1 = await axios.patch(`/api/users/${comp.state.uid}`, updateInfo)
         console.log(res1)
-        comp.state.user.imageUrl = updateInfo.imageUrl
-        comp.state.user.imageId = updateInfo.imageId
         callback(comp)
     } catch (error){
         console.log(error)
