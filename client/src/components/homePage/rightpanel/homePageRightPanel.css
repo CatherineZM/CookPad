@@ -1,52 +1,51 @@
-#right-panel {
+#top-3-recipe {
     margin-left: 20px;
-    margin-top: 30px;
     float: left;
     background-color: white;
     border-radius: 25px;
     width: 250px;
 }
 
-#right-panel span{
+#top-3-recipe span{
     padding-left: 2px;
 }
 
-#right-panel #table-row .name{
+#top-3-recipe #table-row .name{
     font-weight: bold;
     padding-right: 45px;
     padding-left: 25px;
 }
 
-#right-panel #table-row .likes-count{
+#top-3-recipe #table-row .likes-count{
     font-weight: bold;
     padding-right: 40px;
 }
 
-#right-panel #table-row #recipe-name{
+#top-3-recipe #table-row #recipe-name{
     padding-left: 20px;
     padding-right: 25px;
 }
 
-#right-panel #table-row #recipe-likes{
+#top-3-recipe #table-row #recipe-likes{
     padding-top: 15px;
     padding-left: 20px;
     width: 70px;
 }
 
-#right-panel #table-row #recipe-likes .dislikes{
+#top-3-recipe #table-row #recipe-likes .dislikes{
     float: left;
     position: relative;
 }
-#right-panel #table-row #recipe-likes .likes{
+#top-3-recipe #table-row #recipe-likes .likes{
     float: left;
     position: relative;
 }
 
-#right-panel #table-row #recipe-likes span{
+#top-3-recipe #table-row #recipe-likes span{
     position: relative;
     float: left;
 }
 
-#right-panel .dislikes{
+#top-3-recipe .dislikes{
     float: left;
 }

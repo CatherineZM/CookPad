@@ -6,16 +6,24 @@ body {
 
 #middle-panel {
     background-color: white;
-    float: left;
+    position: absolute;
     margin-top: 30px;
-    max-width: 410px;
-    margin-left: 230px;
+    max-width: 630px;
+    margin-left: 240px;
     border-radius: 25px;
-    height: 100%;
+    height: fit-content;
     padding: 20px 20px;
+}
+
+#right-panel {
+    height: 100%;
+    position: absolute;
+    margin-left: 860px;
+    margin-top: 30px;
+    padding-left: 20px;
 }
 
 #recipe-list {
     margin-top: 10px;
-    max-height: 700px;
+    max-height: 600px;
 }

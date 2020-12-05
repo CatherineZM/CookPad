@@ -307,7 +307,7 @@ export default class ViewProfile extends Component {
         const { app } = this.props;
         return(
             <div>
-            <Container maxWidth='md'>
+            <Container maxWidth='lg'>
                 <Navbar app={app}/>
                 {this.profileGenerator(app)}
                 

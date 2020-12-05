@@ -67,17 +67,17 @@ class UserList extends Component {
             <Table>
                 <TableHead id="table-head">
                     <TableRow>
-                        <TableCell className={classes.head} align = 'center'>uid</TableCell>
+                        <TableCell className={classes.head} align = 'center'>Level</TableCell>
                         <TableCell className={classes.head} align = 'center'>Username</TableCell>
                         <TableCell className={classes.head} align = 'center'>View Profiles</TableCell>
-                        <TableCell className={classes.head} align = 'center'>Mange</TableCell>
+                        <TableCell className={classes.head} align = 'center'>Operations</TableCell>
                     </TableRow>
                 </TableHead>
                     <TableBody>
                         {console.log(this.state.users)}
                         {this.state.users.map(user => (
                         <TableRow className="user_row" key={uid(user.username)}>
-                            <TableCell className = "admin-level" align = 'center'>
+                            <TableCell className = "level" align = 'center'>
                                 {user.isAdmin ? "Admin":"Standard"}
                             </TableCell>
                             <TableCell className = "username" align = 'center'>

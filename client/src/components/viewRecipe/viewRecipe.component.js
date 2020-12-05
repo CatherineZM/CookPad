@@ -132,7 +132,7 @@ class ViewRecipe extends Component {
         const {classes, app} = this.props;
         return(
             <div>
-            <Container maxWidth="md">
+            <Container maxWidth='lg'>
                 <Navbar app={app}/>
                 <div className="recipe-des">
                     <Card className={classes.card}>

@@ -252,7 +252,7 @@ export default class HomePage extends Component {
         return(
             <div id="body">
                 
-                <Container maxWidth='md'>
+                <Container maxWidth='lg'>
                     <Navbar app={app}/>
                     <HomePageLeftPanel
                         categories={this.state.categories}
@@ -274,18 +274,20 @@ export default class HomePage extends Component {
                         </div>
                     </div>
 
-                    {this.state.recipes && this.state.recipes.length >= 3 &&
-                    <HomePageRightPanel 
-                    top3_recipe={this.state.top3_recipe} 
-                    recipes={this.state.recipes}
-                    />}
-                    
-                    {this.state.recipes && this.state.recipes.length >= 3 &&
-                    <TopRecipes
-                    top3_recipe={this.state.top3_recipe}
-                    recipes={this.state.recipes}
-                    app={app}
-                    />}
+                    <div id="right-panel">
+                        {this.state.recipes && this.state.recipes.length >= 3 &&
+                        <HomePageRightPanel 
+                        top3_recipe={this.state.top3_recipe} 
+                        recipes={this.state.recipes}
+                        />}
+                        
+                        {this.state.recipes && this.state.recipes.length >= 3 &&
+                        <TopRecipes
+                        top3_recipe={this.state.top3_recipe}
+                        recipes={this.state.recipes}
+                        app={app}
+                        />}
+                    </div>
                 </Container> 
             </div>
         )

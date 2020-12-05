@@ -28,7 +28,7 @@ class HomePageRightPanel extends Component {
     render(){
         const {classes, top3_recipe, recipes} = this.props;
         return(
-            <div id="right-panel">
+            <div id="top-3-recipe">
             <Table size="small" aria-label="a dense table">
                 <TableBody>
                     <TableRow id="table-row">

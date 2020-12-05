@@ -121,11 +121,11 @@ export default class AddRecipe extends Component {
 
         return(
             <div>
-            <Container maxWidth='md'>
+            <Container maxWidth='lg'>
                 <Navbar app={app}/>
                 <form onSubmit = {this.onSubmit} className="add-recipe">
                     <b>Create A Recipe</b>
-                    <div className = "Recipe-form">
+                    <div className = "recipe-form">
                         <label> Recipe Name: </label>
                         <input 
                             type = "Name" 
@@ -136,7 +136,7 @@ export default class AddRecipe extends Component {
                             onChange={this.onChangeRecipeName}
                         />
                     </div>
-                    <div className = "Recipe-form">
+                    <div className = "recipe-form">
                         <label> Recipe Description: </label>
                         <input 
                             type = "Description" 
@@ -147,7 +147,7 @@ export default class AddRecipe extends Component {
                             onChange={this.onChangeDescription}
                         />
                     </div>
-                    <div className="Recipe-form">
+                    <div className="recipe-form">
                         <label>Cuisine Type: </label>
                         <Multiselect
                             placeholder = "Select cuisine type(s)"
@@ -157,12 +157,12 @@ export default class AddRecipe extends Component {
                             displayValue="name" 
                         />    
                     </div>
-                    <div className = "Ingredient-form" >
+                    <div className = "ingredient-form" >
                         <label> Recipe Ingredients: </label>
                          {
                             this.state.ingredients.map((Ingredient, index) => {
                                 return(
-                                    <div className="row" id="Ingredient-row" key={index}>
+                                    <div className="row" id="ingredient-row" key={index}>
                                         <Col className="col" xs={5}>
                                             <input 
                                                 type = "Ingredients" 
@@ -210,12 +210,12 @@ export default class AddRecipe extends Component {
                                 )})
                         } 
                     </div>
-                    <div className="AddIngredient-btn">
+                    <div className="add-ingredient-btn">
                         <button id="add-ingredient" className = "btn btn-outline-primary" type = "button" onClick={this.addIngredientsRow} >
                             Add Ingredients
                         </button>
                     </div>
-                    <div className = "Step-form">
+                    <div className = "step-form">
                         <label> Recipe Steps: </label>
                         {
                             this.state.steps.map((step, index) => {
@@ -243,12 +243,12 @@ export default class AddRecipe extends Component {
                         }
                         
                     </div>
-                    <div className="AddSteps-btn">
+                    <div className="add-steps-btn">
                         <button id = "add-step" className = "btn btn-outline-primary" type = "button" onClick={this.addStepsRow} >
                             Add Steps
                         </button> 
                     </div>
-                    <div className = "Recipe-form">
+                    <div className = "recipe-form">
                         <label>Please upload a picture of your recipe: </label>
                         <div>
                             <ImageUploader
@@ -262,7 +262,7 @@ export default class AddRecipe extends Component {
                             />
                         </div>
                     </div>
-                    <div className = "Recipe-form">
+                    <div className = "recipe-form">
                         <input 
                             type = "Submit" 
                             value = "Submit New Recipe" 

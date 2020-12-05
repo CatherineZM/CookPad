@@ -154,7 +154,7 @@ export default class EditRecipe extends Component {
 
         return(
             <div> 
-            <Container maxWidth='md'>
+            <Container maxWidth='lg'>
                 <Navbar app={app}/>
                 <form onSubmit={this.ReturnView} className="edit-recipe">
                     <b>Edit Your Recipe</b>

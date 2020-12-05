@@ -20,20 +20,25 @@ import { withStyles } from '@material-ui/core/styles';
 const styles = {
     root: {
         width: 170,
-        height: 295,
+        height: 260,
         borderRadius: 25,
     },
     title:{
         height: 35,
+        padding: 5,
     },
     media: {
-        height: 200,
+        height: 180,
     },
     likeButton:{
         paddingLeft: 20,
     },
     saveButton: {
         marginLeft: 10,
+    },
+    action: {
+        paddingTop: 0,
+        paddingLeft: 12,
     },
   };
 
@@ -59,7 +64,7 @@ class RecipeList extends Component {
                             </Typography>
                             </CardContent>
                         </CardActionArea>
-                        <CardActions disableSpacing>
+                        <CardActions disableSpacing className={classes.action}>
                             <div className="like-class">
                                 <FormControlLabel
                                 labelPlacement="end"
