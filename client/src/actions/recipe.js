@@ -354,8 +354,7 @@ export const updateRecipe = async(comp, newRecipe) => {
                 }
             })
             newRecipe.imageUrl = res0.data.imageUrl
-            newRecipe.imageId = res0.data.imageId  
-            console.log(newRecipe.imageUrl)     
+            newRecipe.imageId = res0.data.imageId    
         }
         await axios.patch(`/api/recipes/${comp.state.rid}`, newRecipe)
         swal({title:"Yummy!", text:"Your recipe has been succesfully updated!",icon:"success"})
