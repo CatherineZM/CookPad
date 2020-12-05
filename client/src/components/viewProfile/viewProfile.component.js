@@ -4,7 +4,6 @@ import './viewProfile.css'
 import Navbar from "../Navbar/navbar.component"
 import RecipeList from '../recipelist/recipelist.component'
 import Avatar from 'react-avatar-edit';
-import {Collapse} from 'react-bootstrap'
 import {DeleteFromRecipeList, addToRecipeList} from '../../actions/recipe';
 import {setRecipe} from '../../actions/recipe'
 import { withStyles } from '@material-ui/core/styles';
@@ -44,7 +43,8 @@ const styles = {
     },
     tab: {
         color: "black",
-        textTransform: "none"
+        textTransform: "none",
+        fontSize: '20px'
     }
 
 }
@@ -69,12 +69,7 @@ class ViewProfile extends Component {
             getMyCollection(this);
         })
         console.log(this.state.collectedRecipes)
-    }
-
-
- 
-
-   
+    }  
 
      clickHeart=(rid)=>{
         let newLikes = 0;
@@ -220,7 +215,6 @@ class ViewProfile extends Component {
             {"  Edit Profile"}
             </button>
         }
-        
     }
 
     profileGenerator = (app)=>{
@@ -270,9 +264,6 @@ class ViewProfile extends Component {
         }
     }
 
-
-  
-
     clickRecipe=(rid)=>{
         this.props.history.push("/viewrecipe/" + rid);
     }
@@ -292,7 +283,6 @@ class ViewProfile extends Component {
 
     render(){
         const { app, classes} = this.props;
-
         return(
             <div>
             <Container maxWidth='md'>
@@ -318,7 +308,6 @@ class ViewProfile extends Component {
                         />
                     </this.TabPanel>
                     <this.TabPanel className={classes.panel} value={this.state.currTab} index={1}>
-
                         <RecipeList   
                             recipes={this.state.collectedRecipes}
                             clickHeart={this.clickHeart}
@@ -327,7 +316,6 @@ class ViewProfile extends Component {
                             app={app}
                         />
                     </this.TabPanel>
-
                 </div>
                 
             </Container>

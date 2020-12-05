@@ -3,7 +3,7 @@
 	padding: 10px;
     min-height: 0px;
 	margin-top: 30px;
-    margin-left: 65px;
+    margin-left: 70px;
     width: 300px;
     position: relative;
     float: left;
@@ -28,10 +28,9 @@
     position: relative;
 }
 
-
 .recipes-collaps {
     background-color: white;
-    width: 500px;
+    width: 470px;
     padding: 20px 30px;
     float: left;
     margin-top: 30px;
@@ -44,7 +43,7 @@ h4 button {
 
 .recipe-list{
     margin-top: 20px;
-    width: 450px;
+    width: 430px;
     max-height: 600px;
 }
 
@@ -90,7 +89,7 @@ h4 button {
     float: left;
     margin-left: 20px;
     margin-top: 30px;
-    width: 500px;
+    width: 470px;
 }
 
 .recipe-div .recipe-container{
@@ -104,5 +103,4 @@ h4 button {
 .recipe-tab-bar {
     background-color: white;
     border-radius: 25px;
-
 }

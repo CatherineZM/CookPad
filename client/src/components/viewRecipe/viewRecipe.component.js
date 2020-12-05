@@ -175,7 +175,7 @@ class ViewRecipe extends Component {
                         <Card className={classes.card}>
                             <CardActionArea>
                                 <CardMedia
-                                    height="160"
+                                    height="150"
                                     component="img"
                                     alt={recipe.name}
                                     image={recipe.imageUrl}
