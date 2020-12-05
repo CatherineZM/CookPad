@@ -19,7 +19,8 @@ const styles = {
     panel: {
         backgroundColor: "white",
         marginTop: 20,
-        borderRadius:10
+        borderRadius:10,
+        transition: "ease"
     },
     scrollButtons: {
         color: "black",
@@ -27,12 +28,13 @@ const styles = {
     },
 
     indicator: {
-        backgroundColor: "darkgray"
+        backgroundColor: "black"
     },
 
     bar: {
+        flexGrow: 1,
         backgroundColor: "white",
-        borderRadius: 5,
+        borderRadius: 10,
 
     },
 
@@ -41,7 +43,8 @@ const styles = {
         borderRadius: 20,
     },
     tab: {
-        color: "black"
+        color: "black",
+        textTransform: "none"
     }
 
 }
@@ -298,9 +301,9 @@ class ViewProfile extends Component {
                 
                 <div id="recipe-div">
                     <AppBar position="static" className={classes.bar} color="white">
-                        <Tabs value={this.state.currTab} onChange={this.handleTab} textColor="black" variant="fullWidth" classes={{
-    indicator: classes.indicator, flexContainer: classes.flexContainer
-  }}>
+                        <Tabs value={this.state.currTab} onChange={this.handleTab} variant="fullWidth" classes={{
+                                                                                                indicator: classes.indicator, 
+                                                                                                flexContainer: classes.flexContainer}}>
                         <Tab label="My Recipes" className={classes.tab}/>
                         <Tab label="My Collection" className={classes.tab}/>
                         </Tabs>
