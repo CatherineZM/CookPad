@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import './editRecipe.css'
-import Navbar from "../Navbar/navbar.component" 
-import recipe1 from '../../recipes/butter-chicken.jpg'
+import Navbar from "../Navbar/navbar.component"
 import {Multiselect} from 'multiselect-react-dropdown';
 import Container from "@material-ui/core/Container"
-import Dropdown from 'react-dropdown';
 import ImageUploader from 'react-images-upload'; 
 import Col from 'react-bootstrap/Col';
 
@@ -26,7 +24,6 @@ export default class EditRecipe extends Component {
         super(props);
 
         this.props.history.push('/editrecipe/'+this.props.match.params.rid)
-        // requires server call to fetch the recipe information
         this.state = {
             rid: this.props.match.params.rid,
             recipe:{
@@ -44,14 +41,8 @@ export default class EditRecipe extends Component {
         getRecipe(this, this.props.match.params.rid)
     }
 
-    componentDidMount() {
-        // this is where the server calls are invoked
-        // state variable is updated hereexport
-    }
-
     ReturnView=(e)=>{
         e.preventDefault();
-        // server calls are required to push the updated recipe to the server
         const newRecipe = {
             name: this.state.recipe.name,
             description: this.state.recipe.description,
@@ -60,9 +51,7 @@ export default class EditRecipe extends Component {
             steps: this.state.recipe.steps,
             file: this.state.recipe.file
         }
-        console.log(newRecipe)
         updateRecipe(this,newRecipe)
-        //this.props.history.push("/viewrecipe/"+this.state.rid)
     }
 
     onCancel=(e)=>{

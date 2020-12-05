@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import {login} from "../../actions/user";
-
-import './login.css'
 import Container from "@material-ui/core/container"
 import cookpadIcon from '../homePage/images/cookpad.png'
+import './login.css'
 
 export default class Login extends Component {
     constructor(props){

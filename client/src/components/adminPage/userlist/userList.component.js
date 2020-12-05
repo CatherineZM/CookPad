@@ -6,9 +6,8 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from '@material-ui/core/styles';
+import { deleteUser, promoteUser, getAllUser } from '../../../actions/user'
 import "./userlist.css"
-import App from '../../../App';
-import {deleteUser, promoteUser, getAllUser} from '../../../actions/user'
 
 const styles = {
     head:{
@@ -34,7 +33,6 @@ class UserList extends Component {
     onDelete(e, uid){
         e.preventDefault();
         if (window.confirm('Please confirm to delete this user?')){
-            // requires server call to change the banned field of the user
             const newUsers = this.state.users.filter(user=>user._id !== uid)
             deleteUser(uid)
             this.setState({users: newUsers})
@@ -44,7 +42,6 @@ class UserList extends Component {
     onPromote(e, uid){
         e.preventDefault();
         if (window.confirm('Please confirm to promote this user?')){
-            // requires server call to change the isAdmin field of the user
             const newUsers = this.state.users
             promoteUser(uid)
             for (let user of newUsers){
@@ -55,19 +52,17 @@ class UserList extends Component {
             }
             this.setState({users: newUsers})
         } 
-    
-        
     }
 
 
     render() {
-        const {classes, app} = this.props;
+        const {classes} = this.props;
         return(
             <div className="user-list">
             <Table>
                 <TableHead id="table-head">
                     <TableRow>
-                        <TableCell className={classes.head} align = 'center'>uid</TableCell>
+                        <TableCell className={classes.head} align = 'center'>Role</TableCell>
                         <TableCell className={classes.head} align = 'center'>Username</TableCell>
                         <TableCell className={classes.head} align = 'center'>View Profiles</TableCell>
                         <TableCell className={classes.head} align = 'center'>Mange</TableCell>

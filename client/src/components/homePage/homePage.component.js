@@ -2,8 +2,11 @@ import React, { Component } from 'react';
 import {getAllRecipes, setRecipe, DeleteFromRecipeList, addToRecipeList} from '../../actions/recipe';
 import Container from '@material-ui/core/Container';
 
+// import css
 import './homePage.css'
 import "bootstrap/dist/css/bootstrap.min.css"
+
+// import components
 import RecipeSlideShow from './slideshow/recipeSlideShow.component'
 import HomePageLeftPanel from './leftpanel/homePageLeftPanel.component'
 import Navbar from '../Navbar/navbar.component'
@@ -11,6 +14,7 @@ import HomePageRightPanel from './rightpanel/homePageRightPanel.component'
 import RecipeList from '../recipelist/recipelist.component'
 import TopRecipes from "./toprecipes/topRecipes.component"
 
+// static images
 import cakeIcon from './images/cake.png'
 import pieIcon from './images/pie.png'
 import pizzaIcon from './images/pizza.png'
@@ -20,8 +24,6 @@ import seafoodIcon from './images/seafood.png'
 import soupIcon from './images/soup.png'
 import noodlesIcon from './images/noodles.png'
 
-// mappings between categories and id
-// 0: cake; 1: noodles; 2: pie; 3: pizza; 4: salads; 5: sandwiches; 6: seafood; 7: soup 
 export default class HomePage extends Component {
     constructor(props){
         super(props);
@@ -31,7 +33,6 @@ export default class HomePage extends Component {
             num_slides: 3,
             // this is the index into the recipes array
             top3_recipe: [],
-            // categories 
             categories: [
                 {id:0, src:cakeIcon, text:'Cake', checked:true},
                 {id:1, src:noodlesIcon, text:'Noodles', checked:true},
@@ -190,12 +191,9 @@ export default class HomePage extends Component {
             }
         }
         this.setState({ top3_recipe: [first_idx, second_idx, third_idx]})
-        console.log(this.state.top3_recipe)
-        console.log(this.state.recipes)
-        console.log(this.state.displayed_recipes)
     }
 
-    clickCategory = (event)=>{
+    clickCategory = (event) =>{
         const new_categories = this.state.categories;
         new_categories[event.target.name].checked = !this.state.categories[event.target.name].checked;
         this.setState({ categories: new_categories});

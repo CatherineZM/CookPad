@@ -21,7 +21,6 @@ export const checkSession = (app) => {
 
 // a function to send a POST request with the user to be logged in
 export const login = (loginComp, app) => {
-    // create our request constructor with all the parameters we need
     const request = new Request("users/login", {
         method: "post",
         body: JSON.stringify(loginComp.state),
@@ -31,7 +30,6 @@ export const login = (loginComp, app) => {
         }
     })
 
-    // send the request with fetch()
     fetch(request)
         .then(res=>{
             if(res.status === 200){
@@ -66,6 +64,7 @@ export const logout = (app) => {
         });
 };
 
+// A function to send a POST request to signup a user
 export const signup = async(signupComp) => {
     // create our request constructor with all the parameters we need
     const formData = new FormData();   
@@ -84,17 +83,15 @@ export const signup = async(signupComp) => {
             newUser.imageUrl = res0.data.imageUrl
             newUser.imageId = res0.data.imageId
         }
-        const res1 = await axios.post("/api/users", newUser)
+        await axios.post("/api/users", newUser)
         alert("Sign up success!");
-
-
     } catch(error) {
         alert("Could not Sign up!");
         console.log(error)
-    }
-    
+    }    
 }
 
+// A function to send a GET request to get all users
 export const getAllUser = (userListComp) => {
     const request = new Request("/api/users", {
         method: "get",
@@ -123,10 +120,9 @@ export const getAllUser = (userListComp) => {
         .catch(error=>{
             console.log(error);
         })
-
 }
 
-
+// A function to send a GET request to get one user
 export const getUser = (viewProfileComp, callback) => {
     const request = new Request(`/api/users/${viewProfileComp.state.uid}`, {
         method: "get",
@@ -156,10 +152,8 @@ export const getUser = (viewProfileComp, callback) => {
 
 }
 
+// a function to send a POST request to update image and a PATCH requset to update user profile
 export const updateUser = async(comp, updateInfo, callback) => {
-    
-    
-
     try {
         if (updateInfo.profilePic){
             const formData = new FormData();   
@@ -185,7 +179,7 @@ export const updateUser = async(comp, updateInfo, callback) => {
     }
 }
 
-
+// a function to send a promote a regular user to admin
 export const promoteUser = (uid) => {
     const request = new Request(`/api/users/${uid}`, {
         method: "PATCH",
@@ -210,6 +204,7 @@ export const promoteUser = (uid) => {
         })
 }
 
+// A function to send a DELETE requset to delete user
 export const deleteUser = (uid) => {
     const request = new Request(`/api/users/${uid}`, {
         method: "delete",
@@ -232,5 +227,4 @@ export const deleteUser = (uid) => {
         .catch(error=>{
             console.log(error);
         })
-    
 }
