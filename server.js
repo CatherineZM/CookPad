@@ -73,26 +73,6 @@ const ridValidator = (req, res, next) => {
     }
 }
 
-// Middleware for authentication of resources
-const authenticate = (req, res, next) => {
-    if (req.session.user) {
-        User.findById(req.session.user).then((user) => {
-            if (!user) {
-                return Promise.reject()
-            } else {
-                req.user = user
-                next()
-            }
-        }).catch((error) => {
-            res.status(401).send("Unauthorized")
-        })
-    } else {
-        res.status(401).send("Unauthorized")
-    }
-}
-
-
-
 // cloudinary: configure using credentials found on your Cloudinary Dashboard
 // sign up for a free account here: https://cloudinary.com/users/register/free
 const cloudinary = require('cloudinary');
@@ -470,7 +450,7 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
             if(req.body.description){
                 recipeToEdit.description = req.body.description
             }
-            if(req.body.likes){
+            if(typeof req.body.likes !== 'undefined'){
                 recipeToEdit.likes = req.body.likes
             }
             if(req.body.categories){
