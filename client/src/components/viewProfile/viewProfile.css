@@ -89,6 +89,7 @@ h4 button {
     position: relative;
     float: left;
     margin-left: 20px;
+    margin-top: 30px;
     width: 500px;
 }
 
@@ -98,4 +99,10 @@ h4 button {
 
 .recipe-div .vertical-scrollable{
     width: 300px;
+}
+
+.recipe-tab-bar {
+    background-color: white;
+    border-radius: 25px;
+
 }
