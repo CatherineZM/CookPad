@@ -118,11 +118,11 @@ There are two models in the project: user and recipe. The routes for each model 
 POST '/api/users'
 req.body = 
 {
-        username: "user",
-	password: "123456",
-        description: "I love Chinese food",
-        imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
-        imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
+        "username": "user",
+	"password": "123456",
+        "description": "I love Chinese food",
+        "imageUrl": "profileimageUrl", // this is obtained from cloudinary.uploader.upload
+        "imageId": "profileimageId" // this is obtained from cloudinary.uploader.upload
 }
 ```
 
@@ -147,11 +147,11 @@ GET '/api/users/:uid'
 PATCH'/api/users/:uid'
 req.body = 
 {
-        username: "user",
-		      password: "123456",
-        description: "I love Chinese food",
-        imageUrl: "profileimageUrl", // this is obtained from cloudinary.uploader.upload
-        imageId: "profileimageId" // this is obtained from cloudinary.uploader.upload
+        "username": "user",
+	"password": "123456",
+        "description": "I love Chinese food",
+        "imageUrl": "profileimageUrl", // this is obtained from cloudinary.uploader.upload
+        "imageId": "profileimageId" // this is obtained from cloudinary.uploader.upload
 }
 ```
 
