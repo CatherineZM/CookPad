@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {getAllRecipes, setRecipe, DeleteFromRecipeList, addToRecipeList} from '../../actions/recipe';
-import Container from '@material-ui/core/Container';
+import {Container} from '@material-ui/core';
 
 // import css
 import './homePage.css'

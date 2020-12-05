@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
 import {signup} from "../../actions/user";
-import Container from "@material-ui/core/Container"
+import {Container} from "@material-ui/core"
 import cookpadIcon from '../homePage/images/cookpad.png'
 import './signup.css'
 

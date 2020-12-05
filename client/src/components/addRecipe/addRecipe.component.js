@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Col from 'react-bootstrap/Col';
-import Container from "@material-ui/core/Container"
+import {Container} from "@material-ui/core"
 import {Multiselect} from 'multiselect-react-dropdown';
 import ImageUploader from 'react-images-upload';
 

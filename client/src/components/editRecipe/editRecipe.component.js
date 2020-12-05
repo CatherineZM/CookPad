@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './editRecipe.css'
 import Navbar from "../Navbar/navbar.component"
 import {Multiselect} from 'multiselect-react-dropdown';
-import Container from "@material-ui/core/Container"
+import {Container} from "@material-ui/core"
 import ImageUploader from 'react-images-upload'; 
 import Col from 'react-bootstrap/Col';
 

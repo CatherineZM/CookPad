@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from "../Navbar/navbar.component";
 import { Link } from "react-router-dom"
-import Container from "@material-ui/core/Container"
+import {Container} from "@material-ui/core"
 import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
 import {getRecipe, deleteRecipe, setRecipe, getTop2Recipes, DeleteFromRecipeList, addToRecipeList} from "../../actions/recipe"

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import UserList from "./userlist/userList.component"
 import Navbar from '../Navbar/navbar.component'
-import Container from "@material-ui/core/Container"
+import {Container} from "@material-ui/core"
 
 export default class AdminPage extends Component {
     constructor(props){

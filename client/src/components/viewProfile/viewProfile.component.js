@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Container from "@material-ui/core/Container"
+import {Container} from "@material-ui/core"
 import './viewProfile.css'
 import Navbar from "../Navbar/navbar.component"
 import RecipeList from '../recipelist/recipelist.component'
