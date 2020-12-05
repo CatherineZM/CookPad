@@ -4,9 +4,9 @@ import './viewProfile.css'
 import Navbar from "../Navbar/navbar.component"
 import RecipeList from '../recipelist/recipelist.component'
 import Avatar from 'react-avatar-edit';
-import {Collapse} from 'react-bootstrap'
 import {DeleteFromRecipeList, addToRecipeList} from '../../actions/recipe';
 import {setRecipe} from '../../actions/recipe'
+import { withStyles } from '@material-ui/core/styles';
 
 // hard coded images
 import defaultPic from'./default-profile-pic.png' 
@@ -15,7 +15,41 @@ import {getUser, updateUser} from "../../actions/user";
 import {getMyRecipe, getMyCollection} from "../../actions/recipe";
 import swal from 'sweetalert';
 
-export default class ViewProfile extends Component {
+const styles = {
+    panel: {
+        backgroundColor: "white",
+        marginTop: 20,
+        borderRadius:10,
+        transition: "ease"
+    },
+    scrollButtons: {
+        color: "black",
+        backgroundColor: "darkgray"
+    },
+
+    indicator: {
+        backgroundColor: "black"
+    },
+
+    bar: {
+        flexGrow: 1,
+        backgroundColor: "white",
+        borderRadius: 10,
+
+    },
+
+    flexContainer: {
+        color: "darkgray",
+        borderRadius: 20,
+    },
+    tab: {
+        color: "black",
+        textTransform: "none",
+        fontSize: '20px'
+    }
+
+}
+class ViewProfile extends Component {
     constructor(props){
         super(props);
         
@@ -26,8 +60,6 @@ export default class ViewProfile extends Component {
             recipes: [],
             collectedRecipes:[],
             newPassword: null,
-            recipeExpanded: false,
-            collectionExpanded: false,
             inEdit:false,
             preview:null,
             currTab:-1,
@@ -38,23 +70,7 @@ export default class ViewProfile extends Component {
             getMyCollection(this);
         })
         console.log(this.state.collectedRecipes)
-    }
-
-    handleRecipeExpandClick = () => {
-        if(this.state.recipeExpanded){
-            this.setState({ recipeExpanded: false });
-        }else{
-            this.setState({ recipeExpanded: true });
-        }
-    }
-
-    handleCollectionExpandClick= () => {
-        if(this.state.collectionExpanded){
-            this.setState({ collectionExpanded: false });
-        }else{
-            this.setState({ collectionExpanded: true });
-        }
-    }
+    }  
 
      clickHeart=(rid)=>{
         let newLikes = 0;
@@ -162,13 +178,6 @@ export default class ViewProfile extends Component {
         this.setState({user: newUser})
     }
 
-    enterKeyHandler(e){
-        e.preventDefault();
-        if (e.keyCode === 13){
-            this.setState({description: e.target.value + '\n'})
-        };
-    }
-
     editProfile=(e)=>{
         e.preventDefault();
         this.setState({inEdit: true})
@@ -207,7 +216,6 @@ export default class ViewProfile extends Component {
             {"  Edit Profile"}
             </button>
         }
-        
     }
 
     profileGenerator = (app)=>{
@@ -257,38 +265,6 @@ export default class ViewProfile extends Component {
         }
     }
 
-    RecipeExpandButtonGenerator=()=>{
-        if(this.state.recipeExpanded){
-            return <button type="button"
-                    className = "btn btn-outline-primary" 
-                    onClick={this.handleRecipeExpandClick}>
-                    Close 
-                    </button>
-        }else{
-            return <button type="button"
-            className = "btn btn-outline-primary" 
-            onClick={this.handleRecipeExpandClick}>
-            View 
-            </button>
-        }
-    }
-
-    CollectionExpandButtonGenerator=()=>{
-       if(this.state.collectionExpanded){
-            return <button type="button"
-                    className = "btn btn-outline-primary" 
-                    onClick={this.handleCollectionExpandClick}>
-                    Close 
-                    </button>
-        }else{
-            return <button type="button"
-                    className = "btn btn-outline-primary" 
-                    onClick={this.handleCollectionExpandClick}>
-                    View 
-                    </button>
-        }
-    }
-
     clickRecipe=(rid)=>{
         this.props.history.push("/viewrecipe/" + rid);
     }
@@ -307,7 +283,7 @@ export default class ViewProfile extends Component {
     };
 
     render(){
-        const { app } = this.props;
+        const { app, classes} = this.props;
         return(
             <div>
             <Container maxWidth='md'>
@@ -315,13 +291,15 @@ export default class ViewProfile extends Component {
                 {this.profileGenerator(app)}
                 
                 <div id="recipe-div">
-                    <AppBar position="static">
-                        <Tabs value={this.state.currTab} onChange={this.handleTab}>
-                        <Tab label="My Recipes" />
-                        <Tab label="My Collection" />
+                    <AppBar position="static" className={classes.bar} color="white">
+                        <Tabs value={this.state.currTab} onChange={this.handleTab} variant="fullWidth" classes={{
+                                                                                                indicator: classes.indicator, 
+                                                                                                flexContainer: classes.flexContainer}}>
+                        <Tab label="My Recipes" className={classes.tab}/>
+                        <Tab label="My Collection" className={classes.tab}/>
                         </Tabs>
                     </AppBar>
-                    <this.TabPanel value={this.state.currTab} index={0}>
+                    <this.TabPanel className={classes.panel} value={this.state.currTab} index={0}>
                         <RecipeList   
                             recipes={this.state.recipes}
                             clickHeart={this.clickHeart}
@@ -330,8 +308,7 @@ export default class ViewProfile extends Component {
                             app={app}
                         />
                     </this.TabPanel>
-                    <this.TabPanel value={this.state.currTab} index={1}>
-
+                    <this.TabPanel className={classes.panel} value={this.state.currTab} index={1}>
                         <RecipeList   
                             recipes={this.state.collectedRecipes}
                             clickHeart={this.clickHeart}
@@ -340,36 +317,6 @@ export default class ViewProfile extends Component {
                             app={app}
                         />
                     </this.TabPanel>
-            
-
-                    {/* <div className="recipes-collaps">
-                        <h4>{app.state.currentUser._id === this.state.user._id ? "My Recipes" : `${this.state.user.username}'s Recipes`}
-                        <this.RecipeExpandButtonGenerator/>
-                        </h4>
-                        <Collapse in={this.state.recipeExpanded}>
-                            <div className="recipe-list">
-                                    
-                            </div>
-                        </Collapse>
-                    </div>
-
-                    <div className="recipes-collaps">
-                        <h4>{app.state.currentUser._id === this.state.user._id ? "My Collection" : `${this.state.user.username}'s Collection`}
-                        <this.CollectionExpandButtonGenerator/>
-                        </h4>
-                        <Collapse in={this.state.collectionExpanded}>
-                            <div className="recipe-list">
-                                <RecipeList   
-                                    recipes={this.state.collectedRecipes}
-                                    clickHeart={this.clickHeart}
-                                    clickStar={this.clickStar}
-                                    clickRecipe = {this.clickRecipe}
-                                    app = {this.props.app}
-                                />    
-                            </div>
-                        </Collapse> 
-                    </div> */}
-
                 </div>
                 
             </Container>
@@ -377,3 +324,6 @@ export default class ViewProfile extends Component {
         )
     }
 } 
+
+
+export default withStyles(styles)(ViewProfile);
