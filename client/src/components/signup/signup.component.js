@@ -51,12 +51,8 @@ export default class Signup extends Component {
 
     onSubmit=(e, app)=>{
         e.preventDefault();
-        
-        // create a new user object and 
-        // requires server calls to push the user to backend database
         if (this.validator()){
             signup(this, app);
-            this.props.history.push("/login");
         }
         console.log(this.state)
     }

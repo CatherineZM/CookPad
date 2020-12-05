@@ -85,6 +85,7 @@ export const signup = async(signupComp) => {
         }
         await axios.post("/api/users", newUser)
         alert("Signed up successfully!");
+        signupComp.props.history.push("/login");
     } catch(error) {
         alert("Username already exist please try again!");
         console.log(error)
