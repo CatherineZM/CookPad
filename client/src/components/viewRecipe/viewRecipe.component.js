@@ -20,6 +20,7 @@ import { yellow } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
+import swal from 'sweetalert';
 
 import './viewRecipe.css'
 
@@ -99,9 +100,15 @@ class ViewRecipe extends Component {
 
     deleteRecipe=(e)=>{
         e.preventDefault();
-        if (window.confirm('Are you sure you wish to delete this item?')){
-            deleteRecipe(this.state.recipe._id, this)
-        } 
+        swal({title: "Are you sure?", text:"Once deleted, you will not be able to recover this recipe", icon:"warning",buttons: ["Cancel", "Delete"]})
+        .then((confirmDelete)=>{
+            if(confirmDelete){
+                deleteRecipe(this.state.recipe._id, this)
+                swal({title:"Poof! Your recipe is gone!", icon:"success"})
+            }else{
+                swal({title:"Your recipe is still here!"})
+            }
+        })
     }
 
     editDeleteButtonGen=()=>{
