@@ -1,15 +1,7 @@
 import axios from "axios";
-// modify recipe list of the user
-/*
-add a new recipe to recipe lists
-{
-    "likedRecipes": <rid>,
-    "collectedRecipes": <rid>,
-    "myRecipes": <rid>
-}
-*/
+
+// add to recipe list of the user: myRecipes, likedRecipes, collectedRecipes
 export const addToRecipeList = (uid, recipeList) => {
-    // create our request constructor with all the parameters we need
     const request = new Request(`/api/users/${uid}`, {
         method: "post",
         body: JSON.stringify(recipeList),
@@ -19,8 +11,6 @@ export const addToRecipeList = (uid, recipeList) => {
         }
     })
 
-    console.log(request)
-    // send the request with fetch()
     fetch(request)
         .then(res=>{
             if(res.status === 200){
@@ -34,16 +24,9 @@ export const addToRecipeList = (uid, recipeList) => {
             console.log(error);
         })
 }
-/*
-delete a new recipe to recipe lists
-{
-    "likedRecipes": <rid>,
-    "collectedRecipes": <rid>,
-    "myRecipes": <rid>
-}
-*/
+
+// remove from recipe list of the user: myRecipes, likedRecipes, collectedRecipes
 export const DeleteFromRecipeList = (uid, recipeList) => {
-    // create our request constructor with all the parameters we need
     const request = new Request(`/api/users/${uid}`, {
         method: "delete",
         body: JSON.stringify(recipeList),
@@ -53,7 +36,6 @@ export const DeleteFromRecipeList = (uid, recipeList) => {
         }
     })
 
-    // send the request with fetch()
     fetch(request)
         .then(res=>{
             if(res.status === 200){
@@ -68,6 +50,7 @@ export const DeleteFromRecipeList = (uid, recipeList) => {
         })
 }
 
+// get myRecipes from user model
 export const getMyRecipe = (viewProfileComp) => {
     const myRecipes = []
     console.log(viewProfileComp.state.user)
@@ -95,11 +78,11 @@ export const getMyRecipe = (viewProfileComp) => {
             .catch(error=>{
                 console.log(error);
             })
-        
     });
     viewProfileComp.setState({recipes: myRecipes})  
 }
 
+// get myCollection from user model
 export const getMyCollection = (viewProfileComp) => {
     const myCollectedRecipes = []
     viewProfileComp.state.user.collectedRecipes.forEach(rid => {
@@ -124,12 +107,11 @@ export const getMyCollection = (viewProfileComp) => {
             .catch(error=>{
                 console.log(error);
             })
-        
     });
     viewProfileComp.setState({collectedRecipes: myCollectedRecipes})
 }
 
-
+// create a new recipe
 export const addRecipe = async(newRecipeComp) => {
     const formData = new FormData();   
     formData.append('file', newRecipeComp.state.file);
@@ -173,6 +155,7 @@ export const addRecipe = async(newRecipeComp) => {
     }
 }
 
+// get recipe
 export const getRecipe = (comp, rid) => {
     const request = new Request(`/api/recipes/${rid}`, {
         method: "get",
@@ -197,7 +180,7 @@ export const getRecipe = (comp, rid) => {
         })
 }
 
-// delete recipe list from all users
+// delete the recipe from recipelists of all users
 export const deleteRecipeAllUsers = (rid, deleteComp) => {
     const request = new Request(`/api/users/`, {
         method: "get",
@@ -215,7 +198,7 @@ export const deleteRecipeAllUsers = (rid, deleteComp) => {
         })
         .then(json=>{
             json.map(user=>{
-                DeleteFromRecipeList(user._id, 
+                return DeleteFromRecipeList(user._id, 
                     {myRecipes: rid, likedRecipes: rid, collectedRecipes: rid}
                 )
             }).then(
@@ -225,9 +208,9 @@ export const deleteRecipeAllUsers = (rid, deleteComp) => {
         .catch(error=>{
             console.log(error);
         })
-
 }
 
+// delete a recipe
 export const deleteRecipe = (rid, deleteComp) => {
     const request = new Request(`/api/recipes/${rid}`, {
         method: "delete",
@@ -252,6 +235,7 @@ export const deleteRecipe = (rid, deleteComp) => {
         })
 }
 
+// get all recipes and update the top3 recipes
 export const getAllRecipes = (comp)=>{
     const request = new Request(`/api/recipes`, {
         method: "get",
@@ -304,6 +288,7 @@ export const getAllRecipes = (comp)=>{
         })
 }
 
+// get top2 recipes
 export const getTop2Recipes = (comp, rid)=>{
     const request = new Request(`/api/recipes`, {
         method: "get",
@@ -349,12 +334,13 @@ export const getTop2Recipes = (comp, rid)=>{
         })
 }
 
-// set a recipe field 
+// update a recipe's likes field
 export const setRecipe = (rid, newRecipe) => {
     axios.patch(`/api/recipes/${rid}`, newRecipe)
     .then(res => console.log(res.data));
 }
 
+// update a recipe
 export const updateRecipe = async(comp, newRecipe) => {
     try {
         if (newRecipe.file){

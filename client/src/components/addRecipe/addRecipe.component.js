@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
-import './addRecipe.css'
-import Navbar from "../Navbar/navbar.component";
+import Col from 'react-bootstrap/Col';
 import Container from "@material-ui/core/Container"
 import {Multiselect} from 'multiselect-react-dropdown';
 import ImageUploader from 'react-images-upload';
-import 'react-dropdown/style.css';
-import Col from 'react-bootstrap/Col';
 
+// import css style sheets
+import 'react-dropdown/style.css';
+import './addRecipe.css'
+
+// import components
+import Navbar from "../Navbar/navbar.component";
+
+// import actions
 import {addRecipe} from "../../actions/recipe"
 
 const UnitType = ['(quantity)','kg', 'g','mg', 'cup(s)', 'teaspoon(s)', 'tablespoon(s)', 'mL', 'L', 'oz', 'lb(s)'];

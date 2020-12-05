@@ -2,9 +2,7 @@
 'use strict';
 const log = console.log
 const path = require('path')
-
 const express = require('express')
-// starting the express server
 const app = express();
 
 // Cross-origin resource sharing
@@ -12,32 +10,41 @@ const cors = require('cors');
 app.use(cors());
 
 // mongoose and mongo connection
-const { mongoose } = require('./db/mongoose')
-mongoose.set('bufferCommands', false); // don't buffer db requests if the db server isn't connected - minimizes http requests hanging if this is the case.
-mongoose.set('useFindAndModify', false); // for some deprecation issues
+const { mongoose } = require('./db/mongoose');
+mongoose.set('bufferCommands', false);
+mongoose.set('useFindAndModify', false);
 
 // import the mongoose models
-const { User } = require('./models/User')
-const { Recipe } = require('./models/Recipe')
+const { User } = require('./models/User');
+const { Recipe } = require('./models/Recipe');
 
 // to validate object IDs
-const { ObjectID } = require('mongodb')
+const { ObjectID } = require('mongodb');
 
 // body-parser: middleware for parsing HTTP JSON body into a usable object
-const bodyParser = require('body-parser') 
-app.use(bodyParser.json())
+const bodyParser = require('body-parser');
+app.use(bodyParser.json());
 
 // express-session for managing user sessions
 const session = require("express-session");
-const e = require('express');
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // multipart middleware: allows you to access uploaded file from req.file
 const multipart = require('connect-multiparty');
 const multipartMiddleware = multipart();
 
-/*** Helper functions below **********************************/
-function isMongoError(error) { // checks for first error returned by promise rejection if Mongo database suddently disconnects
+// cloudinary: configure using credentials found on your Cloudinary Dashboard
+// sign up for a free account here: https://cloudinary.com/users/register/free
+const cloudinary = require('cloudinary');
+cloudinary.config({
+    cloud_name: 'dcbkumvzn',
+    api_key: '724245945181957',
+    api_secret: 'Fz7Syp9Ak3PHwdbwS0DmePhWXjQ'
+});
+
+/****************************** Helper functions below **********************************/
+// checks for first error returned by promise rejection if Mongo database suddently disconnects
+function isMongoError(error) {
 	return typeof error === 'object' && error !== null && error.name === "MongoNetworkError"
 }
 
@@ -53,6 +60,7 @@ const mongoChecker = (req, res, next) => {
     }   
 }
 
+// check if uid is valid ObjectID
 const uidValidator = (req, res, next) => {
     const id = req.params.uid;
     if (!ObjectID.isValid(id)) {
@@ -63,6 +71,7 @@ const uidValidator = (req, res, next) => {
     }
 }
 
+// check if rid is valid ObjectID
 const ridValidator = (req, res, next) => {
     const id = req.params.rid;
     if (!ObjectID.isValid(id)) {
@@ -73,71 +82,7 @@ const ridValidator = (req, res, next) => {
     }
 }
 
-// Middleware for authentication of resources
-const authenticate = (req, res, next) => {
-    if (req.session.user) {
-        User.findById(req.session.user).then((user) => {
-            if (!user) {
-                return Promise.reject()
-            } else {
-                req.user = user
-                next()
-            }
-        }).catch((error) => {
-            res.status(401).send("Unauthorized")
-        })
-    } else {
-        res.status(401).send("Unauthorized")
-    }
-}
-
-
-
-// cloudinary: configure using credentials found on your Cloudinary Dashboard
-// sign up for a free account here: https://cloudinary.com/users/register/free
-const cloudinary = require('cloudinary');
-cloudinary.config({
-    cloud_name: 'dcbkumvzn',
-    api_key: '724245945181957',
-    api_secret: 'Fz7Syp9Ak3PHwdbwS0DmePhWXjQ'
-});
-
-/*********************************************************/
-/*** Image API Routes below ************************************/
-// a POST route to *create* an image
-app.post("/images", multipartMiddleware, (req, res) => {
-    // Use uploader.upload API to upload image to cloudinary server.
-    cloudinary.uploader.upload(
-        req.files.file.path, // req.files contains uploaded files
-        function (result) {
-            // Save image to the database
-            res.send({imageId: result.public_id, imageUrl: result.url});
-        });
-});
-
-/// a DELETE route to remove an image by its id.
-app.delete("/images/:imageId", (req, res) => {
-    const imageId = req.params.imageId;
-    // Delete an image by its id (NOT the database ID, but its id on the cloudinary server)
-    // on the cloudinary server
-    cloudinary.uploader.destroy(imageId, function (result) {
-
-        // Delete the image from the database
-        Image.findOneAndRemove({ image_id: imageId })
-            .then(img => {
-                if (!img) {
-                    res.status(404).send();
-                } else {
-                    res.send(img);
-                }
-            })
-            .catch(error => {
-                res.status(500).send(); // server error, could not delete.
-            });
-    });
-});
-
-/*** Session handling **************************************/
+/****************************** Session Handling **********************************/
 // Create a session and session cookie
 app.use(
     session({
@@ -188,12 +133,43 @@ app.get("/users/check-session", (req, res) => {
     }
 });
 
+/****************************** Image API Routes **********************************/
+// a POST route to *create* an image
+app.post("/images", multipartMiddleware, (req, res) => {
+    // Use uploader.upload API to upload image to cloudinary server.
+    cloudinary.uploader.upload(
+        req.files.file.path, // req.files contains uploaded files
+        function (result) {
+            // Save image to the database
+            res.send({imageId: result.public_id, imageUrl: result.url});
+        });
+});
 
-/*** User API below ************************************/
-// User API Route
+/// a DELETE route to remove an image by its id.
+app.delete("/images/:imageId", (req, res) => {
+    const imageId = req.params.imageId;
+    
+    // Delete an image by its id on the cloudinary server
+    cloudinary.uploader.destroy(imageId, function (result) {
+        // Delete the image from the database
+        Image.findOneAndRemove({ image_id: imageId })
+            .then(img => {
+                if (!img) {
+                    res.status(404).send();
+                } else {
+                    res.send(img);
+                }
+            })
+            .catch(error => {
+                res.status(500).send(); // server error, could not delete.
+            });
+    });
+});
+
+
+/****************************** User API Routes **********************************/
 // create a user
 app.post('/api/users', mongoChecker, async(req, res)=>{
-	// create a new user
 	const user = new User({
 		username: req.body.username,
 		password: req.body.password,
@@ -205,7 +181,6 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
         imageUrl: req.body.imageUrl,
         imageId: req.body.imageId
     })
-    console.log(user)
 
 	try{
 		const newUser = await user.save()
@@ -219,8 +194,8 @@ app.post('/api/users', mongoChecker, async(req, res)=>{
 	}
 })
 
-app.get('/api/users', mongoChecker, async(req, res)=>{
-	
+// get all users
+app.get('/api/users', mongoChecker, async(req, res)=>{	
 	try{
         const user = await User.find()  
         res.send(user)
@@ -233,6 +208,7 @@ app.get('/api/users', mongoChecker, async(req, res)=>{
 	}
 })
 
+// get user by uid
 app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	const uid = req.params.uid;
 
@@ -253,14 +229,7 @@ app.get('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	}
 })
 
-/*
-add a new recipe to recipe lists
-{
-    "likedRecipes": <rid>,
-    "collectedRecipes": <rid>,
-    "myRecipes": <rid>
-}
-*/
+// add to user's likedRecipes, collectedRecipes, myRecipes
 app.post('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
     const uid = req.params.uid;
     const idToPush = {}
@@ -293,16 +262,8 @@ app.post('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	}
 })
 
-/*
-delete a new recipe to recipe lists
-{
-    "likedRecipes": <rid>,
-    "collectedRecipes": <rid>,
-    "myRecipes": <rid>
-}
-*/
+// remove from user's likedRecipes, collectedRecipes, myRecipes
 app.delete('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
-	
     const uid = req.params.uid;
 
     // Remove user
@@ -353,14 +314,7 @@ app.delete('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
     }
 })
 
-/*
-update a user
-{
-    "password": <new password>,
-    "description": <new description>,
-    "isAdmin": <boolean>
-}
-*/
+// update a user's profile
 app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{	
     const uid = req.params.uid;
 
@@ -395,10 +349,9 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 	}
 })
 
-/*** User API below ************************************/
+/****************************** Recipe API Routes **********************************/
 // create a recipe
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
-    // create a new recipe
     const recipe = new Recipe({
         name: req.body.name,
         description: req.body.description,
@@ -435,7 +388,7 @@ app.get('/api/recipes', mongoChecker, async(req, res)=>{
     }
 })
 
-// get recipe by its id
+// get a recipe by its id
 app.get('/api/recipes/:rid', [ridValidator, mongoChecker], async(req, res) =>{
     const rid = req.params.rid
 
@@ -470,7 +423,7 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
             if(req.body.description){
                 recipeToEdit.description = req.body.description
             }
-            if(req.body.likes){
+            if(typeof req.body.likes !== 'undefined'){
                 recipeToEdit.likes = req.body.likes
             }
             if(req.body.categories){
@@ -486,12 +439,10 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
                 recipeToEdit.imageUrl = req.body.imageUrl
                 cloudinary.uploader.destroy(req.body.imageId, function (result) {})
             }
-
             const newRecipe = await recipeToEdit.save()
             res.send(newRecipe)
         }
-        
-        
+            
     } catch(error) {
         if(isMongoError(error)){
             res.status(500).send('Internal Server Error')
@@ -516,7 +467,8 @@ app.delete('/api/recipes/:rid', [ridValidator, mongoChecker], async(req, res) =>
 		}  
     }
 });
-/*** Webpage routes below **********************************/
+
+/****************************** Webpage Routes **********************************/
 // Serve the build
 app.use(express.static(path.join(__dirname, "/client/build")));
 
@@ -527,12 +479,10 @@ app.get("*", (req, res) => {
     if (!goodPageRoutes.includes(req.url)) {
         res.status(404);
     }
-
-    // send index.html
     res.sendFile(path.join(__dirname, "/client/build/index.html"));
 });
 
-/*************************************************/
+/********************************************************************************/
 // Express server listening...
 const port = process.env.PORT || 5000
 app.listen(port, () => {

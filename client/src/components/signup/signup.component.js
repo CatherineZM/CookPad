@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {Link} from 'react-router-dom';
 import Avatar from 'react-avatar-edit';
-
 import {signup} from "../../actions/user";
-import './signup.css'
 import Container from "@material-ui/core/Container"
 import cookpadIcon from '../homePage/images/cookpad.png'
+import './signup.css'
 
 export default class Signup extends Component {
     constructor(props){

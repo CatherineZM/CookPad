@@ -6,8 +6,6 @@ import Ingredients from "./ingredients.component"
 import Steps from "./steps.component"
 import {getRecipe, deleteRecipe, setRecipe, getTop2Recipes, DeleteFromRecipeList, addToRecipeList} from "../../actions/recipe"
 import {uid} from "react-uid"
-import './viewRecipe.css'
-
 import Card from '@material-ui/core/Card';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -22,6 +20,8 @@ import { yellow } from '@material-ui/core/colors';
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
+
+import './viewRecipe.css'
 
 const styles = {
     card:{

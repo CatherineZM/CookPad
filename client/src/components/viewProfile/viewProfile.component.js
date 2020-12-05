@@ -38,14 +38,6 @@ export default class ViewProfile extends Component {
         console.log(this.state.collectedRecipes)
     }
 
-
-    componentDidMount() {
-        // getUser(this, ()=>{
-        //     getMyRecipe(this);
-        //     getMyCollection(this);
-        // })
-    }
-
     handleRecipeExpandClick = () => {
         if(this.state.recipeExpanded){
             this.setState({ recipeExpanded: false });
@@ -171,13 +163,12 @@ export default class ViewProfile extends Component {
     enterKeyHandler(e){
         e.preventDefault();
         if (e.keyCode === 13){
-            this.state.user.description = e.target.value + '\n'
+            this.setState({description: e.target.value + '\n'})
         };
     }
 
     editProfile=(e)=>{
         e.preventDefault();
-        // this.props.history.push("/editprofile/"+ this.state.uid);
         this.setState({inEdit: true})
     }
 
@@ -189,23 +180,20 @@ export default class ViewProfile extends Component {
         }
         
         if (this.state.newPassword !== null && this.state.newPassword !== ""){
-            if (this.state.newPassword.length < 5){
-                alert("Password needs a minimum length of 5")
+            if (this.state.newPassword.length < 4){
+                alert("Password needs a minimum length of 4")
                 return
             } else{
                 updateInfo.password = this.state.newPassword
-                this.state.user.password = this.state.newPassword
-                this.state.newPassword = null
+                this.setState({password: this.state.newPassword})
+                this.setState({newPassword: null})
             }
         }
         
         console.log(updateInfo)
         updateUser(this, updateInfo, (comp)=>{
             comp.setState({inEdit:false})
-        })
-
-        
-
+        }) 
     }
 
     editButtonGenerator=(app)=>{
@@ -225,7 +213,7 @@ export default class ViewProfile extends Component {
             return  <div id="user-profile">
                         <h4>{this.state.user.username + "'s Profile"}</h4>
                         <div id="profile-pic">
-                            <img src={this.state.user.imageUrl ? this.state.user.imageUrl : defaultPic}
+                            <img alt={this.state.user.imageUrl} src={this.state.user.imageUrl ? this.state.user.imageUrl : defaultPic}
                                 style={{width:"inherit",  height:"inherit"}}/> 
                         </div>
                         <div id="user-description">{this.state.user.description}</div>
