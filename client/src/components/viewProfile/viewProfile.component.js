@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Container} from "@material-ui/core"
+import {Container, AppBar, Tabs, Tab, Box} from "@material-ui/core"
 import './viewProfile.css'
 import Navbar from "../Navbar/navbar.component"
 import RecipeList from '../recipelist/recipelist.component'
@@ -28,7 +28,8 @@ export default class ViewProfile extends Component {
             recipeExpanded: false,
             collectionExpanded: false,
             inEdit:false,
-            preview:null
+            preview:null,
+            currTab:-1,
         }
         this.props.history.push('/viewprofile/'+this.props.match.params.uid);
         getUser(this, ()=>{
@@ -291,6 +292,19 @@ export default class ViewProfile extends Component {
         this.props.history.push("/viewrecipe/" + rid);
     }
 
+    TabPanel = (props) => {
+        const { children, value, index, ...other } = props;
+        return (
+          <div {...other}>
+            {value === index && <Box p={3}>{children}</Box>}
+          </div>
+        );
+    }
+
+    handleTab = (event, newTab) => {
+        this.setState({currTab: newTab});
+    };
+
     render(){
         const { app } = this.props;
         return(
@@ -300,19 +314,40 @@ export default class ViewProfile extends Component {
                 {this.profileGenerator(app)}
                 
                 <div id="recipe-div">
-                    <div className="recipes-collaps">
+                    <AppBar position="static">
+                        <Tabs value={this.state.currTab} onChange={this.handleTab}>
+                        <Tab label="My Recipes" />
+                        <Tab label="My Collection" />
+                        </Tabs>
+                    </AppBar>
+                    <this.TabPanel value={this.state.currTab} index={0}>
+                        <RecipeList   
+                            recipes={this.state.recipes}
+                            clickHeart={this.clickHeart}
+                            clickStar={this.clickStar}
+                            clickRecipe = {this.clickRecipe}
+                            app={app}
+                        />
+                    </this.TabPanel>
+                    <this.TabPanel value={this.state.currTab} index={1}>
+
+                        <RecipeList   
+                            recipes={this.state.collectedRecipes}
+                            clickHeart={this.clickHeart}
+                            clickStar={this.clickStar}
+                            clickRecipe = {this.clickRecipe}
+                            app={app}
+                        />
+                    </this.TabPanel>
+            
+
+                    {/* <div className="recipes-collaps">
                         <h4>{app.state.currentUser._id === this.state.user._id ? "My Recipes" : `${this.state.user.username}'s Recipes`}
                         <this.RecipeExpandButtonGenerator/>
                         </h4>
                         <Collapse in={this.state.recipeExpanded}>
                             <div className="recipe-list">
-                                <RecipeList   
-                                    recipes={this.state.recipes}
-                                    clickHeart={this.clickHeart}
-                                    clickStar={this.clickStar}
-                                    clickRecipe = {this.clickRecipe}
-                                    app={app}
-                                />    
+                                    
                             </div>
                         </Collapse>
                     </div>
@@ -332,7 +367,7 @@ export default class ViewProfile extends Component {
                                 />    
                             </div>
                         </Collapse> 
-                    </div>
+                    </div> */}
 
                 </div>
                 
