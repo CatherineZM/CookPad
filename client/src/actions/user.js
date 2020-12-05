@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from 'sweetalert';
 
 // send a request to check if a user is logged in through the session cookie
 export const checkSession = (app) => {
@@ -43,7 +44,7 @@ export const login = (loginComp, app) => {
             }
         })
         .catch(error=>{
-            alert("Username does not exist or Password does not match!");
+            swal({title:"Oh No!", text:"Username does not exist or Password does not match!", icon:"error"});
             console.log(error);
         })
 }
@@ -84,10 +85,10 @@ export const signup = async(signupComp) => {
             newUser.imageId = res0.data.imageId
         }
         await axios.post("/api/users", newUser)
-        alert("Signed up successfully!");
+        swal({title:"Welcome!", text:"Sign up successfully!", icon:"success"});
         signupComp.props.history.push("/login");
     } catch(error) {
-        alert("Username already exist please try again!");
+        swal({title:"Oops!", text:"Username already exist please try again!", icon:"error"});
         console.log(error)
     }    
 }

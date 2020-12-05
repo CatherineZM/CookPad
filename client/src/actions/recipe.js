@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from 'sweetalert';
 
 // add to recipe list of the user: myRecipes, likedRecipes, collectedRecipes
 export const addToRecipeList = (uid, recipeList) => {
@@ -140,7 +141,7 @@ export const addRecipe = async(newRecipeComp) => {
         
         const res1 = await axios.post('/api/recipes/', newRecipe);
         console.log(newRecipe)
-        alert("The Recipe has been succesfully created!")
+        swal({title:"Yummy!", text:"Your recipe has been succesfully created!",icon:"success"})
 
         // add to user's my recipe list
         console.log(res1)

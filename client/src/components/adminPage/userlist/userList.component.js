@@ -8,6 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { withStyles } from '@material-ui/core/styles';
 import { deleteUser, promoteUser, getAllUser } from '../../../actions/user'
 import "./userlist.css"
+import swal from 'sweetalert';
 
 const styles = {
     head:{
@@ -32,26 +33,32 @@ class UserList extends Component {
 
     onDelete(e, uid){
         e.preventDefault();
-        if (window.confirm('Please confirm to delete this user?')){
-            const newUsers = this.state.users.filter(user=>user._id !== uid)
-            deleteUser(uid)
-            this.setState({users: newUsers})
-        } 
+        swal({title:"Are you sure?",text:"Once deleted, the user and their recipes will not be able to recover.", icon:"warning", buttons:["Cancel", "Delete"]})
+        .then((confirmDelete)=>{
+            if (confirmDelete){
+                const newUsers = this.state.users.filter(user=>user._id !== uid)
+                deleteUser(uid)
+                this.setState({users: newUsers})
+            } 
+        })
     }
 
     onPromote(e, uid){
         e.preventDefault();
-        if (window.confirm('Please confirm to promote this user?')){
-            const newUsers = this.state.users
-            promoteUser(uid)
-            for (let user of newUsers){
-                if (user._id === uid){
-                    user.isAdmin = true
-                    break
+        swal({title:"Are you sure?",text:"That's a lot of power for them!", icon:"warning", buttons:["Cancel", "Promote"]})
+        .then((confirmPromote)=>{
+            if (confirmPromote){
+                const newUsers = this.state.users
+                promoteUser(uid)
+                for (let user of newUsers){
+                    if (user._id === uid){
+                        user.isAdmin = true
+                        break
+                    }
                 }
-            }
-            this.setState({users: newUsers})
-        } 
+                this.setState({users: newUsers})
+            } 
+        })
     }
 
 

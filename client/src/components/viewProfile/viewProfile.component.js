@@ -13,6 +13,7 @@ import defaultPic from'./default-profile-pic.png'
 import { FaRegEdit, FaRegSave } from "react-icons/fa";
 import {getUser, updateUser} from "../../actions/user";
 import {getMyRecipe, getMyCollection} from "../../actions/recipe";
+import swal from 'sweetalert';
 
 const styles = {
     panel: {
@@ -191,7 +192,7 @@ class ViewProfile extends Component {
         
         if (this.state.newPassword !== null && this.state.newPassword !== ""){
             if (this.state.newPassword.length < 4){
-                alert("Password needs a minimum length of 4")
+                swal({title:"Oops!", text:"Password needs a minimum length of 4", icon:"warning"})
                 return
             } else{
                 updateInfo.password = this.state.newPassword
