@@ -164,33 +164,6 @@ export default class HomePage extends Component {
 
         // server call to update recipe
         setRecipe(rid, {likes: newLikes})
-
-        // update top three recipes
-        let first_largest = -1;
-        let second_largest = -1;
-        let third_largest = -1;
-        let first_idx = -1;
-        let second_idx = -1;
-        let third_idx = -1;
-        for(let i=0; i< this.state.recipes.length; i++){
-            if(this.state.recipes[i].likes >= first_largest){
-                third_largest = second_largest;
-                second_largest = first_largest;
-                first_largest = this.state.recipes[i].likes;
-                third_idx = second_idx;
-                second_idx = first_idx;
-                first_idx = i;
-            }else if(this.state.recipes[i].likes >= second_largest){
-                third_largest = second_largest;
-                second_largest = this.state.recipes[i].likes;
-                third_idx = second_idx;
-                second_idx = i;
-            }else if(this.state.recipes[i].likes >= third_largest){
-                third_largest = this.state.recipes[i].likes;
-                third_idx = i;
-            }
-        }
-        this.setState({ top3_recipe: [first_idx, second_idx, third_idx]})
     }
 
     clickCategory = (event) =>{
@@ -248,9 +221,8 @@ export default class HomePage extends Component {
     render(){
         const { app } = this.props;
         return(
-            <div id="body">
-                
-                <Container maxWidth='lg'>
+            <div id="body"> 
+                <Container maxWidth='md'>
                     <Navbar app={app}/>
                     <HomePageLeftPanel
                         categories={this.state.categories}
@@ -277,6 +249,8 @@ export default class HomePage extends Component {
                         <HomePageRightPanel 
                         top3_recipe={this.state.top3_recipe} 
                         recipes={this.state.recipes}
+                        app={app}
+                        clickHeart={this.clickHeart}
                         />}
                         
                         {this.state.recipes && this.state.recipes.length >= 3 &&

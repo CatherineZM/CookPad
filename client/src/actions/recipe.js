@@ -198,7 +198,7 @@ export const deleteRecipeAllUsers = (rid, deleteComp) => {
         })
         .then(json=>{
             json.map(user=>{
-                return DeleteFromRecipeList(user._id, 
+                DeleteFromRecipeList(user._id, 
                     {myRecipes: rid, likedRecipes: rid, collectedRecipes: rid}
                 )
             }).then(
@@ -334,13 +334,13 @@ export const getTop2Recipes = (comp, rid)=>{
         })
 }
 
-// update a recipe's likes field
+// update a recipe field 
 export const setRecipe = (rid, newRecipe) => {
     axios.patch(`/api/recipes/${rid}`, newRecipe)
     .then(res => console.log(res.data));
 }
 
-// update a recipe
+// update a recipe 
 export const updateRecipe = async(comp, newRecipe) => {
     try {
         if (newRecipe.file){

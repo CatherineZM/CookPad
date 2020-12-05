@@ -132,7 +132,7 @@ class ViewRecipe extends Component {
         const {classes, app} = this.props;
         return(
             <div>
-            <Container maxWidth='lg'>
+            <Container maxWidth='md'>
                 <Navbar app={app}/>
                 <div className="recipe-des">
                     <Card className={classes.card}>
@@ -175,7 +175,7 @@ class ViewRecipe extends Component {
                         <Card className={classes.card}>
                             <CardActionArea>
                                 <CardMedia
-                                    height="200"
+                                    height="160"
                                     component="img"
                                     alt={recipe.name}
                                     image={recipe.imageUrl}

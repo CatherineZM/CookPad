@@ -8,6 +8,10 @@ import TableRow from '@material-ui/core/TableRow'
 import TableCell from '@material-ui/core/TableCell';
 import { grey } from '@material-ui/core/colors';
 import { withStyles } from '@material-ui/core/styles';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+import Checkbox from '@material-ui/core/Checkbox';
 
 const styles = {
     cell:{
@@ -20,7 +24,7 @@ const styles = {
 
 class HomePageRightPanel extends Component {
     render(){
-        const {classes, top3_recipe, recipes} = this.props;
+        const {classes, top3_recipe, recipes, app, clickHeart} = this.props;
         return(
             <div id="top-3-recipe">
             <Table size="small" aria-label="a dense table">
@@ -35,7 +39,12 @@ class HomePageRightPanel extends Component {
                                 <Link to={"/viewrecipe/"+recipes[recipe]._id}>{recipes[recipe].name}</Link>
                             </TableCell>
                             <TableCell className={classes.cell} id="recipe-likes">
-                                {recipes[recipe].likes}
+                                <FormControlLabel
+                                labelPlacement="end"
+                                className={classes.likeButton}
+                                control={<Checkbox checked={app.state.currentUser.likedRecipes && app.state.currentUser.likedRecipes.includes(recipes[recipe]._id)} disableRipple={true} onChange={()=>clickHeart(recipes[recipe]._id)} icon={<FavoriteBorder/>} checkedIcon={<Favorite />} name="liked" />} 
+                                label={recipes[recipe].likes}
+                                />
                             </TableCell>
                         </TableRow>
                     ))}

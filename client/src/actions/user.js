@@ -84,9 +84,9 @@ export const signup = async(signupComp) => {
             newUser.imageId = res0.data.imageId
         }
         await axios.post("/api/users", newUser)
-        alert("Sign up success!");
+        alert("Signed up successfully!");
     } catch(error) {
-        alert("Could not Sign up!");
+        alert("Username already exist please try again!");
         console.log(error)
     }    
 }

@@ -14,7 +14,6 @@ export default class Navbar extends Component {
         this.state = {
             uid: this.props.uid,
         }
-
     }
 
     render(){

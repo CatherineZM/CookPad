@@ -18,10 +18,9 @@ export default class AdminPage extends Component {
         const { history, app } = this.props;
         return(
             <div>
-                <Container maxWidth='lg'>     
+                <Container maxWidth='md'>     
                 <Navbar app={app}/>
                     <UserList app={app} history={history}/> 
-                    {console.log(this.state.users)}  
                 </Container>
             </div>  
         )
