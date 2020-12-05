@@ -8,8 +8,8 @@ body {
     background-color: white;
     position: absolute;
     margin-top: 30px;
-    max-width: 630px;
-    margin-left: 240px;
+    width: 640px;
+    margin-left: 230px;
     border-radius: 25px;
     height: fit-content;
     padding: 20px 20px;
@@ -18,12 +18,12 @@ body {
 #right-panel {
     height: 100%;
     position: absolute;
-    margin-left: 860px;
+    margin-left: 890px;
     margin-top: 30px;
-    padding-left: 20px;
 }
 
 #recipe-list {
     margin-top: 10px;
     max-height: 600px;
+    width: 100%;
 }
