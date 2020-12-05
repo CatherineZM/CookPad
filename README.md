@@ -4,6 +4,11 @@ Cookpad is a recipe sharing app that allows food lovers to write food blogs and 
 ## Basic Features
 In our web app, users will be able to post their recipes with steps and ingredients. To search for a recipe, users can apply different filters to filter out unwanted recipes. They can also add a recipe to their own collection so that it is easier for them to replicate it. Users can also give likes to a recipes and they will be able to get a sense of whether the recipe is worth trying by looking at the number of likes. The homepage will also display the top recipes for users in a slideshow. 
 
+## URL to the deployed web app
+```
+https://dry-garden-09111.herokuapp.com/
+```
+
 ## Get started
 ### Clone the repo
 ```
@@ -240,7 +245,4 @@ req.body =
 }
 ```
 
-## URL to the deployed web app
-```
-TODO
-```
+
