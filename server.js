@@ -352,6 +352,7 @@ app.patch('/api/users/:uid', [uidValidator, mongoChecker], async(req, res)=>{
 /****************************** Recipe API Routes **********************************/
 // create a recipe
 app.post('/api/recipes', mongoChecker, async(req, res)=>{
+    //initialize recipe information
     const recipe = new Recipe({
         name: req.body.name,
         description: req.body.description,
@@ -366,6 +367,7 @@ app.post('/api/recipes', mongoChecker, async(req, res)=>{
     })
 
     try{
+        //send the recipe to the server
         const newRecipe = await recipe.save()
 		res.send(newRecipe)
     } catch(error) {
@@ -380,7 +382,9 @@ app.post('/api/recipes', mongoChecker, async(req, res)=>{
 // get all recipes
 app.get('/api/recipes', mongoChecker, async(req, res)=>{
     try{
+        //grab all the recipes that could find
         const recipes = await Recipe.find()
+        //send all the objects to the server
 		res.send({recipes})
     } catch(error) {
         log(error)
@@ -417,6 +421,7 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
         if (!recipeToEdit){
             res.status(404).send("Resource not found")
         } else {
+            //only change the value of objects if it's changed 
             if(req.body.name){
                 recipeToEdit.name = req.body.name
             }
@@ -456,7 +461,9 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
 app.delete('/api/recipes/:rid', [ridValidator, mongoChecker], async(req, res) => {
     try{
         const recipe1 = await Recipe.findById(req.params.rid);
+        //delete the image associated to the recipe
         cloudinary.uploader.destroy(recipe1.imageId, function (result) {})
+        //delete the recipe itself 
         const recipe2 = await Recipe.findByIdAndDelete(req.params.rid);
         return res.send(recipe2);
     } catch(error) {
