@@ -159,9 +159,7 @@ export const updateUser = async(comp, updateInfo, callback) => {
     try {
         if (updateInfo.profilePic){
             const formData = new FormData();   
-            formData.append('file', updateInfo.profilePic);
-    
-            
+            formData.append('file', updateInfo.profilePic);   
             const res0 = await axios.post('/images', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'

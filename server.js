@@ -442,12 +442,11 @@ app.patch('/api/recipes/:rid', [ridValidator, mongoChecker], async (req, res) =>
             }
             if(req.body.imageUrl != null){
                 recipeToEdit.imageUrl = req.body.imageUrl
-                cloudinary.uploader.destroy(req.body.imageId, function (result) {})
+                recipeToEdit.imageId = req.body.imageId
             }
             const newRecipe = await recipeToEdit.save()
             res.send(newRecipe)
-        }
-            
+        }           
     } catch(error) {
         if(isMongoError(error)){
             res.status(500).send('Internal Server Error')

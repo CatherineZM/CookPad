@@ -28,6 +28,10 @@ const styles = {
     card:{
         borderRadius: 20,
     },
+    media:{
+        width: 600,
+        height: 400,
+    },
     likeButton:{
         paddingLeft: 40,
     },
@@ -144,6 +148,7 @@ class ViewRecipe extends Component {
                 <div className="recipe-des">
                     <Card className={classes.card}>
                         <CardMedia
+                            className={classes.media}
                             component="img"
                             alt={this.state.recipe.name}
                             image={this.state.recipe.imageUrl}
@@ -182,7 +187,7 @@ class ViewRecipe extends Component {
                         <Card className={classes.card}>
                             <CardActionArea>
                                 <CardMedia
-                                    height="150"
+                                    height="170"
                                     component="img"
                                     alt={recipe.name}
                                     image={recipe.imageUrl}

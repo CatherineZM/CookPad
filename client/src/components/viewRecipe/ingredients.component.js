@@ -21,7 +21,7 @@ export default class Ingredients extends Component {
                     return(
                         <TableRow key={uid(ingredient.name)}>
                             <TableCell>{ingredient.name}</TableCell>
-                            <TableCell>{ingredient.quantity}{ingredient.unit}</TableCell>
+                            <TableCell>{ingredient.quantity}{"  "}{ingredient.unit}</TableCell>
                         </TableRow>
                     )
                     })}
