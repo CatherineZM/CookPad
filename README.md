@@ -30,7 +30,9 @@ npm run build-run
 Login as a regular user:
   * username: user
   * password: user
+
 or
+
   * username: user2
   * password: user2
 
