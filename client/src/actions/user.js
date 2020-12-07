@@ -126,7 +126,7 @@ export const getAllUser = (userListComp) => {
 
 // A function to send a GET request to get one user
 export const getUser = (viewProfileComp, callback) => {
-    const request = new Request(`/api/users/${viewProfileComp.state.uid}`, {
+    const request = new Request(`/api/users/${viewProfileComp.props.match.params.uid}`, {
         method: "get",
         headers: {
             Accept: "application/json, text/plain, */*",

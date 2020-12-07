@@ -64,13 +64,25 @@ class ViewProfile extends Component {
             preview:null,
             currTab:-1,
         }
-        this.props.history.push('/viewprofile/'+this.props.match.params.uid);
         getUser(this, ()=>{
             getMyRecipe(this);
             getMyCollection(this);
         })
         console.log(this.state.collectedRecipes)
-    }  
+    }
+
+    componentDidUpdate(prevProps, prevState){
+        if (prevProps.match.params.uid != this.props.match.params.uid){
+            this.setState({uid: this.props.match.params.uid})
+            
+            getUser(this, ()=>{
+                getMyRecipe(this);
+                getMyCollection(this);
+            })
+            console.log(this.state)
+        }
+    }
+
 
      clickHeart=(rid)=>{
         let newLikes = 0;
@@ -295,8 +307,8 @@ class ViewProfile extends Component {
                         <Tabs value={this.state.currTab} onChange={this.handleTab} variant="fullWidth" classes={{
                                                                                                 indicator: classes.indicator, 
                                                                                                 flexContainer: classes.flexContainer}}>
-                        <Tab label="My Recipes" className={classes.tab}/>
-                        <Tab label="My Collection" className={classes.tab}/>
+                        <Tab label={app.state.currentUser._id == this.state.uid ? "My Recipe" : `${this.state.user.username}'s Recipe`} className={classes.tab}/>
+                        <Tab label={app.state.currentUser._id == this.state.uid ? "My Collection" : `${this.state.user.username}'s Collection`} className={classes.tab}/>
                         </Tabs>
                     </AppBar>
                     <this.TabPanel className={classes.panel} value={this.state.currTab} index={0}>
