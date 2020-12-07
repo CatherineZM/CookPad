@@ -12,6 +12,7 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
+import Box from '@material-ui/core/Box';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
@@ -158,7 +159,9 @@ class ViewRecipe extends Component {
                             {this.state.recipe.name}
                         </Typography>
                         <Typography gutterBottom variant="h5" component="h5">
+                            <Box fontStyle="oblique">
                             {this.state.recipe.description}
+                            </Box>
                         </Typography>
                         <Typography variant="h6" color="textSecondary" component="h6">
                             <Link to={"/viewprofile/"+ this.state.recipe.creatorId}>{"By: "+this.state.recipe.creatorUsername}</Link>
