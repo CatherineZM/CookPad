@@ -157,6 +157,9 @@ class ViewRecipe extends Component {
                         <Typography gutterBottom variant="h4" component="h4">
                             {this.state.recipe.name}
                         </Typography>
+                        <Typography gutterBottom variant="h5" component="h5">
+                            {this.state.recipe.description}
+                        </Typography>
                         <Typography variant="h6" color="textSecondary" component="h6">
                             <Link to={"/viewprofile/"+ this.state.recipe.creatorId}>{"By: "+this.state.recipe.creatorUsername}</Link>
                         </Typography>

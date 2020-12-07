@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import './viewRecipe.css'
 import { uid } from "react-uid";
-import Table from "@material-ui/core/Table"
-import TableBody from "@material-ui/core/TableBody"
-import TableRow from "@material-ui/core/TableRow"
-import TableCell from "@material-ui/core/TableCell"
+import {Table, TableContainer, Paper, TableBody, TableRow, TableCell} from "@material-ui/core"
 
 export default class Ingredients extends Component {
     render(){
         const {ingredients} = this.props;
         return(
             <div>
-                <Table className="recipe-ingredients" size="small" aria-label="a dense table">
+                <TableContainer component={Paper} className="recipe-ingredients">
+                <Table size="small" aria-label="a dense table">
                     <TableBody>
                         <TableRow>
                             <TableCell>Ingredients</TableCell>
@@ -27,6 +25,7 @@ export default class Ingredients extends Component {
                     })}
                     </TableBody>
                 </Table>
+                </TableContainer>
             </div>
         )
     }
