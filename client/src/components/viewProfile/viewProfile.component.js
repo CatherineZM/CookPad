@@ -235,7 +235,7 @@ class ViewProfile extends Component {
                         <form className="signup-form" onSubmit={this.saveProfile}>
                             <div className="form-group" id="change-pic">
                                 <Avatar 
-                                    width={250}
+                                    width={280}
                                     height={250} 
                                     round={true}
                                     label={"Change profile picture"}
