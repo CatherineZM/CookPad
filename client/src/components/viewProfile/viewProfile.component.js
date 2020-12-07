@@ -72,7 +72,7 @@ class ViewProfile extends Component {
     }
 
     componentDidUpdate(prevProps, prevState){
-        if (prevProps.match.params.uid != this.props.match.params.uid){
+        if (prevProps.match.params.uid !== this.props.match.params.uid){
             this.setState({uid: this.props.match.params.uid})
             
             getUser(this, ()=>{
@@ -307,8 +307,8 @@ class ViewProfile extends Component {
                         <Tabs value={this.state.currTab} onChange={this.handleTab} variant="fullWidth" classes={{
                                                                                                 indicator: classes.indicator, 
                                                                                                 flexContainer: classes.flexContainer}}>
-                        <Tab label={app.state.currentUser._id == this.state.uid ? "My Recipe" : `${this.state.user.username}'s Recipe`} className={classes.tab}/>
-                        <Tab label={app.state.currentUser._id == this.state.uid ? "My Collection" : `${this.state.user.username}'s Collection`} className={classes.tab}/>
+                        <Tab label={app.state.currentUser._id === this.state.uid ? "My Recipe" : `${this.state.user.username}'s Recipe`} className={classes.tab}/>
+                        <Tab label={app.state.currentUser._id === this.state.uid ? "My Collection" : `${this.state.user.username}'s Collection`} className={classes.tab}/>
                         </Tabs>
                     </AppBar>
                     <this.TabPanel className={classes.panel} value={this.state.currTab} index={0}>
