@@ -12,11 +12,14 @@
     margin-left: 10px;
 }
 
+.view-recipe-buttons{
+    width: 600px;
+}
+
 .view-recipe-form-group{
     margin-top: 10px;
     float: left;
     margin-right: 10px;
-    margin-left: 10px;
     margin-bottom: 10px;
 }
 

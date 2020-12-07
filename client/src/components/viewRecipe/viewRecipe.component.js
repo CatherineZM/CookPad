@@ -119,7 +119,7 @@ class ViewRecipe extends Component {
     editDeleteButtonGen=()=>{
         if(this.state.recipe.creatorId === this.props.app.state.currentUser._id){
             return (
-            <div>
+            <div className="view-recipe-buttons">
             <div className="view-recipe-form-group">
                 <form float="left" onSubmit={this.editRecipe}><input type="submit" value="Edit" className="btn btn-primary"/></form>
             </div>
