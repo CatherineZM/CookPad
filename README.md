@@ -52,12 +52,12 @@ Login as an admin:
 3. On the homepage, you can:
   * **View all recipes**
   * **Search for a recipe** by applying filters on the left hand side of the homepage
-  * **Like or dislike** the recipe by clicking on the heart icon
+  * **Like or dislike** the recipe by clicking on the favourite icon
   * **add a recipe to "My Collection"** by clicking on the collection icon
   * **View a particular recipe** by cliking on the recipe image
-  * on the top recipes panels to check the top recipes, click the heart icons to give a like and click on the name of the recipe to view the recipe
+  * on the top recipes panels to check the top recipes, click the favourite icons to give a like and click on the name of the recipe to view the recipe
   * You can also check the details about the top recipes by clicking on the images below the "top recipes" table
-  * use the next and previous arrow on the slide show to switch between recipes (the slideshow can also autoplay)
+  * use the next and previous arrow on the slide show to switch between recipes
   
 4. Click on "My Profile" on the navgation bar. On this page, you can:
   * **View your own profile, your recipes, and your collection**.
@@ -90,13 +90,12 @@ Login as an admin:
   * username: admin
   * password: admin
   
-2. An admin can **View any user's profile** by clicking on "View Profile" button
+2. Let's go check out all users by clicking on "Admin Page" in the navgation bar. On this page, An admin can:
+ * **View any user's profile** by clicking on "View Profile" button
+ * **Delete users** by clicking on "Delete" button
+ * **Promote users as admins** by clicking on "Promote" button
 
-2. An admin can **Delete users** by clicking on "Delete" button
-
-3. An admin can **Promote users as admins** by clicking on "Promote" button
-
-4. An admin can **View HomePage** by clicking on "HomePage" in the navgation bar. This allows admins to check if there are any inappropriate contents.
+3. An admin can also **View HomePage** and **Create a recipe** by clicking on corresponding items in the navgation bar.
 
 ## Third Party Libraries:
 1. Bootstrap
@@ -123,27 +122,26 @@ There are two models in the project: user and recipe. The routes for each model 
 POST '/api/users'
 req.body = 
 {
-        "username": "user",
+        "username": "yoshi",
 	"password": "123456",
         "description": "I love Chinese food",
         "imageUrl": "profileimageUrl", // this is obtained from cloudinary.uploader.upload
         "imageId": "profileimageId" // this is obtained from cloudinary.uploader.upload
 }
+Note: username needs to be unique
+returns a user document
 ```
 
 #### Getting all users 
 ```
 GET '/api/users'
+returns a list of user document
 ```
 
 #### Getting one user
 ```
 GET '/api/users/:uid'
-```
-
-#### Getting one user
-```
-GET '/api/users/:uid'
+returns the specified user
 ```
 
 #### Updating user profile
@@ -152,12 +150,12 @@ GET '/api/users/:uid'
 PATCH'/api/users/:uid'
 req.body = 
 {
-        "username": "user",
 	"password": "123456",
         "description": "I love Chinese food",
         "imageUrl": "profileimageUrl", // this is obtained from cloudinary.uploader.upload
         "imageId": "profileimageId" // this is obtained from cloudinary.uploader.upload
 }
+returns the updated user document
 ```
 
 #### Adding to user's recipe list
@@ -171,6 +169,7 @@ req.body =
     "collectedRecipes": <rid>,
     "myRecipes": <rid>
 }
+returns the updated user document
 ```
 
 #### Deleting from user's recipe list
@@ -184,6 +183,7 @@ req.body =
     "collectedRecipes": <rid>,
     "myRecipes": <rid>
 }
+returns the updated user document
 ```
 
 #### Deleting user
@@ -193,6 +193,7 @@ req.body =
 {
     "deleteUser": "true"
 }
+returns the deleted user document
 ```
 
 
@@ -212,21 +213,25 @@ req.body =
         "imageUrl": "recipeimageUrl", // this is obtained from cloudinary.uploader.upload
         "imageId": "recipeimageId", // this is obtained from cloudinary.uploader.upload
 }
+returns the created recipe document
 ```
 
 #### Getting all recipes
 ```
 GET '/api/recipes'
+returns a list of recipe document
 ```
 
 #### Getting one recipe
 ```
 GET '/api/recipes/:rid'
+returns the specified recipe document
 ```
 
 #### Deleting recipe
 ```
 DELETE '/api/recipes/:rid'
+returns the deleted recipe document
 ```
 
 #### Updating recipe
@@ -243,6 +248,7 @@ req.body =
          "imageUrl": "recipeimageUrl", // this is obtained from cloudinary.uploader.upload
          "imageId": "recipeimageId", // this is obtained from cloudinary.uploader.upload
 }
+returns the updated recipe document
 ```
 
 
