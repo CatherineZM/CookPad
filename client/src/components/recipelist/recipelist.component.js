@@ -31,10 +31,10 @@ const styles = {
         height: 180,
     },
     likeButton:{
-        paddingLeft: 20,
+        paddingLeft: 15,
     },
     saveButton: {
-        marginLeft: 10,
+        paddingLeft: 10,
     },
     action: {
         paddingTop: 0,
