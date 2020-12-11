@@ -55,7 +55,7 @@ Login as an admin:
   * **View all recipes**
   * **Search for a recipe** by applying filters on the left hand side of the homepage
   * **Like or dislike** the recipe by clicking on the favourite icon
-  * **add a recipe to "My Collection"** by clicking on the collection icon
+  * **Add a recipe to "My Collection"** by clicking on the collection icon
   * **View a particular recipe** by cliking on the recipe image
   * On the top recipes panels to check the top recipes, click the favourite icons to give a like and click on the name of the recipe to view the recipe
   * You can also check the details about the top recipes by clicking on the images below the "top recipes" table
