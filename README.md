@@ -4,12 +4,12 @@ Cookpad is a recipe sharing app that allows food lovers to write food blogs and 
 ## Basic Features
 In our web app, users will be able to post their recipes with steps and ingredients. To search for a recipe, users can apply different filters to filter out unwanted recipes. They can also add a recipe to their own collection so that it is easier for them to replicate it. Users can also give likes to a recipes and they will be able to get a sense of whether the recipe is worth trying by looking at the number of likes. The homepage will also display the top recipes for users in a slideshow. 
 
-## URL to the deployed web app
+## URL to the Deployed Web App
 ```
 https://dry-garden-09111.herokuapp.com/
 ```
 
-## Get started
+## Get Started
 ### Clone the repo
 ```
 git clone https://github.com/csc309-fall-2020/team07.git
@@ -26,7 +26,7 @@ Build and open on local host:
 npm run build-run
 ```
 
-## login credentials
+## Login Credentials
 Login as a regular user:
   * username: user
   * password: user
@@ -115,7 +115,7 @@ Login as an admin:
 12. cors
 13. connect-multiparty
 
-## overview of the routes
+## Overview of the Routes
 There are two models in the project: user and recipe. The routes for each model will be explained in this section.
 
 ### User Routes
