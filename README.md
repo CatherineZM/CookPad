@@ -48,8 +48,8 @@ Login as an admin:
   * Profile picture
   
 2. Click on "Login here" on the sign up page to navigate to the login page. To **Login** as a regular user, enter:
-  * username
-  * password
+  * Username
+  * Password
   
 3. On the homepage, you can:
   * **View all recipes**
@@ -57,9 +57,9 @@ Login as an admin:
   * **Like or dislike** the recipe by clicking on the favourite icon
   * **add a recipe to "My Collection"** by clicking on the collection icon
   * **View a particular recipe** by cliking on the recipe image
-  * on the top recipes panels to check the top recipes, click the favourite icons to give a like and click on the name of the recipe to view the recipe
+  * On the top recipes panels to check the top recipes, click the favourite icons to give a like and click on the name of the recipe to view the recipe
   * You can also check the details about the top recipes by clicking on the images below the "top recipes" table
-  * use the next and previous arrow on the slide show to switch between recipes
+  * Use the next and previous arrow on the slide show to switch between recipes
   
 4. Click on "My Profile" on the navgation bar. On this page, you can:
   * **View your own profile, your recipes, and your collection**.
@@ -67,19 +67,19 @@ Login as an admin:
   * Click on "View" to expand "my recipes or my collections"
 
 5. Click on any of the recipes on "My Profile" page. It will navigate you to the "view recipe" page. On this page, you can:
-  * click on the recipe creator's name to **View the recipe creator’s profile**
+  * Click on the recipe creator's name to **View the recipe creator’s profile**
   * **Delete a recipe** by clicking on the delete button
   * **Edit a recipe** by clicking on the edit button, the edit page allows you to:
-     * remove or add any steps or ingredients
-     * change the recipe name, description, cuisine type and recipe picture
+     * Remove or add any steps or ingredients
+     * Change the recipe name, description, cuisine type and recipe picture
      * Click "Update Recipe" to save your changes
   * You can also checkout some recommended recipes on the right of the page
 
 6. Let's create a new recipe. Click on "Create a recipe" on the navigation bar to **Create your own recipe**:
   * Enter recipe name and description(optional)
   * Select Cuisine Type(s) using the drop down list and use the cross mark to remove a type
-  * click on "add ingredients" to add a new ingredient and use the drop down list to select measurements.
-  * click on "add steps" to add a new step
+  * Click on "add ingredients" to add a new ingredient and use the drop down list to select measurements.
+  * Click on "add steps" to add a new step
   * You can remove an ingredient or a step by click on the "remove" button
   * You can upload a picture of your recipe
 
