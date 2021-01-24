@@ -1,0 +1,31 @@
+.add-recipe{
+    margin-top: 20px;
+    margin-left: 35px;
+}
+
+.add-recipe b{
+    font-size: 30px;
+}
+
+.add-recipe #remove-ingredient{
+    margin-top: 2px;
+}
+
+.add-recipe #add-step{
+    margin-top: 5px;
+}
+
+.add-recipe #remove-step{
+    margin-top: 10px;
+}
+
+textarea{
+    resize: none;
+    height: fit-content;
+}
+
+#units {
+    border-radius:5%;
+    height: 38px;
+    width: 100%;
+}

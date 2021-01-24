@@ -1,0 +1,64 @@
+.recipe-ingredients{
+    max-width:300px;
+    background-color: white;
+    float: right;
+}
+
+.recommendations{
+    width: 300px;
+    float: right;
+    text-align: center;
+    margin-top: 30px;
+    margin-left: 10px;
+}
+
+.view-recipe-buttons{
+    width: 600px;
+}
+
+.view-recipe-form-group{
+    margin-top: 10px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.recipe-des{
+    background-color: white;
+    width: 600px;
+    float: left;
+    margin-bottom: 20px;
+    height: fit-content;
+    margin-top: 30px;
+    border-radius: 10%;
+}
+
+.recipe-steps{
+    max-width: 600px;
+    background-color: white;
+    float:left;
+}
+.recipe-des-text{
+    margin-top: 10px;
+    margin-left: 20px;
+}
+
+.recipe-des-text #like-count{
+    position: relative;
+    float: right;
+    margin-right: 30px;
+}
+
+.recipe-des-text #author{
+    float: left;
+    margin-left: 10px;
+}
+
+.recipe-des-text #title{
+    float: left;
+    margin-left: 10px;
+}
+
+.view-other{
+    margin-bottom: 10px;
+}

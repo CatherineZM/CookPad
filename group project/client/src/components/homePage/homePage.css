@@ -1,0 +1,29 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+	background-color: #e6ecf0;
+	margin: 0;
+}
+
+#middle-panel {
+    background-color: white;
+    position: absolute;
+    margin-top: 30px;
+    width: 460px;
+    margin-left: 230px;
+    border-radius: 25px;
+    height: fit-content;
+    padding: 20px 20px;
+}
+
+#right-panel {
+    height: 100%;
+    position: absolute;
+    margin-left: 710px;
+    margin-top: 30px;
+}
+
+#recipe-list {
+    margin-top: 10px;
+    max-height: 600px;
+    width: 100%;
+}

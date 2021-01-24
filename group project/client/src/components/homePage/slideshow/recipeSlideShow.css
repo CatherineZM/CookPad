@@ -1,0 +1,85 @@
+#slides {
+    border-radius: 25px;
+    object-fit: cover;
+    width: 375px;
+    height: 310px;
+    border: solid #e6ecf0;
+}
+
+.slideshow-container{
+    margin-left: 5px;
+    margin-right: 5px;
+    width: 420px;
+    height: 380px;
+    text-align: center;
+}
+
+.dot-container {
+    text-align: center;
+}
+
+.dot {
+    height: 15px;
+    width: 15px;
+    margin: 0 2px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    width: auto;
+    padding: 16px;
+    margin-top: 135px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 10px;
+    user-select: none;
+}
+
+/* Caption text */
+.caption-text {
+    font-size: 25px;
+    padding: 8px 12px;
+    bottom: 8px;
+    width: 100%;
+    text-align: center;
+}
+
+/* Position the "next button" to the right */
+.next {
+    margin-left: 380px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+    background-color: rgba(0,0,0,0.8);
+    text-decoration: none;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 3s;
+    animation-name: fade;
+    animation-duration: 3s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4} 
+    to {opacity: 1}
+}

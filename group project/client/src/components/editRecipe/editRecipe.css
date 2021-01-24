@@ -1,0 +1,34 @@
+.edit-recipe{
+    margin-top: 20px;
+    margin-left: 35px;
+}
+
+.edit-recipe b{
+    font-size: 30px;
+}
+
+.edit-recipe #remove-ingredient{
+    margin-top: 2px;
+}
+
+.edit-recipe #add-step{
+    margin-top: 5px;
+}
+
+.edit-recipe #remove-step{
+    margin-top: 10px;
+}
+
+.Image{
+    height: 40%;
+    width: 40%;
+}
+
+textarea{
+    resize: none;
+    height: fit-content; 
+}
+
+.edit-recipe #cancel-edit{
+    margin-left: 10px;
+}

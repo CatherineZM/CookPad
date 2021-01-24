@@ -1,0 +1,50 @@
+#top-3-recipe {
+    float: left;
+    background-color: white;
+    border-radius: 25px;
+    width: 250px;
+}
+
+#top-3-recipe span{
+    padding-left: 2px;
+}
+
+#top-3-recipe #table-row .name{
+    font-weight: bold;
+    padding-right: 45px;
+    padding-left: 25px;
+}
+
+#top-3-recipe #table-row .likes-count{
+    font-weight: bold;
+    padding-right: 40px;
+}
+
+#top-3-recipe #table-row #recipe-name{
+    padding-left: 20px;
+    padding-right: 25px;
+}
+
+#top-3-recipe #table-row #recipe-likes{
+    padding-top: 15px;
+    padding-left: 20px;
+    width: 70px;
+}
+
+#top-3-recipe #table-row #recipe-likes .dislikes{
+    float: left;
+    position: relative;
+}
+#top-3-recipe #table-row #recipe-likes .likes{
+    float: left;
+    position: relative;
+}
+
+#top-3-recipe #table-row #recipe-likes span{
+    position: relative;
+    float: left;
+}
+
+#top-3-recipe .dislikes{
+    float: left;
+}
