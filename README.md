@@ -4,7 +4,7 @@ Cookpad is a recipe sharing app that allows food lovers to write food blogs and 
 ## Get started
 ### Clone the repo
 ```
-git clone https://github.com/csc309-fall-2020/team07.git
+git clone https://github.com/CatherineZM/CookPad.git
 ```
 
 ### Build the project
